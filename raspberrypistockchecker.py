@@ -1,0 +1,22 @@
+exec("""
+import requests
+from bs4 import BeautifulSoup
+stock=input("Enter a stock symbol: ")
+r = requests.get("https://www.marketwatch.com/investing/stock/"+stock)
+soup = BeautifulSoup(r.text, "html.parser")
+mystring=str(soup)
+backwardanswer=""
+answer=""
+length=len(mystring)
+for x in range (0, length):
+	if mystring[x]=="c" and mystring[x+1]=="e" and mystring[x+3]=="/" and mystring[x+4]==">":
+		i=12
+		while mystring[x-i]!='"':
+			backwardanswer=backwardanswer+mystring[x-i]
+			i=i+1
+z=len(backwardanswer)-1
+while z>=0:
+	answer=answer+backwardanswer[z]
+	z=z-1
+print(answer)
+""")

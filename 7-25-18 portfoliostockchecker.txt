@@ -1,0 +1,77 @@
+
+import requests
+from bs4 import BeautifulSoup
+import datetime
+now = datetime.datetime.now()
+minute=now.minute+2
+maxhour=1
+
+minhour=6.5
+currentminute=now.minute
+prevminute=0
+hour=now.hour
+decimalminute=now.minute
+decimalminute=float(decimalminute)/float(60)
+hour=hour+decimalminute
+f = open('portfoliostockprice.txt','a')
+g = open('portfoliostockpriceandtime.txt','a')
+#stock=input("Enter a stock symbol: ")
+def mystockchecker(name):
+    r = requests.get("https://www.marketwatch.com/investing/stock/"+name)
+    soup = BeautifulSoup(r.text, "html.parser")
+    mystring=str(soup)
+    backwardanswer=""
+    answer=""
+    length=len(mystring)
+    for x in range (0, length):
+            if mystring[x]=="c" and mystring[x+1]=="e" and mystring[x+3]=="/" and mystring[x+4]==">":
+                    i=12
+                    while mystring[x-i]!='"':
+                            backwardanswer=backwardanswer+mystring[x-i]
+                            i=i+1
+    z=len(backwardanswer)-1
+    while z>=0:
+            answer=answer+backwardanswer[z]
+            z=z-1
+    total=float(answer)
+    return total
+while hour>=6.5 and hour<=13 and datetime.datetime.today().weekday()<5:
+#while 1:
+	
+    now = datetime.datetime.now()
+    currentminute=now.minute
+    hour=now.hour
+    decimalminute=now.minute
+    decimalminute=float(decimalminute)/float(60)
+    hour=hour+decimalminute
+    #print(hour)
+    sum=0
+    sum=sum+mystockchecker("baba")
+    sum=sum+5*mystockchecker("schx")
+    sum=sum+2*mystockchecker("schg")
+    sum=sum+mystockchecker("ryt")
+    if currentminute!=prevminute:
+        stringhour=str(hour)
+        print(str(now))
+        print(sum)
+        g.write(str(now))
+        g.write(" ")
+        g.write(str(sum))
+        g.write("\n")
+        f.write(str(sum))
+        f.write("\n")
+    prevminute=currentminute
+    sum=0
+    answer=""
+f.close()
+
+
+
+
+
+
+
+
+
+
+

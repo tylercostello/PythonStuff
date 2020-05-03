@@ -91,7 +91,7 @@ newX=np.array(([0.6]), dtype=float)
 NN.setInput(newX)
 print(NN.feedforward())
 
-
+#test
 btn = Button() # we will use any button to stop script
 tank_pair = MoveTank(OUTPUT_B, OUTPUT_C)
 

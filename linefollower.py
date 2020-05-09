@@ -4,6 +4,7 @@
 # Imports
 import numpy as np
 import random
+import matplotlib.pyplot as plt
 # Each row is a training example, each column is a feature  [X1, X2, X3]
 
 #generate array of inputs
@@ -89,3 +90,11 @@ print(NN.feedforward())
 newX=np.array(([0.6]), dtype=float)
 NN.setInput(newX)
 print(NN.feedforward())
+xList=[]
+yList=[]
+for i in range(100):
+    xList.append(i/100)
+    NN.setInput(i/100)
+    yList.append(NN.feedforward())
+plt.scatter(xList,yList)
+plt.show()

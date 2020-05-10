@@ -1,6 +1,6 @@
 import gym
 import numpy as np
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 import copy
 
 #Hyperparameters
@@ -86,12 +86,12 @@ for e in range(NUM_EPISODES):
 
 		# Loop through everything that happend in the episode and update towards the log policy gradient times **FUTURE** reward
 		w += LEARNING_RATE * grads[i] * sum([ r * (GAMMA ** r) for t,r in enumerate(rewards[i:])])
-		print(LEARNING_RATE * grads[i] * sum([ r * (GAMMA ** r) for t,r in enumerate(rewards[i:])]))
+		#print(LEARNING_RATE * grads[i] * sum([ r * (GAMMA ** r) for t,r in enumerate(rewards[i:])]))
 
 	# Append for logging and print
 	episode_rewards.append(score)
 	print("EP: " + str(e) + " Score: " + str(score) + "         ",end="\r", flush=False)
 
-plt.plot(np.arange(NUM_EPISODES),episode_rewards)
-plt.show()
+#plt.plot(np.arange(NUM_EPISODES),episode_rewards)
+#plt.show()
 env.close()

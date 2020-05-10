@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
 Created on Sun Feb 19 09:40:56 2017
@@ -8,7 +8,7 @@ Replay Buffer
 
 from collections import deque
 import random
-import gym 
+import gym
 import numpy as np
 
 # ===========================
@@ -65,15 +65,15 @@ class ReplayBuffer(object):
     def erase(self):
         self.buffer = deque()
         self.num_experiences = 0
-        
-        
-        
+
+
+
 if __name__ == '__main__':
-    
+
     env = gym.make(ENV_NAME)
     # Initialize replay memory
     replay_buffer = ReplayBuffer(BUFFER_SIZE)
-    
+
     for i in range(5):
         s = env.reset()
         ep_reward = 0
@@ -81,19 +81,19 @@ if __name__ == '__main__':
 
         for j in range(100):
 
-            if RENDER_ENV: 
+            if RENDER_ENV:
                 env.render()
             a = env.action_space.sample()
             s2, r, terminal, info = env.step(a)
            # replay_buffer.add(np.reshape(s, (actor.s_dim,)), np.reshape(a, (actor.a_dim,)), r, \
           #      terminal, np.reshape(s2, (actor.s_dim,)))
             replay_buffer.add(s, a, r, s2, terminal)
-     
-    batch = replay_buffer.getBatch(5)     
+
+    batch = replay_buffer.getBatch(5)
     print(replay_buffer.count())
     print(type(batch))
     print(len(batch))
-    print(batch)       
+    print(batch)
 
     states = np.asarray([e[0] for e in batch])
     actions = np.asarray([e[1] for e in batch])

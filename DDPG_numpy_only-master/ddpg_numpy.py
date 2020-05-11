@@ -80,6 +80,7 @@ if __name__ == '__main__':
         s_t = env.reset()
         total_reward = 0.
         for j in range(MAX_EP_STEPS):
+            #print(j)
             loss=0;
             loss2 = 0;
 
@@ -96,7 +97,7 @@ if __name__ == '__main__':
             # Store transition in replay buffer
             buff.add(s_t, a_t[0], r_t, s_t_1, done)
 
-            # If the no. of experiences (episodes) is larger than the mini batch size
+            # If the no. of experiences (steps) is larger than the mini batch size
             if buff.count() > MINIBATCH_SIZE:
                 # Sample a random batch
                 batch = buff.getBatch(MINIBATCH_SIZE)

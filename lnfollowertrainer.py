@@ -1,4 +1,7 @@
-import gym
+"""Discretizes action space to 100 motor values, future plans include actor critic for continous space"""
+"""credit to this article for REINFORCE algorithm https://medium.com/samkirkiles/reinforce-policy-gradients-from-scratch-in-numpy-6a09ae0dfe12"""
+
+#import gym
 import numpy as np
 #import matplotlib.pyplot as plt
 import copy
@@ -9,13 +12,17 @@ LEARNING_RATE = 0.000025
 GAMMA = 0.99
 
 # Create gym and seed numpy
-env = gym.make('CartPole-v0')
-nA = env.action_space.n
+#env = gym.make('CartPole-v0')
+#nA = env.action_space.n
+nA=100
 #print(nA)
 np.random.seed(1)
 
 # Init weight
-w = np.random.rand(4, 2)
+
+w = np.random.rand(1, 100)
+
+#w = np.random.rand(4, 2)
 
 # Keep stats for final print of graph
 episode_rewards = []
@@ -34,8 +41,8 @@ def softmax_grad(softmax):
 # Main loop
 # Make sure you update your weights AFTER each episode
 for e in range(NUM_EPISODES):
-
-	state = env.reset()[None,:]
+	# TODO: replace with resetting function
+	#state = env.reset()[None,:]
 
 	grads = []
 	rewards = []
@@ -65,7 +72,9 @@ for e in range(NUM_EPISODES):
 		#choose from array randomly based on their probs
 		#print(action)
 		#0 or 1
-		next_state,reward,done,_ = env.step(action)
+
+		# TODO: replace next_state = sensor reading, reward = r(reading), done is finished running loop
+		#next_state,reward,done,_ = env.step(action)
 		next_state = next_state[None,:]
 		#print(action)
 		# Compute gradient and save with reward in memory for our weight updates

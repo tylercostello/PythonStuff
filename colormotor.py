@@ -24,7 +24,15 @@ while not btn.any():
     for x in range(600):
            # exit loop when any button pressed
         # if we are over the black line (weak reflection)
-        if cl.reflected_light_intensity<30:
+        rintensity=cl.reflected_light_intensity
+        lmotorpower=-((100/70)*(rintensity-70)+100)
+        rmotorpower=-(100-((100/70)*(rintensity-70)+100))
+        leftMotor.on(SpeedNativeUnits(lmotorpower))
+        rightMotor.on(SpeedNativeUnits(rmotorpower))
+        sleep(0.05)
+        leftSpeeds.append(leftMotor.speed)
+        rightSpeeds.append(rightMotor.speed)
+        """if cl.reflected_light_intensity<30:
             # medium turn right
 
             leftMotor.on(SpeedNativeUnits(-100))
@@ -49,8 +57,9 @@ while not btn.any():
             rightSpeeds.append(rightMotor.speed)
             #tank_pair.on(left_speed=-50, right_speed=0)
             #print(leftMotor.speed)
+        """
 
-        sleep(0.1) # wait for 0.1 seconds
+        sleep(0.05) # wait for 0.1 seconds
     for y in range(len(leftSpeeds)):
         leftMotor.on(SpeedNativeUnits(-leftSpeeds[len(leftSpeeds)-y-1]))
         #leftMotor.speedNativeUnits(-500)

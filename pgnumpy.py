@@ -52,6 +52,7 @@ for e in range(NUM_EPISODES):
 		#print(state)
 		#2d array of 4 values
 		probs = policy(state,w)
+		print(probs)
 		#2d array of 2 values
 		#print(probs)
 		#print(nA)
@@ -71,16 +72,16 @@ for e in range(NUM_EPISODES):
 		# Compute gradient and save with reward in memory for our weight updates
 
 		#print(softmax_grad(probs))
-
+		#print()
 		dsoftmax = softmax_grad(probs)[action,:]
 		#gradients in the column of the actions
 		#there are as many columns as actions
 		#print(dsoftmax)
 		dlog = dsoftmax / probs[0,action]
 		grad = state.T.dot(dlog[None,:])
-		print("State")
-		print(state)
-		print(state.T)
+		#print("State")
+		#print(state)
+		#print(state.T)
 		grads.append(grad)
 		rewards.append(reward)
 

@@ -1,4 +1,4 @@
-"""Discretizes action space to 100 motor values, future plans include actor critic for continous space"""
+"""Discretizes action space to 100 motor values, is linear. future plans include actor critic for continous space"""
 """credit to this article for REINFORCE algorithm https://medium.com/samkirkiles/reinforce-policy-gradients-from-scratch-in-numpy-6a09ae0dfe12"""
 
 #import gym
@@ -49,7 +49,7 @@ for e in range(NUM_EPISODES):
 
 	# Keep track of game score to print
 	score = 0
-	# TODO: replace with for loop and get rid of done 
+	# TODO: replace with for loop and get rid of done
 	while True:
 
 		# Uncomment to see your model train in real time (slower)

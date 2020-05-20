@@ -32,10 +32,8 @@ print("output")
 print(feedforward(myinput))
 
 def dw2():
-    #return np.dot(sigprime(np.dot(layer1,l2w)).T,layer1).T
     return np.dot(softprime(np.dot(layer1,l2w)).T,layer1).T
 def dw1():
-    #return np.multiply(np.dot(np.dot(input.T,sigprime(np.dot(layer1,l2w))),l2w.T).T,sigprime(np.dot(input,l1w)).T).T
     return np.multiply(np.dot(np.dot(input.T,softprime(np.dot(layer1,l2w))),l2w.T).T,sigprime(np.dot(input,l1w)).T).T
 
 print("d1")

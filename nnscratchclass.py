@@ -25,11 +25,9 @@ class NN:
         return self.soft(np.dot(self.sig(np.dot(self.input,self.l1w)),self.l2w))
     def dw2(self):
         layer1=self.sig(np.dot(self.input,self.l1w))
-        #return np.dot(self.sigprime(np.dot(layer1,self.l2w)).T,layer1).T
         return np.dot(self.softprime(np.dot(layer1,self.l2w)).T,layer1).T
     def dw1(self):
         layer1=self.sig(np.dot(self.input,self.l1w))
-        #return np.multiply(np.dot(np.dot(self.input.T,self.sigprime(np.dot(layer1,self.l2w))),self.l2w.T).T,self.sigprime(np.dot(self.input,self.l1w)).T).T
         return np.multiply(np.dot(np.dot(self.input.T,self.softprime(np.dot(layer1,self.l2w))),self.l2w.T).T,self.sigprime(np.dot(self.input,self.l1w)).T).T
 newNN=NN(1,2,3)
 print("output")

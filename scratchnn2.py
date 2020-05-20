@@ -5,11 +5,11 @@ def sig(x):
 
 def sigprime(x):
     return sig(x)*(1-sig(x))
-myinput=0.1
+myinput=1
 inputneurons=1
 hiddenneurons=2
 outputneurons=2
-"""
+
 input=np.random.uniform(-1,1,(1,inputneurons))
 l1w=np.random.uniform(-1,1,(inputneurons,hiddenneurons))
 l2w=np.random.uniform(-1,1,(hiddenneurons,outputneurons))
@@ -17,7 +17,7 @@ l2w=np.random.uniform(-1,1,(hiddenneurons,outputneurons))
 input=np.random.rand(1,inputneurons)
 l1w=np.random.rand(inputneurons,hiddenneurons)
 l2w=np.random.rand(hiddenneurons,outputneurons)
-
+"""
 layer1=sig(np.dot(input,l1w))
 print("input")
 print(myinput)

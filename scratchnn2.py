@@ -5,10 +5,10 @@ def sig(x):
 
 def sigprime(x):
     return sig(x)*(1-sig(x))
-myinput=0.8
-inputneurons=5
-hiddenneurons=5
-outputneurons=5
+myinput=1
+inputneurons=1
+hiddenneurons=2
+outputneurons=2
 input=np.random.rand(1,inputneurons)
 l1w=np.random.rand(inputneurons,hiddenneurons)
 l2w=np.random.rand(hiddenneurons,outputneurons)

@@ -16,11 +16,7 @@ outputneurons=4
 input=np.random.uniform(-1,1,(1,inputneurons))
 l1w=np.random.uniform(-1,1,(inputneurons,hiddenneurons))
 l2w=np.random.uniform(-1,1,(hiddenneurons,outputneurons))
-"""
-input=np.random.rand(1,inputneurons)
-l1w=np.random.rand(inputneurons,hiddenneurons)
-l2w=np.random.rand(hiddenneurons,outputneurons)
-"""
+
 layer1=sig(np.dot(input,l1w))
 print("input")
 print(myinput)
@@ -31,7 +27,6 @@ print(l2w)
 def feedforward(x):
     input[0,0]=x
     layer1=sig(np.dot(input,l1w))
-    #return sig(np.dot(sig(np.dot(input,l1w)),l2w))
     return soft(np.dot(sig(np.dot(input,l1w)),l2w))
 print("output")
 print(feedforward(myinput))

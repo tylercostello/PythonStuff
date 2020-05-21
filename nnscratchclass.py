@@ -20,7 +20,8 @@ class NN:
         print("weights2")
         print(self.l2w)
     def feedforward(self,x):
-        self.input[0,0]=x
+        self.input=x
+        #print(self.input)
         layer1=self.sig(np.dot(self.input,self.l1w))
         return self.soft(np.dot(self.sig(np.dot(self.input,self.l1w)),self.l2w))
     def dw2(self):
@@ -31,7 +32,7 @@ class NN:
         return np.multiply(np.dot(np.dot(self.input.T,self.softprime(np.dot(layer1,self.l2w))),self.l2w.T).T,self.sigprime(np.dot(self.input,self.l1w)).T).T
 newNN=NN(1,2,3)
 print("output")
-print(newNN.feedforward(1))
+print(newNN.feedforward(np.array([[1]])))
 print("d1")
 print(newNN.dw1())
 print("d2")

@@ -31,22 +31,28 @@ class NN:
     def dw1(self):
         layer1=self.sig(np.dot(self.input,self.l1w))
         return np.multiply(np.dot(np.dot(self.input.T,self.sigprime(np.dot(layer1,self.l2w))),self.l2w.T).T,self.sigprime(np.dot(self.input,self.l1w)).T).T
-newNN=NN(2,3,2)
+testInput=np.array([[0.3]])
+print("input")
+print(testInput)
+newNN=NN(1,3,10)
 print("output")
-print(newNN.feedforward(np.array([[-0.5,-0.5]])))
+#print(newNN.feedforward(np.array([[-0.5,-0.5]])))
+print(newNN.feedforward(testInput))
 for x in range(1000):
     newNN.addw1(newNN.dw1())
 
     w2adder=newNN.dw2()
     w2adder[:,0]*=-1
     newNN.addw2(w2adder)
-    newNN.feedforward(np.array([[-0.5,-0.5]]))
+    #newNN.feedforward(np.array([[-0.5,-0.5]]))
+    newNN.feedforward(testInput)
 
 
 
 
 print("output")
-print(newNN.feedforward(np.array([[-0.5,-0.5]])))
+#print(newNN.feedforward(np.array([[-0.5,-0.5]])))
+print(newNN.feedforward(testInput))
 print("d1")
 print(newNN.dw1())
 print("d2")

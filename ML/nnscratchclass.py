@@ -21,7 +21,7 @@ class NN:
         print(self.l2w)
     def feedforward(self,x):
         self.input=x
-        print(self.input)
+        #print(self.input)
         layer1=self.sig(np.dot(self.input,self.l1w))
         return self.soft(np.dot(self.sig(np.dot(self.input,self.l1w)),self.l2w))
     def addw1(self,x):
@@ -34,15 +34,22 @@ class NN:
     def dw1(self):
         layer1=self.sig(np.dot(self.input,self.l1w))
         return np.multiply(np.dot(np.dot(self.input.T,self.softprime(np.dot(layer1,self.l2w))),self.l2w.T).T,self.sigprime(np.dot(self.input,self.l1w)).T).T
-newNN=NN(2,2,2)
-"""
+newNN=NN(2,3,2)
+print("output")
+print(newNN.feedforward(np.array([[-0.5,-0.5]])))
 for x in range(1000):
     newNN.addw1(newNN.dw1())
-    newNN.addw2(newNN.dw2())
-"""
-print("output")
-print(newNN.feedforward(np.array([[1,1]])))
 
+    w2adder=newNN.dw2()
+    w2adder[:,1]*=-1
+    newNN.addw2(w2adder)
+    newNN.feedforward(np.array([[-0.5,-0.5]]))
+
+
+
+
+print("output")
+print(newNN.feedforward(np.array([[-0.5,-0.5]])))
 print("d1")
 print(newNN.dw1())
 print("d2")

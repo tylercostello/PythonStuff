@@ -29,6 +29,7 @@ def policy(state,w):
 # Vectorized softmax Jacobian
 def softmax_grad(softmax):
     s = softmax.reshape(-1,1)
+    #print((np.diagflat(s) - np.dot(s, s.T)).shape)
     return np.diagflat(s) - np.dot(s, s.T)
 
 # Main loop
@@ -52,7 +53,7 @@ for e in range(NUM_EPISODES):
 		#print(state)
 		#2d array of 4 values
 		probs = policy(state,w)
-		print(probs)
+		#print(probs)
 		#2d array of 2 values
 		#print(probs)
 		#print(nA)
@@ -62,6 +63,8 @@ for e in range(NUM_EPISODES):
 		#1d array of 2 values
 		#(2)
 		#first value in probs is prob of zero, second is prob of one
+		#action=0
+		#print(probs)
 		action = np.random.choice(nA,p=probs[0])
 		#choose from array randomly based on their probs
 		#print(action)
@@ -74,11 +77,14 @@ for e in range(NUM_EPISODES):
 		#print(softmax_grad(probs))
 		#print()
 		dsoftmax = softmax_grad(probs)[action,:]
+		#print(dsoftmax.size)
 		#gradients in the column of the actions
 		#there are as many columns as actions
 		#print(dsoftmax)
 		dlog = dsoftmax / probs[0,action]
+		#print(dlog.size)
 		grad = state.T.dot(dlog[None,:])
+		#print(grad.size)
 		#print("State")
 		#print(state)
 		#print(state.T)

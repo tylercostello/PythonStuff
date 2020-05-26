@@ -4,12 +4,13 @@ import warnings
 warnings.simplefilter(action = "ignore", category = RuntimeWarning)
 class NN:
     def sig(self,x):
-        return 1/(1+np.exp(-x))
+        return np.nan_to_num(1/(1+np.exp(-x)))
     def sigprime(self,x):
-        return self.sig(x)*(1-self.sig(x))
+        return np.nan_to_num(self.sig(x)*(1-self.sig(x)))
 
     def soft(self,x):
-        return np.exp(x)/np.sum(np.exp(x))
+
+        return np.nan_to_num(np.exp(x)/np.sum(np.exp(x)))
 
     def softprime(self,x):
         s = x.reshape(-1,1)
@@ -33,9 +34,9 @@ class NN:
             #print(jacobian[counter:].sum())
         #    column[counter]=(jacobian[counter:].sum())/len(jacobian)
         #return column.T
-        #return rowone
+        return np.nan_to_num(rowone)
         #return sum
-        return diag
+        #return diag
 
         #return self.soft(x)*(1-self.soft(x))
     def __init__(self,In,Hn,On):
@@ -53,17 +54,17 @@ class NN:
         self.input=x
         #print(self.input)
         layer1=self.sig(np.dot(self.input,self.l1w))
-        return self.soft(np.dot(self.sig(np.dot(self.input,self.l1w)),self.l2w))
+        return np.nan_to_num(self.soft(np.dot(self.sig(np.dot(self.input,self.l1w)),self.l2w)))
     def addw1(self,x):
         self.l1w+=x
     def addw2(self,x):
         self.l2w+=x
     def dw2(self):
         layer1=self.sig(np.dot(self.input,self.l1w))
-        return np.dot(self.softprime(np.dot(layer1,self.l2w)).T,layer1).T
+        return np.nan_to_num(np.dot(self.softprime(np.dot(layer1,self.l2w)).T,layer1).T)
     def dw1(self):
         layer1=self.sig(np.dot(self.input,self.l1w))
-        return np.multiply(np.dot(np.dot(self.input.T,self.softprime(np.dot(layer1,self.l2w))),self.l2w.T).T,self.sigprime(np.dot(self.input,self.l1w)).T).T
+        return np.nan_to_num(np.multiply(np.dot(np.dot(self.input.T,self.softprime(np.dot(layer1,self.l2w))),self.l2w.T).T,self.sigprime(np.dot(self.input,self.l1w)).T).T)
 testInput=np.array([[0.2]])
 print("input")
 print(testInput)
@@ -74,10 +75,11 @@ print(newNN.feedforward(testInput))
 for x in range(10000):
     newNN.addw1(0.01*newNN.dw1())
     #newNN.addw2(newNN.dw2())
-    w2adder=0.01*newNN.dw2()
-    w2adder[:,0]*=-1
-    w2adder[:,1]*=-1
-    newNN.addw2(w2adder)
+    #w2adder=0.01*newNN.dw2()
+    #w2adder[:,0]*=-1
+    #w2adder[:,1]*=-1
+    #newNN.addw2(w2adder)
+    newNN.addw2(0.01*newNN.dw2())
     #newNN.feedforward(np.array([[-0.5,-0.5]]))
     newNN.feedforward(testInput)
 

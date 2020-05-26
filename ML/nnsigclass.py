@@ -38,11 +38,11 @@ newNN=NN(1,3,10)
 print("output")
 #print(newNN.feedforward(np.array([[-0.5,-0.5]])))
 print(newNN.feedforward(testInput))
-for x in range(1000):
+for x in range(10000):
     newNN.addw1(newNN.dw1())
 
     w2adder=newNN.dw2()
-    w2adder[:,0]*=-1
+    w2adder[:,1]*=-1
     newNN.addw2(w2adder)
     #newNN.feedforward(np.array([[-0.5,-0.5]]))
     newNN.feedforward(testInput)

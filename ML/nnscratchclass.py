@@ -74,7 +74,7 @@ class NN:
         #return np.multiply(np.dot(np.dot(self.input.T,self.softprime(np.dot(layer1,self.l2w),row)),self.l2w.T).T,self.sigprime(np.dot(self.input,self.l1w)).T).T
         return np.multiply(np.dot(np.dot(self.input.T,self.softprime(np.dot(layer1,self.l2w),row)),self.l2w.T).T,self.sigprime(np.dot(self.input,self.l1w)).T).T
 testInput=np.array([[0.2]])
-wrt=1
+wrt=0
 print("input")
 print(testInput)
 newNN=NN(1,2,2)
@@ -82,13 +82,14 @@ print("output")
 #print(newNN.feedforward(np.array([[-0.5,-0.5]])))
 print(newNN.feedforward(testInput))
 for x in range(10000):
-    newNN.addw1(0.01*newNN.dw1(wrt))
+    newNN.addw1(newNN.dw1(wrt))
     #newNN.addw2(newNN.dw2())
     #w2adder=0.01*newNN.dw2()
     #w2adder[:,0]*=-1
     #w2adder[:,1]*=-1
     #newNN.addw2(w2adder)
-    newNN.addw2(0.01*newNN.dw2(wrt))
+    newNN.addw2(newNN.dw2(wrt))
+    #newNN.addw2(-newNN.dw2(wrt+1))
     #newNN.feedforward(np.array([[-0.5,-0.5]]))
     newNN.feedforward(testInput)
 

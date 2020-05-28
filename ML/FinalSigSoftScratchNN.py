@@ -55,11 +55,10 @@ class NN:
         layer1=self.sig(np.dot(self.input,self.l1w))
         leftSide=np.dot(np.dot(self.input.T,self.softprime(np.dot(layer1,self.l2w),row)),self.l2w.T).T
         rightSide=self.sigprime(np.dot(self.input,self.l1w)).T
-        rightSide+=np.random.uniform(-0.01,0.01)
         return np.multiply(leftSide,rightSide).T
 
 testInput=np.array([[0.9]])
-wrt=0
+wrt=50
 print("input")
 print(testInput)
 newNN=NN(1,50,100)

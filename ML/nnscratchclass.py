@@ -50,9 +50,9 @@ class NN:
         self.inputneurons=In
         hiddenneurons=Hn
         outputneurons=On
-        self.input=np.random.uniform(-1,1,(1,self.inputneurons))
-        self.l1w=np.random.uniform(-1,1,(self.inputneurons,hiddenneurons))
-        self.l2w=np.random.uniform(-1,1,(hiddenneurons,outputneurons))
+        self.input=np.random.uniform(0,1,(1,self.inputneurons))
+        self.l1w=np.random.uniform(0,1,(self.inputneurons,hiddenneurons))
+        self.l2w=np.random.uniform(0,1,(hiddenneurons,outputneurons))
         print("weights1")
         print(self.l1w)
         print("weights2")
@@ -61,15 +61,16 @@ class NN:
         self.input=x
         #print(self.input)
         layer1=self.sig(np.dot(self.input,self.l1w))
-        print(np.clip(np.dot(self.sig(np.dot(self.input,self.l1w)),self.l2w),-100000,100000))
-        return self.soft(np.clip(np.dot(self.sig(np.dot(self.input,self.l1w)),self.l2w),-100000,100000))
+        #print(np.dot(self.sig(np.dot(self.input,self.l1w)),self.l2w))
+        return self.soft(np.dot(self.sig(np.dot(self.input,self.l1w)),self.l2w))
     def addw1(self,x):
         self.l1w+=x
     def addw2(self,x):
         self.l2w+=x
     def dw2(self,row):
         layer1=self.sig(np.dot(self.input,self.l1w))
-        leftSide=np.clip(self.softprime(np.dot(layer1,self.l2w),row).T,-100000,100000)
+        leftSide=self.softprime(np.dot(layer1,self.l2w),row).T
+        #leftSide=np.clip(self.softprime(np.dot(layer1,self.l2w),row).T,-100000,100000)
         rightSide=layer1
         return np.dot(leftSide,rightSide).T
         #return np.dot(self.softprime(np.dot(layer1,self.l2w),row).T,layer1).T
@@ -79,23 +80,24 @@ class NN:
 
         #print(self.sigprime(np.dot(self.input,self.l1w)))
         #return np.multiply(np.dot(np.dot(self.input.T,self.softprime(np.dot(layer1,self.l2w),row)),self.l2w.T).T,self.sigprime(np.dot(self.input,self.l1w)).T).T
-        leftSide=np.clip(np.dot(np.dot(self.input.T,self.softprime(np.dot(layer1,self.l2w),row)),self.l2w.T).T,-100000,100000)
-        rightSide=np.clip(self.sigprime(np.dot(self.input,self.l1w)).T,-100000,100000)
-
+        leftSide=np.dot(np.dot(self.input.T,self.softprime(np.dot(layer1,self.l2w),row)),self.l2w.T).T
+        #leftSide=np.clip(np.dot(np.dot(self.input.T,self.softprime(np.dot(layer1,self.l2w),row)),self.l2w.T).T,-100000,100000)
+        #rightSide=np.clip(self.sigprime(np.dot(self.input,self.l1w)).T,-100000,100000)
+        rightSide=self.sigprime(np.dot(self.input,self.l1w)).T
         rightSide+=np.random.uniform(-0.01,0.01)
         #rightSide+=0.01
         return np.multiply(leftSide,rightSide).T
 
         #return np.multiply(np.dot(np.dot(self.input.T,self.softprime(np.dot(layer1,self.l2w),row)),self.l2w.T).T,self.sigprime(np.dot(self.input,self.l1w)).T+0.001).T
 testInput=np.array([[0.2]])
-wrt=0
+wrt=9
 print("input")
 print(testInput)
-newNN=NN(1,2,2)
+newNN=NN(1,2,10)
 print("output")
 #print(newNN.feedforward(np.array([[-0.5,-0.5]])))
 print(newNN.feedforward(testInput))
-for x in range(1000):
+for x in range(10000):
     newNN.addw1(newNN.dw1(wrt))
     #newNN.addw2(newNN.dw2())
     #w2adder=0.01*newNN.dw2()
@@ -105,7 +107,7 @@ for x in range(1000):
     newNN.addw2(newNN.dw2(wrt))
     #newNN.addw2(-newNN.dw2(wrt+1))
     #newNN.feedforward(np.array([[-0.5,-0.5]]))
-    newNN.feedforward(testInput)
+    #print(newNN.feedforward(testInput))
 
 
 

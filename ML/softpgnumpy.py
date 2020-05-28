@@ -6,7 +6,7 @@ from FinalSigSoftScratchNN import NN
 
 #Hyperparameters
 NUM_EPISODES = 1000000
-LEARNING_RATE = 0.005
+LEARNING_RATE = 1
 GAMMA = 0.99
 
 # Create gym and seed numpy

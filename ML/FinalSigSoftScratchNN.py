@@ -3,8 +3,11 @@ import numpy as np
 class NN:
 
     def sig(self,x):
+        print(x)
         shiftx = x - np.max(x)
+        #np.clip(shiftx,-1000,1000)
         return 1/(1+np.exp(-shiftx))
+
         #return 1/(1+np.exp(-x))
 
     def sigprime(self,x):
@@ -33,15 +36,17 @@ class NN:
         print(self.l1w)
         print("weights2")
         print(self.l2w)
-        
+
 
     def feedforward(self,x):
         self.input=x
         layer1=self.sig(np.dot(self.input,self.l1w))
+        #print(np.dot(self.sig(np.dot(self.input,self.l1w)),self.l2w))
         return self.soft(np.dot(self.sig(np.dot(self.input,self.l1w)),self.l2w))
 
     def addw1(self,x):
         self.l1w+=x
+        #print(x)
 
     def addw2(self,x):
         self.l2w+=x
@@ -57,7 +62,7 @@ class NN:
         leftSide=np.dot(np.dot(self.input.T,self.softprime(np.dot(layer1,self.l2w),row)),self.l2w.T).T
         rightSide=self.sigprime(np.dot(self.input,self.l1w)).T
         return np.multiply(leftSide,rightSide).T
-"""
+
 testInput=np.array([[0.9]])
 wrt=0
 print("input")
@@ -68,6 +73,7 @@ print(newNN.feedforward(testInput))
 
 for x in range(1000):
     newNN.feedforward(testInput)
+    #print(10*newNN.dw1(wrt))
     newNN.addw1(newNN.dw1(wrt))
     newNN.addw2(newNN.dw2(wrt))
 
@@ -78,4 +84,3 @@ print("d1")
 print(newNN.dw1(wrt))
 print("d2")
 print(newNN.dw2(wrt))
-"""

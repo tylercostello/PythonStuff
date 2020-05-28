@@ -33,6 +33,7 @@ class NN:
         print(self.l1w)
         print("weights2")
         print(self.l2w)
+        
 
     def feedforward(self,x):
         self.input=x
@@ -56,7 +57,7 @@ class NN:
         leftSide=np.dot(np.dot(self.input.T,self.softprime(np.dot(layer1,self.l2w),row)),self.l2w.T).T
         rightSide=self.sigprime(np.dot(self.input,self.l1w)).T
         return np.multiply(leftSide,rightSide).T
-
+"""
 testInput=np.array([[0.9]])
 wrt=0
 print("input")
@@ -66,9 +67,10 @@ print("output")
 print(newNN.feedforward(testInput))
 
 for x in range(1000):
+    newNN.feedforward(testInput)
     newNN.addw1(newNN.dw1(wrt))
     newNN.addw2(newNN.dw2(wrt))
-    newNN.feedforward(testInput)
+
 
 print("output")
 print(newNN.feedforward(testInput))
@@ -76,3 +78,4 @@ print("d1")
 print(newNN.dw1(wrt))
 print("d2")
 print(newNN.dw2(wrt))
+"""

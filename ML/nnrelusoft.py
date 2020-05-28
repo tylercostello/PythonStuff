@@ -3,15 +3,20 @@ import numpy as np
 
 #warnings.simplefilter(action = "ignore", category = RuntimeWarning)
 class NN:
-
     def sig(self,x):
         return 1/(1+np.exp(-x))
     def sigprime(self,x):
-        return self.sig(x)*(1-self.sig(x))
-
+        return self.relu(x)*(1-self.relu(x))
+    def relu(self,x):
+        #print(x)
+        #print(np.maximum(0.01,x))
+        return np.maximum(-0.01,x)
+    def reluprime(self,x):
+        x[x<=0] = 0
+        x[x>0] = 1
+        return x
     def soft(self,x):
         """Compute the softmax of vector x in a numerically stable way."""
-        #print(x)
         shiftx = x - np.max(x)
         exps = np.exp(shiftx)
         return exps / np.sum(exps)
@@ -19,9 +24,9 @@ class NN:
 
     def softprime(self,x,row):
         s = x.reshape(-1,1)
+        #print(s)
         #print(x.shape)
         #print((np.diagflat(s) - np.dot(s, s.T)).shape)
-        #print(x)
         jacobian = (np.diagflat(s) - np.dot(s, s.T))
 
         #print(jacobian.shape)
@@ -57,36 +62,28 @@ class NN:
         print(self.l1w)
         print("weights2")
         print(self.l2w)
+        #print(self.reluprime(self.l2w))
+
     def feedforward(self,x):
         self.input=x
         #print(self.input)
-        layer1=self.sig(np.dot(self.input,self.l1w))
-        print(np.clip(np.dot(self.sig(np.dot(self.input,self.l1w)),self.l2w),-100000,100000))
-        return self.soft(np.clip(np.dot(self.sig(np.dot(self.input,self.l1w)),self.l2w),-100000,100000))
+        layer1=self.relu(np.dot(self.input,self.l1w))
+        #print(np.dot(self.relu(np.dot(self.input,self.l1w)),self.l2w))
+        return self.soft(np.dot(self.relu(np.dot(self.input,self.l1w)),self.l2w))
     def addw1(self,x):
         self.l1w+=x
     def addw2(self,x):
         self.l2w+=x
     def dw2(self,row):
-        layer1=self.sig(np.dot(self.input,self.l1w))
-        leftSide=np.clip(self.softprime(np.dot(layer1,self.l2w),row).T,-100000,100000)
-        rightSide=layer1
-        return np.dot(leftSide,rightSide).T
-        #return np.dot(self.softprime(np.dot(layer1,self.l2w),row).T,layer1).T
+        layer1=self.relu(np.dot(self.input,self.l1w))
+        return np.dot(self.softprime(np.dot(layer1,self.l2w),row).T,layer1).T
     def dw1(self,row):
-        layer1=self.sig(np.dot(self.input,self.l1w))
-        #print(np.dot(np.dot(self.input.T,self.softprime(np.dot(layer1,self.l2w),row)),self.l2w.T).T)
+        layer1=self.relu(np.dot(self.input,self.l1w))
+        #print(np.clip(np.dot(np.dot(self.input.T,self.softprime(np.dot(layer1,self.l2w),row)),self.l2w.T).T,-100000,100000))
 
-        #print(self.sigprime(np.dot(self.input,self.l1w)))
-        #return np.multiply(np.dot(np.dot(self.input.T,self.softprime(np.dot(layer1,self.l2w),row)),self.l2w.T).T,self.sigprime(np.dot(self.input,self.l1w)).T).T
-        leftSide=np.clip(np.dot(np.dot(self.input.T,self.softprime(np.dot(layer1,self.l2w),row)),self.l2w.T).T,-100000,100000)
-        rightSide=np.clip(self.sigprime(np.dot(self.input,self.l1w)).T,-100000,100000)
-
-        rightSide+=np.random.uniform(-0.01,0.01)
-        #rightSide+=0.01
-        return np.multiply(leftSide,rightSide).T
-
-        #return np.multiply(np.dot(np.dot(self.input.T,self.softprime(np.dot(layer1,self.l2w),row)),self.l2w.T).T,self.sigprime(np.dot(self.input,self.l1w)).T+0.001).T
+        #print(self.reluprime(np.dot(self.input,self.l1w)))
+        #return np.multiply(np.dot(np.dot(self.input.T,self.softprime(np.dot(layer1,self.l2w),row)),self.l2w.T).T,self.reluprime(np.dot(self.input,self.l1w)).T).T
+        return np.multiply(np.dot(np.dot(self.input.T,self.softprime(np.dot(layer1,self.l2w),row)),self.l2w.T).T,self.reluprime(np.dot(self.input,self.l1w)).T).T
 testInput=np.array([[0.2]])
 wrt=0
 print("input")
@@ -95,6 +92,7 @@ newNN=NN(1,2,2)
 print("output")
 #print(newNN.feedforward(np.array([[-0.5,-0.5]])))
 print(newNN.feedforward(testInput))
+
 for x in range(1000):
     newNN.addw1(newNN.dw1(wrt))
     #newNN.addw2(newNN.dw2())
@@ -106,6 +104,7 @@ for x in range(1000):
     #newNN.addw2(-newNN.dw2(wrt+1))
     #newNN.feedforward(np.array([[-0.5,-0.5]]))
     newNN.feedforward(testInput)
+
 
 
 

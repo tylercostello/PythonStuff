@@ -3,9 +3,9 @@ import numpy as np
 class NN:
 
     def sig(self,x):
-        print(x)
+        #print(x)
         shiftx = x - np.max(x)
-        #np.clip(shiftx,-1000,1000)
+        #np.clip(shiftx,-10,10)
         return 1/(1+np.exp(-shiftx))
 
         #return 1/(1+np.exp(-x))
@@ -15,6 +15,7 @@ class NN:
 
     def soft(self,x):
         shiftx = x - np.max(x)
+        #np.clip(shiftx,-10,10)
         exps = np.exp(shiftx)
         return exps / np.sum(exps)
 
@@ -67,15 +68,15 @@ testInput=np.array([[0.9]])
 wrt=0
 print("input")
 print(testInput)
-newNN=NN(1,50,100)
+newNN=NN(1,2,2)
 print("output")
 print(newNN.feedforward(testInput))
 
 for x in range(1000):
     newNN.feedforward(testInput)
     #print(10*newNN.dw1(wrt))
-    newNN.addw1(newNN.dw1(wrt))
-    newNN.addw2(newNN.dw2(wrt))
+    newNN.addw1(0.01*newNN.dw1(wrt))
+    newNN.addw2(0.01*newNN.dw2(wrt))
 
 
 print("output")

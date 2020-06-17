@@ -29,7 +29,7 @@ class NeuralNetwork:
         self.input = x
         print(self.input)
         #print(self.input.shape[1])
-        self.weights1= np.random.rand(2,4)
+        self.weights1= np.random.rand(3,4)
         #self.weights1= np.random.rand(self.input.shape[1],4) # considering we have 4 nodes in the hidden layer
         self.weights2 = np.random.rand(4,1)
         self.y = y
@@ -45,7 +45,7 @@ class NeuralNetwork:
         d_weights1 = np.dot(self.input.T, np.dot(2*(self.y -self.output)*sigmoid_derivative(self.output), self.weights2.T)*sigmoid_derivative(self.layer1))
 
         self.weights1 += d_weights1
-        self.weights2 += d_weights2
+        #self.weights2 += d_weights2
 
     def train(self, X, y):
         self.output = self.feedforward()

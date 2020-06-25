@@ -4,7 +4,7 @@ import numpy as np
 class Neural_Network(object):
     def __init__(self):
         #Define Hyperparameters
-        self.inputLayerSize = 2
+        self.inputLayerSize = 4
         self.outputLayerSize = 2
         self.hiddenLayerSize = 3
 
@@ -72,7 +72,10 @@ nn = Neural_Network()
 
 for i in range (1000):
     if (i%100==0):
-        print(nn.forward(np.array([[1,3]])))
-    a,b=nn.costFunctionPrime(np.array([[1,3]]),np.array([[1,0]]))
+        print(nn.forward(np.array([[1,3,1,4]])))
+    actionarray=np.zeros((2))
+    actionarray[0]=1
+    #a,b=nn.costFunctionPrime(np.array([[1,3]]),np.array([[1,0]]))
+    a,b=nn.costFunctionPrime(np.array([[1,3,1,4]]),actionarray)
     nn.addW1(a)
     nn.addW2(b)

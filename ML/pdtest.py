@@ -28,37 +28,39 @@ class Neural_Network(object):
         #Gradient of sigmoid
         return np.exp(-z)/((1+np.exp(-z))**2)
 
-    def costFunction(self, X, y):
-        #Compute cost for given X,y, use weights already stored in class.
-        self.yHat = self.forward(X)
-        J = 0.5*sum((y-self.yHat)**2)
-        return J
-
-    def costFunctionPrime(self, X, y):
+    def gradient(self, X, wtr):
         #Compute derivative with respect to W and W2 for a given X and y:
         self.yHat = self.forward(X)
 
-        delta3 = np.multiply((y-self.yHat), self.sigmoidPrime(self.z3))
+        delta3 = self.sigmoidPrime(self.z3)
         dJdW2 = np.dot(self.a2.T, delta3)
-
 
         delta2 = np.dot(delta3, self.W2.T)*self.sigmoidPrime(self.z2)
         dJdW1 = np.dot(X.T, delta2)
 
+        wtrarray=np.ones((self.inputLayerSize,self.hiddenLayerSize))
+        wtrarray[wtr]=-1
+        dJdW1=np.multiply(dJdW1,wtrarray)
+        wtrarray=np.ones((self.hiddenLayerSize,self.outputLayerSize))
+        wtrarray[:,wtr]=-1
+        dJdW2=np.multiply(dJdW2,wtrarray)
 
         return dJdW1, dJdW2
+
     def addW1(self,x):
         self.W1+=x
+
     def addW2(self,x):
         self.W2+=x
 
 nn = Neural_Network()
-#print(nn.forward(np.array([[1]])))
-#print(nn.costFunctionPrime(np.array([[1]]),np.array([[0.2,0.8]])))
+print(nn.forward(np.array([[1,2]])))
+print(nn.gradient(np.array([[1,2]]),1))
+
 
 for i in range (1000):
     if (i%100==0):
-        print(nn.forward(np.array([[1,3]])))
-    a,b=nn.costFunctionPrime(np.array([[1,3]]),np.array([[0,0,1,0]]))
+        print(nn.forward(np.array([[1,2]])))
+    a,b=nn.gradient(np.array([[1,2]]),1)
     nn.addW1(a)
     nn.addW2(b)

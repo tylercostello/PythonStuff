@@ -5,7 +5,7 @@ class Neural_Network(object):
     def __init__(self):
         #Define Hyperparameters
         self.inputLayerSize = 2
-        self.outputLayerSize = 4
+        self.outputLayerSize = 2
         self.hiddenLayerSize = 3
 
         #Weights (parameters)
@@ -17,7 +17,7 @@ class Neural_Network(object):
         self.z2 = np.dot(X, self.W1)
         self.a2 = self.sigmoid(self.z2)
         self.z3 = np.dot(self.a2, self.W2)
-        yHat = self.sigmoid(self.z3)
+        yHat = self.soft(self.z3)
         return yHat
 
     def sigmoid(self, z):
@@ -27,6 +27,20 @@ class Neural_Network(object):
     def sigmoidPrime(self,z):
         #Gradient of sigmoid
         return np.exp(-z)/((1+np.exp(-z))**2)
+
+    def soft(self,x):
+        shiftx = x - np.max(x)
+        #np.clip(shiftx,-10,10)
+        exps = np.exp(shiftx)
+        return exps / np.sum(exps)
+
+    def softprime(self,x,row):
+        s = x.reshape(-1,1)
+        jacobian = (np.diagflat(s) - np.dot(s, s.T))
+        returnrow=jacobian[row,:]
+        returnrow=np.reshape(returnrow,(1,-1))
+        return returnrow
+
 
     def costFunction(self, X, y):
         #Compute cost for given X,y, use weights already stored in class.
@@ -59,6 +73,6 @@ nn = Neural_Network()
 for i in range (1000):
     if (i%100==0):
         print(nn.forward(np.array([[1,3]])))
-    a,b=nn.costFunctionPrime(np.array([[1,3]]),np.array([[0,0,1,0]]))
+    a,b=nn.costFunctionPrime(np.array([[1,3]]),np.array([[1,0]]))
     nn.addW1(a)
     nn.addW2(b)

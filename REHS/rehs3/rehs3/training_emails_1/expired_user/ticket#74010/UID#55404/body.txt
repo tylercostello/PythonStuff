@@ -1,0 +1,46 @@
+
+Thu Aug 17 14:52:52 2017: Request 74010 was acted upon.
+ Transaction: Queue changed from 0-XOC to 0-SDSC by jhidleba
+       Queue: 0-SDSC
+     Subject: XUP: GPU job submission
+       Owner: jhidleba
+  Requestors: hemma011@umn.edu
+      Status: new
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=74010 >
+
+
+[Ticket created from XUP by hemma011]
+[From: Mahya Hemmat]
+[System: Comet]
+[Category: Batch Queues/Jobs]
+Hi,
+
+I have an active allocation TG-MCB160060, on comet for 68500 SUS.
+The project ID is umn113. When I try to submit my jobs to umn 113, the error below comes up:
+
+sbatch: error: bank_limit plugin: expired user, can't submit job
+sbatch: error: Batch job submission failed: Invalid account or account/partition combination specified
+
+
+Here is my batch script for job submission which was working previously:
+
+#!/bin/bash
+#SBATCH -A umn113
+#SBATCH --job-name="namd"
+#SBATCH --output="outs/min.out"
+#SBATCH --partition=compute
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=24
+#SBATCH --export=ALL
+#SBATCH -t 02:00:00
+
+#This job runs with 1 nodes, 24 cores/node, total of 24 cores
+#Load NAMD module
+module load namd
+
+#Run MPI job using ibrun
+sleep 20s
+ibrun namd2 min.namd 
+
+
+Please let me know why it deosn't let me run anything. 

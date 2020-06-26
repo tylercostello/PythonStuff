@@ -1,0 +1,43 @@
+
+Fri Jul 14 12:03:24 2017: Request 72034 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by hthta
+       Queue: 0-SDSC
+     Subject: XUP: Submitting Gaussian jobs
+       Owner: Nobody
+  Requestors: rsyrlyb@nmsu.edu
+      Status: new
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=72034 >
+
+
+[Ticket created from XUP by rsyrlyb]
+[From: Raulia Syrlybaeva]
+[System: Comet]
+[Category: Batch Queues/Jobs]
+Hello,
+
+I'm new in in Unix and I am trying to run a test script for Gaussian /share/apps/examples/gauss_09_revD.sb
+
+#!/bin/bash
+#SBATCH --job-name="gauss"
+#SBATCH --output="gauss.%j.%N.out"
+#SBATCH --partition=compute
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=24
+#SBATCH --export=ALL
+#SBATCH -t 00:10:00
+export GAUSS_SCRDIR=/scratch/$USER/$SLURM_JOBID
+module load gaussian/16.A.03
+exe=`which g16`
+export OMP_NUM_THREADS=24
+/usr/bin/time $exe < water_opt_24c.dat > water_opt_09D.out
+
+ 
+but I have a constant error:
+
+/usr/bin/which: no g16 in (/opt/gaussian/16.A.03/g16:/opt/hdf5/gnu/mvapich2_ib/bin:/opt/nco/gnu/mvapich2_ib/bin:/opt/netcdf/4.3.2/gnu/mvapich2_ib/bin:/opt/fftw/3.3.4/gnu/mvapich2_ib/bin:/opt/mvapich2/gnu/ib/bin:/opt/amber/bin:/opt/gaussian/09.D.01/g09:/opt/gnu/gcc/bin:/opt/gnu/bin:/opt/mvapich2/intel/ib/bin:/opt/intel/composer_xe_2013_sp1.2.144/bin/intel64:/opt/intel/composer_xe_2013_sp1.2.144/mpirt/bin/intel64:/opt/intel/composer_xe_2013_sp1.2.144/debugger/gdb/intel64_mic/bin:/usr/lib64/qt-3.3/bin:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin:/opt/ibutils/bin:/usr/java/latest/bin:/opt/pdsh/bin:/opt/rocks/bin:/opt/rocks/sbin:/opt/sdsc/bin:/opt/sdsc/sbin:/home/rsyrlyb/bin)
+
+ 
+Could you help me with this Gaussian script?
+
+Thank you,
+Raulia Syrlybaeva 

@@ -1,0 +1,36 @@
+
+Fri Dec 08 14:47:33 2017: Request 80106 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by hthta
+       Queue: 0-SDSC
+     Subject: XUP: gromacs module not working?
+       Owner: hthta
+  Requestors: irem.altan@duke.edu
+      Status: new
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=80106 >
+
+
+[Ticket created from XUP by nano3]
+[From: Irem Altan]
+[System: Comet]
+[Category: Software]
+Hi,
+
+I cannot run the gromacs module in the login node:
+
+[nano3@comet-ln2 cI_m]$ module load gromacs
+[nano3@comet-ln2 cI_m]$ gmx
+LiMIC: (limic_open) file open fail
+[unset]: aborting job:
+Fatal error in PMPI_Init_thread:
+Other MPI error, error stack:
+MPIR_Init_thread(514)....: 
+MPID_Init(359)...........: channel initialization failed
+MPIDI_CH3_Init(446)......: 
+MPIDI_CH3I_SMP_Init(2313): LiMIC2 device does not exist: No such file or directory
+
+This doesn't seem to be a problem on the GPU nodes themselves, as the jobs I had submitted have been running.
+
+I need to get gromacs to work in the login nodes for input preparation and converting the output file into readable formats. 
+
+Best,
+Irem 

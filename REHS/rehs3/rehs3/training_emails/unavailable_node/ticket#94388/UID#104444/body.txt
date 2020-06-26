@@ -1,0 +1,23 @@
+
+Mon Sep 03 15:48:19 2018: Request 94388 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by buskuehl
+       Queue: 0-SDSC
+     Subject: Comet compute queue issues?
+       Owner: buskuehl
+  Requestors: rbdavid@rams.colostate.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=94388 >
+
+
+Hi,
+When I squeue the compute partition, I see that my jobs (and numerous
+others) have a Nodelist (Reason) of:
+(ReqNodeNotAvail,
+UnavailableNodes:comet-01-[38,55-72],comet-12-70,comet-14-06,comet-21-38,comet-23-17,comet-30-03,comet-33-[05,08])
+
+My sbatch script does not specify which nodes that my job should run on.
+Additionally, there seems to be over half of the compute partition sitting
+idle (based on sinfo). Why are my jobs being held up in the queue?
+
+Russell Davidson
+ 

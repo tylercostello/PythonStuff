@@ -1,0 +1,39 @@
+
+Tue Feb 19 01:47:09 2019: Request 103983 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by aredding
+       Queue: 0-SDSC
+     Subject: Why copying same file takes different amount of time?
+       Owner: Nobody
+  Requestors: kaw130@eng.ucsd.edu
+      Status: new
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=103983 >
+
+
+Dear help team,
+
+My workflow involves copying the dataset to the local SSD scratch place 
+before start training model on the dataset to enhance throughput. 
+However, I found that copying the same dataset takes different amount of 
+time. I'm worrying whether it implies something went wrong. The log is 
+shown here, where every two lines is one log file:
+
+```
+[23:39:20] kkew@comet-ln3:.. sfm$ cat *{21515599,21515718,21515768}.out
+Tue Feb 19 07:15:40 UTC 2019 -- copying dataset to scratch place
+Tue Feb 19 07:20:45 UTC 2019 -- completed copying dataset to scratch place
+Tue Feb 19 07:30:17 UTC 2019 -- copying dataset to scratch place
+Tue Feb 19 07:31:45 UTC 2019 -- completed copying dataset to scratch place
+Tue Feb 19 07:35:02 UTC 2019 -- copying dataset to scratch place
+Tue Feb 19 07:36:30 UTC 2019 -- completed copying dataset to scratch place
+```
+
+The first SLURM out shows that copying takes 5 minutes whereas the next 
+two takes one minute each.
+
+Thank you so much for your suggestions.
+
+----------------
+Yours sincerely,
+Kaiwen Wu
+
+ 

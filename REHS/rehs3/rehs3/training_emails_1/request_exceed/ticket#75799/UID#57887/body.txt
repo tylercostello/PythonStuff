@@ -1,0 +1,47 @@
+
+Wed Sep 20 14:46:07 2017: Request 75799 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by jhawthor
+       Queue: 0-SDSC
+     Subject: Question regarding allocation and usage
+       Owner: Nobody
+  Requestors: sahmed@email.sc.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=75799 >
+
+
+Hi
+
+We have an allocation of 60000.0 SUs in comet machine, the project name and number are: Multidimensional Modeling of NOx Formation in High Hydrogen Content Fuels Combustion in Gas Turbine Applications | TG-CTS170024.
+
+When I submitted a job I got the following error msg or overusage:
+
+
+[arhan12@comet-ln2 test8_150ppmNO]$ sbatch openfoam-run-restart.sb
+sbatch: error: bank_limit plugin: The requested time can not exceed the available balance.
+Requested SUs: 1153
+Allocation limit group SUs: 60000
+Allocation limit user SUs: 60000
+Allocation used group SUs: 55575
+Allocation used user SUs: 55575
+Allocation available group SUs: 4425
+Allocation available user SUs: 4425
+Allocation running/queued group SUs: 3459
+Allocation running/queued user SUs: 3459
+Allocation completed today group SUs: 3
+Allocation completed today user SUs: 3
+sbatch: error: Batch job submission failed: Requested time limit is invalid (missing or exceeds some limit)
+[arhan12@comet-ln2 test8_150ppmNO]$
+
+
+
+It shows that I requested for 1153 SUs for the currently submitted job and I have 4425 SUs left. So it should work. Could you explain why it showed the overusage msg?
+
+Also, I couldnt understand how 55575 SUs are already used, isnt it like when one run is completed, it will not be using that much of SUs? If this continues, I will be out of SUs if I keep running jobs.
+
+I hope I could explain my question clearly. Please clarify my confusion.
+
+Thanks
+
+
+~Sheikh Ahmed
+ 

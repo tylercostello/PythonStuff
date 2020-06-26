@@ -1,0 +1,54 @@
+
+Tue Sep 26 00:39:09 2017: Request 76055 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by sporluck
+       Queue: 0-SDSC
+     Subject: XUP: job submission failure
+       Owner: sporluck
+  Requestors: taosun2@illinois.edu
+      Status: new
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=76055 >
+
+
+[Ticket created from XUP by taosun2]
+[From: Tao Sun]
+[System: Comet]
+[Category: Accounts]
+Hi:
+
+I was trying to submit a job on Comet, and got the following message with a submission failure
+
+There was an error running the SLURM sbatch command.
+The command was:
+'/usr/bin/sbatch comet_qsub.bat  2>&1'
+and the output was:
+'sbatch: error: bank_limit plugin: user is disallowed to submit jobs
+ sbatch: error: Batch job submission failed: Invalid account or account/partition combination specified
+'
+
+I checked my account and found my allocation is still active. I am attaching my submitting file below:
+
+#!/bin/bash
+#SBATCH -A TG-CDA100010
+#SBATCH --partition=compute
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=24
+#SBATCH -t 00:30:00
+#SBATCH --job-name="1node_test"
+#SBATCH -o %j.out
+#SBATCH -e %j.err
+#SBATCH --export=ALL
+#SBATCH --mail-type=ALL
+#SBATCH --mail-user taosun.victor@gmail.com
+
+module unload mvapich2_ib
+module load openmpi_ib
+module load vasp
+
+cd $SLURM_SUBMIT_DIR
+export SLURM_NODEFILE=`generate_pbs_nodefile`
+
+mpirun -hostfile $SLURM_NODEFILE -np 24 vasp > S4to5_02_vib.stdout
+
+Thanks very much!
+
+Tao Sun 

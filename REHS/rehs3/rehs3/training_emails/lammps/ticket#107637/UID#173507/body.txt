@@ -1,0 +1,47 @@
+
+Thu May 02 11:50:56 2019: Request 107637 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by jhawthor
+       Queue: 0-SDSC
+     Subject: XUP: Muliple Node Job submission failer.
+       Owner: jhawthor
+  Requestors: fmq221@lehigh.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=107637 >
+
+
+[Ticket created from XUP by fmq221]
+[From: Felix Quintana]
+[System: Comet]
+[Category: Batch Queues/Jobs]
+Hi,
+
+I am attempting to submit a multinode LAMMPS job for efficiency reasons. I submitted the same simulation using a singular node with success. However submitting a job with multinodes I received the following error without any possible indicator of the issue is in the out file:
+
+[comet-16-62.sdsc.edu:mpi_rank_14][error_sighandler] Caught error: Segmentation fault (signal 11)
+[comet-16-62.sdsc.edu:mpispawn_0][readline] Unexpected End-Of-File on file descriptor 28. MPI process died?
+[comet-16-62.sdsc.edu:mpispawn_0][mtpmi_processops] Error while reading PMI socket. MPI process died?
+[comet-16-62.sdsc.edu:mpispawn_0][child_handler] MPI process (rank: 14, pid: 1197) terminated with signal 11 -> abort job
+[comet-16-68.sdsc.edu:mpispawn_3][read_size] Unexpected End-Of-File on file descriptor 29. MPI process died?
+[comet-16-68.sdsc.edu:mpispawn_3][read_size] Unexpected End-Of-File on file descriptor 29. MPI process died?
+[comet-16-68.sdsc.edu:mpispawn_3][handle_mt_peer] Error while reading PMI socket. MPI process died?
+[comet-16-67.sdsc.edu:mpispawn_2][read_size] Unexpected End-Of-File on file descriptor 29. MPI process died?
+[comet-16-67.sdsc.edu:mpispawn_2][read_size] Unexpected End-Of-File on file descriptor 29. MPI process died?
+[comet-16-67.sdsc.edu:mpispawn_2][handle_mt_peer] Error while reading PMI socket. MPI process died?
+[comet-16-65.sdsc.edu:mpispawn_1][read_size] Unexpected End-Of-File on file descriptor 29. MPI process died?
+[comet-16-65.sdsc.edu:mpispawn_1][read_size] Unexpected End-Of-File on file descriptor 29. MPI process died?
+[comet-16-65.sdsc.edu:mpispawn_1][handle_mt_peer] Error while reading PMI socket. MPI process died?
+[comet-16-62.sdsc.edu:mpirun_rsh][process_mpispawn_connection] mpispawn_0 from node comet-16-62 aborted: Error while reading a PMI socket (4)
+Time is Wed May 1 10:53:42 PDT 2019
+Connection to comet-16-67 closed by remote host.^M
+Connection to comet-16-65 closed by remote host.^M
+Connection to comet-16-68 closed by remote host.^M
+
+It seems to occur at random times breaking sometimes within minutes of the simulation running, or less than two hours of the simulation running. The run file that ran successfully for a full 48 hours with a single node is located in the following directory: /oasis/scratch/comet/fmq221/temp_project/arp23/ called run_comet.slurm.
+
+One of the files that I ran for the multinode simulations is in the following directory: 
+/oasis/scratch/comet/fmq221/temp_project/arp23/part2/  called: run_comet.slurm
+
+I believe the issue pertains to the run configuration using multiple nodes since the sole difference between the successful single node run file and the broken multinode run file is the node count. Could I please get some help to what the issue is here. The error message is unspecific for me to decipher. 
+
+Thank you!
+Felix Quintana 

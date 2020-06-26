@@ -1,0 +1,43 @@
+
+Tue Oct 03 17:50:50 2017: Request 76565 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by clm
+       Queue: 0-SDSC
+     Subject: XUP: Cannot submit job with GPU resources
+       Owner: clm
+  Requestors: andy00@umail.ucsb.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=76565 >
+
+
+[Ticket created from XUP by andy00]
+[From: Andy Elias]
+[System: Comet]
+[Category: Batch Queues/Jobs]
+I am trying to submit this new job -- simple list directory operation (taken from /share/apps/examples/GPU/TensorFlow/)
+
+submit.sh content:
+ 
+#!/bin/bash
+#SBATCH --job-name="test_script"
+#SBATCH --output="test.out"
+#SBATCH --partition=gpu-shared
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=6
+#SBATCH --gres=gpu:1
+#SBATCH -t 00:10:00
+
+ls
+
+ 
+and I get this error
+ 
+[andy00@comet-ln3 ~]$ sbatch submit.sh 
+sbatch: error: bank_limit plugin: expired user, can't submit job
+sbatch: error: Batch job submission failed: Invalid account or account/partition combination specified
+
+The documentation says that I can access the allocation through the --partition flag, but it does not seem to work. I have also tried to ssh to comet-gpu.sdsc.xsede and that does not work either.
+
+Any help would be greatly appreciated!
+
+Thanks,
+Andy. 

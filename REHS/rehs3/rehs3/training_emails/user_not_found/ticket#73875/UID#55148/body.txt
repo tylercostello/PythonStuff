@@ -1,0 +1,31 @@
+
+Tue Aug 15 11:02:57 2017: Request 73875 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by jhawthor
+       Queue: 0-SDSC
+     Subject: XUP: GPU allocation shown as active but show_accounts indicates "no accounts found"
+       Owner: Nobody
+  Requestors: ejp213@lehigh.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=73875 >
+
+
+[Ticket created from XUP by ejp213]
+[From: Evan Pretti]
+[System: comet-gpu.sdsc.xsede]
+[Category: Accounts]
+I have just received access to an allocation on comet-gpu.  It appears in my list of allocations on the XSEDE user portal, and there are a sufficient number of SUs available.  However, when attempting to run a job requesting a GPU, I encounter:
+
+[ejp213@comet-ln3 example]$ sbatch lammps-shared.sb
+sbatch: error: bank_limit plugin: not found user association ejp213
+sbatch: error: Batch job submission failed: Invalid account or account/partition combination specified
+
+Checking my accounts indicates the following:
+
+[ejp213@comet-ln3 example]$ show_accounts --gpu
+ID name      project      used     available    used_by_proj
+------------------------------------------------------------
+
+No accounts found for user ejp213 on platform sdsc_comet_gpu.
+
+My PI, who gave me GPU access, has indicated to me that I should have it and everything appears to be working from his end.  Furthermore, I have used and am still using normal Comet (CPU) time and am experiencing no problems.  
+Please note that I am using the unmodified /share/apps/examples/GPU/LAMMPS/shared example above. 

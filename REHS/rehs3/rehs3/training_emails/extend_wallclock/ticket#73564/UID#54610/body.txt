@@ -1,0 +1,38 @@
+
+Wed Aug 09 08:05:30 2017: Request 73564 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by jhawthor
+       Queue: 0-SDSC
+     Subject: XUP: Allocate M partitions of processors for molecular dynamics simulation
+       Owner: Nobody
+  Requestors: jqwang@vols.utk.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=73564 >
+
+
+[Ticket created from XUP by jqwang]
+[From: Jiaqi Wang]
+[System: Comet]
+[Category: Batch Queues/Jobs]
+Hi, 
+
+I want to allocate M partitions of processors for molecular dynamics simulations to run the "parallel replica dynamics" (http://lammps.sandia.gov/doc/prd.html). The job submission file is shown as below, here the M is set as 70. But when I run it, I didn't obtain the desired results, however the input file works well on our home machines when I execute "mpirun -np 64 ~/lammps/src/lmp_mpi -partition 32x2 -in  Al2Cu_CandSC_ADP.in " Here the M is 32. I am not sure whether this is a correct job submission file. 
+
+I want to run this job for one week with 1680 cores, can I extend the wall time limit to one week? If not, how can I resume the job after 48 hours? Thanks for your time! 
+
+#!/bin/bash
+#SBATCH --job-name="SCandC_ADP"
+#SBATCH --output="SCandC_ADP.%j.%N.out"
+#SBATCH --partition=compute
+#SBATCH --nodes=70
+#SBATCH --ntasks-per-node=24
+#SBATCH --export=ALL
+#SBATCH -t 48:00:00
+
+module load lammps
+export EXE=`which lammps`
+
+export OMP_NUM_THREADS=1
+ibrun -np 1680 $EXE -partition 70x24 -in Al2Cu_CandSC_ADP.in
+
+Best,
+Jiaqi 

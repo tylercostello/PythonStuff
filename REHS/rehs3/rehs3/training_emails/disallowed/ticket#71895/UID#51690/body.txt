@@ -1,0 +1,35 @@
+
+Wed Jul 12 13:41:34 2017: Request 71895 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by fwells
+       Queue: 0-SDSC
+     Subject: problem running jobs on comet
+       Owner: Nobody
+  Requestors: kwong@utk.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=71895 >
+
+
+I believe my resource on comet is back.
+I can see it on my xsede page.
+But I get the following error when I submit an interactive job.
+
+==========
+
+[klwong@comet-ln2 SCRIPTS]$ ./interact
+srun: error: bank_limit plugin: user is disallowed to submit jobs
+srun: error: Unable to allocate resources: Invalid account or account/partition combination specified
+
+
+[klwong@comet-ln2 SCRIPTS]$ more interact
+srun -A TG-ASC170031 --partition=debug --pty --nodes=1 --ntasks-per-node=24 -t 00:30:00 --wait=0 --export=ALL /bin/bash
+
+
+======
+
+
+Many thanks,
+
+Kwai Wong
+
+
+ 

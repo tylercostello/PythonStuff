@@ -1,0 +1,34 @@
+
+Fri Mar 23 11:57:14 2018: Request 85501 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by hthta
+       Queue: 0-SDSC
+     Subject: XUP: Comet Disk Quota
+       Owner: hthta
+  Requestors: drummondfielding@gmail.com
+      Status: new
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=85501 >
+
+
+[Ticket created from XUP by fielding]
+[From: Drummond Fielding]
+[System: Comet]
+[Category: System/Hardware Issues]
+Hello,
+
+I am trying to understand the disk quotas on the scratch dirs on comet. I was just running a bunch of jobs and overnight they all started throwing the same error: 
+
+ADIOI_NFS_WRITECONTIG(76): Other I/O error Disk quota exceeded
+    major: Internal error (too specific to document in detail)
+    minor: MPI Error String
+
+I immediately canceled all the jobs and deleted a few hundred GB of space, but I would like to know if this was caused by a global disk quota for all users or just for me. I thought i remembered that we could use the command "quota" to see how much we have used and how much we have available, but when I enter quota into the command line I get the following:
+
+quota: error while getting quota from ps-073.sdsc.edu:/ps-data/janssen3/ for fielding (id 510447): Connection refused
+quota: error while getting quota from ps-009.sdsc.edu:/ps-data/ngbt/ for fielding (id 510447): Connection refused
+quota: error while getting quota from ps-038.sdsc.edu:/ps-data/nsg/ for fielding (id 510447): Connection refused
+
+
+Any help would be appreciated
+
+thanks
+Drummond 

@@ -1,0 +1,39 @@
+
+Tue Oct 17 17:38:44 2017: Request 77461 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by clm
+       Queue: 0-SDSC
+     Subject: XUP: problem submitting batch job
+       Owner: clm
+  Requestors: bnolen@uoregon.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=77461 >
+
+
+[Ticket created from XUP by bjnolen]
+[From: Brad Nolen]
+[System: Comet]
+[Category: Batch Queues/Jobs]
+Hi, I'm trying to submit a batch job with the following script:
+#!/bin/bash
+#SBATCH -p shared
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=22
+#SBATCH -t 24:00:00
+#SBATCH -J ARP.las17-1
+#SBATCH --export=ALL
+. /home/bjnolen/installs/cns_solve_1.3/.cns_solve_env_sh
+cp docking_no_fix_rot_attched_2.inp /scratch/$USER/$SLURM_JOBID
+cp *.mtf /scratch/$USER/$SLURM_JOBID
+cp *.def /scratch/$USER/$SLURM_JOBID
+cp ATP* /scratch/$USER/$SLURM_JOBID
+cp splay_arp3_redo.pdb /scratch/$USER/$SLURM_JOBID
+cd /scratch/$USER/$SLURM_JOBID
+module load python
+python3 $SLURM_SUBMIT_DIR/dock3.py docking_no_fix_rot_attched_2.inp 2
+tar -cvf $SLURM_SUBMIT_DIR/results.$SLURM_JOBID.tar /scratch/$USER/$SLURM_JOBID/dock*
+
+and I get the following error:
+sbatch: error: slurm_receive_msg: Socket timed out on send/recv operation
+sbatch: error: Batch job submission failed: Socket timed out on send/recv operation
+
+This script has worked in the past, so I'm wondering if it's possible something has changed? Thanks!! 

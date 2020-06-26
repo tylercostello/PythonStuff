@@ -1,0 +1,82 @@
+
+Fri May 24 13:23:25 2019: Request 108722 was acted upon.
+ Transaction: Queue changed from 0-XOC to 0-SDSC by hthta
+       Queue: 0-SDSC
+     Subject: Jupiter Notebook and Interactive Node
+       Owner: hthta
+  Requestors: gmooers@uci.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=108722 >
+
+
+Greetings,
+
+I am having difficulty opening a Jupyter Notebook to work with while I am
+using an interactive GPU Node:
+
+Workflow to get GPU node:
+
+1). srun -A sio134 --partition=gpu-shared --pty --nodes=1
+--ntasks-per-node=6 --gres=gpu:k80:1 -t 03:00:00 --wait=0 --export=ALL
+/bin/bash
+2). module purge
+3). module load singularity
+4). singularity shell
+/share/apps/gpu/singularity/images/tensorflow/tensorflow-v1.12-gpu-20181218.simg
+
+At this point, I attempt to open a Jupyter Notebook
+
+jupyter notebook --port=8888
+
+get the error:
+
+bash: jupyter: command not found
+
+I believe I was told previously I could add modules, like Jupyter I needed
+by
+
+pip install --user  jupyter
+or
+pip3 install --user jupyter
+
+The pip3 install seems to install jupyter, but doesn't change the above
+error "bash: jupter: command not found "  while just pip yields the error
+
+Traceback (most recent call last):
+  File "/usr/bin/pip", line 9, in <module>
+    from pip import main
+ImportError: cannot import name main
+
+I can successfully open a jupyter notebook in the can by using my locally
+installed miniconda3:
+
+/home/gmooers/miniconda3/bin/jupyter notebook --port=8888
+
+However, this seems to conflict in some way with the can and my TensorFlow
+is only able to read the cpu, not the gpu I requested (see image 1)
+
+I can open an Ipython notebook once inside the can via:
+
+ipython notebook --port=8888
+
+However, my understanding is that ipython is an older version, and I'm not
+sure that everything in the jupyter notebook will be properly converted in
+ipython.
+
+Is there another way I can install/access jupyter once inside the can so I
+can open up a jupyter notebook to work with?  Or something wrong in the way
+I am currently trying to install jupyter?
+
+Thank you for your time.
+
+All the est,
+Griffin
+
+
+
+
+
+*Griffin Mooers*
+Earth System Science, Ph.D. Student  | UC Irvine
+Atmospheric Sciences, B. Sc. 2018 | Cornell University
+ 

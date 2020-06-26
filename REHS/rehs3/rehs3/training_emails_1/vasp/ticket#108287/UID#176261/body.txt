@@ -1,0 +1,40 @@
+
+Thu May 16 00:28:12 2019: Request 108287 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by aredding
+       Queue: 0-SDSC
+     Subject: XUP: VASP on comet error
+       Owner: Nobody
+  Requestors: kichae@UCSD.EDU
+      Status: new
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=108287 >
+
+
+[Ticket created from XUP by kisung]
+[From: Kisung Chae]
+[System: Comet]
+[Category: Software]
+Dear whom it may concern,
+
+First of all, thank you for granting generous SUs.
+I tried comet to use Vasp, and I got the following error.
+INTERNAL ERROR: invalid error code ffffffff (Ring Index out of range) in MPID_nem_gen2_module_get_from_bc:262
+It has been done on: /home/kisung/hafnia/boundaries/o-g1
+Also, the following is the job script that I used:
+#!/bin/bash
+#SBATCH --job-name="o-g1"
+#SBATCH --partition=compute
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=24
+#SBATCH --export=ALL
+#SBATCH -t 01:30:00
+#SBATCH -A sds154
+#SBATCH --mail-user=kichae@ucsd.edu
+#SBATCH --mail-type=all
+
+module add vasp
+
+ibrun vasp_std > out.vasp
+
+Thank you,
+
+Kisung 

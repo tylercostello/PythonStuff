@@ -1,0 +1,70 @@
+
+Tue Mar 12 16:33:53 2019: Request 105103 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by carmanh
+       Queue: 0-SDSC
+     Subject: XSEDE Comet endpoint
+       Owner: carmanh
+  Requestors: cyoun@sdsc.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=105103 >
+
+
+Hi Mahidhar,
+
+
+
+Cosmic2 gateway is using the project directory, /projects/cosmic2 as the globus storage.
+
+That project directory is accessed by XSEDE Comet endpoint.
+
+Recently I got the error messages below.
+
+It seems to me there is mounting problems.
+
+
+
+Mar 12 2019 13:58:47 [exec-6] ERROR -            TransferAction:895    | Create directory: EndpointError(502 Bad Gateway) on request 'LvAboMooZ' resource '/endpoint/de463f97-6d04-11e5-ba46-22000b92c6ec/mkdir': Endpoint Error, Error (mkdir)
+
+Endpoint: XSEDE Comet (de463f97-6d04-11e5-ba46-22000b92c6ec)
+
+Server: oasis-dm.sdsc.xsede.org:2811
+
+Command: MKD /projects/cosmic2/gateway/globus_transfers/cyoun@globusid.org/
+
+Message: Fatal FTP Response
+
+---
+
+Details: 550-GlobusError: v=1 c=PATH_NOT_FOUND\r\n550-GridFTP-Errno: 2\r\n550-GridFTP-Reason: System error in mkdir\r\n550-GridFTP-Error-String: No such file or directory\r\n550 End.\r\n
+
+
+
+Second, I am working on cipres gateway integrating with globus transfer as well.
+
+I think cipres user data directory, /projects/ps-ngbt/db_documents/restpod/ is needed to be configured as the XSEDE Comet endpoint for the globus transfer.
+
+When I tested it, I got the error message below:
+
+
+
+Mar 12 2019 11:58:01 [exec-6] ERROR -            TransferAction:881    | Create directory: EndpointError(502 Bad Gateway) on request 'b4PkhdKv9' resource '/endpoint/de463f97-6d04-11e5-ba46-22000b92c6ec/mkdir': Endpoint Error, Error (mkdir)
+
+Endpoint: XSEDE Comet (de463f97-6d04-11e5-ba46-22000b92c6ec)
+
+Server: oasis-dm.sdsc.xsede.org:2811
+
+Command: MKD /projects/ps-ngbt/db_documents/restprod/globus_transfers/cyoun@globusid.org/
+
+Message: Fatal FTP Response
+
+---
+
+Details: 550-GlobusError: v=1 c=PATH_NOT_FOUND\r\n550-GridFTP-Errno: 2\r\n550-GridFTP-Reason: System error in mkdir\r\n550-GridFTP-Error-String: No such file or directory\r\n550 End.\r\n
+
+
+
+Thanks,
+
+Choonhan Youn
+
+ 

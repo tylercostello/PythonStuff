@@ -1,0 +1,32 @@
+
+Thu Dec 07 13:10:04 2017: Request 80028 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by jhawthor
+       Queue: 0-SDSC
+     Subject: XUP: VASP calculations
+       Owner: Nobody
+  Requestors: pangq@oregonstate.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=80028 >
+
+
+[Ticket created from XUP by guest]
+[From: Qin Pang]
+[System: Comet]
+[Category: Other]
+Hi,
+I am trying to run vasp calculations but I couldn't run it successfully. And in the vasp/5.4.4, I couldn't find the available executable files.  
+vasp.sb file:
+#!/bin/bash
+#SBATCH --job-name='Fe2O3-2by2'
+#SBATCH --nodes=1
+#SBATCH --tasks-per-node=24
+#SBATCH -t 02:30:00
+#SBATCH -o vasp.%j.out
+#SBATCH -e vasp.err
+#SBATCH -p compute
+#SBATCH --export=ALL
+module unload mvapich2_ib
+module load vasp
+ibrun vasp_std >& job.log
+
+Thank you. 

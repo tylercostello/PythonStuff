@@ -1,0 +1,51 @@
+
+Wed Nov 28 11:09:30 2018: Request 99657 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by jhidleba
+       Queue: 0-SDSC
+     Subject: XUP: exceed balance?
+       Owner: Nobody
+  Requestors: bps001@ucsd.edu
+      Status: new
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=99657 >
+
+
+[Ticket created from XUP by bpsong]
+[From: Benjamin Song]
+[System: Comet]
+[Category: Batch Queues/Jobs]
+sbatch: error: bank_limit plugin: The requested time can not exceed the available balance.
+Requested SUs: 49
+Allocation limit group SUs: 50000
+Allocation limit user SUs: 1000
+Allocation used group SUs: 27031
+Allocation used user SUs: 523
+Allocation available group SUs: 22969
+Allocation available user SUs: 477
+Allocation running/queued group SUs: 0
+Allocation running/queued user SUs: 0
+Allocation completed today group SUs: 435
+Allocation completed today user SUs: 435
+sbatch: error: Batch job submission failed: Requested time limit is invalid (missing or exceeds some limit)
+
+It seems like I have SUs available, but I can't run my job
+
+this is my job:
+
+
+#!/bin/bash
+#SBATCH --job-name="cellrangercount1"
+#SBATCH --output="cellrangercount1.out"
+#SBATCH --partition=compute
+#SBATCH --nodes=4
+#SBATCH --ntasks-per-node=24
+#SBATCH --export=ALL
+#SBATCH -t 00:30:00
+
+export PATH=~/cellranger-3.0.0:$PATH
+cellranger count --id=BS1 \
+        --transcriptome=~/10XCionaGenome \
+        --fastqs=~/scratch/181121_K00180_0718_BH2JYNBBXY_PE10x_Combo/BS1/ \
+        --expect-cells=6000
+
+
+Can you help me figure out what the problem is? 

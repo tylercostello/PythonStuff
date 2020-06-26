@@ -1,0 +1,43 @@
+
+Fri Jul 21 17:37:50 2017: Request 72486 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by clm
+       Queue: 0-SDSC
+     Subject: XUP: mpi4py
+       Owner: clm
+  Requestors: bassioum@oregonstate.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=72486 >
+
+
+[Ticket created from XUP by bassioum]
+[From: Maoya Bassiouni]
+[System: Comet]
+[Category: Batch Queues/Jobs]
+I am using mpi4py to run a script in parallel for a list of iterables (something like what is bellow). Each is independant. However, the time to complete the script on an iterable is not constant and this time is unknown (can be more than double from iterable to iterable). This script completes itself once the computation has converged or when the maximum number of simulations is exceeded.
+With this setup, a thread that has all fast computations will idle when done while a thread with many long computations will continue. Is there another way to set up the parallel processes with mpi4py to be more flexible to avoid waisting SUs? So far I have just been attempting to make sure a large number of iterables is assigned to each, so that on average they should all complete around the same time.
+
+Is this a question you can help me resolve?
+
+Thanks
+
+Maoya
+
+
+
+
+def parallel(full_iterable):
+    comm = MPI.COMM_WORLD
+    rank = comm.Get_rank()
+    size = comm.Get_size()
+    numit = len(iterable) / size
+    diff = len(full_iterable) - numit * size
+    if diff > 0:
+        diff_list = [it for it in full_iterable[numit * size:]]
+    iterable_p = [it for it in full_iterable[rank * numit:(rank + 1) * numit]]
+    if rank < diff:
+        iterable_p.append(diff_list[rank])
+    loop(iterable_p)
+
+def loop(iterable): 
+     for it in iterable):
+              run_my_script(it) 

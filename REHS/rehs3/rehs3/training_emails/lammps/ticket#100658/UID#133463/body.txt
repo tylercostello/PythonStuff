@@ -1,0 +1,83 @@
+
+Tue Dec 18 16:54:55 2018: Request 100658 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by carmanh
+       Queue: 0-SDSC
+     Subject: XUP: Error in running CUDA aware MPI multi gpu job
+       Owner: carmanh
+  Requestors: dsambit@umich.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=100658 >
+
+
+[Ticket created from XUP by dsambit]
+[From: Sambit Das]
+[System: Comet]
+[Category: Batch Queues/Jobs]
+I am trying a run a CUDA aware MPI job on 4 P100 GPUs on a single node using the following script
+
+#!/bin/bash
+#SBATCH --job-name="gpumpi"
+#SBATCH --output="gpumpi.%j.%N.out"
+#SBATCH --partition=gpu
+#SBATCH --gres=gpu:p100:4   #only P100 nodes
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=28
+#SBATCH --export=ALL
+#SBATCH -t 00:15:00
+#SBATCH -A mia302
+
+module purge
+module load gnutools
+export MODULEPATH=/share/apps/compute/modulefiles/mpi:$MODULEPATH
+export MODULEPATH=/share/apps/compute/modulefiles:$MODULEPATH
+module load gnu/6.3.0
+module load cuda/9.2
+module load openmpi_ib/3.1.3_gnu63_cuda92
+module load mkl
+
+ibrun  ../build/release/real/cudaMPIProfile > output28Tasks4P100
+
+However, I get the following error report
+--------------------------------------------------------------------------
+As of version 3.0.0, the "sm" BTL is no longer available in Open MPI.
+
+Efficient, high-speed same-node shared memory communication support in
+Open MPI is available in the "vader" BTL.  To use the vader BTL, you
+can re-run your job with:
+
+    mpirun --mca btl vader,self,... your_mpi_application
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+A requested component was not found, or was unable to be opened.  This
+means that this component is either not installed or is unable to be
+used on your system (e.g., sometimes this means that shared libraries
+that the component requires are unable to be found/loaded).  Note that
+Open MPI stopped checking at the first component that it did not find.
+
+Host:      comet-34-11.sdsc.edu
+Framework: btl
+Component: sm
+--------------------------------------------------------------------------
+[comet-34-11.sdsc.edu:147060] [[55362,0],0] ORTE_ERROR_LOG: Data unpack would read past end of buffer in file util/show_help.c at line 501
+--------------------------------------------------------------------------
+It looks like MPI_INIT failed for some reason; your parallel process is
+likely to abort.  There are many reasons that a parallel process can
+fail during MPI_INIT; some of which are due to configuration or environment
+problems.  This failure appears to be an internal failure; here's some
+additional information (which may only be relevant to an Open MPI
+developer):
+
+  mca_bml_base_open() failed
+  --> Returned "Not found" (-13) instead of "Success" (0)
+--------------------------------------------------------------------------
+[comet-34-11:147073] *** An error occurred in MPI_Init_thread
+[comet-34-11:147073] *** reported by process [3628204033,8]
+[comet-34-11:147073] *** on a NULL communicator
+[comet-34-11:147073] *** Unknown error
+[comet-34-11:147073] *** MPI_ERRORS_ARE_FATAL (processes in this communicator will now abort,
+[comet-34-11:147073] ***    and potentially your MPI job)
+[comet-34-11.sdsc.edu:147060] 26 more processes have sent help message help-mpi-btl-sm.txt / btl sm is dead
+[comet-34-11.sdsc.edu:147060] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
+[comet-34-11.sdsc.edu:147060] 25 more processes have sent help message help-mca-base.txt / find-available:not-valid
+[comet-34-11.sdsc.edu:147060] 19 more processes have sent help message help-mpi-runtime.txt / mpi_init:startup:internal-failure
+[comet-34-11.sdsc.edu:147060] 12 more processes have sent help message help-mpi-errors.txt / mpi_errors_are_fatal unknown handle 

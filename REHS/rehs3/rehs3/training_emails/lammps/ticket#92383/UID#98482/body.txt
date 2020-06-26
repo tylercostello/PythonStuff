@@ -1,0 +1,50 @@
+
+Fri Jul 27 15:04:55 2018: Request 92383 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by hthta
+       Queue: 0-SDSC
+     Subject: XUP: deadlock on repeated calls to MPI_Scatterv() with 576 threads
+       Owner: hthta
+  Requestors: finlator@nmsu.edu
+      Status: new
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=92383 >
+
+
+[Ticket created from XUP by finlator]
+[From: Kristian Finlator]
+[System: Comet]
+[Category: System/Hardware Issues]
+As part of running a strong-scaling test, I've been running and re-starting a calculation on increasing number of threads.  The restart procedure involves a block of code in which the root process repeatedly reads in some data, then scatters it to all processes using a loop that, in total, invokes 120 calls to MPI_Scatterv().  Comet quite consistently deadlocks on this block; I know this because I have some print statements both before and after it.  I don't know how many calls to MPI_Scatterv() complete before it deadlocks.  I did not have this problem when restarting test runs that used 384 and on 480 threads; those tests succeeded on July 23rd and July 25th, respectively.
+
+Additionally, one re-start attempt (job id: 18107634) ended with some logging that looks like a hardware issue (below); but I have only seen that one time whereas the deadlock on 576 cores is quite repeatable.
+
+Hardware error?
+mlx4: local QP operation err (QPN 04b829, WQE index 0, vendor syndrome 77, opcode = 5e)
+mlx4: local QP operation err (QPN 04b823, WQE index 0, vendor syndrome 77, opcode = 5e)
+send desc error
+send desc error
+
+Offending code block:
+      for(ifreq = 0; ifreq < NFREQ; ifreq++)
+        {
+          /* Read in E_prev_edd */
+          if(ThisTask == 0) my_fread(tempFloatVec, sizeof(float), Ncells, rtfd);
+          MPI_Scatterv(tempFloatVec, rtg.nCellsPerTask, displs, MPI_FLOAT, rtg.E_prev_edd[ifreq],
+            rtg.nCellsPerTask[ThisTask], MPI_FLOAT, 0, MPI_COMM_WORLD);
+          /* Read in and scatter E */
+          if(ThisTask == 0) my_fread(tempDoubleVec, sizeof(double), 2 * Ncells, rtfd);
+          MPI_Scatterv(tempDoubleVec, recvcounts2, displs2, MPI_DOUBLE, rtg.E[ifreq],
+            2 * rtg.nCellsPerTask[ThisTask], MPI_DOUBLE, 0, MPI_COMM_WORLD);
+          /* Read in and scatter Fx */
+          if(ThisTask == 0) my_fread(tempDoubleVec, sizeof(double), Ncells, rtfd);
+          MPI_Scatterv(tempDoubleVec, rtg.nCellsPerTask, displs, MPI_DOUBLE, rtg.Fx[ifreq],
+            rtg.nCellsPerTask[ThisTask], MPI_DOUBLE, 0, MPI_COMM_WORLD);
+          /* Read in and scatter Fy */
+          if(ThisTask == 0) my_fread(tempDoubleVec, sizeof(double), Ncells, rtfd);
+          MPI_Scatterv(tempDoubleVec, rtg.nCellsPerTask, displs, MPI_DOUBLE, rtg.Fy[ifreq],
+            rtg.nCellsPerTask[ThisTask], MPI_DOUBLE, 0, MPI_COMM_WORLD);
+          /* Read in and scatter Fz */
+          if(ThisTask == 0) my_fread(tempDoubleVec, sizeof(double), Ncells, rtfd);
+          MPI_Scatterv(tempDoubleVec, rtg.nCellsPerTask, displs, MPI_DOUBLE, rtg.Fz[ifreq],
+            rtg.nCellsPerTask[ThisTask], MPI_DOUBLE, 0, MPI_COMM_WORLD);
+          /* next field */
+        } 

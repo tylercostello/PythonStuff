@@ -1,0 +1,32 @@
+
+Thu Jun 13 16:06:36 2019: Request 109587 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by hargens
+       Queue: 0-SDSC
+     Subject: Matlab Interactive Node with GUI
+       Owner: Nobody
+  Requestors: yan.yuj@husky.neu.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=109587 >
+
+
+Hi,
+
+I got a problem with running Matlab with GUI in Comet and hope you can help
+me figure out what the problem is.
+
+I am using a mac to access the Comet and have installed Xquartz to run the
+GUI. I tested the Xquarts and found it works when I connect to a server
+using SSH. I have also tested it using the login node in Comet. What I did
+is 1) ssh the comet server; 2) load the Matlab module in the login node
+directly; 3) call Matlab and the Xquartz runs the GUI. However, when I
+request an interactive job in debug partition, the GUI does not pop up
+while the Matlab is actually running as a nodisplay mode. Could you please
+help me figure out what the problem is? Below is the command I use to
+request the interactive job:
+
+srun --partition=debug --pty --nodes=1 --ntasks-per-node=24 -t 02:00:00
+--wait=0 --export=ALL /bin/bashsrun
+
+Thanks,
+Yujie
+ 

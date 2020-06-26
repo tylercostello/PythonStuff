@@ -1,0 +1,54 @@
+
+Sun Oct 15 20:21:35 2017: Request 77330 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by clm
+       Queue: 0-SDSC
+     Subject: XUP: Latest version of lammps
+       Owner: clm
+  Requestors: dinpajooh@gmail.com
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=77330 >
+
+
+[Ticket created from XUP by din1984]
+[From: Hadi Dinpajooh]
+[System: Comet]
+[Category: Software]
+Hi,
+
+I was able to run lammps successfully on Comet several weeks ago. However, the version of lammps has been changed recently and my preliminary simulations with the new version (lammps/20170331) suggests that ibrun might not work with lammps.
+
+New errors occur when I use:
+module load lammps
+ibrun -np 48 lammps < in.soft > OUTequil   # (or other commands in other modes)
+
+Fatal error in MPI_Init: Other MPI error, error stack:
+MPIR_Init_thread(784).................:
+MPID_Init(1332).......................: channel initialization failed
+MPIDI_CH3_Init(141)...................:
+dapl_rc_setup_all_connections_20(1388): generic failure with errno = 872614415
+getConnInfoKVS(849)...................: PMI_KVS_Get failed
+
+( Here is the part of submission script:
+
+#!/bin/bash
+#SBATCH --job-name="N192-nb1"
+#SBATCH --output="N192-nb1.%j.%N.out"
+#SBATCH --partition=compute
+#SBATCH --nodes=2
+#SBATCH --ntasks-per-node=24
+#SBATCH --export=ALL
+#SBATCH -t 00:30:00
+#SBATCH --mail-user=dinpajooh@gmail.com
+#SBATCH --mail-type=begin  # email me when the job starts
+#SBATCH --mail-type=end    # email me when the job finishes
+
+module load lammps
+ibrun -np 48 lammps < in.soft > OUTequil
+)
+
+I tried using mpirun and it seems to be working, but I am not sure it is as efficient as the ibrun when it was working.
+
+Can you please let me know your comments about the latest version of lammps and running it efficiently?
+
+Thanks,
+Hadi Dinpajooh 

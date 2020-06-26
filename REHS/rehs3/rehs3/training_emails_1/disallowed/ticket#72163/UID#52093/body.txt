@@ -1,0 +1,35 @@
+
+Mon Jul 17 11:08:01 2017: Request 72163 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by hthta
+       Queue: 0-SDSC
+     Subject: access comet regular node
+       Owner: hthta
+  Requestors: kwong@utk.edu
+      Status: new
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=72163 >
+
+
+I used the following comment to access interactive nodes on comet. It does not work now, not sure why?
+
+
+Thanks,
+
+Kwai Wong
+
+
+======
+
+
+srun -A TG-ASC170031 --partition=debug --pty --nodes=1 --ntasks-per-node=24 -t 00:30:00 --wait=0 --export=ALL /bin/bash
+
+
+=====
+
+[klwong@comet-ln3 SCRIPTS]$ ./interact
+srun: error: bank_limit plugin: user is disallowed to submit jobs
+srun: error: Unable to allocate resources: Invalid account or account/partition combination specified
+=======
+
+
+Kwai
+ 

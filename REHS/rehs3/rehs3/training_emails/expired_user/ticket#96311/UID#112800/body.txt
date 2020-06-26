@@ -1,0 +1,47 @@
+
+Thu Oct 04 14:50:25 2018: Request 96311 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by jhawthor
+       Queue: 0-SDSC
+     Subject: Jobs on Comet
+       Owner: jhawthor
+  Requestors: prave002@umn.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=96311 >
+
+
+Hi,
+
+I am trying to submit a job script as below on Comet.
+
+-----------------------------------------------------------------------------------------
+*#! /bin/bash*
+*#SBATCH --job-name="test"  *
+*#SBATCH --output="mpcugles.out"  *
+*#SBATCH --partition=compute  *
+*#SBATCH --nodes=1 *
+*#SBATCH --ntasks-per-node=24  *
+*#SBATCH --export=ALL  *
+*#SBATCH -t 00:10:00  *
+
+*export SLURM_NODEFILE=`generate_pbs_nodefile`*
+
+*mpirun_rsh -hostfile $SLURM_NODEFILE -np 4 ./mpcugles*
+
+-------------------------------------------------------------------------------------------
+
+I get this error message:
+
+*sbatch: error: bank_limit plugin: not found user association pkumar1*
+*sbatch: error: Batch job submission failed: Invalid account or
+account/partition combination specified*
+
+Please help.
+
+Thanks
+-- 
+Praveen Kumar
+Postdoctoral Associate
+Department of Aerospace Engineering and Mechanics
+University of Minnesota
+USA
+ 

@@ -1,0 +1,218 @@
+
+Mon Jun 04 17:24:17 2018: Request 89527 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by buskuehl
+       Queue: 0-SDSC
+     Subject: Re: problem downloading packages
+       Owner: buskuehl
+  Requestors: cwills@ucsd.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=89527 >
+
+
+Hi, Marty! Thanks for being there! I apologize for using an old subject line.
+
+Before I wrote to you, I tried library(‘ggpubr’). The error message I got at first was simply:
+
+
+
+Error in library("ggpubr") : there is no package called 'ggpubr'
+
+Execution halted
+
+
+
+Then I tried:
+
+
+
+install.packages('ggsci')
+
+install.packages('cowplot')
+
+install.packages('ggsignif')
+
+install.packages('ggrepel')
+
+install.packages('ggpubr')
+
+
+
+The error I got was:
+
+
+
+Installing package into '/opt/R/local/lib'
+
+(as 'lib' is unspecified)
+
+Warning in install.packages("ggsci") :
+
+  'lib = "/opt/R/local/lib"' is not writable
+
+Error in install.packages("ggsci") : unable to install packages
+
+Execution halted
+
+
+
+So, it didn’t like the ggsci package! Next, I simply ran
+
+
+
+install.packages('ggpubr’)
+
+
+
+This time I got:
+
+
+
+Installing package into '/opt/R/local/lib'
+
+(as 'lib' is unspecified)
+
+Warning in install.packages("ggpubr") :
+
+  'lib = "/opt/R/local/lib"' is not writable
+
+Error in install.packages("ggpubr") : unable to install packages
+
+Execution halted
+
+
+
+
+
+So it seems that this time I didn’t specify the location into which the package has to be installed! Hope this gives you some clues!
+
+Chris
+
+
+
+
+
+On Jun 4, 2018, at 2:37 PM, Martin Kandes via RT <help@xsede.org<mailto:help@xsede.org>> wrote:
+
+
+
+
+
+Mon Jun 04 16:37:08 2018: Request 88779 was acted upon.
+
+Transaction: Correspondence added by mckandes
+
+      Queue: 0-SDSC
+
+    Subject: Stupid mistake
+
+      Owner: mahidhar
+
+ Requestors: cwills@ucsd.edu<mailto:cwills@ucsd.edu>
+
+     Status: open
+
+Ticket URL: https://portal.xsede.org/group/xup/tickets/-/tickets/88779
+
+
+
+
+
+Chris,
+
+
+
+I didn't have any problem starting the installation with a simple 'install.packages('ggpubr') command. However, it did eventually fail with these dependency errors [1]. Is that what you saw as well?
+
+
+
+Marty Kandes
+
+SDSC User Services Group
+
+
+
+P.S. For future reference: In general, we would prefer you open a new ticket when you encounter a new issue instead of replying to an older ticket on a separate subject. It helps us keep everything better organized on our end.
+
+
+
+[1]
+
+
+
+...
+
+ERROR: dependencies ‘ggrepel’, ‘ggsci’, ‘cowplot’, ‘ggsignif’ are not available for package ‘ggpubr’
+
+* removing ‘/home/mkandes/R/x86_64-pc-linux-gnu-library/3.4/ggpubr’
+
+
+
+The downloaded source packages are in
+
+‘/tmp/Rtmpr4TSp2/downloaded_packages’
+
+Warning messages:
+
+1: In install.packages("ggpubr") :
+
+ installation of package ‘ggsci’ had non-zero exit status
+
+2: In install.packages("ggpubr") :
+
+ installation of package ‘cowplot’ had non-zero exit status
+
+3: In install.packages("ggpubr") :
+
+ installation of package ‘ggsignif’ had non-zero exit status
+
+4: In install.packages("ggpubr") :
+
+ installation of package ‘ggrepel’ had non-zero exit status
+
+5: In install.packages("ggpubr") :
+
+ installation of package ‘ggpubr’ had non-zero exit status
+
+
+
+
+
+
+
+
+
+
+
+Christopher Wills
+
+Professor of Biological Sciences Emeritus
+
+University of California, San Diego
+
+9500 Gilman Drive
+
+La Jolla CA 92093-0116
+
+Phone: 858-534-4113
+
+Fax: 858-534-7108
+
+Campus Office: 3238 Bonner Hall
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 

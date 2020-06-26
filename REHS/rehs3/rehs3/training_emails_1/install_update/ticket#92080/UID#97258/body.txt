@@ -1,0 +1,29 @@
+
+Fri Jul 20 22:04:23 2018: Request 92080 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by carmanh
+       Queue: 0-SDSC
+     Subject: XUP: Gromacs On Comet
+       Owner: carmanh
+  Requestors: ruisun@hawaii.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=92080 >
+
+
+[Ticket created from XUP by ruisun]
+[From: Rui Sun]
+[System: Comet]
+[Category: Software]
+Dear System Admin,
+
+I need to use a customized Gromacs for my own research. I first compiled Gromacs-5.1.4 and compared its performance with the public one (module load Gromacs). I was only able to get about 50% of the performance ~60 ns/day vs ~ 110 ns/day on my test calculation. 
+
+I used the following module for my compilation:
+  1) gnu/4.9.2             2) intel/2016.3.210      3) intelmpi/2016.3.210   4) gromacs/2016.3        5) cmake/3.9.1
+
+The cmake command was:
+CC=mpicc CXX=mpicxx cmake .. -DGMX_MPI=ON -DGMX_DOUBLE=ON -DCMAKE_INSTALL_PREFIX=/home/rusun/local -DGMX_BUILD_OWN_FFTW=ON -DEXTRA_C_FLAGS=-fPIC -O2 -DGMX_DEFAULT_SUFFIX=OFF -DGMX_BINARY_SUFFIX=_514_along -DGMX_LIBS_SUFFIX=_514_along -DEXTRA_C_FLAGS=-xHost
+
+Would you please let me know what I was doing wrong? It would be great if you could share a compiling script.
+
+Thank you,
+Rui 

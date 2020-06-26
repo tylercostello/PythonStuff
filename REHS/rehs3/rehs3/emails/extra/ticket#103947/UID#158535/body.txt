@@ -1,0 +1,57 @@
+
+Mon Feb 18 13:06:33 2019: Request 103947 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by fwells
+       Queue: 0-SDSC
+     Subject: COMET bank_limit error
+       Owner: fwells
+  Requestors: lmrodriguezr@gmail.com
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=103947 >
+
+
+Dear XSEDE team,
+
+I've successfully deployed all of my code in COMET and for the most part
+I've had a very smooth experience. However, I've now encountered the
+following sbatch error (or similar) in some submissions:
+
+sbatch: error: bank_limit plugin: The requested time can not exceed the
+available balance.
+Requested SUs: 145
+Allocation limit group SUs: 50000
+Allocation limit user SUs: 50000
+Allocation used group SUs: 7084
+Allocation used user SUs: 7084
+Allocation available group SUs: 42916
+Allocation available user SUs: 42916
+Allocation running/queued group SUs: 42775
+Allocation running/queued user SUs: 42775
+Allocation completed today group SUs: 3
+Allocation completed today user SUs: 3
+sbatch: error: Batch job submission failed: Requested time limit is invalid
+(missing or exceeds some limit)
+
+
+It looks like this only occurs when I have multiple jobs queued and/or
+running (about 150, I think), but I couldn't find such restriction in the
+documentation.
+
+Looking around I saw this report that seems somewhat related:
+https://github.com/marbl/canu/issues/1164
+In there, they report adding '-p shared' to the sbatch solves the problem,
+but I'm not sure what's the reason behind that (or if that'd actually work).
+
+
+Thanks a lot!
+Miguel (XSEDE User: lrr).
+
+--
+Luis M. Rodriguez-R, Ph.D.
+[ https://rodriguez-r.com ]
+---------------------------------
+Research Engineer
+Georgia Institute of Technology
+311 Ferst Drive, ES&T, Room 3324
+Atlanta, GA 30332, USA
+[ http://enve-omics.gatech.edu/ ]
+ 

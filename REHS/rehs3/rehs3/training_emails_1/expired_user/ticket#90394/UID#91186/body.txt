@@ -1,0 +1,48 @@
+
+Thu Jun 21 14:21:53 2018: Request 90394 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by jhawthor
+       Queue: 0-SDSC
+     Subject: XUP: unable to submit jobs
+       Owner: Nobody
+  Requestors: sagiyama@umich.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=90394 >
+
+
+[Ticket created from XUP by sagiyama]
+[From: koki sagiyama]
+[System: Comet]
+[Category: Allocations]
+Hi,
+
+I am added to the account, TG-MSS160003, but I get the following error when I submit a job on comet.
+It seems related to that I used to use comet via another account.
+
+
+%%%%%%%%%    
+
+>>sbatch comet.slurm
+>>sbatch: error: bank_limit plugin: expired user, can't submit job
+>>sbatch: error: Batch job submission failed: Invalid account or account/partition combination specified
+
+%%%%%%%%%    comet.slurm  %%%%%%%%%%%%%%%%
+#!/bin/bash  
+#SBATCH --job-name="comet"
+#SBATCH --output="comet.%j.out"  
+#SBATCH --partition=compute  
+#SBATCH --nodes=10
+#SBATCH --ntasks-per-node=24
+#SBATCH --export=ALL  
+#SBATCH -t 48:00:00  
+
+#SBATCH -A TG-MSS160003
+
+#ibrun in verbose mode will give binding detail  
+
+ibrun -v ./main
+
+
+Could you help me, please?
+
+Thank you,
+Koki Sagiyama 

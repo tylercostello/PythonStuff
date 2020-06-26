@@ -1,0 +1,91 @@
+
+Mon Dec 04 14:34:52 2017: Request 79854 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by hthta
+       Queue: 0-SDSC
+     Subject: XUP: Don't have a home directory on Comet - getting error when I gsissh into Comet
+       Owner: hthta
+  Requestors: lrodolph@buffalo.edu
+      Status: new
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=79854 >
+
+
+[Ticket created from XUP by lrodolph]
+[From: Lavone Rodolph]
+[System: Comet]
+[Category: Accounts]
+Greetings All,
+  I have an account on comet and I can successfully gsissh into comet from thessohub, but I receive the error: Could not chdir to home directory /home/lrodolph: No such file or directory. 
+Can you tell me how I can resolve this error.  Below is the error msg. received when attempting to gsissh into comet.
+
+ssh -l lrodolph login.xsede.org 
+Please login to this system using your XSEDE username and password:
+password:
+Duo two-factor login for lrodolph
+
+Enter a passcode or select one of the following options:
+
+ 1. Phone call to XXX-XXX-8891
+
+Passcode or option (1-1): 1
+Success. Logging you in...
+Last failed login: Mon Dec  4 15:21:35 EST 2017 from 128.205.39.41 on ssh:notty
+There was 1 failed login attempt since the last successful login.
+Last login: Thu Nov 30 16:05:01 2017 from 128.205.39.75
+
+#  Welcome to the XSEDE Single Sign-On (SSO) Hub!
+# 
+#  This system is for use by authorized users only, and is subject to the XSEDE
+#  Acceptable Use Policy, described at https://www.xsede.org/usage-policies.
+#  All activities on this system may be monitored and logged. 
+#
+#  Your storage on this system is limited to 100MB. Backup is not provided.
+#
+#  From this system, you may login to other XSEDE system login hosts on which
+#  you currently have an active account. To see a list of your accounts, visit:
+#  https://portal.xsede.org/group/xup/accounts
+# 
+#  To login to an XSEDE system login host, enter: gsissh <login-host>
+#  where <login-host> is the hostname, alias or IP address of the login host.
+#  The following default gsissh host aliases have been defined:
+# 
+#       bridges  comet  mason  maverick  osg  rmacc-summit  stampede
+#         stampede2  supermic  wrangler-iu  wrangler-tacc  xstream
+# 
+#  For example, to login to the Comet system at SDSC, enter: gsissh comet
+# 
+#  E-mail help@xsede.org if you require assistance in the use of this system.
+
+[lrodolph@ssohub ~]$ gsissh comet
+Last login: Wed Nov 29 21:53:58 2017 from ssohub.iu.xsede.org
+Rocks 6.2 (SideWinder)
+Profile built 16:45 08-Feb-2016
+
+Kickstarted 17:27 08-Feb-2016
+                                                                       
+                      WELCOME TO 
+      __________________  __  _______________
+        -----/ ____/ __ \/  |/  / ____/_  __/
+          --/ /   / / / / /|_/ / __/   / /
+           / /___/ /_/ / /  / / /___  / /
+           \____/\____/_/  /_/_____/ /_/
+
+*******************************************************************************
+
+[1] Example Scripts: /share/apps/examples
+
+[2] Filesystems:
+
+     (a) Lustre scratch filesystem : /oasis/scratch/comet/$USER/temp_project
+         (Preferred: Scalable large block I/O)
+
+     (b) Compute/GPU node local SSD storage: /scratch/$USER/$SLURM_JOBID
+         (Meta-data intensive jobs, high IOPs)
+
+     (c) Lustre projects filesystem: /oasis/projects/nsf
+     
+     (d) /home/$USER : Only for source files, libraries, binaries.
+         *Do not* use for I/O intensive jobs.
+
+[3] Comet User Guide: http://www.sdsc.edu/support/user_guides/comet.html
+******************************************************************************
+Could not chdir to home directory /home/lrodolph: No such file or directory 

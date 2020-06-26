@@ -1,0 +1,34 @@
+
+Thu Nov 16 08:53:08 2017: Request 79069 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by jhawthor
+       Queue: 0-SDSC
+     Subject: XUP: memory error with gromacs jobs
+       Owner: Nobody
+  Requestors: irem.altan@duke.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=79069 >
+
+
+[Ticket created from XUP by guest]
+[From: Irem Altan]
+[System: comet-gpu.sdsc.xsede]
+[Category: System/Hardware Issues]
+Hi,
+
+I have been getting sporadic memory errors with Gromacs jobs. My first job that failed this way had not requested any specific amount of memory, so I added the following line:
+
+#SBATCH --mem=32G
+
+It then worked, so I generated a number of submission scripts with this line. Five of them are running now, but the first one seems to have failed with memory problems again. This is the particular error:
+
+Fatal error:
+Not enough memory. Failed to realloc 789852 bytes for sort->sort,
+sort->sort=32400030
+(called from file
+/state/partition1/git/chemistry-roll/BUILD/sdsc-gromacs-2016.3/gromacs-2016.3/src/gromacs/domdec/domdec.cpp,
+line 8914)
+
+I am attaching the submission script and the output file to this e-mail. It looks like 32G was not enough, but why does this setup work for some jobs and not for the others (all jobs are identical in the number of atoms)? Also, what is the maximum memory I can request from the GPU nodes? I should also note that I had never gotten this error with the older version of Gromacs, nor with the older GPU node setup.
+
+Best,
+Irem 

@@ -1,0 +1,80 @@
+
+Tue Oct 10 16:22:26 2017: Request 77017 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by clm
+       Queue: 0-SDSC
+     Subject: COMET SDSC: Error Running NAMD
+       Owner: clm
+  Requestors: rory.henderson@duke.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=77017 >
+
+
+Hello,
+
+
+
+I am running benchmarks on the COMET SDSC cpu nodes and keep getting the following error for certain runs:
+
+
+
+Could not chdir to home directory /home/rch42: No such file or directory
+
+
+
+My other runs which are identical except for the number of nodes have not produced the same error. I am also unable to replicate the issue using two debug nodes. Is there a problem I’ve missed in my job submission file?
+
+
+
+#!/bin/bash
+
+#SBATCH -A dku129
+
+#SBATCH --job-name="NAMD_cpu-time-test"
+
+#SBATCH -p compute
+
+#SBATCH --nodes=64
+
+#SBATCH --ntasks-per-node=24
+
+#SBATCH --export=ALL
+
+#SBATCH -t 00:05:00
+
+
+
+module load namd/2.10
+
+
+
+ibrun namd2 runconf > log.log
+
+
+
+This is in the following directory:
+
+
+
+/oasis/scratch/comet/rch42/temp_project/gp140trimer/cpux2
+
+
+
+Thanks,
+
+
+
+Rory Henderson
+
+Postdoctoral Scholar
+
+Duke Human Vaccine Institute
+
+919-668-6995 | rory.henderson@duke.edu<mailto:rory.henderson@duke.edu>
+
+
+
+[ignature_885174823]
+
+
+
+ 

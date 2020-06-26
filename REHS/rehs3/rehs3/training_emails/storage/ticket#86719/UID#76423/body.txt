@@ -1,0 +1,31 @@
+
+Tue Apr 10 14:52:44 2018: Request 86719 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by fwells
+       Queue: 0-SDSC
+     Subject: XUP: archiving and transferring to Oasis
+       Owner: fwells
+  Requestors: drummondfielding@gmail.com
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=86719 >
+
+
+[Ticket created from XUP by fielding]
+[From: Drummond Fielding]
+[System: Comet]
+[Category: Software]
+Hello,
+
+I have been reading through the instructions on how to move data over to Oasis and I have run into a few issues. I am trying to move 4.5 TB of data that (unfortunately) is in many small-ish files. I am trying to figure out how to (a) efficiently archive the files before transferring them and (b) transfer them using the best/proper method. 
+
+On other machines I have used pigz to compress files in parallel using a command such as, tar -c --use-compress-program=pigz -f tar.file dir_to_zip, but this doesn't seem to be working on comet. When I did a trial of a single small directory on the login node it just sat there indefinitely whereas regular tar -cf was quite quick. If I try to use tar -cf on all 4.5 TB it will take a very long time. Could you please advise me on how to best go about this. 
+
+Once I have archived all the directories I was going to try to use GridFTP but I am quite confused as to how to actually use this. Would this be the proper command:
+
+globus-url-copy -stripe -tcp-bs 8388608 my_large_file_to_back_up.tar gsiftp://oasis-dm.sdsc.xsede.org:2811///oasis/projects/nsf/ucb166/fielding/my_large_file_to_back_up.tar
+
+
+
+Thank you for your help!
+
+best
+drummond 

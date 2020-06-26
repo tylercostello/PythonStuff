@@ -1,0 +1,24 @@
+
+Mon May 07 18:29:49 2018: Request 88199 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by buskuehl
+       Queue: 0-SDSC
+     Subject: XUP: concurrent access to the files fails beyond one node
+       Owner: buskuehl
+  Requestors: mkhoshle@asu.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=88199 >
+
+
+[Ticket created from XUP by mkhoshle]
+[From: Mahzad Khoshlessan]
+[System: Comet]
+[Category: Software]
+Hi, 
+
+I have a MPI job that each ranks tries to load its own file and by loading that file it also creates a zipped index file. I have a barrier to make sure all ranks finish writing the index file. Then, each rank needs to load and read all the created files by other ranks. When I run my job on my local workstation it works. On Comet it works on a single node but when I go beyond one node my job fails by the following error:
+  File "/home/mkhoshle/miniconda2/envs/ga4py/lib/python2.7/site-packages/numpy/lib/npyio.py", line 429, in load
+IOError: Failed to interpret file '/oasis/scratch/comet/mkhoshle/temp_project/MPI-traj-split/files/.newtraj_4_1.xtc_offsets.npz' as a pickle
+
+Which is weird. Do you know what might cause this problem?
+
+Thanks, 

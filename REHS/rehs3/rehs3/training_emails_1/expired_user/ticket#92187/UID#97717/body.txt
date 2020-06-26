@@ -1,0 +1,40 @@
+
+Tue Jul 24 09:59:29 2018: Request 92187 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by jhawthor
+       Queue: 0-SDSC
+     Subject: XUP: sbatch job submission error
+       Owner: Nobody
+  Requestors: dmsussma@syr.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=92187 >
+
+
+[Ticket created from XUP by dsussman]
+[From: Daniel Sussman]
+[System: Comet]
+[Category: Batch Queues/Jobs]
+Hi,
+
+I currently have a bunch of jobs running and queued on the gpu-shared partition (top snippet of the sbatch file is pasted below my signature), that's all fine... Today I tried to submit a bunch more jobs using exactly the same style of submission and I got the following error:
+"sbatch: error: Batch job submission failed: Job violates accounting/QOS policy (job submit limit, user's size and/or time limits)"
+
+I have plenty of time left on my account; any idea what limit I'm hitting here? Thanks, as always, for you help!
+
+Best,
+Daniel
+
+The slurm file I'm using: a separate sh file copies this base file to a new location, fills in the right parameters using "sed" commands, and then submits. Exactly this pattern worked for my currently running jobs.
+
+#!/bin/bash
+#SBATCH --partition=gpu-shared
+#SBATCH --gres=gpu:k80:1
+#SBATCH --ntasks-per-node=6
+#SBATCH -t 40:00:00
+#SBATCH --nodes=1
+#SBATCH -A SYU115
+#SBATCH -o script/quenchZ{programSwitch}N{number}P{perimeter}T{temperature}File{fileIdx}Tq{tIdx}.out
+#SBATCH -e script/quenchZ{programSwitch}N{number}P{perimeter}T{temperature}File{fileIdx}Tq{tIdx}.err
+#SBATCH -J quenchN{number}P{perimeter}T{temperature}File{fileIdx}Tq{tIdx}
+module load cuda/8.0
+
+/home/dsussman/xsedeGrant/cellGPU/quenchAndRun.out -n {number} -p {perimeter} -v {temperature} -i {fileIdx} -y {fraction} -z {programSwitch} -f {tIdx} 

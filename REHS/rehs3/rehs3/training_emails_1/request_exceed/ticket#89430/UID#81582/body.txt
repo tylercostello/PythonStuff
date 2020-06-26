@@ -1,0 +1,40 @@
+
+Fri Jun 01 17:37:20 2018: Request 89430 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by carmanh
+       Queue: 0-SDSC
+     Subject: XUP: User not able to use the allocation
+       Owner: Nobody
+  Requestors: venug012@umn.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=89430 >
+
+
+[Ticket created from XUP by magsim]
+[From: Aneesh Venugopal]
+[System: comet-gpu.sdsc.xsede]
+[Category: Batch Queues/Jobs]
+Hi 
+The group of which user - magsim is a member has around 1900 S.Us on Comet GPU. However, when I try to submit a job using this user  it shows the following error:
+
+[magsim@comet-ln2 set2]$ sbatch -p gpu-shared -t 48:00:00 ms3.pbs rf_field_field.dat
+sbatch: error: bank_limit plugin: The requested time can not exceed the available balance.
+Requested SUs: 49
+Allocation limit group SUs: 2500
+Allocation limit user SUs: 100
+Allocation used group SUs: 4
+Allocation used user SUs: 0
+Allocation available group SUs: 2496
+Allocation available user SUs: 100
+Allocation running/queued group SUs: 73
+Allocation running/queued user SUs: 73
+Allocation completed today group SUs: 8
+Allocation completed today user SUs: 8
+sbatch: error: Batch job submission failed: Requested time limit is invalid (missing or exceeds some limit)
+
+I am new to this Supercomputer and none of the others have faced this issue. I tried looking for this at :
+https://portal.xsede.org/sdsc-comet
+but wasn't much help.
+I am  attaching the batch file below. Do let me know as to the limit that magsim is facing (Is it :- Allocation limit user SUs: 100); and also is there a way to increase this limit. The project has only two ids that will actively use the allocations, so it would be helpful if both users make use of the allocation.
+
+Regards, 
+Aneesh 

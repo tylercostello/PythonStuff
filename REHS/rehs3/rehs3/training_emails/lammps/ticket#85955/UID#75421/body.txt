@@ -1,0 +1,53 @@
+
+Fri Mar 30 18:51:18 2018: Request 85955 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by fwells
+       Queue: 0-SDSC
+     Subject: XUP: problem with gromacs submission
+       Owner: fwells
+  Requestors: irem.altan@duke.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=85955 >
+
+
+[Ticket created from XUP by nano3]
+[From: Irem Altan]
+[System: comet-gpu.sdsc.xsede]
+[Category: Batch Queues/Jobs]
+Hi,
+
+I'm using the following script to submit a job that runs two subsequent gromacs simulations. It runs grompp to prepare executables.
+
+#!/bin/bash
+#SBATCH --job-name="nnU0"
+#SBATCH --output=out0.dat
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=4
+#SBATCH --no-requeue
+#SBATCH -p gpu
+#SBATCH --gres=gpu:4
+#SBATCH -t 1-10:00:00
+#SBATCH -A TG-DMR150103
+#SBATCH --export=ALL
+export OMP_NUM_THREADS=6
+module unload intel
+module load gromacs
+exe=`which gmx_mpi`
+processors=$(( $SLURM_NNODES * $SLURM_NTASKS_PER_NODE ))
+$exe grompp -f npt_umbrella.mdp -c conf0.gro -p topol.top -n index.ndx -o npt0.tpr -maxwarn 1
+mpirun -np $processors -genv I_MPI_FABRICS shm:ofa $exe mdrun -v -deffnm npt0
+$exe grompp -f md_umbrella.mdp -c npt0.gro -t npt0.cpt -p topol.top -n index.ndx -maxwarn 1 -o umbrella0.tpr
+mpirun -np $processors -genv I_MPI_FABRICS shm:ofa $exe mdrun -v -deffnm umbrella0 -pf pullf-umbrella0.xvg -px pullx-umbrella0.xvg
+
+
+However, this results in the following output:
+
+Unloading compiler-dependent module intelmpi/2016.3.210
+Unloading compiler-dependent module mvapich2_ib/2.1
+mpiexec_comet-30-14.sdsc.edu: cannot connect to local mpd (/tmp/mpd2.console_nano3); possible causes:
+  1. no mpd is running on this host
+  2. an mpd is running but was started without a "console" (-n option)
+
+What does this mean?
+
+Best,
+Irem 

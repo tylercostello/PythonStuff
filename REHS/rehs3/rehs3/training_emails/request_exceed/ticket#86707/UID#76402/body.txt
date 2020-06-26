@@ -1,0 +1,46 @@
+
+Tue Apr 10 13:57:29 2018: Request 86707 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by jhawthor
+       Queue: 0-SDSC
+     Subject: SU usage
+       Owner: Nobody
+  Requestors: skimble@towson.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=86707 >
+
+
+I am trying to understand why a job on my allocation required so many more SUs than normal (see attached .csv). This was a job submitted by user joel11 on my allocation on 2 April 2018 and apparently was requesting >9k SUs.
+
+
+The shell file is:
+
+
+#!/bin/bash
+#SBATCH --job-name="dDocent"
+#SBATCH --output="dDocent.%j.%N.out"
+#SBATCH --partition=compute
+#SBATCH --nodes=4
+#SBATCH --ntasks-per-node=24
+#SBATCH --export=ALL
+#SBATCH --qos=oneweek
+#SBATCH -t 96:00:00
+export MODULEPATH=/share/apps/compute/modulefiles/applications:$MODULEPATH
+module load dDocent/2.2.16
+dDocent Pop2_Config.file
+
+other similar jobs have called for many fewer SUs.
+
+  1.  Is there a way to calculate the number of SUs a job will require before sbatching it?
+  2.  Are there other ways I can estimate the number of SUs without trying to sbatching?
+
+Thanks,
+Steve
+
+
+
+Steve Kimble
+
+Visiting Assistant Professor, Towson University
+
+skimble@towson.edu
+ 

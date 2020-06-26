@@ -1,0 +1,33 @@
+
+Wed Aug 23 12:48:58 2017: Request 74275 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by fwells
+       Queue: 0-SDSC
+     Subject: Batch job submission failed: Requested time limit is invalid (missing or exceeds some limit)
+       Owner: fwells
+  Requestors: wilkinkate@gmail.com
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=74275 >
+
+
+Greetings,
+
+I've been having errors associated with reaching time limits and put in a
+large number (70 hrs) to make sure the job completed. What is the time
+limit allowed for my account ucb176 (see below)?
+
+Best,
+Kate
+
+[katew@comet-ln3 Globus.data.dump]$ show_accounts
+ID name      project      used     available    used_by_proj
+------------------------------------------------------------
+katew        ucb176       75       50000        75
+katew        ucb152       37       50000        37
+katew        sds154       817      1000         55553
+
+To charge your job to one of these projects replace  << project >>
+with one from the list and put this Slurm directive in your job script:
+#SBATCH -A << project >>
+
+[katew@comet-ln3 Globus.data.dump]$
+ 

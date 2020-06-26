@@ -1,0 +1,32 @@
+
+Thu Jun 28 16:31:09 2018: Request 90797 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by carmanh
+       Queue: 0-SDSC
+     Subject: XUP: Can not Use Allocation
+       Owner: carmanh
+  Requestors: wangcha@umich.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=90797 >
+
+
+[Ticket created from XUP by wangcha]
+[From: Chaoran Wang]
+[System: Comet]
+[Category: Allocations]
+Hi,
+
+We applied a start-up allocation on Comet (Charge#: TG-AST180033, PI: Mateusz Ruszkowski) and it got approved earlier today. My account (username: wangcha, name: Chaoran Wang) was added as a user when we went through the allocation application process. When I tried to submit a job on comet by sbatch, an error message returned immediately and the job is cancelled. The message is:
+
+srun: error: bank_limit plugin: not found user association wangcha
+srun: error: Unable to allocate resources: Invalid account or account/partition combination specified
+
+For testing, I also tried to request an interactive node using the command in the user guide:
+
+srun --partition=debug --pty --nodes=1 --ntasks-per-node=24 -t 00:30:00 --wait=0 --export=ALL /bin/bash
+
+But the same error message shows up.
+
+Could you please tell me what the problem is?
+
+Best,
+Chaoran 

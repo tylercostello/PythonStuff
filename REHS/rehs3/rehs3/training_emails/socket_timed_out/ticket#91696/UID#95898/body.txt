@@ -1,0 +1,37 @@
+
+Sat Jul 14 10:31:34 2018: Request 91696 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by jhidleba
+       Queue: 0-SDSC
+     Subject: issue w/ slurm on comet:
+       Owner: Nobody
+  Requestors: ffeddersen@ucsd.edu
+      Status: new
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=91696 >
+
+
+Dear XSEDE/Comet staff:
+I've tried a few times to submit a job to slurm, and I get the following 
+error message both w/ sbatch and squeue.
+
+-----
+[falk@comet-ln2 LV4]$ sbatch runB.sb
+sbatch: error: slurm_receive_msg: Socket timed out on send/recv operation
+sbatch: error: Batch job submission failed: Socket timed out on 
+send/recv operation
+[falk@comet-ln2 LV4]$
+[falk@comet-ln2 LV4]$
+[falk@comet-ln2 LV4]$ squeue -u falk
+squeue: error: slurm_receive_msg: Socket timed out on send/recv operation
+slurm_load_jobs error: Socket timed out on send/recv operation
+------
+
+a little searching and it appears that this is likely a network problem
+https://bugs.schedmd.com/show_bug.cgi?id=4279
+
+
+I will continue to periodically check if I can submit jobs, but thought 
+you should know - probably already do.
+
+falk
+
+ 

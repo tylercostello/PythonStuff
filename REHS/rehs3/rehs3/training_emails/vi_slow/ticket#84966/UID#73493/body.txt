@@ -1,0 +1,34 @@
+
+Thu Mar 15 09:15:23 2018: Request 84966 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by jhawthor
+       Queue: 0-SDSC
+     Subject: XUP: SLEPc solver did not running
+       Owner: Nobody
+  Requestors: iancclin@umich.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=84966 >
+
+
+[Ticket created from XUP by iancclin]
+[From: Chih-Chuen Lin]
+[System: Comet]
+[Category: Software]
+Hi,
+
+I am using SLEPc eps solver for my computation. But recently, I found that sometimes, the eps solver will not run through, meaning that the program stopped at the point where slepc starts calculation. This happened randomly, sometimes using the same settings and executable and submission files but different number of tasks and nodes, the stop will disappear. This never happened when I am using other machine at my university. 
+
+To be more specific, the program 
+/oasis/projects/nsf/mia168/iancclin/work/2x2x2check/kernel_integration
+with submission script
+/oasis/projects/nsf/mia168/iancclin/work/2x2x2check/2x2x2AlRef.dft
+is not stopped at the slepc solving part.
+The calculation currently being blocked is jobid 14831474 using comet-14-[01-02] nodes.
+
+As the solving part being blocked now is solving a small 125*125 matrix, it should not take too long to finish.
+
+Would it happen to be landing on some bad nodes? Or would there be any issue with the slepc installed on the comet machine?
+
+Thanks in advance for your kindly help.
+
+Regards,
+Chih-Chuen 

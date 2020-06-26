@@ -1,0 +1,62 @@
+
+Wed Feb 20 15:04:25 2019: Request 104096 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by carmanh
+       Queue: 0-SDSC
+     Subject: XUP: Stale File Handle Error
+       Owner: carmanh
+  Requestors: mragsac@eng.ucsd.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=104096 >
+
+
+[Ticket created from XUP by mragsac]
+[From: Michelle Ragsac]
+[System: Comet]
+[Category: Access/Login Issues]
+I was trying to login to Comet, and ran into the following error:
+
+==========
+Last login: Wed Feb 20 12:53:45 2019 from 137.110.84.59
+Rocks 6.2 (SideWinder)
+Profile built 16:45 08-Feb-2016
+
+Kickstarted 17:27 08-Feb-2016
+                                                                       
+                      WELCOME TO 
+      __________________  __  _______________
+        -----/ ____/ __ \/  |/  / ____/_  __/
+          --/ /   / / / / /|_/ / __/   / /
+           / /___/ /_/ / /  / / /___  / /
+           \____/\____/_/  /_/_____/ /_/
+
+*******************************************************************************
+
+[1] Example Scripts: /share/apps/examples
+
+[2] Filesystems:
+
+     (a) Lustre scratch filesystem : /oasis/scratch/comet/$USER/temp_project
+         (Preferred: Scalable large block I/O)
+            *** Meant for storing data required for active simulations
+            *** Not backed up and should not be used for storing data long term
+            *** Periodically clear old data not required for active simulations
+
+     (b) Compute/GPU node local SSD storage: /scratch/$USER/$SLURM_JOBID
+         (Meta-data intensive jobs, high IOPs)
+
+     (c) Lustre projects filesystem: /oasis/projects/nsf
+     
+     (d) /home/$USER : Only for source files, libraries, binaries.
+         *Do not* use for I/O intensive jobs.
+
+[3] Comet User Guide: http://www.sdsc.edu/support/user_guides/comet.html
+******************************************************************************
+SDSC COMET MAINTENANCE : 8AM-5PM (PT), Tuesday, 02/26/2019
+Details: https://portal.xsede.org/web/xup/user-news/-/news/item/10498
+******************************************************************************
+Could not chdir to home directory /home/mragsac: Stale file handle
+-bash: /home/mragsac/.bash_profile: Stale file handle
+-bash-4.1$
+==========
+
+Because of this issue, I am not able to login to my home directory or access it. I was wondering if you had any suggestions on what to do to resolve this error. 

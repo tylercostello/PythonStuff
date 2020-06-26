@@ -1,0 +1,80 @@
+
+Wed Sep 27 14:57:44 2017: Request 76174 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by jhawthor
+       Queue: 0-SDSC
+     Subject: XUP: Issues with LAMMPS jobs
+       Owner: Nobody
+  Requestors: dan1988326@gmail.com
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=76174 >
+
+
+[Ticket created from XUP by tytang]
+[From: Tsung-Yeh Tang]
+[System: Comet]
+[Category: Batch Queues/Jobs]
+To whom it may concern,
+
+I have been using Comet to run LAMMPS jobs for years, and this is the first time I got this issue, please advice.
+I was trying to submit jobs that are "exactly the same" as those I have completed using LAMMPS packages on Comet. However, It returned with these messages:
+
+Fatal error in MPI_Init: Other MPI error, error stack:
+MPIR_Init_thread(784).................: 
+MPID_Init(1332).......................: channel initialization failed
+MPIDI_CH3_Init(141)...................: 
+dapl_rc_setup_all_connections_20(1388): generic failure with errno = 872614415
+getConnInfoKVS(849)...................: PMI_KVS_Get failed
+Fatal error in MPI_Init: Other MPI error, error stack:
+MPIR_Init_thread(784).................: 
+MPID_Init(1332).......................: channel initialization failed
+MPIDI_CH3_Init(141)...................: 
+dapl_rc_setup_all_connections_20(1388): generic failure with errno = 872614415
+getConnInfoKVS(849)...................: PMI_KVS_Get failed
+Fatal error in MPI_Init: Other MPI error, error stack:
+MPIR_Init_thread(784).................: 
+MPID_Init(1332).......................: channel initialization failed
+MPIDI_CH3_Init(141)...................: 
+dapl_rc_setup_all_connections_20(1388): generic failure with errno = 872614415
+getConnInfoKVS(849)...................: PMI_KVS_Get failed
+Fatal error in MPI_Init: Other MPI error, error stack:
+MPIR_Init_thread(784).................: 
+MPID_Init(1332).......................: channel initialization failed
+MPIDI_CH3_Init(141)...................: 
+dapl_rc_setup_all_connections_20(1388): generic failure with errno = 872614415
+getConnInfoKVS(849)...................: PMI_KVS_Get failed
+[comet-17-44.sdsc.edu:mpispawn_0][readline] Unexpected End-Of-File on file descriptor 16. MPI process died?
+[comet-17-44.sdsc.edu:mpispawn_0][mtpmi_processops] Error while reading PMI socket. MPI process died?
+[comet-17-44.sdsc.edu:mpispawn_0][child_handler] MPI process (rank: 6, pid: 24523) exited with status 1
+[comet-17-44.sdsc.edu:mpispawn_0][child_handler] MPI process (rank: 17, pid: 24534) exited with status 1
+[comet-17-44.sdsc.edu:mpispawn_0][child_handler] MPI process (rank: 10, pid: 24527) exited with status 1
+[comet-17-44.sdsc.edu:mpispawn_0][child_handler] MPI process (rank: 23, pid: 24540) exited with status 1
+Connection to comet-17-44 closed by remote host.
+
+And attached is the file I used to submit jobs:
+
+#!/bin/bash
+#SBATCH -A csd552
+#SBATCH --job-name="lammps"
+#SBATCH --output="cpu.%j.%N.out"
+#SBATCH --partition=compute
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=24
+#SBATCH --export=ALL
+#SBATCH -t 48:00:00
+
+#This job runs with 1 nodes, 24 cores per node for a total of 24 cores.
+
+#Load the CP2K module and find the executable
+module load lammps
+export EXE=`which lammps`
+
+#Use ibrun to run the MPI job. It will detect the MPI, generate the hostfile
+# and doing the right binding. With no options ibrun will use all cores.
+export OMP_NUM_THREADS=1
+ibrun $EXE -in in.hybrid
+
+Which was also no problem at all, and I did not change anything.
+Please let me know if the issue is on my end or on Comet. Thank you.
+
+Best regards,
+Dan 

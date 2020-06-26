@@ -1,0 +1,50 @@
+
+Thu Nov 16 21:20:29 2017: Request 79121 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by buskuehl
+       Queue: 0-SDSC
+     Subject: XUP: How to use machine file
+       Owner: buskuehl
+  Requestors: fyuewen@gmail.com
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=79121 >
+
+
+[Ticket created from XUP by ywfang]
+[From: Yue-Wen Fang]
+[System: Comet]
+[Category: Batch Queues/Jobs]
+Dear colleague,
+
+This is Yuewen FANG. I have a job submission problem on COMET.
+
+Specifically I want to run a CALYPSO job using machinefile in parallel.
+
+The command of submission: qsub job.sh
+
+Inputfiles: INCAR_1 INCAR_2 INCAR_3 job.sh input.dat POTCAR
+
+working directory: ywfang@comet-ln2.sdsc.edu /home/ywfang/software/CALYPSO_x64/Examples/1_example/fyw_li/parallelmode
+
+For your information, I show the usage of parallel in CALYPSO manual:
+
+The parallel mode of CALYPSO enables the geometrical optimization of structures
+through desirable number of CPUs. The parallel mode of CALYPSO supports torque
+pbs system.
+1. The keywords “Parallel” and “NumberOfParallel” are needed for using the
+parallel mode.
+For example, you can add ‘Parallel = T’ and ‘NumberOfParallel = 4’ to the
+input.dat. NumberOfParallel defines the number of structure relaxations you want
+to run in parallel.
+2.Modify the pbs script for generating the machinefile. The machinefile is a file that
+contains a list of the possible machines on which you want your MPI program to
+run.
+For example, you should add ‘cat $PBS_NODEFILE > machinefile’ before the
+line of executable calypso.x (usually ‘./calypso.x > caly.log’).
+3. Modify the script for vasp execution.
+For example, you can write the submit.sh as below:
+mpiexec –machine snodefile –n 12 vasp > out.vasp 2 > /dev/null
+
+Thank you very much.
+
+Bests
+Yuewen 

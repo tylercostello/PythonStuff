@@ -1,0 +1,43 @@
+
+Mon Oct 09 14:20:09 2017: Request 76927 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by fwells
+       Queue: 0-SDSC
+     Subject: XUP: invalid account/partition
+       Owner: fwells
+  Requestors: vkotteda@utep.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=76927 >
+
+
+[Ticket created from XUP by vkotteda]
+[From: V M Krushnarao Kotteda]
+[System: Comet]
+[Category: Accounts]
+Hi, 
+
+I logged on to comet today and submitted a job through the following jobscript. 
+
+#!/bin/bash
+#SBATCH -J MPIj         
+#SBATCH -o output%j.txt    
+#SBATCH --ntasks-per-node=24
+#SBATCH -N 4             
+#SBATCH -n 96               
+#SBATCH -p compute        
+#SBATCH -t 00:10:00         
+
+source /home/vkotteda/mpi_kokkosserial
+ibrun -np 96 /home/vkotteda/mfix_mpi3d_v1p3_all3/mfixtpifpacks
+
+The jobscript submission resulted these two errors:
+sbatch: error: bank_limit plugin: expired user, can't submit job
+sbatch: error: Batch job submission failed: Invalid account or account/partition combination specified
+
+Could you please help me in resolving this errors. 
+
+I had a startup grant. The computational resources in this grant are going to be expired by today. Is there a way to transfer these resources to my research grant. 
+
+Thank you. 
+
+Sincerely, 
+V M Krushnarao Kotteda. 

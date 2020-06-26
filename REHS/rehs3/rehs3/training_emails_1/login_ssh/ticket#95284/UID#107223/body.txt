@@ -1,0 +1,58 @@
+
+Mon Sep 17 15:25:04 2018: Request 95284 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by buskuehl
+       Queue: 0-SDSC
+     Subject: How to log into Comet?
+       Owner: buskuehl
+  Requestors: mspritch@uci.edu
+      Status: user_wait
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=95284 >
+
+
+Hi XSEDE,
+
+I have a trial account on Comet-GPU but can’t seem to figure out how to log in there. I signed up for two factor authentication via DUO and am able to connect to other systems via gsissh there, e.g. stampede2.  But when I try to access my new Comet trial allocation via the same strategy I get hostname unresolved.
+
+FYI, here’s the listing under my “accounts”:
+
+
+
+Here’s the failure mode.
+
+[pritch@ssohub ~]$ gsissh comet
+Permission denied (publickey,gssapi-keyex,gssapi-with-mic,password,keyboard-interactive,hostbased).
+[pritch@ssohub ~]$ gsissh mpritcha@comet-gpu.sdsc.xsede
+gsissh: Could not resolve hostname comet-gpu.sdsc.xsede: Name or service not known
+[pritch@ssohub ~]$ gsissh comet-gpu.sdsc.xsede
+gsissh: Could not resolve hostname comet-gpu.sdsc.xsede: Name or service not known
+[pritch@ssohub ~]$ gsissh comet-gpu.sdsc.xsede.org
+gsissh: Could not resolve hostname comet-gpu.sdsc.xsede.org: Name or service not known
+[pritch@ssohub ~]$ gsissh mpritcha@comet.sdsc.edu
+Permission denied (publickey,gssapi-keyex,gssapi-with-mic,password,keyboard-interactive,hostbased).
+[pritch@ssohub ~]$ gsissh comet.sdsc.edu
+Permission denied (publickey,gssapi-keyex,gssapi-with-mic,password,keyboard-interactive,hostbased).
+[pritch@ssohub ~]$ 
+
+I was also surprised that I cannot even ping any of the comet machine names above. 
+
+The one pingable machine name I found by trial and error was “comet.sdsc.edu”. But unfortunately doing:
+
+ssh -Y mpritcha@comet.sdsc.edu
+
+failed too (at least with my XSEDE user portal password).
+
+At this stage I’m out of ideas. Can you help?
+
+Thanks,
+
+Mike. 
+
+---
+
+Mike Pritchard
+Assistant Professor
+Dept of Earth System Sciences
+University of California, Irvine
+sites.uci.edu/pritchard
+
+ 

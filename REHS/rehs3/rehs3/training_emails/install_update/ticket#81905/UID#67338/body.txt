@@ -1,0 +1,23 @@
+
+Mon Jan 15 16:17:19 2018: Request 81905 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by jhawthor
+       Queue: 0-SDSC
+     Subject: XUP: Lapack issue
+       Owner: Nobody
+  Requestors: mjhsma@rit.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=81905 >
+
+
+[Ticket created from XUP by guest]
+[From: Matthew Hoffman]
+[System: Comet]
+[Category: Software]
+I am trying to compile code that uses Lapack and I am getting an error. I am using the library in /opt/lapack/intel/lib and when I compile using mpif90 I get the following error:
+
+/opt/lapack/intel/lib/liblapack.so: undefined reference to `zerbla_'
+/opt/lapack/intel/lib/liblapack.so: undefined reference to `zggsvp_'
+
+I googled this and all I could find was that this was an error in Lapack that has been corrected (it had a typo asking for zerbla rather than xerbla I think). Do you know anything about this or how to use Lapack on Comet? I tried the 'module load lapack' and that seemed to work except it does not see the library -lapack when compiling. That is why I has to point to the library itself. 
+
+Thanks for any help you can provide. 

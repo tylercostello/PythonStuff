@@ -1,0 +1,35 @@
+
+Sun Aug 12 08:54:27 2018: Request 93115 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by jhawthor
+       Queue: 0-SDSC
+     Subject: No output in comet
+       Owner: Nobody
+  Requestors: jmondal@tifrh.res.in
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=93115 >
+
+
+Hi 
+  Our jobs in comet are showing ‘R’ status but without any output being generated.
+  The job ids are 18530318, 18530319, 18530320 and so on.
+  The job output file is writing: "Unloading compiler-dependent module intelmpi/2016.3.210
+mpiexec_comet-03-68.sdsc.edu: cannot connect to local mpd (/tmp/mpd2.console_jmondal); possible causes:
+  1. no mpd is running on this host
+  2. an mpd is running but was started without a "console" (-n option)”
+
+
+  #!/bin/bash
+#SBATCH -p compute
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=24
+#SBATCH -t 48:00:00
+#SBATCH -o test.out
+#SBATCH -e test.out
+#SBATCH -J nav60
+#SBATCH --export=ALL
+module unload intel
+module load gromacs
+exe=`which gmx_mpi`
+processors=$(( $SLURM_NNODES * $SLURM_NTASKS_PER_NODE ))
+gmx_mpi grompp -c conf.gro -f prod.mdp -maxwarn 1
+mpirun  -np $processors -genv I_MPI_FABRICS shm:ofa $exe mdrun 

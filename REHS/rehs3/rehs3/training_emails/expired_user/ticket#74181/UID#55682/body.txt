@@ -1,0 +1,44 @@
+
+Tue Aug 22 07:15:09 2017: Request 74181 was acted upon.
+ Transaction: Queue changed from 0-XOC to 0-SDSC by fwells
+       Queue: 0-SDSC
+     Subject: XUP: Expired user, can't submit job
+       Owner: fwells
+  Requestors: deeperbass1@gmail.com
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=74181 >
+
+
+[Ticket created from XUP by wagna84]
+[From: Seonghoon Kim]
+[System: comet-gpu.sdsc.xsede]
+[Category: Allocations]
+My PI transferred the SUs from CPU to GPU in Comet, and he added my ID on the GPU Comet yesterday. However, I cannot submit my job in Comet GPU. I used batch script as below,
+Please let me know whether the rejection was caused by the script or allocation. Thanks.
+
+#!/bin/bash
+#SBATCH --partition=gpu
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=28
+#SBATCH --gres=gpu:p100:4
+#SBATCH --job-name="namdgpu"
+#SBATCH -t 48:00:00
+#SBATCH --mail-user=sek316@lehigh.edu
+#SBATCH --mail-type=BEGIN
+#SBATCH --mail-type=END
+##SBATCH -A kan203
+
+#Load CUDA module, default is v7.0
+module load cuda
+
+#Path to GPU enabled NAMD
+export PATH=/share/apps/gpu/namd:$PATH
+export LD_LIBRARY_PATH=/share/apps/gpu/namd:$LD_LIBRARY_PATH
+
+cd $SLURM_SUBMIT_DIR/${nsys}/${rep}
+
+cp ../../step7.2_pulling.namd junk.namd
+cp ../../colvars_${nsys}_2.conf colvars_2.conf
+
+#Run the NAMD job
+namd2 +p28 +devices 0,1,2,3 junk.namd | tee step7.2_pulling.out > /dev/null 

@@ -1,0 +1,22 @@
+
+Sat Jul 22 10:19:18 2017: Request 72505 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by fwells
+       Queue: 0-SDSC
+     Subject: XUP: Job not properly terminating
+       Owner: Nobody
+  Requestors: cjwhite@berkeley.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=72505 >
+
+
+[Ticket created from XUP by cjwhite]
+[From: Christopher White]
+[System: Comet]
+[Category: System/Hardware Issues]
+I recently ran a job on Comet on 28 nodes, with 28x24 mpi ranks. I scheduled 17 hours, and after that time the job was killed by the scheduler. However the code reports that it completed its work in about 12.5 hours. This was reported in its final diagnostic message to stdout. After that, the only statements in the C++ code are some delete statements, a call to MPI_Finalize(), and return(0).
+
+It seems there was a problem with MPI_Finalize() that let the code sit idle for several hours. I've run this exact code on Comet before without problems, but those were only very short scaling studies -- this is the first long run. I've also run very large and long jobs with this code on other machines, and I haven't seen this behavior.
+
+I've attached the final output from slurm, which seems to indicate trouble with one of the nodes. What's weird is that the node must have worked fine before the cleanup stage, since all the data dumps from the code are correct.
+
+Are there any known causes for behavior like this? 

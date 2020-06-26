@@ -1,0 +1,37 @@
+
+Thu Apr 26 00:14:29 2018: Request 87628 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by sporluck
+       Queue: 0-SDSC
+     Subject: XUP: libblas.so.3: cannot open shared object file: No such file or directory
+       Owner: sporluck
+  Requestors: elvira.sayfutyarova@yale.edu
+      Status: new
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=87628 >
+
+
+[Ticket created from XUP by guest]
+[From: Elvira Sayfutyarova]
+[System: Comet]
+[Category: Software]
+Hi!
+
+I'm a new user on Comet and I experience some problems with my software. I am using the package (PySCF) which I need for my project. This package requires a lot of external libraries and packages (Numpy 1.8.0 or higher, Scipy 0.10 or higher, h5py 2.3.0 or higher (requires HDF5 1.8.4 or higher), BLAS,....). I was able to compile it loading the required modules, but I cannot run the program. It crashes with error message:
+
+
+  File "/home/elvira/OldPyscf/pyscf/pyscf/lib/misc.py", line 41, in load_library
+    return numpy.ctypeslib.load_library(libname, _loaderpath)
+  File "/opt/python/lib/python2.7/site-packages/numpy/ctypeslib.py", line 123, in load_library
+    return ctypes.cdll[libpath]
+  File "/opt/python/lib/python2.7/ctypes/__init__.py", line 440, in __getitem__
+    return getattr(self, name)
+  File "/opt/python/lib/python2.7/ctypes/__init__.py", line 435, in __getattr__
+    dll = self._dlltype(name)
+  File "/opt/python/lib/python2.7/ctypes/__init__.py", line 365, in __init__
+    self._handle = _dlopen(self._name, mode)
+OSError: libblas.so.3: cannot open shared object file: No such file or directory
+
+I have atlas/3.10.2 and it usually works fine. But currently i cannot figure out what's going on. Can you help me to understand the problem and if possible to install some libraries, which might be missing from the Comet cluster.
+
+Thanks,
+Elvira.
+PS. Why can't I use "git clone..." It gives me an error message too... 

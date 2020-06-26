@@ -1,0 +1,35 @@
+
+Mon Sep 18 10:25:55 2017: Request 75616 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by jhawthor
+       Queue: 0-SDSC
+     Subject: XUP: undefined reference to `netcdf_mp_nf90_open_'
+       Owner: Nobody
+  Requestors: xhu@ou.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=75616 >
+
+
+[Ticket created from XUP by xhu]
+[From: Xiaoming Hu]
+[System: Comet]
+[Category: Software]
+I am trying to compile a simple program that uses NetCDF library.   It works fine on my computer. But after I transfer it to Comet, when I compile, I got: 
+
+xhu2@comet-ln3.sdsc.edu:/oasis/scratch/comet/xhu2/temp_project/Run/CO2_and_otherGHG/WRFV3.9/wrfchem3.9_NCEP_DOE_CONUS_Snudge_tracer16CTbc_SSTu_alterPara.2016010100/extract_netCDF_Fortran_xhu$ make
+ifort  -c -extend-source -free  -I/opt/netcdf/4.3.2/intel/mvapich2_ib/include  extract_netCDF_xhu.f90
+ifort   extract_netCDF_xhu.o  -o extract_netCDF_xhu  -L/opt/netcdf/4.3.2/intel/mvapich2_ib/lib -lnetcdf
+extract_netCDF_xhu.o: In function `MAIN__':
+extract_netCDF_xhu.f90:(.text+0x55): undefined reference to `netcdf_mp_nf90_open_'
+extract_netCDF_xhu.f90:(.text+0x83): undefined reference to `netcdf_mp_nf90_inq_varid_'
+extract_netCDF_xhu.f90:(.text+0x193): undefined reference to `netcdf_mp_nf90_get_var_3d_fourbyteint_'
+extract_netCDF_xhu.f90:(.text+0x2e4): undefined reference to `netcdf_mp_nf90_close_'
+extract_netCDF_xhu.f90:(.text+0x3ba): undefined reference to `netcdf_mp_nf90_strerror_'
+extract_netCDF_xhu.f90:(.text+0x461): undefined reference to `netcdf_mp_nf90_strerror_'
+extract_netCDF_xhu.f90:(.text+0x508): undefined reference to `netcdf_mp_nf90_strerror_'
+extract_netCDF_xhu.f90:(.text+0x5ab): undefined reference to `netcdf_mp_nf90_strerror_'
+make: *** [extract_netCDF_xhu] Error 1
+
+The source code and Makefile are beneath 
+xhu2@comet-ln3.sdsc.edu:/oasis/scratch/comet/xhu2/temp_project/Run/CO2_and_otherGHG/WRFV3.9/wrfchem3.9_NCEP_DOE_CONUS_Snudge_tracer16CTbc_SSTu_alterPara.2016010100/extract_netCDF_Fortran_xhu
+
+Any comment? 

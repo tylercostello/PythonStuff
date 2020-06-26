@@ -1,0 +1,29 @@
+
+Wed Jun 20 13:32:06 2018: Request 90336 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by jhawthor
+       Queue: 0-SDSC
+     Subject: XUP: Requesting Increase in Limit to Number of Files
+       Owner: Nobody
+  Requestors: cfleeter@stanford.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=90336 >
+
+
+[Ticket created from XUP by cfleeter]
+[From: Casey Fleeter]
+[System: Comet]
+[Category: System/Hardware Issues]
+Hello,
+
+I am writing to see if it is possible for my limit on the number of files to be raised from it's current value of 2,000,000. This is the number of files, not the memory limit in KB (which I am well below).
+
+I am working on a multilevel-multifidelity uncertainty quantification project which necessitates running a large number of simulations (many of which are inexpensive, less than 10 minutes on 1 processor jobs). However, due to our workflow, each of these low fidelity jobs generates on the order of 500 files. The most expensive high fidelity simulations use SimVascular. These jobs run in parallel on many nodes and a results file is written out  for each processor (so one job with 500 save steps running on 100 processors will generate 50,000 small files).
+
+Another member of the Marsden lab (user jstucsd on comet) was also using Comet for uncertainty quantification, and his limit is 16,000,000 files. He remembers emailing your support team about this at some point, which might be why he has a larger quota.
+
+On my end, I am taking steps to reduce the number of files I produce by adding scripts which delete all the restart files I don't need (I only require the final time cycle, but need to run the solver for 6ish cycles to reach a converged solution). This should reduce the number of files I have by a factor of 6, but by my quick calculations, I will likely still hit the file quota before my simulation pipeline (run using Dakota) completes.
+
+Let me know if an increase is possible, or if there are other solutions I should pursue.
+
+Thank you,
+Casey Fleeter 

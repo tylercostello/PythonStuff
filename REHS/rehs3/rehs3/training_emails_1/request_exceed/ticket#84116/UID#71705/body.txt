@@ -1,0 +1,35 @@
+
+Tue Feb 27 15:34:33 2018: Request 84116 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by buskuehl
+       Queue: 0-SDSC
+     Subject: XUP: Jobs not allowed
+       Owner: buskuehl
+  Requestors: sghias2@uic.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=84116 >
+
+
+[Ticket created from XUP by ghiasi]
+[From: Seyyed Ziaoddin Ghiasi]
+[System: Comet]
+[Category: Allocations]
+Hi,
+The user portal shows that I have 6051 SUs left onComet, but when I try to submit a job for even less than that amount, it says that the requested time exceeds the limit. See below the error (note that the requested SUs is less than available SUs):
+
+[ghiasi@comet-ln3 runFolder]$ sbatch sub
+sbatch: error: bank_limit plugin: The requested time can not exceed the available balance.
+Requested SUs: 2401
+Allocation limit group SUs: 50000
+Allocation limit user SUs: 50000
+Allocation used group SUs: 43949
+Allocation used user SUs: 43949
+Allocation available group SUs: 6051
+Allocation available user SUs: 6051
+Allocation running/queued group SUs: 35050
+Allocation running/queued user SUs: 35050
+Allocation completed today group SUs: 1715
+Allocation completed today user SUs: 1715
+sbatch: error: Batch job submission failed: Requested time limit is invalid (missing or exceeds some limit)
+
+Thanks,
+Zia 

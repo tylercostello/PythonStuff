@@ -1,0 +1,45 @@
+
+Wed Aug 09 14:51:17 2017: Request 73602 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by fwells
+       Queue: 0-SDSC
+     Subject: XUP: can not submit a run
+       Owner: fwells
+  Requestors: ncai@vims.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=73602 >
+
+
+[Ticket created from XUP by ncai]
+[From: Xun Cai]
+[System: Comet]
+[Category: Operations]
+Hi,
+
+I was not able to submit my run from yesterday. My command file is:
+#!/bin/bash
+#SBATCH --job-name="run02b"
+#SBATCH --output="liberty.%j.%N.out"
+#SBATCH --partition=debug
+#SBATCH --nodes=2
+#SBATCH --ntasks-per-node=24
+#SBATCH --export=ALL
+#SBATCH -t 00:30:00
+
+#This job runs with 1 nodes, 24 cores per node for a total of 24 cores.
+#ibrun in verbose mode will give binding detail
+
+ibrun -v ./pschism_COMET_VL_ICM
+
+
+The error message shows as:
+
+There was an error running the SLURM sbatch command.
+The command was:
+'/usr/bin/sbatch run_comet  2>&1'
+and the output was:
+'sbatch: error: bank_limit plugin: not found user association xcai
+ sbatch: error: Batch job submission failed: Invalid account or account/partition combination specified
+'
+
+Thanks for your help!
+Nicole 

@@ -1,0 +1,38 @@
+
+Mon Nov 27 11:39:06 2017: Request 79481 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by hthta
+       Queue: 0-SDSC
+     Subject: XUP: Confusion about resource allocation request.
+       Owner: hthta
+  Requestors: nhorst@iastate.edu
+      Status: new
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=79481 >
+
+
+[Ticket created from XUP by nhorst]
+[From: Nathan Horst]
+[System: comet-gpu.sdsc.xsede]
+[Category: Allocations]
+Hello,
+
+I am confused about the conversion rates for GPU resources on Comet. In the user guide I see the following information under the "Managing Your Accounts" > "Charging" tabs:
+
+"A GPU is equivalent to 1/4th of a node which equals 6 cores on the K80 GPUs and 7 cores on the P100 GPUs"
+
+"A P100 gpu/gpu-shared job will be charged a premium of 1.5x....(Please note that the SUs on the GPU resource are measured in terms of K80 GPU hours)"
+
+I then see the following information directly under the "Using GPU Nodes" tab:
+
+"...the conversion rate is 14 Comet Service Units (SUs) to 1 K80 GPU-hour. The P100 GPUs are substantially faster than the K80, achieving more than twice the performance for some applications. Accordingly, users will incur a 1.5x premium when running on the P100 vs the K80."
+
+This suggests to me that the conversion between SUs and GPU SUs should be:
+
+ 1 SU = 1 GPU hr / 14
+
+So requesting 1,000,000 SUs would be the equivalent of ~ 71,500 GPU SUs.
+
+Is this the correct conversion? We have recently submitted a request of 1,000,000 SUs and were told that we are requesting far too many resources. Is there something wrong with the conversion we are using, or should we be requesting things in terms of converted GPU SUs?
+
+Thanks for the clarification on this matter.
+
+Nathan Horst 

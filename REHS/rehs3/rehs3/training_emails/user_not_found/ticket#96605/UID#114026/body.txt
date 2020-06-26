@@ -1,0 +1,86 @@
+
+Tue Oct 09 00:58:12 2018: Request 96605 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by sporluck
+       Queue: 0-SDSC
+     Subject: Problem to run job in sbatch
+       Owner: sporluck
+  Requestors: dieunelderilus@gmail.com
+      Status: new
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=96605 >
+
+
+Dear  Xsede Help Desk Team
+
+I am happy that I start using  Xsede to process my data. However since I am
+a beginner in using  this service, I start  facing  some problems that
+ could be   trivial. When I'am trying to run some jobs using sbatch in
+comet, I have this following error :
+ *[dieunel@comet-ln3 head_out]$ sbatch blhead.1.sl <http://blhead.1.sl> *
+
+*sbatch: error: bank_limit plugin: expired user, can't submit job*
+
+*sbatch: error: Batch job submission failed: Invalid account or
+account/partition combination specified.*
+
+
+Is it normal  o there is  problem with my login account since I am a new
+ user with a startup allocation. Please I really need your help just to
+optimize the use  xsede to run my analysis.
+
+here is my *sl script :
+
+*#!/bin/bash*
+
+
+
+*#SBATCH --job-name=job1*
+
+*#SBATCH -t 01:30:00 *
+
+*#SBATCH --export=ALL*
+
+*#SBATCH --nodes=2  *
+
+*#SBATCH --ntasks-per-node=24 *
+
+*#SBATCH --partition=compute*
+
+
+
+*module load blast/2.3.0 *
+
+*export LC_ALL="en_US.utf8"*
+
+*export BLASTDB="/oasis/scratch/comet/dieunel/temp_project/blastdb"*
+
+
+
+*blastp   \*
+
+*    -db nr \*
+
+*    -task blastp-fast \*
+
+*    -outfmt '6 qseqid sseqid qstart qend sstart send evalue bitscore
+pident length mismatch gapopen staxids sskingdoms sscinames ssalltitles
+stitle' \*
+
+*    -evalue 1e-10 \*
+
+*    -max_target_seqs 1 \*
+
+*    -query
+/oasis/scratch/comet/dieunel/temp_project/zillutr_proteome/head_out/head.1
+\*
+
+*    -out
+/oasis/scratch/comet/dieunel/temp_project/zillutr_proteome/head_out/head.1.test*
+
+
+Gratefully
+--------------------------
+Derilus Dieunel
+Graduate Student
+Department of Environmental Sciences
+University of Puerto Rico, Río Piedras
+ 

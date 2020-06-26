@@ -1,0 +1,29 @@
+
+Fri May 11 20:22:24 2018: Request 88425 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by carmanh
+       Queue: 0-SDSC
+     Subject: XUP: wrong group for new files
+       Owner: Nobody
+  Requestors: ivorobyov@ucdavis.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=88425 >
+
+
+[Ticket created from XUP by ivoro001]
+[From: Igor Vorobyov]
+[System: Comet]
+[Category: Accounts]
+Hello,
+It turns out that all new files on comet I create in home folder as well as in some folders where I run jobs have wrong group name, leading to jobs running out of disk space due to group storage restriction for that allocation.
+The correct group number is ucd147, but the new files are assigned to usc108. See below:
+
+ ls -lad /oasis/projects/nsf/ucd147/vorobyov/projects/herg/herg_dof_pulling/herg_o2_dof0/namd_us01/27/1.txt
+-rw-r--r-- 1 vorobyov usc108 0 May 11 18:09 /oasis/projects/nsf/ucd147/vorobyov/projects/herg/herg_dof_pulling/herg_o2_dof0/namd_us01/27/1.txt
+
+[vorobyov@comet-ln2 ~]$ ls -lad /home/vorobyov/1.txt 
+-rw-r--r-- 1 vorobyov usc108 0 May 11 17:47 /home/vorobyov/1.txt
+
+Could you please fix that?
+
+Thanks a lot,
+Igor. 

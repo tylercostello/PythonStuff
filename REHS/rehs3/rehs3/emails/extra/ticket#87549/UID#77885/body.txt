@@ -1,0 +1,48 @@
+
+Tue Apr 24 16:08:51 2018: Request 87549 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by buskuehl
+       Queue: 0-SDSC
+     Subject: Community user getting error when tried to create working directories
+       Owner: buskuehl
+  Requestors: eabeysin@iu.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=87549 >
+
+
+Hello,
+
+
+
+SimVascular gateway (https://gateway.simvascular.org) community login (svuser) for comet is throwing the highlighted error [1] when tries to create the working directories.
+
+I tried to view the quota usage using quota –u svuser and that fails with [2].
+
+
+
+Please look in to this and advice on best way to clean up quota space.
+
+
+
+[1]
+
+cannot create directory `/oasis/scratch/comet/svuser/temp_project/simvascular_workdirs/PROCESS_4004eb87-e681-4c5e-963b-0ac3cf808dff': Disk quota exceeded
+
+
+
+[2]
+
+[svuser@comet-ln3 ~]$ quota -u svuser
+
+quota: error while getting quota from ps-073.sdsc.edu:/ps-data/janssen3/ for svuser (id 516267): Connection refused
+
+quota: error while getting quota from ps-009.sdsc.edu:/ps-data/ngbt/ for svuser (id 516267): Connection refused
+
+quota: error while getting quota from ps-038.sdsc.edu:/ps-data/nsg/ for svuser (id 516267): Connection refused
+
+
+
+Thanks,
+
+Eroma
+
+ 

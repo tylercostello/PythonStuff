@@ -1,0 +1,54 @@
+
+Fri Jan 04 08:02:20 2019: Request 101273 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by jhidleba
+       Queue: 0-SDSC
+     Subject: python3 issue on comet
+       Owner: Nobody
+  Requestors: pamidigs@iu.edu
+      Status: new
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=101273 >
+
+
+Hi:
+
+
+
+I am seeing this error when I used python3 ( python2) from comet. Is there a general solution for this. I can try and install python3 but would like to see if this can be generally supported for all users.
+
+
+
+Thanks,
+
+Sudhakar.
+
+
+
+Traceback (most recent call last):
+
+  File "/home/gridchem/apps/xchem_dev/pyxchem/pyxchem.py", line 3, in <module>
+
+    from steps import env, integrals, basis, orbitals, rdm, ccm, bsplines, boxstates, scatteringstates, dta, preptdse
+
+  File "/oasis/projects/nsf/uic151/gridchem/apps/xchem_dev/pyxchem/steps/integrals.py", line 6, in <module>
+
+    from molcas_input_generators import *
+
+  File "/oasis/projects/nsf/uic151/gridchem/apps/xchem_dev/pyxchem/molcas_input_generators.py", line 2, in <module>
+
+    import h5_extractors
+
+  File "/oasis/projects/nsf/uic151/gridchem/apps/xchem_dev/pyxchem/h5_extractors.py", line 2, in <module>
+
+    import h5py
+
+  File "/opt/hdf5/intel/mvapich2_ib/lib/python2.7/site-packages/h5py-2.5.0-py2.7-linux-x86_64.egg/h5py/__init__.py", line 13, in <module>
+
+    from . import _errors
+
+ImportError: dynamic module does not define module export function (PyInit__errors)
+
+
+
+
+
+ 

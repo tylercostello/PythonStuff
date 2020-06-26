@@ -1,0 +1,37 @@
+
+Mon Feb 26 11:15:00 2018: Request 84061 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by hthta
+       Queue: 0-SDSC
+     Subject: XUP: lack of NETCDF4 library?  for WRF/Chem compiling on Comet
+       Owner: hthta
+  Requestors: xhu@ou.edu
+      Status: new
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=84061 >
+
+
+[Ticket created from XUP by xhu]
+[From: Xiaoming Hu]
+[System: Comet]
+[Category: Software]
+I wanted compile WRF/Chem with NETCDF4 on Comet
+/oasis/projects/nsf/uok114/xhu2/Codes/WRFV3.9.1/WRFV3_kpp_15_NETCDF4
+But I got the following error: 
+
+ifort -real-size 32 -i4  -O3 -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   -o wrf_io.o  -I/opt/netcdf/4.3.2/intel/mvapich2_ib/include -I../ioapi_share -c wrf_io.f
+wrf_io.f(1879): error #6404: This name does not have a type, and must have an explicit type.   [NF_NETCDF4]
+  create_mode = nf_netcdf4
+----------------^
+wrf_io.f(1881): error #6404: This name does not have a type, and must have an explicit type.   [NF_SET_CHUNK_CACHE]
+  stat = NF_SET_CHUNK_CACHE(cache_size, cache_nelem, cache_preemption)
+---------^
+wrf_io.f(7529): error #6404: This name does not have a type, and must have an explicit type.   [NF_DEF_VAR_CHUNKING]
+     stat = NF_DEF_VAR_CHUNKING(NCID, VarID, NF_CHUNKED, chunks(1:NDim+1))
+------------^
+wrf_io.f(7537): error #6404: This name does not have a type, and must have an explicit type.   [NF_DEF_VAR_DEFLATE]
+      stat = NF_DEF_VAR_DEFLATE(NCID, VarID, 1, 1, compression_level)
+-------------^
+compilation aborted for wrf_io.f (code 1)
+
+See the detail compiling error at /oasis/projects/nsf/uok114/xhu2/Codes/WRFV3.9.1/WRFV3_kpp_15_NETCDF4/compile_kpp_workingVPRM.log
+
+Any suggestions? 

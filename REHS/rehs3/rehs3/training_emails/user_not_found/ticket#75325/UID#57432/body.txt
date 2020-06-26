@@ -1,0 +1,54 @@
+
+Wed Sep 13 15:24:39 2017: Request 75325 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by clm
+       Queue: 0-SDSC
+     Subject: XUP: Problems with job submission
+       Owner: clm
+  Requestors: echagaro@ucsd.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=75325 >
+
+
+[Ticket created from XUP by chagarov]
+[From: Evgueni Chagarov]
+[System: Comet]
+[Category: Batch Queues/Jobs]
+Hello,
+
+  I have problems with job submission on Comet. I use the same job submission script. Yesterday it was fine, today I have problems. 
+  When I try to submit VASP parallel job using command: 
+   sbatch VASP_SB_RUNSCRIPT
+
+   I get system messages: 
+   sbatch: error: bank_limit plugin: not found user association echagaro
+   sbatch: error: Batch job submission failed: Invalid account or account/partition combination specified
+
+   If you need my job submission script,  it looks like this. Yesterday and before that it was working fine.
+
+#!/bin/bash
+#SBATCH --nodes=1
+#SBATCH --tasks-per-node=24
+#SBATCH -t 48:00:00
+#SBATCH --output="EVG_JOB.%j.%N.out"
+#SBATCH --error="EVG_JOB.%j.%N.err"
+#SBATCH -p compute
+#SBATCH --export=ALL
+#SBATCH --qos=oneweek
+#SBATCH --job-name="HfO2_GeO2_Ge"
+
+
+module unload intel
+module load vasp
+exe=`which vasp_std`
+processors=$(( $SLURM_NNODES * $SLURM_NTASKS_PER_NODE ))
+cd $SLURM_SUBMIT_DIR #change to the working directory
+mkdir /oasis/scratch/comet/$USER/temp_project/$SLURM_JOB_ID
+cp * /oasis/scratch/comet/$USER/temp_project/$SLURM_JOB_ID
+cd   /oasis/scratch/comet/$USER/temp_project/$SLURM_JOB_ID
+mpirun  -np $processors -genv I_MPI_FABRICS shm:ofa $exe >& vasp.log
+cp * $SLURM_SUBMIT_DIR
+
+
+  Thank you,
+   Evgueni Chagarov
+   UCSD 

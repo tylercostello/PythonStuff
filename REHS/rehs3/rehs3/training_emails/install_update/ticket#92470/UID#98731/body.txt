@@ -1,0 +1,26 @@
+
+Mon Jul 30 17:12:45 2018: Request 92470 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by buskuehl
+       Queue: 0-SDSC
+     Subject: XUP: CUDA and glibc
+       Owner: buskuehl
+  Requestors: jweyn@uw.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=92470 >
+
+
+[Ticket created from XUP by jweyn]
+[From: Jonathan Weyn]
+[System: comet-gpu.sdsc.xsede]
+[Category: Software]
+Hi,
+
+I'm having compatibility issues with Python libraries that require CUDA. I'm trying to install Tensorflow but have had problems with numerous installation methods:
+1) Installing a pre-built package from anaconda: the package installs its own CUDA-9.0 but the system's NVIDIA drivers for the GPUs are too old for this CUDA version
+2) Installing a pre-built package from pip: the package does not install its own CUDA, but fails when being imported in python: "/lib64/libc.so.6: version `GLIBC_2.14' not found" (max is 2.12)
+3) Compiling from source: the compiler (bazel) also fails due to the GLIBC requirement.
+
+Would it be possible to either a) install CUDA 9.0 or later (and a compatible cuDNN), with drivers, as a system module or b) somehow fix the core gnu library problem?
+
+Thank you,
+Jonathan 

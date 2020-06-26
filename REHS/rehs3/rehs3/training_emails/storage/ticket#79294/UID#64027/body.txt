@@ -1,0 +1,47 @@
+
+Mon Nov 20 18:04:07 2017: Request 79294 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by buskuehl
+       Queue: 0-SDSC
+     Subject: XUP: Gromacs memory problem
+       Owner: buskuehl
+  Requestors: irem.altan@duke.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=79294 >
+
+
+[Ticket created from XUP by nano3]
+[From: Irem Altan]
+[System: comet-gpu.sdsc.xsede]
+[Category: System/Hardware Issues]
+Hi,
+
+I don't know if you received my reply to the previous ticket, but the problem still continues. I just submitted 35 jobs at once, 6 of them started running, and 2 of them died immediately because of the memory problem I had previously mentioned. Essentially, I sporadically get the following error, and the job gets canceled:
+
+Program:     gmx mdrun, version 2016.3
+Source file: src/gromacs/utility/smalloc.cpp (line 226)
+MPI rank:    0 (out of 4)
+
+Fatal error:
+Not enough memory. Failed to realloc 475824 bytes for buf, buf=54761070
+(called from file
+/state/partition1/git/chemistry-roll/BUILD/sdsc-gromacs-2016.3/gromacs-2016.3/src/gromacs/domdec/domdec.cpp,
+line 1181)
+
+For more information and tips for troubleshooting, please check the GROMACS
+website at http://www.gromacs.org/Documentation/Errors
+-------------------------------------------------------
+[cli_0]: aborting job:
+application called MPI_Abort(MPI_COMM_WORLD, 1) - process 0
+[comet-31-18.sdsc.edu:mpispawn_0][readline] Unexpected End-Of-File on file descriptor 6. MPI process died?
+[comet-31-18.sdsc.edu:mpispawn_0][mtpmi_processops] Error while reading PMI socket. MPI process died?
+[comet-31-18.sdsc.edu:mpispawn_0][child_handler] MPI process (rank: 0, pid: 17198) exited with status 1
+Connection to comet-31-18 closed by remote host.
+
+This can happen towards the end of a job, or in the middle of a job as well. For an example, look at /oasis/scratch/comet/nano3/temp_project/cIII_m/out.dat
+
+There are jobs that run and complete successfully with the same input parameters.
+
+This is becoming quite inconvenient as my jobs keep on losing their place in the queue and I have to check output files one by one to see if they finished properly. How could we solve this problem?
+
+Best,
+Irem 

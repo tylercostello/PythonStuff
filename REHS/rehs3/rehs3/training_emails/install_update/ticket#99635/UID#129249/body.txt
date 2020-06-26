@@ -1,0 +1,61 @@
+
+Tue Nov 27 18:06:25 2018: Request 99635 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by buskuehl
+       Queue: 0-SDSC
+     Subject: XUP: Trouble loading matplotlib
+       Owner: buskuehl
+  Requestors: oasselin@ucsd.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=99635 >
+
+
+[Ticket created from XUP by oasselin]
+[From: Olivier Asselin]
+[System: Comet]
+[Category: Software]
+Hi,
+
+
+There is something I fail to grasp while using Comet (the exact same script works fine on Stampede2): somehow the "matplotlib.pyplot" module is nowhere to be found, even though I load module python...
+
+Here a typical script:
+----------------------------
+
+#!/usr/bin/env python                                                                                                                                                                    
+import os
+import numpy as np
+import matplotlib.pyplot as plt
+
+
+scratch_location = '/oasis/scratch/comet/oasselin/temp_project/'
+folder = 'niskine/expeady/'
+run = 'storm_Y3/'
+
+vres=128
+
+
+path_wz = scratch_location+folder+run+'output/wz.dat'
+if os.path.isfile(path_wz):
+    wz = np.loadtxt(path_wz)
+    wke = wz[:,1]
+    wke = np.reshape(wke,(wke.shape[0]/vres,-1,1),order='C')
+
+    z = wz[:,0]
+    t = np.arange(0,wke.shape[0])
+    ZZ, TT = np.meshgrid(z, t)
+
+    plt.contourf(TT,ZZ,wke)
+
+
+
+When I launch the script, I get this error in the terminal:
+-------------------------------------------------------------------------
+
+Traceback (most recent call last):
+  File "source.py", line 4, in <module>
+    import matplotlib.pyplot as plt
+ImportError: No module named matplotlib.pyplot 
+
+
+Thank you
+Olivier 

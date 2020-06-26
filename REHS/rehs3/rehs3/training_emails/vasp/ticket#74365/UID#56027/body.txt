@@ -1,0 +1,45 @@
+
+Thu Aug 24 18:34:24 2017: Request 74365 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by clm
+       Queue: 0-SDSC
+     Subject: XUP: Available Nodes
+       Owner: clm
+  Requestors: landerson8214@gmail.com
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=74365 >
+
+
+[Ticket created from XUP by lphil004]
+[From: Lindsey Anderson]
+[System: Comet]
+[Category: Batch Queues/Jobs]
+When I attempt to have my .run file request more than one node on the jobs that I am running, I get an error that says:
+"There was an error running the SLURM sbatch command.
+The command was:
+'/usr/bin/sbatch relax.run  2>&1'
+and the output was:
+'sbatch: error: Not allowed to set the number of nodes in the shared partition.
+ sbatch: error: Batch job submission failed: Invalid partition name specified'."
+
+Similarly, when I request more than 20 cores for the single node, I also get an error:
+"There was an error running the SLURM sbatch command.
+The command was:
+'/usr/bin/sbatch relax.run  2>&1'
+and the output was:
+'sbatch: error: Batch job submission failed: Job violates accounting/QOS policy (job submit limit, user's size and/or time limits)'. "
+
+Is there a reason for this and am I able to request more nodes/cores for my calculations?
+
+My .run file (for my current calculations with the VASP program on Comet) typically look like this:
+#!/bin/bash
+#SBATCH --nodes=1
+#SBATCH --tasks-per-node=20
+#SBATCH -t 1:00:00
+#SBATCH --job-name="relax"
+#SBATCH -p shared
+#SBATCH --export=ALL
+#SBATCH -A TG-DMR130081
+module load mkl/11.1.2.144
+mpiexec -np 20 /home/landerso/vasp.5.3.5_constrain_1D/vasp.5.3/vasp >& vasp.out
+
+Thank you, in advance, for your help. 

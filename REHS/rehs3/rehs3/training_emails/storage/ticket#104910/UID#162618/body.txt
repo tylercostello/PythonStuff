@@ -1,0 +1,64 @@
+
+Fri Mar 08 11:35:13 2019: Request 104910 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by hthta
+       Queue: 0-SDSC
+     Subject: XUP: Got a few errors after the maintenance
+       Owner: hthta
+  Requestors: heolim@msu.edu
+      Status: new
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=104910 >
+
+
+[Ticket created from XUP by huhlim]
+[From: Lim Heo]
+[System: Comet,Comet GPU,Oasis]
+[Category: Network]
+I got a few errors after the maintenance on Comet.
+
+1. I could not transfer files via Globus system. The error message was "Authentication error".
+{
+"context": [
+{
+"endpoint": "SDSC Data Oasis (c982d486-6d04-11e5-ba46-22000b92c6ec)",
+"operation": "Endpoint Scan"
+}
+],
+"error": {
+"details": "Error (login)\nEndpoint: SDSC Data Oasis (c982d486-6d04-11e5-ba46-22000b92c6ec)\nServer: oasis-dm.sdsc.edu:2811\nMessage: Login Failed\n---\nDetails: 530 Login incorrect. : Access denied, user's system account is disabled.\\r\\n\n",
+"type": "GSHError"
+}
+}
+
+2. I could not run my jobs properly on some of the Comet-gpu nodes because of a permission issue with oasis. The error message was like following.With the same script, they are running on comet-34-08.
+
+srun: error: comet-33-03: task 0: Exited with exit code 1
+Traceback (most recent call last):
+  File "/home/huhlim/work/refine/casp13/bin/prod_without_restraint.py", line 207, in <module>
+    run()
+  File "/home/huhlim/work/refine/casp13/bin/prod_without_restraint.py", line 139, in run
+    job = Job.load(id)
+  File "/home/huhlim/work/refine/casp13/bin/libcommon.py", line 51, in load
+    with job.job_pkl.open("rb") as fp:
+  File "/home/huhlim/work/refine/casp13/bin/libcommon.py", line 26, in job_pkl
+    return self.work_home.fn("job.pkl")
+  File "/home/huhlim/work/refine/casp13/bin/libcommon.py", line 23, in work_home
+    return path.Dir("%s/%s"%(self.run_HOME, self.id), build=True, green=True)
+  File "/home/huhlim/lib/path.py", line 161, in __init__
+    self.build()
+  File "/home/huhlim/lib/path.py", line 164, in build
+    os.makedirs(self._path)
+  File "/home/huhlim/apps/conda/envs/openmm/lib/python2.7/os.py", line 150, in makedirs
+    makedirs(head, mode)
+  File "/home/huhlim/apps/conda/envs/openmm/lib/python2.7/os.py", line 150, in makedirs
+    makedirs(head, mode)
+  File "/home/huhlim/apps/conda/envs/openmm/lib/python2.7/os.py", line 150, in makedirs
+    makedirs(head, mode)
+  File "/home/huhlim/apps/conda/envs/openmm/lib/python2.7/os.py", line 150, in makedirs
+    makedirs(head, mode)
+  File "/home/huhlim/apps/conda/envs/openmm/lib/python2.7/os.py", line 150, in makedirs
+    makedirs(head, mode)
+  File "/home/huhlim/apps/conda/envs/openmm/lib/python2.7/os.py", line 150, in makedirs
+    makedirs(head, mode)
+  File "/home/huhlim/apps/conda/envs/openmm/lib/python2.7/os.py", line 157, in makedirs
+    mkdir(name, mode)
+OSError: [Errno 13] Permission denied: '/oasis/scratch/comet/huhlim' 

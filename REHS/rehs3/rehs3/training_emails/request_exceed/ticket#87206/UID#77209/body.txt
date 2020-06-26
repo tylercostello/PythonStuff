@@ -1,0 +1,27 @@
+
+Tue Apr 17 16:49:20 2018: Request 87206 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by buskuehl
+       Queue: 0-SDSC
+     Subject: XUP: Comet GPU jobs don't seem to be running
+       Owner: buskuehl
+  Requestors: yunwang@andrew.cmu.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=87206 >
+
+
+[Ticket created from XUP by maigo]
+[From: Yun Wang]
+[System: comet-gpu.sdsc.xsede]
+[Category: Batch Queues/Jobs]
+Hi,
+
+  I submitted some jobs to the gpu-shared queue on comet before the maintenance today (4/17). Some of them ran, while others waited for the maintenance to complete.
+
+  Now, three of the jobs that waited for the maintenance are shown to be running:
+          15551867 gpu-share                  17L-time-fac1.0    maigo  RUNNING    2:13:53 2-00:00:00      1 comet-33-05
+          15551868 gpu-share                 17L-class-fac0.9    maigo  RUNNING    2:13:53 2-00:00:00      1 comet-34-02
+          15551869 gpu-share                  13L-time-fac0.9    maigo  RUNNING    2:13:53 2-00:00:00      1 comet-34-06
+
+  But I'm not seeing the expected log files. When I log on to the compute nodes (comet-33-05, etc) and execute "ps aux | grep maigo", I don't see any python processes.
+
+  Could you look into this and see why the jobs didn't run? 

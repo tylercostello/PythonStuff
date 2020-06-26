@@ -1,0 +1,40 @@
+
+Wed Jan 10 01:38:43 2018: Request 81545 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by aredding
+       Queue: 0-SDSC
+     Subject: XUP: Making an executable with Cython
+       Owner: Nobody
+  Requestors: dinpajooh@gmail.com
+      Status: new
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=81545 >
+
+
+[Ticket created from XUP by din1984]
+[From: Hadi Dinpajooh]
+[System: Comet]
+[Category: Software]
+Hi,
+
+I am trying to make an executable file with Cython with the following sequence:
+
+1) module load python
+2) cython test.py (where test.py file contains simple print python command)
+3) gcc test.c
+
+When I run gcc test.cc, the following error occurs:
+
+"test.c:4:20: fatal error: Python.h: No such file or directory
+ #include "Python.h"                    ^
+compilation terminated."
+
+I tried to locate Python.h file and use -I/opt/python/include/python2.7/Python.h, etc., but
+they did not work.
+
+I appreciate your help regarding how to make a simple executable in Cython on comet.
+Thanks again,
+Hadi
+
+PS. Here is my simple test.py python file:
+
+#!/usr/bin/env python
+print('This is a test') 

@@ -1,0 +1,74 @@
+
+Thu Jul 13 17:36:59 2017: Request 72002 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by buskuehl
+       Queue: 0-SDSC
+     Subject: charge on COMET
+       Owner: buskuehl
+  Requestors: gpalermo@ucsd.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=72002 >
+
+
+Dear all,
+
+
+
+I have a question regarding the charging on COMET GPUs P100, since it is not clear to me from the website (http://www.sdsc.edu/support/user_guides/comet.html).
+
+It is always true on CPU nodes that:
+
+
+
+1 SU = 1 core x 1 hour
+
+
+
+On the K80 GPUs, one has to consider that 1 GPU = 6 cores. This means that 6*24 = 144 SUs per 24 hours.
+
+This means that if my code performs 25.72 ns/day, this corresponds to: 144/25.72 = 5.6 SU per 1 ns.
+
+
+
+On the P100 GPUs, 1 GPU = 7 cores. As such, 7*24 = 168 SUs per 24 hours.
+
+Having my code performing 25.72 ns/day, this corresponds to: 168/25.72 = 6.5 SU per 1 ns.
+
+
+
+Is this correct? I have some questions regarding it:
+
+
+
+1. Can I take this number as it is and multiply for the numbers of ns I want?
+
+Or shell I apply some multiplication, considering that I am not using the entire node?
+
+
+
+2. On the website is reported that "A P100 gpu/gpu-shared job will be charged a premium  of 1.5x”
+
+What does it mean? Shell I increase the obtained SU per 1 ns (6.5) of the 50 % ??
+
+
+
+
+
+Can you please clarify how shell we compute the requested SUs?
+
+
+
+
+
+Thank you very much
+
+
+
+Giulia
+
+
+
+
+
+
+
+ 

@@ -1,0 +1,32 @@
+
+Wed Jul 18 20:49:56 2018: Request 91945 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by carmanh
+       Queue: 0-SDSC
+     Subject: XUP: petsc 3.7.7
+       Owner: carmanh
+  Requestors: dstegman@ucsd.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=91945 >
+
+
+[Ticket created from XUP by guest]
+[From: Dave Stegman]
+[System: Comet]
+[Category: Software]
+Hi
+we are using some software that prefers petsc 3.7.7 (the default module on comet is 3.6.3).
+so we are trying to install 3.7.7 in home directory.
+
+we successfully configured, compiled and installed petsc.
+my configure log - /home/dstegman/petsc-3.7.7/configure.log 
+but encountered a problem when it ran tests (see attached image). 
+the error is related to limic2 which is a module for mvapich2. we read on one forum a thread from a previous user having a similar problem:
+http://mailman.cse.ohio-state.edu/pipermail/mvapich-discuss/2011-June/003430.html
+
+The installation instructions for LiMIC2 are located here:
+http://hpc.wm.edu/software/docs/mvapich2-1.9-userguide.pdf
+
+If LiMIC2 is properly installed, we should just be able to include --with-limic2 in the configure line. 
+
+The LiMIC library path is /opt/mvapich2/intel/ib/lib
+Additionally, there is a final called limic.h located in /opt/mvapich2/intel/ib/include 

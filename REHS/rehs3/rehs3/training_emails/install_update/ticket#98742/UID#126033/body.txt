@@ -1,0 +1,69 @@
+
+Tue Nov 06 16:04:24 2018: Request 98742 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by carmanh
+       Queue: 0-SDSC
+     Subject: XUP: Issues installing spack applications
+       Owner: Nobody
+  Requestors: jensenq@wwu.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=98742 >
+
+
+[Ticket created from XUP by jensenq]
+[From: Quentin Jensen]
+[System: Comet]
+[Category: Software]
+Hello,
+Running CentOS release 6.10 (Final), I've been unable to install anything using caliper.
+The Intel/2013_sp1.2.144 compiler is loaded, and I'm using the latest commit of spack. I've tried all above advice, but nothing works. Any attempt at spack install'ing anything, on all branches, results in the following output:
+
+==> Installing pkg-config
+==> Using cached archive: /home/jensenq/tools/spack/var/spack/cache/pkg-config/pkg-config-0.29.2.tar.gz
+==> Already staged pkg-config-0.29.2-njkc7dtgt63fg5566nkojhdbkjof2e25 in /home/jensenq/tools/spack/var/spack/stage/pkg-config-0.29.2-njkc7dtgt63fg5566nkojhdbkjof2e25
+==> No patches needed for pkg-config
+==> Building pkg-config [AutotoolsPackage]
+==> Executing phase: 'autoreconf'
+==> Executing phase: 'configure'
+==> Error: ProcessError: Command exited with status 77:
+    '/home/jensenq/tools/spack/var/spack/stage/pkg-config-0.29.2-njkc7dtgt63fg5566nkojhdbkjof2e25/pkg-config-0.29.2/configure' '--prefix=/home/jensenq/tools/spack/opt/spack/linux-centos6-x86_64/gcc-4.9.2/pkg-config-0.29.2-njkc7dtgt63fg5566nkojhdbkjof2e25' '--enable-shared' '--with-internal-glib'
+
+2 errors found in build log:
+     [ ... ]
+     10    checking build system type... x86_64-unknown-linux-gnu
+     11    checking host system type... x86_64-unknown-linux-gnu
+     12    checking how to print strings... printf
+     13    checking for style of include used by make... GNU
+     14    checking for gcc... /home/jensenq/tools/spack/lib/spack/env/gcc/gcc
+     15    checking whether the C compiler works... no
+  >> 16    configure: error: in `/tmp/jensenq/spack-stage/spack-stage-sDw47a/pkg-config-0.29.2':
+  >> 17    configure: error: C compiler cannot create executables
+     18    See `config.log' for more details
+
+See build log for details:
+  /home/jensenq/tools/spack/var/spack/stage/pkg-config-0.29.2-njkc7dtgt63fg5566nkojhdbkjof2e25/pkg-config-0.29.2/spack-build.out
+
+
+
+spack-build.out :
+
+==> Executing phase: 'configure'
+==> '/home/jensenq/tools/spack/var/spack/stage/pkg-config-0.29.2-njkc7dtgt63fg5566nkojhdbkjof2e25/pkg-config-0.29.2/configure' '--prefix=/home/jensenq/tools/spack/opt/spack/linux-centos6-x86_64/gcc-4.9.2/pkg-config-0.29.2-njkc7dtgt63fg5566nkojhdbkjof2e25' '--enable-shared' '--with-internal-glib'
+checking for a BSD-compatible install... /usr/bin/install -c
+checking whether build environment is sane... yes
+checking for a thread-safe mkdir -p... /bin/mkdir -p
+checking for gawk... gawk
+checking whether make sets $(MAKE)... yes
+checking whether make supports nested variables... yes
+checking build system type... x86_64-unknown-linux-gnu
+checking host system type... x86_64-unknown-linux-gnu
+checking how to print strings... printf
+checking for style of include used by make... GNU
+checking for gcc... /home/jensenq/tools/spack/lib/spack/env/gcc/gcc
+checking whether the C compiler works... no
+configure: error: in `/tmp/jensenq/spack-stage/spack-stage-sDw47a/pkg-config-0.29.2':
+configure: error: C compiler cannot create executables
+See config.log for more details
+
+
+Thanks for any help!
+-Quentin 

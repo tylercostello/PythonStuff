@@ -1,0 +1,104 @@
+
+Thu Apr 04 09:37:05 2019: Request 106349 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by jhawthor
+       Queue: 0-SDSC
+     Subject: QE 6.1 projwfc issue
+       Owner: jhidleba
+  Requestors: pamidigs@iu.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=106349 >
+
+
+Hi Mahidhar:
+
+
+
+
+
+It looks like we have an issue with projwfc module of the QuantumEspresso 6.1. as suggested by  the QEespresso-6.1.stderr
+
+
+
+For the job 22323003 run from /oasis/scratch/comet/ddumettt/temp_project/seagrid_workdirs/PROCESS_bfc243f9-54ae-4075-9b92-118b5433c60c
+
+
+
+The stderr contains the following..
+
+
+
+
+
++ mpirun -np 72 /share/apps/compute/qe/v6.1impi2015/bin/projwfc.x
+
+
+
+forrtl: severe (61): format/variable-type mismatch, unit 33, file /oasis/scratch/comet/ddumettt/temp_project/seagrid_workdirs/PROCESS_bfc243f9-54ae-4075-9b92-118b5433c60c/HC_AmMiner_Wuensch_scf_1p00a_proj.projwfc_up
+
+
+
+Image              PC                Routine            Line        Source
+
+
+
+projwfc.x          00000000009CFCE3  Unknown               Unknown  Unknown
+
+
+
+projwfc.x          0000000000A26C67  Unknown               Unknown  Unknown
+
+
+
+projwfc.x          000000000041E3C1  pprojwave_               2185  projwfc.f90
+
+
+
+projwfc.x          0000000000406034  MAIN__                    224  projwfc.f90
+
+
+
+projwfc.x          000000000040593E  Unknown               Unknown  Unknown
+
+
+
+libc.so.6          00000037BAE1ED20  Unknown               Unknown  Unknown
+
+
+
+projwfc.x          00000000004057C9  Unknown               Unknown  Unknown
+
+
+
+
+
+
+
+In a version I compiled I have the following for projwfc.f90 where the format was changed to open format.
+
+
+
+!WRITE(iunproj,'(2i5,1x,a4,1x,a2,1x,3i5)') &
+
+              WRITE(iunproj,*) &
+
+
+
+
+
+Could you please check if the same is present on comet and perhaps recompile this module and update it.
+
+Please let me know if you have any questions.
+
+
+
+Thanks,
+
+Sudhakar.
+
+
+
+
+
+
+
+ 

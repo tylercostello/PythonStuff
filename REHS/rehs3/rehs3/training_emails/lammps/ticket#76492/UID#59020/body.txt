@@ -1,0 +1,38 @@
+
+Mon Oct 02 21:42:12 2017: Request 76492 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by clm
+       Queue: 0-SDSC
+     Subject: XUP: LAMMPS not running on Comet
+       Owner: clm
+  Requestors: ananthgr@mit.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=76492 >
+
+
+[Ticket created from XUP by ananthgr]
+[From: Ananth Govind Rajan]
+[System: Comet]
+[Category: Allocations]
+Hello Admin,
+
+I am a graduate student working with Professor Daniel Blankschtein in the Department of Chemical Engineering.
+
+For the past week or so, I have not been able to run LAMMPS on Comet. While I can submit jobs, and the jobs start getting executed, the output file is blank. The job goes on to completion, but I cannot see anything in the output file. I have lost close to 5000 SUs because of this issue. Please help me in resolving this issue. For your reference, below, I am copy-pasting my job submission script,
+
+Thank you,
+Ananth Govind Rajan
+
+---
+
+#!/bin/bash
+#SBATCH --job-name="dih_dim"
+#SBATCH --output="lammps.o"
+#SBATCH --partition=debug
+#SBATCH --nodes=4
+#SBATCH --ntasks-per-node=24
+#SBATCH --export=ALL
+#SBATCH -t 00:30:00
+# echo commands to stdout 
+
+module load lammps
+ibrun lammps -in in_wetting.lmp > out.lmp 

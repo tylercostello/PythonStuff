@@ -1,0 +1,161 @@
+MIME-Version: 1.0
+Received: from BYAPR04MB3814.namprd04.prod.outlook.com (2603:10b6:a02:80::14)
+ by BYAPR04MB3814.namprd04.prod.outlook.com with HTTPS via
+ BYAPR01CA0001.PROD.EXCHANGELABS.COM; Thu, 12 Jul 2018 18:28:25 +0000
+Resent-From: <mkandes@sdsc.edu>
+Received: from SN4PR0401CA0019.namprd04.prod.outlook.com
+ (2603:10b6:803:21::29) by BYAPR04MB3814.namprd04.prod.outlook.com
+ (2603:10b6:a02:ac::21) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.952.17; Thu, 12 Jul
+ 2018 18:28:24 +0000
+Received: from BY2NAM03FT061.eop-NAM03.prod.protection.outlook.com
+ (2a01:111:f400:7e4a::201) by SN4PR0401CA0019.outlook.office365.com
+ (2603:10b6:803:21::29) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384) id 15.20.930.21 via Frontend
+ Transport; Thu, 12 Jul 2018 18:28:24 +0000
+Authentication-Results: spf=none (sender IP is 132.239.0.82)
+ smtp.mailfrom=tickets.dyn.xsede.org; ucsdcloud.mail.onmicrosoft.com;
+ dkim=none (message not signed) header.d=none;ucsdcloud.mail.onmicrosoft.com;
+ dmarc=none action=none header.from=xsede.org;
+Received-SPF: None (protection.outlook.com: tickets.dyn.xsede.org does not
+ designate permitted sender hosts)
+Received: from XMAIL-B1.AD.UCSD.EDU (132.239.0.82) by
+ BY2NAM03FT061.mail.protection.outlook.com (10.152.85.107) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384_P384) id
+ 15.20.952.17 via Frontend Transport; Thu, 12 Jul 2018 18:28:23 +0000
+Received: from XMAIL-B1.AD.UCSD.EDU (132.239.0.82) by XMAIL-B1.AD.UCSD.EDU
+ (132.239.0.82) with Microsoft SMTP Server (TLS) id 15.1.396.30; Thu, 12 Jul
+ 2018 11:28:08 -0700
+Received: from XCORE-CUB1.AD.UCSD.EDU (132.239.0.117) by XMAIL-B1.AD.UCSD.EDU
+ (132.239.0.82) with Microsoft SMTP Server (TLS) id 15.1.396.30 via Frontend
+ Transport; Thu, 12 Jul 2018 11:28:08 -0700
+Received: from iport-acv5-out.ucsd.edu (132.239.0.10) by
+ XCORE-CUB1.AD.UCSD.EDU (132.239.0.117) with Microsoft SMTP Server (TLS) id
+ 14.3.319.2; Thu, 12 Jul 2018 11:28:07 -0700
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: =?us-ascii?q?A0GJCgBWnUdbh+XAjo1cHAEBAQQBAQoBA?=
+ =?us-ascii?q?YQsbRIog3qIY4wkAQeBECR1gkOSD4FxIwkChxoROBQBAgEBAQEBAQICAhABAQE?=
+ =?us-ascii?q?KCwkIKSMMgmiBCAEBAQEBAQEBAU0CCGAIAQMDAyAPAVUBIAIDAhEOBwICAykbC?=
+ =?us-ascii?q?AgZBVeCRAGBcg0EC6ongS6ETA+FY4ELiAGBAYEHgRAzgikHgW8BgVcEGIEBKQx?=
+ =?us-ascii?q?PgkIUgkECjUGMGAkChgiJHYIGi1uKOYdbgViBdH0IgVgKMoEQCYIFIxwYiDCFX?=
+ =?us-ascii?q?FEBe4tHAQE?=
+X-IPAS-Result: =?us-ascii?q?A0GJCgBWnUdbh+XAjo1cHAEBAQQBAQoBAYQsbRIog3qIY4w?=
+ =?us-ascii?q?kAQeBECR1gkOSD4FxIwkChxoROBQBAgEBAQEBAQICAhABAQEKCwkIKSMMgmiBC?=
+ =?us-ascii?q?AEBAQEBAQEBAU0CCGAIAQMDAyAPAVUBIAIDAhEOBwICAykbCAgZBVeCRAGBcg0?=
+ =?us-ascii?q?EC6ongS6ETA+FY4ELiAGBAYEHgRAzgikHgW8BgVcEGIEBKQxPgkIUgkECjUGMG?=
+ =?us-ascii?q?AkChgiJHYIGi1uKOYdbgViBdH0IgVgKMoEQCYIFIxwYiDCFXFEBe4tHAQE?=
+X-IronPort-AV: E=Sophos;i="5.51,344,1526367600"; 
+   d="scan'208";a="380479674"
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+X-Spam-Status: No
+X-Spam-Level:
+Received: from amantadine.ncsa.uiuc.edu (HELO rimantadine.ncsa.uiuc.edu)
+ ([141.142.192.229])  by iport-acv5-in.ucsd.edu with
+ ESMTP/TLS/DHE-RSA-AES256-SHA; 12 Jul 2018 11:28:06 -0700
+Received: from tickets.xsede.org (rt02.tacc.utexas.edu [129.114.60.41])	by
+ rimantadine.ncsa.uiuc.edu (8.14.9/8.14.9) with ESMTP id w6CIS5LI021880;	Thu,
+ 12 Jul 2018 13:28:05 -0500
+Received: by tickets.xsede.org (Postfix, from userid 48)	id 0A6CC400A0; Thu,
+ 12 Jul 2018 13:28:05 -0500 (CDT)
+Subject: [tickets.xsede.org #91606] XUP: Relating Mineral Surface Topography and the KPZ Universality Class to Weathering Rate for a 2D Crystal Model.
+From: Jim Hidlebaugh via RT <help@xsede.org>
+Reply-To: <help@xsede.org>
+References: <RT-Ticket-91606@xsede.org>
+Message-ID: <rt-4.0.9-6929-1531420084-1353.91606-12-0@xsede.org>
+Precedence: bulk
+X-RT-Loop-Prevention: tickets.xsede.org
+RT-Ticket: tickets.xsede.org #91606
+Managed-BY: RT 4.0.9 (http://www.bestpractical.com/rt/)
+RT-Originator: jhidleba@illinois.edu
+To: AdminCc of tickets.xsede.org Ticket #91606:;
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+X-RT-Original-Encoding: utf-8
+Date: Thu, 12 Jul 2018 13:28:04 -0500
+X-Null-Tag: 6c0ec19a40afff5783252fc9d8639f0b
+X-NCSA-MailScanner-Information: Please contact help@ncsa.uiuc.edu for more information, rimantadine.ncsa.uiuc.edu
+X-NCSA-MailScanner-ID: w6CIS5LI021880
+X-NCSA-MailScanner: Found to be clean
+Return-Path: apache@tickets.dyn.xsede.org
+X-OrganizationHeadersPreserved: XMAIL-B1.AD.UCSD.EDU
+X-MS-Exchange-Organization-ExpirationStartTime: 12 Jul 2018 18:28:23.9278
+ (UTC)
+X-MS-Exchange-Organization-ExpirationStartTimeReason: Original Submit
+X-MS-Exchange-Organization-ExpirationInterval: 2:00:00:00.0000000
+X-MS-Exchange-Organization-ExpirationIntervalReason: Original Submit
+X-MS-Exchange-Organization-Network-Message-Id: 9711e9f2-22c6-4a53-9377-08d5e82540ac
+X-EOPAttributedMessage: 0
+X-MS-Exchange-Organization-MessageDirectionality: Originating
+X-CrossPremisesHeadersPromoted: BY2NAM03FT061.eop-NAM03.prod.protection.outlook.com
+X-CrossPremisesHeadersFiltered: BY2NAM03FT061.eop-NAM03.prod.protection.outlook.com
+X-Forefront-Antispam-Report:
+ CIP:132.239.0.82;IPV:NLI;CTRY:US;EFV:NLI;SFV:NSPM;SFS:(2980300002)(428003)(3190300001)(189003)(199004)(51234002)(2870700001)(90966002)(109986005)(551934003)(246002)(6266002)(103686004)(1096003)(109096001)(6306002)(8936002)(42186006)(14444005)(8676002)(47776003)(5660300001)(50466002)(7636002)(36756003)(305945005)(356003)(966005)(156004)(63266004)(76176011)(26005)(3450700001)(43066004)(52956003)(106466001)(426003)(105586002)(126002)(446003)(486006)(476003)(116002)(23676004)(336012)(2486003)(2616005)(102196002);DIR:INB;SFP:;SCL:1;SRVR:BYAPR04MB3814;H:XMAIL-B1.AD.UCSD.EDU;FPR:;SPF:None;LANG:en;PTR:xmail-b1.ucsd.edu;MX:1;A:1;
+X-Microsoft-Exchange-Diagnostics: 1;BY2NAM03FT061;1:3uE4xiI2+RYkBBT2Sg4PBAojW0n4ABN5x3nw8vjLhAAis6jkmcolpXlE9w1jqTeBBJWuUBOPj754P77K4uVDZA0oAt2EY4jZeSUscK+UW86SuMjTem0fAAatfQQs7Ro4
+X-MS-Exchange-Organization-AuthSource: XCORE-CUB1.AD.UCSD.EDU
+X-MS-Exchange-Organization-AuthAs: Anonymous
+X-OriginatorOrg: newmail.ucsd.edu
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 9711e9f2-22c6-4a53-9377-08d5e82540ac
+X-Microsoft-Antispam:
+ UriScan:;BCL:0;PCL:0;RULEID:(7020095)(4652040)(8989117)(5600053)(711020)(2017052603328)(7153060);SRVR:BYAPR04MB3814;
+X-Microsoft-Exchange-Diagnostics:
+ 1;BYAPR04MB3814;3:kdJ5ikRWQZQMUzsTGDB2QSSf9Qkbv408Q1NAn/BwPVcNFJrOS2tTtz1RUZiI/B+UUrT9eLS7+dHTxYKl+kOvlUk73TvQZvzZPydzZItObIDhdwXoy5XTjmCp1sRDkUc7qF3X+KmNok4LRp09OVMP5r5VQy+vXmYZy83JqelHuv8JLyCVTHRG9OR1qJzDEo4b3VIdquHhMCskdx61b24vjWj/maqjYjH86QMzWfswTN2Z6b8QAhDx2lKBxo7jVsxkaAMGtXAUbF9gHQ9fZyETjLKY8A6qb2XWuftJNgjBEjjzMN3c4D7W0WtaxWnrh9m4uMeYRUgASuQ/V7ZHDSP3DNQL1L0wD/mrL92wsD4t8Uc=;25:ke7OmcxhQ5BSzIAZPzkBi4h8/8C9rn8cFOrPwsQMEPfFlAPTvgGSEWrNDQyD/r/oS95ouDyzwwHRmVQieXWhLO+vNP8vbMTYmmasTbtKToO8TS1j//QxB6pXLldgk2bvFj4aXyQUwqUR995hTBl9xKq0BNNZ6cas99LfGIVEEUuUe5xzbs4H8vM2FMyUzut2mXyFHGYDtjmV9ba2CbozKh4MPR+iMvAXzMO+E/5B+BbDqGqJUOY9wuV/vd8kSDaAhUK44HfIGHXnAu2PQTNIrc8DIzJNDG4wZ+CmaYJmrfMyL3ofz1uDXvmnLdRmV87FTIlWt+GJJYLJCyy/UxoI1w==
+X-MS-TrafficTypeDiagnostic: BYAPR04MB3814:|BYAPR04MB3814:
+X-Microsoft-Exchange-Diagnostics:
+ 1;BYAPR04MB3814;31:P8QbDO6KAln2QRS50bam4L3NuO5x9T9O8z3wC5m3TKRVs6S34ecI4B35trDI/AmZxJKSE63WpetXuHhNly2sG4Bnmjo2v+QMckFZh67T2AH04u17NqTvQu99nN6kbOmxNc2csc/LyTHb/azde4y954cUarnNAiBVZGbrwMiYGY1xFJur9hmXsN5kvZeOOe3RMZqnQJhhDGS1M+1QUQMF9LHkXdxhac+9nXllFIFQze4=;20:JpAVLaPcvD5q+r2nD79kVOoe0r2sTGQHWNsxuQSXlzDDgEVq0NNUe0aL989INTApjIOKXiKGL7EitKx8ilh2N+zHteM1sBn2qaN7QdviVFcO8UdJiwhi5JG8AtRU6B/MU6tOpmDLIU8XyzhCNi7Y+buuW3+kEHXWTdgeqZoWPS3VDav4n3EywBg6mz3jJwzfavuJ7mtvXi3PLs2fMnIZlABUrrybRF62sJh5vBK7p/HFICE6cypV60QOiMzjzKTwBfxFbhRi0qDD1oHJw+TeKTfnwXATSZVEQtGYg8F1vMaK6t9STTGLA1VguIEReQUzIyV++oxsxZJgDmTL6usu5tGYBrpIcc8GzFkowXcp+AdmCuCiWFYIKfKYIl5njrO0aXjwKpohu8wCs73b886aJUCuwXGAjNJV3lXP40wDyHHx55uNzc0ffIWuR1/KFvA9jo99+2+jriM3L6T2BNLMBBA+lRkAJNnAP2mBwHuN9gJ6fHBQhclY+uf+Zq11tECg
+X-Exchange-Antispam-Report-Test: UriScan:;
+X-Exchange-Antispam-Report-CFA-Test:
+ BCL:0;PCL:0;RULEID:(2018062399030)(2018011200283)(2401047)(8121501046)(823300264)(823330083)(3231311)(901025)(902075)(913088)(7045084)(944500087)(944510158)(944921075)(946801078)(946901078)(9300000166)(9301000104)(52103095)(52105095)(52106170)(52401257)(52601095)(52606095)(52505095)(52406095)(52305095)(52206095)(10201501046)(12181506113)(3002001)(93006095)(93003095)(1610001)(8301001075)(8301003183)(201708071742011)(7699016);SRVR:BYAPR04MB3814;BCL:0;PCL:0;RULEID:;SRVR:BYAPR04MB3814;
+X-Microsoft-Exchange-Diagnostics:
+ 1;BYAPR04MB3814;4:SGIps+yd2P1yurzRZn8KvF4ySSAfYi1xIuXImQrkjsqbJ/8COomasQNJYXvaZAatBTY1142BppE8xi2fXC9Jt9FXNR5nVBVNmCFVk/wZB6V+SfOUx2xZMaR0kJldzJcvg7nTdKVCG3rKEBvzzF8VqrSYxbjxkBLwippXzORWuLWFHAFxxPkxPBeMeETDNUhWokqk97lu+9hTSrmjf/W9tjqrnzF1yujqKu8jI8WUyGvkWzqiRPFQODTBJCdWyfy76oZLmJWm4S+EemwQqHB8iw==
+X-MS-Exchange-Organization-SCL: 1
+X-Microsoft-Exchange-Diagnostics:
+ =?utf-8?B?MTtCWUFQUjA0TUIzODE0OzIzOmhwMkNtRmlaUjFFeGRTd201SnFnM0pDTGh0?=
+ =?utf-8?B?akdRQUJpUWxwTTZOMWRKM2V4aDVoVVF2VnRGZGs2RjdLamtBMWZ6V1kwN1RE?=
+ =?utf-8?B?T1NCUWtDOGZpOEY0V01yWWo1eXFiRTA2bzBhSmRQZm5iM3gzVWpNUFg2VDhY?=
+ =?utf-8?B?SkhPTTJpdExGSzFRNG5nbTBIOGlrUEVLNnNrZzBjWVJINzRYUmlCaEhyeGNB?=
+ =?utf-8?B?WE4wMG8zVXo5b3pSRHJFeERoVHRWZTJ6UjgvSE5VTS95S0I4RjUyWUgxd1Q1?=
+ =?utf-8?B?L2Q0dmQ1OXhlMWF2VXkyKzRvNlEwYmpmazJVbllBR0tzSW5QeE5iL2daNjNI?=
+ =?utf-8?B?blVhWThIWlNuYkxDVlBUaTh5Y2J4Y2pxTzFlVWNseEZQVWg2NWR2OGFDbitG?=
+ =?utf-8?B?bjExNlFpTjU1TEMxRmFLN0pwNFFmRFRDVGhCTXEwSmJ5VXFGVjRjWW1MdGE4?=
+ =?utf-8?B?a1NVVmlNRmtnRTdtMlBNL3NibzNYVVVoRkJNcUNvcFJxRktQamNjMlM4VjA4?=
+ =?utf-8?B?YmdWRjNuZDJWZ3FmWmdiSWV5OHpockoxRk1jNVBwckh3M1pZUGlONTY3K05i?=
+ =?utf-8?B?M1BpWXgxUXdCTCtIdlVVWW5xRDM4ZjV0ajhlbEN5V1R4YXlobUVIaVFaZmd2?=
+ =?utf-8?B?d01Od2dad3hiek1oV0N2L0JxMVZXbGxxQ3ltNUs1REJ2TFdHOWdLcXJ6UWZq?=
+ =?utf-8?B?Y29abmltcm8wbTVGUGdaR01MOENrNkhvS1pBVG9tVmpOQXVxUGI3Z0NoZDUr?=
+ =?utf-8?B?Wk5SOGFQRVRWaHV4bGcwcmtmMmlUeVpxbkZvY2xzYUgxYTc4K09KZ2J4TDRL?=
+ =?utf-8?B?ZVUzd3ZFTG8ranpXajNCNU51TVN6MlZCdDl1c2JhVnRkTUhIN1V0YXplejdF?=
+ =?utf-8?B?YTluRDgySk50TnZyVFdvOEtsc1VGMGtsWHlFc2w0VFNEN2ZXdlRLWTFTdnZ5?=
+ =?utf-8?B?VGNXMXNMaHZxbC9yWHNjUk1oS2JoMDIvdXJET3cyaU1wb0d6QUZDVVdMdWcv?=
+ =?utf-8?B?alUxME5jMTlJVUhUU2tjZmRLT2c2ODJnM2J4c2xqdEFrNzFIa09HVldYWUNL?=
+ =?utf-8?B?ekFUQTNpdTlrdFNDaFB3cEIyQmcxOStDMU1zQTdvK09zN0hmUFAvcWQrYlph?=
+ =?utf-8?B?cllSeERaUHNOTmtEMkQxWmNRbXZLL0U5ZjA0M3Z1TUJsU2JQSC9GNlZadFNu?=
+ =?utf-8?B?OVV2OUZNY052ZzNrdlE3bjNEa2oySVBzdVp2ZTVoM2FmTGtmZEFiT1hTZW1y?=
+ =?utf-8?B?Y0djdFJWTmFVZ0h3c1VBeTdRWi9kdEtZREdhYTBlSVh3MHVBMG10elZGV05l?=
+ =?utf-8?B?VWhDUEZnVjQ1UW1YclVBR25CWDBDajdFV1hJbzVzbFlIZnNRdnVnVVlTTjR3?=
+ =?utf-8?B?M3VkaW01KytMWkpwSjZMM1l1MjFxVjd6Ukd1Q01UMkQvRTJmVWFRbDczb1Mw?=
+ =?utf-8?Q?nj6FyLtkRlQ1MBKAozwVjm4CAVQ?=
+X-Microsoft-Antispam-Message-Info:
+ CkFW46tRLpEXRC5IvuVIlZ/I70tn1MXp7YcbM+Y9OXy9mt6z0NZw81MxlL0jq6xyLWk0vfUfOwKM6NX7as4QqDXxamR2X2II1W1Z9Nz/ZNIPZyDThP0i7XWgPZnLcOSZIDthX/fnav5JewkHPQ8BzbDo0twCxXHg87lcibswOuPWfFA62KKdi+s7TdBeWmVWX4GAewGYbfBmZHReYfm6VpB65xqw/1u3zyAzHDfo1f0fnL417UcD8gpRUaEiB+DwzliqlU3fJkWavmMec2JM/uPqtknv/ssUxZQvnr5VjmlKB+jNTmza46sjdc+p4zo89f+cKmNLkPpVDZYgClF2o2x8AI0kHegqagY1kr8/cFqw2uxV8HfmUR+xCnkA9eChBSyDt1nToCNMRNRzf3gPEciLlSkW4xl+nPW6eqvtFKU7r6cEZuip+zQ2sZjxeEOJEWOoCtP+NFOLogj7vLN70kY+BVByGZpTNXIFsTX5rYRvBY+QECJCbFszbz9tl5SJqxLgjjnvoR09f9tGQCOebdLO4kTKkIsiHFTD6CcsxGdKTnCg8N96/96GMkHw8o64jzy9GHElg6I/fJIdUAjwow==
+X-Microsoft-Exchange-Diagnostics:
+ 1;BYAPR04MB3814;6:fYQboBvxmH8XJ9zvVNcJXDUQ7tKHnhoMt49XbiiANHgpa9fB+H3xzGy8dIEbXSCqRe53xziQc3YcDmxJoizS1t9V8I8mHE/jDkd5Qa53fwYU1VZhYHRlIrTQQjXZQSqzVRsKUOW9v95ck3OQHJOjaKDjbFoCj0bTs7zEDfcw/yAVwFv6rSOffcrCBeTRNtq5g8aIf1dY1kJGXus2YdSwqdJgu45TCQijiNCGJhShAIDI5RmpVHRfGB0vRLzkez0qn1z7yIqYEREbeno3vkIduBS+Pk3hBySilY/OyEfWICBCK8Q2qfvbsNpeSWXrikVft7afwJ0zQIZD3LdcGHLQYrGPotPGOgDXSDUBsydDTc/bPsti5G4s7O4XGl0CdlsUmAWqAqBk5BoT2ijUPmhr6DFssOLWfoOC8+nxG+FcEN41wal6XoMXcz2VHSENrHAMHN+HSIcRL3xVD7sSjW2IsQ==;5:OaiRR2CX45kznLkFd5cKddCj1jIC3cLOxfPTOBt6el6CBENDG0JUEkv9cIKdjOJz/Kg7yzUHTciu67FlVCWbxKrzGWgc3fS8YC6ncaFStdfLwA5s7UPn5BQh2Rk1XwN4Li1P94KtxuVskZbzWrTBD3dEzoy4w8cWWIE081CK0GI=;24:iH36bSgosf1CwRext9KU+k88CV6H/R4mDVgCvPd08eDmJrhwTXYxelj+/AMfpQklmRy00qY3HlenyJALg1r4ktQh/fNVmjxKk3IAJxSzlBU=
+SpamDiagnosticOutput: 1:99
+SpamDiagnosticMetadata: NSPM
+X-Microsoft-Exchange-Diagnostics:
+ 1;BYAPR04MB3814;7:RV9l9K4cXUO4XVnMXqsG10VzbbwOlkGYDJ4T5bbMiWT2CMbvxE40h+Vr3uHW327n6EBfsk+JrK43/YZyzvxa9Y97LT/yIxvwwuZ3VnZmZq4FWTF4aBVTUbN/3UnRQv6mGEOYyycpEGTXxAh94xjHufKrRtaHooGrcSozLd2n5c0rnUtYgBLoFc/6OJUplthpOejSTnc1FED5M6559/bq1Nnawy5OSHzowCAr373LeQSbm74zC90KPsIFGSDExTJp;20:2NwrfAUEPWPuC/7vVrrXsQbiu0C/35Cgm/IxBxsfS+2ROpo4QZq1i0QePrTb2Bo5Lr+aDXsWbmlVYY6T0fInm3dBISZ+UrjV7iyKcy8gl7lALB8ZRwI6ZN3rSmocfpdm+wB60KvImDcNoUg3tD/03hn0WeM9YKofnIPhcqfn5eKy5HSQSwrFKzTaBbj/QlnovgWt1HEZL3lxdodbgEk5vOxuEc5I6ybCXouZvQeYDD0efkd2MBRIwTda2EtAgcFXsAn4lJ7b+m09XPxxZe3eOVQrT57FnkqpmZj73n6yHrZHGxkd5n7v28raX6GdUUZBbAxmzT1tWh1vy0Efd4DeJbJvK4hIBMIj2pOi5PwuBVJo3FhsVVGCi/x/QCxVcaYJLbctQIXLGHK4IPvr38qDKUKXZfeeJMV3Q1rGnKRw7RIHOZsVHXlkNOxvAlxqHO2uYzzr7DkIRDe4yCbcRINZ6biQ7mZnizDzH6Iif7HziPstxVE4sJ72XSeOn4M+DW/g;23:tT7XPK07JNM6eRUSoTWFSyM8A1gobCbdSVYE/3PNMzIQeUWHOYl/iQpXgbWoxu6egtTYpHfApD7DFNUMwTN87UjCNBkKk1i6luDlhMGyJDzcNAeItd5EQCVUVwusfAuQjmYvnbh4bn+Hk+dDtnFenA==
+X-MS-Exchange-Inbox-Rules-Loop: mkandes@sdsc.edu
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Jul 2018 18:28:23.8341
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9711e9f2-22c6-4a53-9377-08d5e82540ac
+X-MS-Exchange-CrossTenant-Id: 8a198873-4fec-4e76-8182-ca479edbbd60
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=8a198873-4fec-4e76-8182-ca479edbbd60;Ip=[132.239.0.82];Helo=[XMAIL-B1.AD.UCSD.EDU]
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR04MB3814
+X-MS-Exchange-Transport-EndToEndLatency: 00:00:01.7106683
+X-MS-Exchange-Processed-By-BccFoldering: 15.20.0952.000
+X-Microsoft-Antispam-Mailbox-Delivery:
+	ucf:0;jmr:0;ex:0;auth:0;dest:I;ENG:(20160514016)(750119)(520002050);
+X-Microsoft-Antispam-Message-Info:
+	RSnKj+awXKyrFspWs07JKWxsurtXrcNnM6gtqBNX0N42R/rk/s4uG8HuR7qCl8TgVrzr1itu0LMQMeJdrp+mw42bUHFu5D/w4wrFcDHjU6DKQGLXSQzRJy1psbCEo42d3EVHMeapTxav0WT2QLZzRrWyG3wk6ZKL6BXnJQUJFI+TrXQQBE2EQLj3YGxdvfeLDNHYMfl943himUUytGIOY1bhDBYUXEDcACp1mlygc3Mi78nfyLYm+kr8SYMorKnuxCrqZRWEbN2TqxLNfg4OIQRVV5nu1EFvujseG24Mex+uvboZoQlul2ege2X2kguWqbFZkqWRhy2aidXApOK62zGB/Udmi3BErpo9+88gQWk8I8oByuyrSywig0jiuEheliWt7I4JCH4r3ek3s8lK6ybhX+kH2exuvAXTlPvhn7jf6LWbbBv3CQkwS6jiPm6bqTjmrm4uL5ZUEYSh9rkVnAvGAKvbI6w2u7yOH5oB/RoQwz+rrf2XwLvLWmVP6TlQH+4oGujyYB8mWm5yvZHNwwkHC1dNuFxJvB6LrB8mUXB70cmLARpqr/H+EgLO9cb2PpND8x0GVI5E5KAf0+73nvwlo8vBPEHgqaRo0ax+cDF15Pd/Zxbvo5sZGIWbAkUVXhy1k6bCoY5CLzMjhJ7sZA==
+

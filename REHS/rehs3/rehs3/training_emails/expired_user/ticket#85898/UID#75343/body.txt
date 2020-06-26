@@ -1,0 +1,47 @@
+
+Thu Mar 29 17:26:15 2018: Request 85898 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by jhawthor
+       Queue: 0-SDSC
+     Subject: XUP: Submitting Jobs with GPU
+       Owner: Nobody
+  Requestors: dinpajooh@gmail.com
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=85898 >
+
+
+[Ticket created from XUP by din1984]
+[From: Hadi Dinpajooh]
+[System: Comet]
+[Category: Batch Queues/Jobs]
+Hi,
+
+We have recently been awarded GPUs on COMET. 
+I have looked at the folder located at "/share/apps/examples/GPU/LAMMPS"
+However, I have not been able to submit my jobs. 
+
+I am submitting the script below, but I get the following error:
+
+sbatch: error: bank_limit plugin: expired user, can't submit job
+sbatch: error: Batch job submission failed: Invalid account or account/partition combination specified
+
+Can you please help?
+Thanks,
+Hadi
+
+PS. My submission script:
+
+#!/bin/bash
+#SBATCH --job-name="gpu6"
+#SBATCH --output="gpu6.%j.%N.out"
+#SBATCH --partition=gpu-shared
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=6
+#SBATCH --no-requeue
+#SBATCH --gres=gpu:1
+#SBATCH -t 01:00:00
+module unload mvapich2_ib
+module unload intel
+module load intel/2015.2.164
+module load mvapich2_ib
+module load cuda
+/share/apps/gpu/lammps/lmp_cuda_mpi -sf gpu -pk gpu 1 -in in.PEprod > OUTprod 

@@ -1,0 +1,29 @@
+
+Sun Oct 29 14:52:25 2017: Request 78086 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by jhidleba
+       Queue: 0-SDSC
+     Subject: XUP: Job SU Billing
+       Owner: Nobody
+  Requestors: mlodea@oakland.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=78086 >
+
+
+[Ticket created from XUP by mlodea]
+[From: Murphy O'Dea]
+[System: Comet]
+[Category: Batch Queues/Jobs]
+Hi All,
+
+I'm running on our startup allocation oak101, and I am requesting 48 nodes and 12 cores/node.  My runs are working fine, but appear to be billed for twice the SUs I was expecting.  For a run that takes about 2.5 hours, I appear to be using about 3K SUs instead of about 1.5K SUs.  sacct shows 1152 allocated cpus instead of 576.
+
+       JobID    JobName  Partition    Account  AllocCPUS      State ExitCode
+------------ ---------- ---------- ---------- ---------- ---------- --------
+12299186        Nek5000    compute     oak101       1152  COMPLETED      0:0
+12299186.ba+      batch                oak101       1152  COMPLETED      0:0
+12299186.0        orted                oak101         47  COMPLETED      0:0
+
+I attached a copy of my sbatch script also.  I thought maybe I was not reading my usage info correctly, or I am allocating/binding cores/threads incorrectly...
+
+Thanks,
+Murph 

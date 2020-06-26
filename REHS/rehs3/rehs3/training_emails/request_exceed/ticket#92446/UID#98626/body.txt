@@ -1,0 +1,36 @@
+
+Mon Jul 30 10:25:08 2018: Request 92446 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by hthta
+       Queue: 0-SDSC
+     Subject: XUP: Slurm job array submission problems
+       Owner: hthta
+  Requestors: cjanaya@umich.edu
+      Status: new
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=92446 >
+
+
+[Ticket created from XUP by cjanaya]
+[From: Carlos Anaya Ramirez]
+[System: Comet]
+[Category: Batch Queues/Jobs]
+Hello, 
+
+I'm new to using Slurm, and I wanted to submit a job array with specifications as to how many cores are to be used per job, and I'm having trouble submitting the job. I don't think I understand how Slurm allocates resources per job, and I was hoping you could provide some help with submitting the job. 
+
+I want to submit a 2,405 job array running a parameter sweep for a simulation. Each job is not computationally extensive, so I only want to allocate a single core per job with a maximum of 4GB of memory, so that I can optimize and take full advantage of my startup allocation. These jobs also run independent from one another. Here is part of how I was trying to specify this in my script:
+
+#SBATCH --partition=compute
+#SBATCH --ntasks=1
+#SBATCH --array=1-2405%100
+#SBATCH --mem=4G
+
+This returns the error: 
+"sbatch: error: Batch job submission failed:Invalid job array specification"
+
+Reducing the job array down from 2,405 to 1,000 "--array=1-1000%100", I get the following error: 
+"sbatch: error: bank_limit plugin: The requested time can not exceed the available balance. Requested SUs: 1153000 ..."
+
+Therefore, I know I am requesting much more than I really want to and am doing something awfully wrong. Kindly, would you be able to recommend a way to organize my script so that I can specify the resources I need for each job? Thank you for your time.
+
+Best,
+Carlos 

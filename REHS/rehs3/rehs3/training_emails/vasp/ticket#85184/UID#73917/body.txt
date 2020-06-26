@@ -1,0 +1,46 @@
+
+Mon Mar 19 07:39:03 2018: Request 85184 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by jhawthor
+       Queue: 0-SDSC
+     Subject: Compiling VASP on Comet
+       Owner: Nobody
+  Requestors: hanghui.chen@nyu.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=85184 >
+
+
+Dear Mahidhar,
+     I am sorry to bother you again.
+     I need to re-compile vasp on Comet again. I use your instructions:
+
+module purge
+module load gnutools
+module load intel/2016.3.210
+module load intelmpi
+
+
+      But this time, it complains that 
+"/home/hchen/codes-Comet/vasp/vasp.5.lib/linpack_double.o: In function 
+`zgefa_':
+linpack_double.f:(.text+0x0): multiple definition of `zgefa_'
+lib/libdmy.a(linpack_double.o):linpack_double.f:(.text+0xd1e): first 
+defined here
+/home/hchen/codes-Comet/vasp/vasp.5.lib/linpack_double.o: In function 
+`zgeco_':
+linpack_double.f:(.text+0xb36): multiple definition of `zgeco_'
+lib/libdmy.a(linpack_double.o):linpack_double.f:(.text+0x0): first 
+defined here
+/home/hchen/codes-Comet/vasp/vasp.5.lib/linpack_double.o: In function 
+`zgedi_':
+linpack_double.f:(.text+0x3e7e): multiple definition of `zgedi_'
+lib/libdmy.a(linpack_double.o):linpack_double.f:(.text+0x10ed): first 
+defined here
+"
+     I recompile the library but it did not work.
+     The directory of the source files is at: 
+/home/hchen/codes-Comet/vasp/vasp.5.4.1
+     Thank you very much for your help.
+
+Hanghui
+
+ 

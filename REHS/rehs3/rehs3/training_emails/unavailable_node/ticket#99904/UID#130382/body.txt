@@ -1,0 +1,76 @@
+
+Mon Dec 03 17:41:17 2018: Request 99904 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by buskuehl
+       Queue: 0-SDSC
+     Subject: Inquiry regarding a problem in submitting concurrently running executables within a single batch script on comet@SDSC
+       Owner: buskuehl
+  Requestors: aytek.gel@gmail.com
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=99904 >
+
+
+Hi,
+
+I am trying to launch a simulation campaign which consists of 20 different
+cases that is to be executed in a single batch session in a concurrent
+manner.
+For each of these cases I am trying to utilize 24 cores so I am requesting
+20 nodes to run 20 cases with 24 cores for each of these cases.
+
+So I have developed a script which will run a loop to go to each work
+directory and then issue the ibrun command.
+I can see first 10 cases launched and running ok but then when I checked
+the 11th till 20th case, it shows the following in the stdio that I capture:
+
+[agel@comet-ln3 Hopper]$ tail
+/oasis/projects/nsf/azs121/agel/Hopper/Hopper_000001/sim_000010/run.20414588
+*[comet-02-06.sdsc.edu:mpirun_rsh][child_handler] Error in init phase,
+aborting! (0/20 mpispawn connections)*
+
+Does it mean I ran out of nodes or ranks to launch the 11th and up
+concurrent cases?
+
+Attach below is an excerpt from my batch script file to show how this
+concurrent launching is performed:
+OUT_LIST is the file that I read where case numbers are listed for
+execution as I have 60 cases so I create a batch of 20 to run at a time by
+setting OUT_LIST to 20 different case names.
+MFIX_ARGS0 stores the arguments that I pass to the executable at run time
+
+#!/bin/csh
+#SBATCH -J P2Hopper
+#SBATCH -o P2LOG.%j.%N.out
+#SBATCH --partition=compute
+#SBATCH --nodes=20
+#SBATCH --ntasks-per-node=24
+#SBATCH -A TG-CTS160064
+#SBATCH --export=ALL
+#SBATCH -t 2:00:00
+...
+set NUMCores = 24
+.... all other missing variables used in the loop are defined in this
+region prior to calling them
+...
+....
+   set OUT_LIST = `awk '{print $0}' $infiles2`
+   foreach i ($OUT_LIST)
+     echo "Launching Run No:" $i
+     echo "Workdir: " $WORK_DIR/sim_$i
+     cd $WORK_DIR/sim_$i
+     cp -f -r $EXEPATH/$EXEFILE .
+     (time ibrun -n $NUMCores ./${EXEFILE} -f hopper_cal.mfx ${MFIX_ARGS0}
+>& run.$SLURM_JOBID) &
+   end
+wait
+
+I can see that 20 different executions are submitted but anything above
+10th has that error message so I am wondering if somehow the 20 nodes
+allocated for the job are somehow not seen after the 10th job
+
+Any suggestions on what I might be missing, as I don't want to split
+further and submit in batches of 10 in each batch session
+
+Thanks
+
+Aytekin
+ 

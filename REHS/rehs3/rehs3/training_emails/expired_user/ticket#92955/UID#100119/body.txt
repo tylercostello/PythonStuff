@@ -1,0 +1,50 @@
+
+Wed Aug 08 10:53:08 2018: Request 92955 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by jhawthor
+       Queue: 0-SDSC
+     Subject: XUP: sbatch: error: bank_limit plugin: expired user, can't submit job sbatch: error: Batch job submission failed: Invalid account or account/partition combination specified
+       Owner: Nobody
+  Requestors: mdixit@ccny.cuny.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=92955 >
+
+
+[Ticket created from XUP by mayankd]
+[From: MAYANK DIXIT]
+[System: Comet]
+[Category: Other]
+I am trying to run gaussian in comet. 
+
+My script is given below
+=========================
+#!/bin/bash
+#SBATCH --job-name="opt"
+#SBATCH --output="pamtrans.%j.%N.out"
+#SBATCH --partition=shared
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=2
+#SBATCH --export=ALL
+#SBATCH -t 00:05:00
+#SBATCH -A wis153
+export GAUSS_SCRDIR=/scratch/$USER/$SLURM_JOBID
+module load gaussian
+exe=`which g09`
+export OMP_NUM_THREADS=2
+/usr/bin/time $exe < pam_trans_aug7.com > pam_trans_aug7.out
+
+
+=========================
+
+I got  following errors.
+
+-----------------------------------
+sbatch: error: bank_limit plugin: expired user, can't submit job
+sbatch: error: Batch job submission failed: Invalid account or account/partition combination specified
+
+------------------------------
+
+
+Please let me know how to solve this problem. 
+
+thanks
+Mayank 

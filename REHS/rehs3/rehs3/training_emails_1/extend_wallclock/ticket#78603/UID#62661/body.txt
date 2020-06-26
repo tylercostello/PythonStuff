@@ -1,0 +1,37 @@
+
+Mon Nov 06 20:48:40 2017: Request 78603 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by buskuehl
+       Queue: 0-SDSC
+     Subject: XUP: Time limit in the batch job
+       Owner: buskuehl
+  Requestors: mdixit@ccny.cuny.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=78603 >
+
+
+[Ticket created from XUP by mayankd]
+[From: MAYANK DIXIT]
+[System: Comet]
+[Category: Batch Queues/Jobs]
+Dear Sir/Madam,
+                               I would like to run jobs in the XSEDE server. My job will take 148 hours. I am not able to define this time limit. Please let me know how to solve this issue.
+Your help and support will be highly appreciated.
+Mayank 
+
+ The details of the script is given below.
+===================================================
+#!/bin/bash
+#SBATCH --job-name="dml26{0.00}"
+#SBATCH --output="dml26{0.00}.%j.%N.out"
+#SBATCH --partition=compute
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=4
+#SBATCH --export=ALL
+#SBATCH -t 148:00:00
+##SBATCH -A << cun105 >>
+#This job runs with 1 nodes, 4 cores per node for a total of 4 cores.
+#ibrun in verbose mode will give binding detail
+
+cd /home/mdixit/DMPC/nov3-pore-hydrophilic/0.00
+ibrun -v /home/mdixit/software/md-software2/c41a1/exec/em64t_M/charmm CNT=1 <pmf-22t24ns_radius_0.00.inp> pmf-22t24ns_radius_0.00.out
+========================================================== 

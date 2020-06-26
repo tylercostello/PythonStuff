@@ -1,0 +1,35 @@
+
+Thu Sep 06 16:18:17 2018: Request 94624 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by buskuehl
+       Queue: 0-SDSC
+     Subject: XUP: Python 3 Installation?
+       Owner: buskuehl
+  Requestors: tburgin@umich.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=94624 >
+
+
+[Ticket created from XUP by tburgin]
+[From: Tucker Burgin]
+[System: Comet]
+[Category: Software]
+I have need of Python 3 on Comet. I tried installing from source to my own directory (/home/tburgin/glycosynthases/171110_TmAfc_d224g/eps/Python3) but frankly I'm not competent enough to know how to do a proper job of it (I encountered "Fatal Python error: initsite: Failed to import the site module", followed by a Traceback:
+
+Traceback (most recent call last):
+  File "/opt/hdf5/gnu/mvapich2_ib/lib/python2.7/site-packages/site.py", line 75, in <module>
+    __boot()
+  File "/opt/hdf5/gnu/mvapich2_ib/lib/python2.7/site-packages/site.py", line 27, in __boot
+    import imp # Avoid import loop in Python >= 3.3
+  File "/home/tburgin/glycosynthases/171110_TmAfc_d224g/eps/Python3/lib/python3.7/imp.py", line 27, in <module>
+    import tokenize
+  File "/home/tburgin/glycosynthases/171110_TmAfc_d224g/eps/Python3/lib/python3.7/tokenize.py", line 33, in <module>
+    import re
+  File "/home/tburgin/glycosynthases/171110_TmAfc_d224g/eps/Python3/lib/python3.7/re.py", line 143, in <module>
+    class RegexFlag(enum.IntFlag):
+AttributeError: module 'enum' has no attribute 'IntFlag'
+
+It looks like Python is trying to use libraries from the 2.7 installation on Comet...?)
+
+Is there an approved means of getting Python 3 working on Comet, or do I just need to bite the bullet and learn how to get my local installation working properly?
+
+Thanks! 

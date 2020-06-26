@@ -1,0 +1,41 @@
+
+Mon Mar 12 19:59:13 2018: Request 84828 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by aredding
+       Queue: 0-SDSC
+     Subject: XUP: Storage limit of 100GB
+       Owner: Nobody
+  Requestors: bha212@lehigh.edu
+      Status: new
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=84828 >
+
+
+[Ticket created from XUP by bha212]
+[From: Bashar Attiya]
+[System: Oasis]
+[Category: Other]
+Hi,
+Sorry to bother you but I have a problem running jobs on Comet. The issues is related to the storage of the data. I am running openFoam cases on :
+/oasis/scratch/comet/bha212/temp_project
+
+folder, however the run keep crashing due to writing data issues. I checked how much storage I am using and I discovered that when I reach 100GB the jobs will not be able to write anymore and kill signal will stop the job.
+The error log is shown below:
+
+[19] 
+[19] 
+[19] --> FOAM FATAL IO ERROR: 
+[19] error in IOstream "/oasis/scratch/comet/bha212/temp_project/Bashar_2P_5D_2.8mil/processor19/30.909787807684917738/UMean" for operation Foam::Ostream& Foam::operator<<(Foam::Ostream&, Foam::doubleScalar)
+[19] 
+[19] file: /oasis/scratch/comet/bha212/temp_project/Bashar_2P_5D_2.8mil/processor19/30.909787807684917738/UMean at line 102527.
+[19] 
+[19]     From function virtual bool Foam::IOstream::check(const char*) const
+[19]     in file db/IOstreams/IOstreams/IOstream.C at line 96.
+[19] 
+FOAM parallel run exiting
+[19] 
+
+
+How can I solve this issue ? I need to save data up to 200GB,
+Sorry for that.
+
+Regards,
+Bashar 

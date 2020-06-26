@@ -1,0 +1,53 @@
+
+Mon Feb 25 18:27:21 2019: Request 104347 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by buskuehl
+       Queue: 0-SDSC
+     Subject: XUP: meam/c lammps
+       Owner: buskuehl
+  Requestors: akm6w3@mst.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=104347 >
+
+
+[Ticket created from XUP by avik]
+[From: Avik Mahata]
+[System: Comet]
+[Category: Software]
+Hi, 
+
+I wanted to use meam/c instead of meam in lammps. This is not installed in comet with the default lammps. Meam is unsupported now. So, is there any other version of lammps in comet? Other than this one, lammps/20170331(default). 
+
+I tried to install and tried to run the executable from my home directory which I installed myself, but getting the below error, 
+
+/home/avik/lammps-16Mar18/src/lmp_mpi: symbol lookup error: /home/avik/lammps-16Mar18/src/lmp_mpi: undefined symbol: __libm_error_support
+
+
+My batch script is like below, 
+
+#!/bin/bash
+#SBATCH --job-name="Ge"
+#SBATCH --output="lammps.comet.logs"
+#SBATCH --partition=compute
+#SBATCH --nodes=25
+#SBATCH --ntasks-per-node=24
+#SBATCH --export=ALL
+#SBATCH -t 47:30:00
+#SBATCH --mail-type=begin,end,fail,requeue
+#SBATCH --mail-user=avik894@gmail.com
+
+#This job runs with 16 nodes, 24 cores per node for a total of 384 cores.
+
+#Load the CP2K module and find the executable
+module load lammps
+export EXE=`which lammps`
+
+#Use ibrun to run the MPI job. It will detect the MPI, generate the hostfile
+# and doing the right binding. With no options ibrun will use all cores.
+export OMP_NUM_THREADS=1
+mpirun /home/avik/lammps-16Mar18/src/lmp_mpi < in.melting
+
+
+Any quick suggestion will be extremely helpful. 
+
+Thanks
+Avik 

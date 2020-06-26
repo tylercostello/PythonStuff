@@ -1,0 +1,33 @@
+
+Thu Jul 12 14:39:56 2018: Request 91612 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by hthta
+       Queue: 0-SDSC
+     Subject: XUP: Submission Help
+       Owner: hthta
+  Requestors: holmest@fvsu.edu
+      Status: new
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=91612 >
+
+
+[Ticket created from XUP by fdsim]
+[From: Tiffani Holmes]
+[System: Comet]
+[Category: Batch Queues/Jobs]
+Hello, 
+
+I am new to XSEDE and have been having issues with my script for the submission of a test job using Gaussian 09.   I found the example files, but apparently I am just not understanding the script because my jobs continue to fail. Here is the example script provided for submission to comet: 
+
+#!/bin/bash
+#SBATCH --job-name="gauss"
+#SBATCH --output="gauss.%j.%N.out"
+#SBATCH --partition=debug
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=24
+#SBATCH --export=ALL
+#SBATCH -t 00:10:00
+export GAUSS_SCRDIR=/scratch/$USER/$SLURM_JOBID
+module load gaussian
+exe=`which g09`
+/usr/bin/time $exe < water_opt_24c.dat > water_opt_09D.out
+
+If I am submitting this script that references my Gaussian input file (test.dat), how would you edit this script to get output in test.out? 

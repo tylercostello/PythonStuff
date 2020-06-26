@@ -1,0 +1,29 @@
+
+Mon Mar 04 14:31:30 2019: Request 104664 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by hthta
+       Queue: 0-SDSC
+     Subject: XUP: Broke pip in singularity
+       Owner: hthta
+  Requestors: rarangurencarmona@hawk.iit.edu
+      Status: new
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=104664 >
+
+
+[Ticket created from XUP by arangurr]
+[From: Rodrigo Aranguren]
+[System: Comet GPU]
+[Category: Software]
+Hi,
+
+Basically, I was trying to install a package in a singularity container and I was getting some errors that I (wrongly assumed) were because the pip installation was very old. I upgraded pip via the recommended command and now I believe I broke pip and I don't know how to revert everything to how it was before.
+
+A sample error I'm getting now:
+Singularity tensorflow-v1.12-gpu-20181218.simg:~/Learning-to-See-in-the-Dark> pip install scikit-image
+Traceback (most recent call last):
+  File "/usr/bin/pip", line 9, in <module>
+    from pip import main
+ImportError: cannot import name main
+
+I've tried switching from this particular singularity container to another, but it is still broken.
+
+Thanks in advance. 

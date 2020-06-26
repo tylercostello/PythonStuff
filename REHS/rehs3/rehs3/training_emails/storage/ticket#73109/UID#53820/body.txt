@@ -1,0 +1,30 @@
+
+Tue Aug 01 19:26:41 2017: Request 73109 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by clm
+       Queue: 0-SDSC
+     Subject: XUP: Seg fault when import theano if requested memory > 8G
+       Owner: clm
+  Requestors: yunwang@andrew.cmu.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=73109 >
+
+
+[Ticket created from XUP by maigo]
+[From: Yun Wang]
+[System: comet-gpu.sdsc.xsede]
+[Category: Batch Queues/Jobs]
+Hi,
+
+  My user id is maigo, and I'm running GPU jobs on comet.
+
+  I need to load a data file that is about 6GB into memory. If I only request 8GB of memory when I submit a job, the job gets killed while loading the data, probably indicating that more memory is needed.
+
+  If I request more than 8GB of memory, say 12GB, with the following command:
+
+    srun --pty -p gpu-shared --gres=gpu:p100:1 --mem=12G -E -D . -t 48:00:00 /bin/bash
+
+I am able to enter the job, but if I run python then "import theano", I get a segmentation fault. This doesn't happen if I request only 8GB of memory.
+
+  Is there a way to request more than 8GB of memory and be able to run theano at the same time?
+
+Thanks! 

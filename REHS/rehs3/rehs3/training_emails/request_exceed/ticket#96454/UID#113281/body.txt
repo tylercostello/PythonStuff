@@ -1,0 +1,66 @@
+
+Fri Oct 05 17:12:49 2018: Request 96454 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by carmanh
+       Queue: 0-SDSC
+     Subject: XUP: too many submissions at once?
+       Owner: carmanh
+  Requestors: solvason@eng.ucsd.edu
+      Status: new
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=96454 >
+
+
+[Ticket created from XUP by solvason]
+[From: Jesse Solvason]
+[System: Comet]
+[Category: Batch Queues/Jobs]
+Hello,
+
+I'm trying to use a python script that...
+ 1. splits up a large file to be analyzed in parallel
+ 2. writes & submits batch submission scripts for analysis.
+ 
+ The test dataset is small so it shouldn't take much memory to process, but when we scale up each file will take longer. It looks like when I submitted the batch scripts (64 of them), SDSC got mad at me.
+ 
+Is there a better way to go about submitting these jobs? Do you have a rule of thumb for the number of jobs to submit at once?
+
+I submitted these to the compute partition
+ 
+
+# Here is the code that created the submission scripts. I'm not sure how much memory is used by the program per file, so I may reduce 30G. This is just the script that I was given.
+for fn in fns:
+        line_out="#!/bin/bash\n"
+        line_out+="#SBATCH --partition=compute\n"
+        line_out+="#SBATCH --job-name=seq2dict\n"
+        line_out+="#SBATCH --nodes=1\n"
+        line_out+="#SBATCH --ntasks-per-node=1\n"
+        line_out+="#SBATCH --mem=30G\n" # memory
+        line_out+="#SBATCH --time=48:00:00\n"
+        line_out+="#SBATCH --output="+dataDir+fn+".out.txt\n"
+        line_out+="#SBATCH --error="+dataDir+fn+".err.txt\n"
+        line_out+="#SBATCH --export=ALL\n"
+        line_out+="#SBATCH --mail-user="+email+"\n" # your email address
+        line_out+="#SBATCH --mail-type=ALL\n"
+        line_out+="module load python\n" # load package numpy
+        line_out+="module load scipy\n" # load package numpy
+        line_out+="module load biopython\n" # load package biopython
+        line_out+="python seq2dict_v2.4.py "+fn # change the name of script if necessary
+        open("seq2dict.sh","w").write(line_out)
+
+        os.system("sbatch seq2dict.sh")
+
+
+
+# Here is the error after too many submission scripts were received
+sbatch: error: bank_limit plugin: The requested time can not exceed the available balance.
+Requested SUs: 1153
+Allocation limit group SUs: 50000
+Allocation limit user SUs: 50000
+Allocation used group SUs: 40
+Allocation used user SUs: 12
+Allocation available group SUs: 49960
+Allocation available user SUs: 49988
+Allocation running/queued group SUs: 49579
+Allocation running/queued user SUs: 49579
+Allocation completed today group SUs: 13
+Allocation completed today user SUs: 13
+sbatch: error: Batch job submission failed: Requested time limit is invalid (missing or exceeds some limit) 

@@ -1,0 +1,48 @@
+
+Mon Aug 14 13:22:45 2017: Request 73816 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by jhawthor
+       Queue: 0-SDSC
+     Subject: submitting jobs using quantum espresso
+       Owner: jhawthor
+  Requestors: bothinah@uark.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=73816 >
+
+
+Dear Mahidhar,
+
+I am trying to submit a job on comet using the following script:
+
+#!/bin/bash
+#SBATCH --job-name="Ir2-CO" 
+#SBATCH --output="SnS.%j.%N.out" 
+#SBATCH --partition=compute 
+#SBATCH --nodes=1 
+#SBATCH -A ALR104 
+#SBATCH --ntasks-per-node=8  
+#SBATCH --export=ALL 
+#SBATCH -t 12:00:00
+
+module load qe
+
+mkdir /oasis/scratch/comet/bothina/temp_project/Ir2-CO    
+cd /oasis/scratch/comet/bothina/temp_project/Ir2-CO
+
+cp $SLURM_SUBMIT_DIR/* .
+ 
+ibrun -np  $SLURM_NNODES    pw.x -npools 1 < scf.in  > scf.out
+
+cp * $SLURM_SUBMIT_DIR
+
+
+But I get an error as follows:
+
+sbatch: error: bank_limit plugin: user is disallowed to submit jobs
+sbatch: error: Batch job submission failed: Invalid account or account/partition combination specified
+
+Could you help me please.
+
+Thank you
+Bothina
+
+ 

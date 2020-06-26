@@ -1,0 +1,36 @@
+
+Tue May 21 19:06:19 2019: Request 108544 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by carmanh
+       Queue: 0-SDSC
+     Subject: Matlab using 24+ cores
+       Owner: Nobody
+  Requestors: saumyatiwari.iitr@gmail.com
+      Status: new
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=108544 >
+
+
+HI,
+I am having trouble setting up parallel computing with matlab when I want
+to use more than 24 cores at once. This is based on the tutorial here:
+https://www.sdsc.edu/support/user_guides/tutorials/matlab.html
+1. I realized that using the sbatch matlab.sb script only utilizes 12
+cores, even if I request 60 nodes =12*60 =720 cores. (script attached, the
+matlab script that it runs has "parfor" loops which should ideally use all
+available cores)
+2. Using the local computer -> remote parallel job method on Matlab2018a
+and running example job from the tutorial page:* run_testparfor1 * runs
+into the following error:
+Error using parallel.internal.customattr.CustomGetSet/set (line 43)
+The property 'IndependentSubmitFcn' cannot be configured as it is no longer
+supported.
+
+Error in getCluster (line 7)
+
+ set(cluster,'IndependentSubmitFcn',{@independentSubmitFcn,clusterHost,RemoteDataLocation,account,username,keyfile,time,queue});
+
+The only way I have been able to use 60 cores is my using my local machine
+on matlab 2016a and submitting jobs via it to the cluster. However, I would
+really like to run my codes on matlab 2018a. Please help!
+
+Saumya
+ 

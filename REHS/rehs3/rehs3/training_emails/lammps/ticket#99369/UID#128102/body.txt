@@ -1,0 +1,38 @@
+
+Tue Nov 20 00:17:56 2018: Request 99369 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by sporluck
+       Queue: 0-SDSC
+     Subject: XUP: Job with 20204752 failed on Comet.
+       Owner: sporluck
+  Requestors: xin.liang@yale.edu
+      Status: new
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=99369 >
+
+
+[Ticket created from XUP by liangxin]
+[From: Xin Liang]
+[System: Comet]
+[Category: Batch Queues/Jobs]
+Error information:
+
+"########################################################################################################################
+# FROM IOTK LIBRARY, VERSION 1.2.0
+# UNRECOVERABLE ERROR (ierr=1)
+# ERROR IN: iotk_write_tag (iotk_write.f90:501)
+# CVS Revision: 1.23 
+# error writing
+iostat=38
+# ERROR IN: iotk_write_end (iotk_write.f90:176)
+# CVS Revision: 1.23 
+# ERROR IN: iotk_write_dat (iotk_dat+REAL2_0.f90:1083)
+# CVS Revision: 1.27 
+########################################################################################################################
+[cli_0]: aborting job:
+application called MPI_Abort(MPI_COMM_WORLD, 1) - process 0
+[comet-25-58.sdsc.edu:mpispawn_0][readline] Unexpected End-Of-File on file descriptor 24. MPI process died?
+[comet-25-58.sdsc.edu:mpispawn_0][mtpmi_processops] Error while reading PMI socket. MPI process died?
+[comet-25-58.sdsc.edu:mpispawn_0][child_handler] MPI process (rank: 0, pid: 24212) exited with status 1
+Connection to comet-25-58 closed by remote host.
+Connection to comet-25-59 closed by remote host."
+
+It seems that the job failed when it was writing data into hard drive. Is the disk quota used up for my account? 

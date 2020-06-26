@@ -1,0 +1,35 @@
+
+Wed May 16 12:50:20 2018: Request 88610 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by jhawthor
+       Queue: 0-SDSC
+     Subject: XUP: having trouble with VASP
+       Owner: Nobody
+  Requestors: wlee@binghamton.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=88610 >
+
+
+[Ticket created from XUP by leewc]
+[From: Wei-Cheng Lee]
+[System: Comet]
+[Category: Software]
+Dear Sir,
+
+      I have access to VASP on Comet, but I keep getting error message as I tried to submit a job to Comet. I guess that it must be some minor mistake. Below I am pasting my script and would you please tell me where I did wrong? Thanks
+#!/bin/bash
+#SBATCH --job-name="HfO2-2L-O-relax"
+#SBATCH --output="HfO2-2L-O-relax.output"
+#SBATCH --partition=compute
+#SBATCH --nodes=2
+#SBATCH --ntasks-per-node=24
+#SBATCH --export=ALL
+#SBATCH -t 24:00:00
+
+#Generate a hostfile from the slurm node list
+export SLURM_NODEFILE=`generate_pbs_nodefile`
+
+#load VASP module
+module load vasp/5.4.4
+
+#Run the job using mpirun_rsh
+mpirun_rsh -hostfile $SLURM_NODEFILE -np 48 vasp_std 

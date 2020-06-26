@@ -1,0 +1,33 @@
+
+Wed Nov 07 12:14:53 2018: Request 98775 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by jhawthor
+       Queue: 0-SDSC
+     Subject: XUP: Memory allocation in QCHEM
+       Owner: Nobody
+  Requestors: tuf98537@temple.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=98775 >
+
+
+[Ticket created from XUP by pratip]
+[From: Pratip Chakraborty]
+[System: Comet]
+[Category: Software]
+Hi,
+
+I am trying to run Qchem jobs in comet. I am running EOM-CCSD calculation in a system which uses 260 basis functions. So, the CC_MEMORY required is somewhere around 35000 MB. I set it up as 40000 MB and make the MEM_TOTAL about 50000 MB which should overwrite the default 4000 MB. I am running them in the shared partition which, as far as I know, has more than 100 GBs of RAM for local scratch SSD. which is where I am running them. However, it fails at the step where it has to allocate 40000 MB. 
+
+The following is the last line of output file:
+ Allocating and initializing 40000MB of RAM...
+
+The following are the last few lines of the slurmjob output:
+exported envs:   QC QCAUX QCSCRATCH QCRUNNAME QCFILEPREF QCPROG QCPROG_S GUIFILE
+/opt/qchem/bin/mpi/mpirun_qchem.ch_p4: line 243:  2144 Killed                  /opt/qchem/exe/qcprog.exe "indole2.inp_2079.0" "./indole2/" -p4pg /scratch/pratip/20008266/PI2089 -p4wd /scratch/pratip/20008266
+cp: cannot stat `/scratch/pratip/20008266/indole': No such file or directory
+slurmstepd: Exceeded step memory limit at some point.
+
+Any help will be appreciated.
+
+Thank you.
+
+Pratip 

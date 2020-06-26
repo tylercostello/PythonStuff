@@ -1,0 +1,109 @@
+MIME-Version: 1.0
+Received: from BYAPR04MB3815.namprd04.prod.outlook.com (2603:10b6:a03:1a0::30)
+ by BYAPR04MB3814.namprd04.prod.outlook.com with HTTPS via
+ BY5PR16CA0017.NAMPRD16.PROD.OUTLOOK.COM; Wed, 27 Mar 2019 23:58:55 +0000
+Received: from SN6PR04CA0026.namprd04.prod.outlook.com (2603:10b6:805:3e::39)
+ by BYAPR04MB3815.namprd04.prod.outlook.com (2603:10b6:a02:ac::22) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.1750.16; Wed, 27 Mar
+ 2019 23:58:52 +0000
+Received: from BY2NAM03FT033.eop-NAM03.prod.protection.outlook.com
+ (2a01:111:f400:7e4a::205) by SN6PR04CA0026.outlook.office365.com
+ (2603:10b6:805:3e::39) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384) id 15.20.1750.16 via Frontend
+ Transport; Wed, 27 Mar 2019 23:58:51 +0000
+Authentication-Results: spf=none (sender IP is 132.239.0.82)
+ smtp.mailfrom=tickets.dyn.xsede.org; ucsdcloud.mail.onmicrosoft.com;
+ dkim=none (message not signed) header.d=none;ucsdcloud.mail.onmicrosoft.com;
+ dmarc=none action=none header.from=xsede.org;
+Received-SPF: None (protection.outlook.com: tickets.dyn.xsede.org does not
+ designate permitted sender hosts)
+Received: from XMAIL-B1.AD.UCSD.EDU (132.239.0.82) by
+ BY2NAM03FT033.mail.protection.outlook.com (10.152.84.220) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384) id
+ 15.20.1750.16 via Frontend Transport; Wed, 27 Mar 2019 23:58:50 +0000
+Received: from XMAIL-B1.AD.UCSD.EDU (132.239.0.82) by XMAIL-B1.AD.UCSD.EDU
+ (132.239.0.82) with Microsoft SMTP Server (TLS) id 15.1.396.30; Wed, 27 Mar
+ 2019 16:58:28 -0700
+Received: from XCORE-CUB1.AD.UCSD.EDU (132.239.0.117) by XMAIL-B1.AD.UCSD.EDU
+ (132.239.0.82) with Microsoft SMTP Server (TLS) id 15.1.396.30 via Frontend
+ Transport; Wed, 27 Mar 2019 16:58:28 -0700
+Received: from iport-acv5-out.ucsd.edu (132.239.0.10) by
+ XCORE-CUB1.AD.UCSD.EDU (132.239.0.117) with Microsoft SMTP Server (TLS) id
+ 14.3.408.0; Wed, 27 Mar 2019 16:58:27 -0700
+X-IronPort-AV: E=Sophos;i="5.60,278,1549958400"; 
+   d="scan'208";a="461063789"
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+X-IronPort-Anti-Spam-SLBL-Result: SAFE-LISTED
+X-IPAS-Result: =?us-ascii?q?A0GoAwDNDJxch+XAjo1kgheCeVEyJ4QOg0qFMYpHUAEHgRA?=
+ =?us-ascii?q?lmDwUgXYjCQKJbxERNgcNAQEDAQEBCAEDAgICEAEBAQoLCQgpIwyCeIELAQEBA?=
+ =?us-ascii?q?QEBAQEBTQIIYAkDAwMgDwFVASIDAiYCAgMpGwgIGQVWgkcBgWgNBAuqM4EvhTU?=
+ =?us-ascii?q?RhHGBCySLMg4JeIEHgREzhCEBgVwEGIEUAQwGAQ+DGhSCQwOKOoI/hUlgkgkJA?=
+ =?us-ascii?q?odqi1saggNdhSWMB5E1jVmBVAiBD3F9CIFZCjKBEgmBdiM2iDSFXSEzATBWjCI?=
+ =?us-ascii?q?OF4InAQE?=
+Received: from amantadine.ncsa.uiuc.edu ([141.142.192.229])  by
+ iport-acv5-in.ucsd.edu with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384; 27 Mar 2019
+ 16:58:27 -0700
+Received: from tickets.xsede.org (rt02.tacc.utexas.edu [129.114.60.41])	by
+ amantadine.ncsa.uiuc.edu (8.15.2/8.15.2) with ESMTP id x2RNwLJV017215;	Wed,
+ 27 Mar 2019 18:58:21 -0500
+Received: by tickets.xsede.org (Postfix, from userid 48)	id F2D0840072; Wed,
+ 27 Mar 2019 18:58:25 -0500 (CDT)
+Subject: [tickets.xsede.org #105942] large scratch problem
+From: Ellen Buskuehl via RT <help@xsede.org>
+Reply-To: <help@xsede.org>
+References: <RT-Ticket-105942@xsede.org>
+Message-ID: <rt-4.0.9-20702-1553731105-1540.105942-12-0@xsede.org>
+Precedence: bulk
+X-RT-Loop-Prevention: tickets.xsede.org
+RT-Ticket: tickets.xsede.org #105942
+Managed-BY: RT 4.0.9 (http://www.bestpractical.com/rt/)
+RT-Originator: buskuehl@illinois.edu
+To: AdminCc of tickets.xsede.org Ticket #105942:;
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+X-RT-Original-Encoding: utf-8
+Date: Wed, 27 Mar 2019 18:58:25 -0500
+X-Null-Tag: ad6fe4a678b92e3c116bf0e1179e20ea
+Return-Path: apache@tickets.dyn.xsede.org
+X-OrganizationHeadersPreserved: XMAIL-B1.AD.UCSD.EDU
+X-MS-Exchange-Organization-ExpirationStartTime: 27 Mar 2019 23:58:51.0407
+ (UTC)
+X-MS-Exchange-Organization-ExpirationStartTimeReason: OriginalSubmit
+X-MS-Exchange-Organization-ExpirationInterval: 2:00:00:00.0000000
+X-MS-Exchange-Organization-ExpirationIntervalReason: OriginalSubmit
+X-MS-Exchange-Organization-Network-Message-Id:
+ 8d75bc51-e3c1-4200-65fa-08d6b3102921
+X-EOPAttributedMessage: 0
+X-MS-Exchange-Organization-MessageDirectionality: Originating
+X-CrossPremisesHeadersPromoted:
+ BY2NAM03FT033.eop-NAM03.prod.protection.outlook.com
+X-CrossPremisesHeadersFiltered:
+ BY2NAM03FT033.eop-NAM03.prod.protection.outlook.com
+X-Forefront-Antispam-Report:
+ CIP:132.239.0.82;IPV:NLI;CTRY:US;EFV:NLI;SFV:NSPM;SFS:(2980300002)(428003)(3190300001)(199004)(189003)(51234002)(356004)(43066004)(2486003)(36756003)(336012)(23676004)(156004)(90966002)(50466002)(47776003)(966005)(2616005)(103686004)(26005)(8676002)(76176011)(446003)(126002)(116002)(476003)(426003)(486006)(246002)(2870700001)(6306002)(42186006)(3450700001)(52956003)(106466001)(105586002)(7636002)(8936002)(305945005)(1096003)(6266002)(5660300002)(14444005)(4744005)(109986005)(109096001)(102196002);DIR:INB;SFP:;SCL:1;SRVR:BYAPR04MB3815;H:XMAIL-B1.AD.UCSD.EDU;FPR:;SPF:None;LANG:en;PTR:xmail-b1.ucsd.edu;A:1;MX:1;
+X-MS-Exchange-Organization-AuthSource: XCORE-CUB1.AD.UCSD.EDU
+X-MS-Exchange-Organization-AuthAs: Anonymous
+X-OriginatorOrg: newmail.ucsd.edu
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 8d75bc51-e3c1-4200-65fa-08d6b3102921
+X-Microsoft-Antispam:
+ BCL:0;PCL:0;RULEID:(2390118)(7020095)(4652040)(8989299)(4534185)(4627221)(201703031133081)(8559020)(8990200)(5600127)(711020)(4605104)(2017052603328)(7153060);SRVR:BYAPR04MB3815;
+X-MS-TrafficTypeDiagnostic: BYAPR04MB3815:
+X-MS-Exchange-PUrlCount: 1
+X-MS-Exchange-Organization-SCL: 1
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Mar 2019 23:58:50.3131
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8d75bc51-e3c1-4200-65fa-08d6b3102921
+X-MS-Exchange-CrossTenant-Id: 8a198873-4fec-4e76-8182-ca479edbbd60
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=8a198873-4fec-4e76-8182-ca479edbbd60;Ip=[132.239.0.82];Helo=[XMAIL-B1.AD.UCSD.EDU]
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR04MB3815
+X-MS-Exchange-Transport-EndToEndLatency: 00:00:04.9683657
+X-MS-Exchange-Processed-By-BccFoldering: 15.20.1750.010
+X-Microsoft-Antispam-Mailbox-Delivery:
+	ucf:0;jmr:0;ex:0;auth:0;dest:I;ENG:(20160514016)(750119)(520002050)(944506303)(944626516);
+X-Microsoft-Antispam-Message-Info:
+	xk5FKAOWx1kNYOZZewlf7q7l2VRU9pvmeoDWnK54pM1kk13YqnNYM/oQzT0Y7l0Q6FMQU2tjaD3MqwSJdLmOPTnoeVHn6f8Wg2Mzpx0cflXUaZb2hi5pOiTz3xgjuH/DmhHSakgYC5lfCmI2gsIP4s8cHBKFXt31dHtt/ilQO9Y2ffYFyu2vqgGlWDVXl2ThMLkpv8g6Ek3d6HfLQ1Hxr8K6yyJontYh4u9u8s9uww/cuKrD/m6C9z1TYvHfDN6pUchm0NxNSNQ3ReuORBRRlFSUPjN0+PjCNI3/oKGpBsRuBFxWGeakWzczsdyTMI5MONym0CWrAYgwkNPrIrZOxiASFIC/LuIKC7ykLlF3Hs+3h85pBU40eyl0PXriYY+ExCr0znpKO+/Gc+ImKuG0GbuJKg+xvV7tGQAg7VpIp1abD1yJRHs7ZJUg6bZvgJV8dUuTny2NX1qOIS1cGZfkHqWYDhU8zmqjvk2O3dZnGySvgWwub8YbZuu+9sEY0rhdSjvH2ryxUjwhQqqvFxLVDOSXlaWercrna2xiFOq6Kf4Ah7NKXYbVFYCqJmKmIJlkPDB8ZCrBoHDyO4brN+Tqw0EQp54BheL98saeguC84VlsEyu6Z2zGrYMTBsxmfs8tZw8LZNlEx9U7rl6S7YNOSAx12pWxON9Iq/wWMl/oc1Jl6bEh9R+0qoQ3h8M4xzp0slXtfJdnjyRo8K08UgM50r2tD55S2zjbwo4hEapr41ODHJ5ylWvV/0KtkRzKDkzga22Ib9PQ6Uk5rAObQio2HDLyIG7PTpslIkWW2CtPemLzKzb4XXYsAwudnt9Csa7G
+

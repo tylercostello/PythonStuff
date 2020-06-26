@@ -1,0 +1,35 @@
+
+Mon Jan 28 08:42:53 2019: Request 102653 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by jhawthor
+       Queue: 0-SDSC
+     Subject: XUP: Gromacs compilation on home account
+       Owner: Nobody
+  Requestors: shima.arasteh@temple.edu
+      Status: new
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=102653 >
+
+
+[Ticket created from XUP by shima]
+[From: Shima Arasteh]
+[System: Comet]
+[Category: Software]
+Hi,
+I am trying to complie gromacs2016.4 on my home account. I used the cmake but it looks like that cmake verion I need for compilation is not late enough.
+The command I use is:
+
+cmake .. -DGMX_BUILD_OWN_FFTW=ON -DGMX_MPI=ON -DGMX_GPU=off  -DGMX_BINARY_SUFFIX=_cuda -DCMAKE_INSTALL_PREFIX=/home/sarashteh/programs/gromacs-2016.4/
+
+And the error I get is:
+
+CMake Error at cmake/gmxTestCXX11.cmake:114 (message):
+  This version of GROMACS requires a C++11 compiler.  Please use a newer
+  compiler or use the GROMACS 5.1.x release.  See the installation guide for
+  details.
+Call Stack (most recent call first):
+  CMakeLists.txt:164 (gmx_test_cxx11)
+
+
+I am not sure it the problem with cmake or gcc, or .. . Can you please help me with it?
+
+Thank you,
+Shima 

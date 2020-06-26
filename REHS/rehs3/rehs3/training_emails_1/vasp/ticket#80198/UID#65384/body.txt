@@ -1,0 +1,44 @@
+
+Mon Dec 11 11:55:52 2017: Request 80198 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by jhawthor
+       Queue: 0-SDSC
+     Subject: Help with memory allocation with Comet cluster
+       Owner: jhawthor
+  Requestors: zulfikharali650@gmail.com
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=80198 >
+
+
+Hi,
+
+I'm having issues with allocating enough memory for a job I'm currently
+running. I'm using a program called VASP, and when I run a job with the
+info below, it says not enough memory allocated.
+
+#!/bin/bash
+#SBATCH --partition=compute
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=24
+#SBATCH --export=ALL
+#SBATCH -t 48:00:00
+#SBATCH -A ucr121
+
+module load mkl/11.1.2.144
+
+mpiexec -np 24 /home/zali003/vasp.5.3.5_constrain_1D/vasp.5.3/vasp >&
+vasp.out
+
+But when I change the last line from -np 24 to -np 2, it finally starts to
+work. But thats just going to take a much longer time for me to run my
+jobs, and I have many more to run. Is there a way I can allocate more
+memory to each submitted job, such that I don't get charged for cores that
+are not even being used? Would I need to add something like:
+
+#SBATCH --constraint="large_scratch"
+
+to help with giving more memory for each job?
+
+-- 
+Thanks
+Zulfi Ali
+ 

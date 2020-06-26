@@ -1,0 +1,125 @@
+
+Mon Jul 30 09:17:48 2018: Request 92438 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by fwells
+       Queue: 0-SDSC
+     Subject: Installing pyICs
+       Owner: fwells
+  Requestors: dna@reed.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=92438 >
+
+
+Marty,
+
+It seem that we are pretty close to being able to run a simulation with all
+your help, but my student and I have been trying to install pyICs -- needed
+to the initial conditions for ChaNGa -- for several days.  I have tried
+using pip or pip3 -- which works fine for pynbody.  pyICs relies on pynbody
+because of ChaNGa's tipsy file format, for one. Below are a few error
+messages -- apparently libraries are a problem.
+
+Best,
+
+johnny
+
+
+
+[antpitta@comet-21-44 particleCount]$ git clone
+https://github.com/jakobherpich/pyICs.git
+
+
+Cloning into 'pyICs'...
+
+
+remote: Counting objects: 137, done.
+
+remote: Total 137 (delta 0), reused 0 (delta 0), pack-reused 137
+
+Receiving objects: 100% (137/137), 47.82 KiB | 1.33 MiB/s, done.
+
+
+Resolving deltas: 100% (64/64), done.
+
+
+[antpitta@comet-21-44 particleCount]$ ls
+
+
+haloArb.param  haloJff.param  init_cond.py  pyICs
+
+
+haloHrn.param  haloNFW.param  Makefile
+
+
+[antpitta@comet-21-44 particleCount]$ cd pyICs/
+
+
+[antpitta@comet-21-44 pyICs]$ ls
+
+LICENSE  pyICs  README.md  setup.py
+
+[antpitta@comet-21-44 pyICs]$ python3 setup.py install
+
+python3: error while loading shared libraries: libpython3.5m.so.1.0: cannot
+open shared object file: No such file or directory
+
+[antpitta@comet-21-44 pyICs]$ python setup.py install
+
+python: error while loading shared libraries: libpython2.7.so.1.0: cannot
+open shared object file: No such file or directory
+
+[antpitta@comet-21-44 pyICs]$
+
+
+---
+
+---
+
+
+[antpitta@comet-21-44 particleCount]$ git clone
+https://github.com/jakobherpich/pyICs.git
+
+
+Cloning into 'pyICs'...
+
+
+remote: Counting objects: 137, done.
+
+remote: Total 137 (delta 0), reused 0 (delta 0), pack-reused 137
+
+Receiving objects: 100% (137/137), 47.82 KiB | 1.33 MiB/s, done.
+
+
+Resolving deltas: 100% (64/64), done.
+
+
+[antpitta@comet-21-44 particleCount]$ ls
+
+
+haloArb.param  haloJff.param  init_cond.py  pyICs
+
+
+haloHrn.param  haloNFW.param  Makefile
+
+
+[antpitta@comet-21-44 particleCount]$ cd pyICs/
+
+
+[antpitta@comet-21-44 pyICs]$ ls
+
+LICENSE  pyICs  README.md  setup.py
+
+[antpitta@comet-21-44 pyICs]$ python3 setup.py install
+
+
+python3: error while loading shared libraries: libpython3.5m.so.1.0: cannot
+open shared object file: No such file or directory
+
+
+[antpitta@comet-21-44 pyICs]$ python setup.py install
+
+
+python: error while loading shared libraries: libpython2.7.so.1.0: cannot
+open shared object file: No such file or directory
+
+[antpitta@comet-21-44 pyICs]$
+ 

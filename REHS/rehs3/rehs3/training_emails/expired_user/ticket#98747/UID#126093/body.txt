@@ -1,0 +1,43 @@
+
+Tue Nov 06 19:08:57 2018: Request 98747 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by carmanh
+       Queue: 0-SDSC
+     Subject: A trouble when submitting jobs on Comet
+       Owner: carmanh
+  Requestors: kanwang@ucdavis.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=98747 >
+
+
+Dear XSEDE supporting team,
+
+I have an account on Comet under the project id: TG-BIO180012 (My account
+is wxk) . I was trying to submit a job to Comet but I run into this error:
+sbatch: error: bank_limit plugin: expired user, can't submit job
+sbatch: error: Batch job submission failed: Invalid account or
+account/partition combination specified
+
+I checked my account on the user portal website and my account is still
+active. Do you know what this error means?
+
+*FYI*: the specification for my job:
+#SBATCH -p shared
+#SBATCH -N 1
+#SBATCH -c 8
+#SBATCH -t 24:00:00
+#SBATCH -o /output/slurm.%N.%j.out
+#SBATCH -e /output/slurm.%N.%j.err
+module load R/3.4.0
+srun -n 1 Rscript ../Three_in_One/main.R starting_size_v9_700.csv 2
+
+Thanks for your time.
+
+Best regards,
+Xiaokang
+
+
+-- 
+Xiaokang Wang
+Biomedical Engineering Department
+University of California-Davis
+ 

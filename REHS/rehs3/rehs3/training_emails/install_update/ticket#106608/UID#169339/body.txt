@@ -1,0 +1,55 @@
+
+Tue Apr 09 19:46:58 2019: Request 106608 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by hargens
+       Queue: 0-SDSC
+     Subject: XUP: Crashes with large MPI jobs
+       Owner: hargens
+  Requestors: wlandry@caltech.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=106608 >
+
+
+[Ticket created from XUP by wlandry]
+[From: Walter Landry]
+[System: Comet]
+[Category: Software]
+Hello,
+
+I am trying to run tests on my code on Comet, and I am consistently
+getting crashes with large MPI jobs.  Below 16 nodes (384 cores),
+everything seems more or less reliable.  Going beyond that, I often,
+but not always, get crashes in MPI.  I am attaching the error output
+for one of these jobs.
+
+I have run this code on many different clusters (Harvard's Odyssey,
+Yale's Grace, Caltech's Central HPC, Princeton's Feynman, EPFL's
+Fidis, Weizmann's WEXAC, and Cornell's CLASSE) using up to 512 cores,
+and I have never seen this kind of crash.  The crashes are only with
+large jobs, so it is difficult to debug them.  But it seems to happen
+when performing a global operation like MPI_Allreduce.
+
+I have been using the GNU compiler to build my code.  To load the
+modules, I run
+
+  module unload intel/2013_sp1.2.144
+  module load gnu openmpi_ib cmake
+
+The latest Intel compiler installed on Comet (16.0.3 20160415) does
+not support enough of C++14 to compile one of the supporting libraries
+that I use.  On other clusters, I have been able to compile with
+17.0.4 20170411.  I also have problems with the Portland Group compiler.
+
+I tried a different MPI implementation with gcc (mvapich2_ib and
+intelmpi), but I get more crashes with those versions.  I noticed that
+the Comet guide
+
+  https://portal.xsede.org/sdsc-comet
+
+suggests using openmpi_ib.
+
+So I have a few questions:
+
+1) Is there another MPI that is compatible with the GNU compiler?
+2) Is there any plan to install a newer version of the Intel compiler on Comet?
+
+Thank you 

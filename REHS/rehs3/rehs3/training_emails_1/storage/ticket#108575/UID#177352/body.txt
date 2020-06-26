@@ -1,0 +1,42 @@
+
+Wed May 22 05:24:22 2019: Request 108575 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by aredding
+       Queue: 0-SDSC
+     Subject: "Disk quota exceeded" when try to use Oasis
+       Owner: Nobody
+  Requestors: oleksandr.frei@medisin.uio.no
+      Status: new
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=108575 >
+
+
+Hi,
+
+
+I'm trying to use my OASIS quota, but receive an error "Disk quota exceeded" (see commands below).
+
+
+My allocation is 5 TB, and I haven't started to use it yet.
+
+
+My commands:
+
+
+[oleksanf@comet-ln3 oleksanf]$ rsync -avP oleksandr@ip24.ucsd.edu:/space/syn03/1/data/GWAS/SUMSTAT/misc .
+oleksandr@ip24.ucsd.edu's password:
+receiving incremental file list
+misc/
+misc/11015833_ref.bim
+      786432   0%  702.01kB/s    0:07:31
+rsync: write failed on "/oasis/projects/nsf/csd604/oleksanf/misc/11015833_ref.bim": Disk quota exceeded (122)
+rsync error: error in file IO (code 11) at receiver.c(301) [receiver=3.0.6]
+rsync: connection unexpectedly closed (447 bytes received so far) [generator]
+rsync error: error in rsync protocol data stream (code 12) at io.c(600) [generator=3.0.6]
+[oleksanf@comet-ln3 oleksanf]$ pwd
+/oasis/projects/nsf/csd604/oleksanf
+
+
+Sorry if it's some obvious mistake -  I'm new to COMET and OASIS, but I've read through https://portal.xsede.org/sdsc-dataoasis . Please assist...
+
+?Kind regards,
+Oleksandr
+ 

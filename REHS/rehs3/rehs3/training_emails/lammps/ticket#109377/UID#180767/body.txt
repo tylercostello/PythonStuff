@@ -1,0 +1,23 @@
+
+Sun Jun 09 21:02:16 2019: Request 109377 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by carmanh
+       Queue: 0-SDSC
+     Subject: XUP: cannot connect to local mpd
+       Owner: Nobody
+  Requestors: xiaoyu.lu@rice.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=109377 >
+
+
+[Ticket created from XUP by xiaoyulu]
+[From: Xiaoyu Lu]
+[System: Comet]
+[Category: Batch Queues/Jobs]
+I was trying to run GROMACS(2016.3) on Comet with sbatch. According to 'module show' command, I should load gnu intel/2016.3.210 intelmpi. However, if I load intel mpi modules, I would run into error 'mpiexec_comet-12-27.sdsc.edu: cannot connect to local mpd (/tmp/mpd2.console_xiaoyulu); possible causes:
+  1. no mpd is running on this host
+  2. an mpd is running but was started without a "console" (-n option)' 
+
+If I unload all intel modules, I cannot use gmx_mpi command with the error message 'gmx_mpi: error while loading shared libraries: libmkl_intel_lp64.so: cannot open shared object file: No such file or directory
+/var/spool/slurmd/job23915681/slurm_script: line 20: mpirun: command not found'
+
+Was wondering which modules shall I load for GROMACS. Thank you! 

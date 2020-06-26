@@ -1,0 +1,25 @@
+
+Mon Nov 05 06:22:20 2018: Request 98648 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by aredding
+       Queue: 0-SDSC
+     Subject: XUP: Running Matlab Script on Comet
+       Owner: Nobody
+  Requestors: harissheikh@berkeley.edu
+      Status: new
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=98648 >
+
+
+[Ticket created from XUP by h7ris]
+[From: Haris Moazam Sheikh]
+[System: Comet]
+[Category: Software]
+I am trying to run a Matlab script on Comet. I tried loading the module using module load matlab/2018a using script and then passing matlab command: matlab -r BayesOptim -nojvm -nodesktop -nodisplay -nosplash -sd "/oasis/scratch/comet/h7ris/temp_project/OptimizationAlgoTest/OptimizationCometTest/" -logfile Optimization.log
+
+(all within a script)
+
+It return the error matlab command not found. This from what I understand is the standard Linux syntax for running matlab (official documentation)
+
+Other than this, exactly how do I call all the compute processors to run a single script. From what I understand, Matlab already does multiple threading as default or large calculation. Do I need to invoke mpirun or ibrun at any point ? Or should I just subit the job to say 5 nodes, and just just run the script with no mpirun 
+
+Regards,
+Haris 

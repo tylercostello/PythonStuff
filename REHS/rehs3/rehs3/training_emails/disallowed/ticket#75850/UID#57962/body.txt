@@ -1,0 +1,46 @@
+
+Thu Sep 21 10:03:17 2017: Request 75850 was acted upon.
+ Transaction: Queue changed from 0-XOC to 0-SDSC by jhidleba
+       Queue: 0-SDSC
+     Subject: XUP: cannot submit jobs
+       Owner: jhidleba
+  Requestors: dmsussma@syr.edu
+      Status: new
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=75850 >
+
+
+[Ticket created from XUP by dsussman]
+[From: Daniel Sussman]
+[System: Comet,comet-gpu.sdsc.xsede]
+[Category: Batch Queues/Jobs]
+Hi,
+
+I recently was awarded a research allocation on comet's GPU resources, but am having trouble submitting jobs. During my trial allocation the following command would work fine for me:
+
+$ sbatch -vvv mySlurmFile.slurm
+
+where the slurm file would be something like:
+"
+#!/bin/bash
+#SBATCH --partition=gpu
+#SBATCH --gres=gpu:k80:1
+#SBATCH --ntasks-per-node=6
+#SBATCH -t 01:00:00
+#SBATCH --nodes=1
+#SBATCH -o cometTest.out
+#SBATCH -e cometTest.err
+#SBATCH -J cometTest
+module load cuda/8.0
+
+/home/dsussman/cellGPU/bidisperseRescaled.out 
+"
+
+Using this process I was able to get the timing data used for the research proposal, etc. etc.
+
+Now, however, if I do exactly the same thing, I get the following error messages:
+sbatch: error: bank_limit plugin: user is disallowed to submit jobs
+sbatch: error: Batch job submission failed: Invalid account or account/partition combination specified
+
+Is there something simple that I am doing wrong? Thanks for your help!
+Best,
+Daniel 

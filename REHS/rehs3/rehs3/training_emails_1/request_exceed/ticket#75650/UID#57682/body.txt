@@ -1,0 +1,56 @@
+
+Mon Sep 18 13:29:39 2017: Request 75650 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by jhawthor
+       Queue: 0-SDSC
+     Subject: Comet Job Array Reports Incorrect SUs
+       Owner: Nobody
+  Requestors: lofquist@iastate.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=75650 >
+
+
+Hello,
+
+My group (allocation TG-CTS110007) is not able to submit jobs to Comet due
+to the batch system incorrectly claiming we have queued more than our
+allocation of SUs.
+
+A user in my group (adityak) submitted a job which is a job array of size
+506. Each job is 1 node/24 processes/4 hour walltime, so the entire job
+array works out to be around 50,000 SUs. This job array submitted and ran
+fine, but subsequent sbatch submissions (for small jobs) give an error like
+this:
+
+$ sbatch run.sh
+sbatch: error: bank_limit plugin: The requested time can not exceed the
+available balance.
+Requested SUs: 9
+Allocation limit group SUs: 1862358
+Allocation limit user SUs: 1862358
+Allocation used group SUs: 1188506
+Allocation used user SUs: 29
+Allocation available group SUs: 673852
+Allocation available user SUs: 1862329
+Allocation running/queued group SUs: 3002538
+Allocation running/queued user SUs: 0
+Allocation completed today group SUs: 28264
+Allocation completed today user SUs: 0
+sbatch: error: Batch job submission failed: Requested time limit is invalid
+(missing or exceeds some limit)
+
+The scheduler reports that we've queued 3 million SUs (which is more than
+our entire allocation), which is not true - we requested less than 50,000.
+This was caught about halfway into the job array's run time, hence the
+"completed today group" value - which looks correct, it's about half of
+50,000.
+
+The number of queued SUs is decreasing as the job array completes, so this
+problem will probably resolve itself soon - but we intend to use job arrays
+again in the future, and it's a problem if a job array blocks the rest of
+our group from getting work done on Comet. Could you please look into why
+with the scheduler's reports of the total SUs requested by the group far
+exceeds the actual SUs requested?
+
+Thanks,
+Alec Lofquist
+ 

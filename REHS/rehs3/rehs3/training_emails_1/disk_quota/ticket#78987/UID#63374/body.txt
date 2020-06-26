@@ -1,0 +1,57 @@
+
+Tue Nov 14 13:27:47 2017: Request 78987 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by jhawthor
+       Queue: 0-SDSC
+     Subject: XUP: disc quota and storage space
+       Owner: Nobody
+  Requestors: kravchen@pitt.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=78987 >
+
+
+[Ticket created from XUP by kravchen]
+[From: Olga Kravchenko]
+[System: Comet]
+[Category: Batch Queues/Jobs]
+Hi, 
+
+I am running namd simulations that produce large *.dcd files and it seems that I ran out of quota after submitting 10 jobs at a time. Is there a storage space that I can use to move finished trajectories? Also, is there a more efficient way for me to run multiple jobs? I appreciate your help. 
+
+Here is my submission script:
+
+#!/usr/bin/env bash
+
+#SBATCH --account=uop134
+#SBATCH --job-name="win10"
+#SBATCH --partition=compute
+#SBATCH --output="win10.o%j.%N"
+#SBATCH --error="win10.e%j.%N"
+#SBATCH --no-requeue
+#SBATCH --nodes=4
+#SBATCH --ntasks-per-node=24
+#SBATCH --time 48:00:00
+
+declare -r COMPILER_MODULE='gnu/4.9.2'
+declare -r OS='Linux'
+declare -r ARCH='x86_64'
+declare -r NAME='namd'
+declare -r VERSION='2.12'
+declare -r NAMD_PATH="${HOME}/namd/NAMD_${VERSION}_Source/${OS}-${ARCH}-g++"
+declare -r PBS_NODEFILE="$(generate_pbs_nodefile)"
+declare -r CHARMRUN_NODELIST="nodelist.o${SLURM_JOB_ID}"
+declare -r BENCHMARK='stmv'
+
+module purge
+module load "${COMPILER_MODULE}"
+export PATH="${NAMD_PATH}:${PATH}"
+export LD_LIBRARY_PATH="${NAMD_PATH}:${LD_LIBRARY_PATH}"
+
+echo "$(less ${PBS_NODEFILE} | sort | uniq)" > "${CHARMRUN_NODELIST}"
+sed -i 's/^/host /g' "${CHARMRUN_NODELIST}"
+
+printenv
+rm /usr/tmp/stmv-output.xsc
+time -p "${NAMD_PATH}/charmrun" ++nodelist "${CHARMRUN_NODELIST}" ++p 80 ++ppn 5 ++verbose "${NAMD_PATH}/namd2" +setcpuaffinity +commap 0,6,12,18 +pemap 1-5,7-11,13-17,19-23 "win10.conf"
+ 
+
+Olga 

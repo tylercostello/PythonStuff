@@ -1,0 +1,38 @@
+
+Mon Apr 02 09:07:08 2018: Request 86026 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by jhawthor
+       Queue: 0-SDSC
+     Subject: XUP: Cannot submit jobs
+       Owner: jhawthor
+  Requestors: jameschapmanuconn@gmail.com
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=86026 >
+
+
+[Ticket created from XUP by jc112358]
+[From: James Chapman]
+[System: Comet]
+[Category: Batch Queues/Jobs]
+Hello,
+I am trying to run VASP on Comet and am running into issues with the scheduler. The error I receive is:
+
+sbatch: error: bank_limit plugin: not found user association jchapman
+sbatch: error: Batch job submission failed: Invalid account or account/partition combination specified
+
+I'm guessing this has something to do with slurm not recognizing who I am but I have no idea how to fix this. My submission script is this:
+
+#!/bin/sh
+
+#SBATCH -J Al_mech4-04_GO
+#SBATCH --nodes=2
+#SBATCH --ntasks-per-node=24
+
+#SBATCH -p compute
+#SBATCH -t 48:00:00
+
+module load intelmpi
+module load vasp
+
+mpirun vasp
+
+If it means anything, it has been over a year since I last tried logging in and using Comet. Any help you can give would be greatly appreciated. Thank you. 

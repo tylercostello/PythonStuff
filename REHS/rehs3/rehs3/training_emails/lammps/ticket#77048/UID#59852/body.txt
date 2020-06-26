@@ -1,0 +1,74 @@
+
+Wed Oct 11 09:57:02 2017: Request 77048 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by jhidleba
+       Queue: 0-SDSC
+     Subject: XUP: running the job
+       Owner: Nobody
+  Requestors: ojaghloun@vcu.edu
+      Status: new
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=77048 >
+
+
+[Ticket created from XUP by nedaoj]
+[From: neda ojaghlou]
+[System: Comet]
+[Category: Other]
+Hi,
+
+I am using the lammps package and until last week my script for running the lammps was working fine. But now I received this error:
+Do you know where is the problem?
+I also copied my script below.
+
+Thanks
+
+The path of one example is: /home/nedaoj/lammps-Project/fiber/17k/0.084
+
+Fatal error in MPI_Init: Other MPI error, error stack:
+MPIR_Init_thread(784).................:
+MPID_Init(1332).......................: channel initialization failed
+MPIDI_CH3_Init(141)...................:
+dapl_rc_setup_all_connections_20(1388): generic failure with errno = 872614415
+getConnInfoKVS(849)...................: PMI_KVS_Get failed
+Fatal error in MPI_Init: Other MPI error, error stack:
+MPIR_Init_thread(784).................:
+MPID_Init(1332).......................: channel initialization failed
+MPIDI_CH3_Init(141)...................:
+dapl_rc_setup_all_connections_20(1388): generic failure with errno = 872614415
+getConnInfoKVS(849)...................: PMI_KVS_Get failed
+Fatal error in MPI_Init: Other MPI error, error stack:
+MPIR_Init_thread(784).................:
+MPID_Init(1332).......................: channel initialization failed
+MPIDI_CH3_Init(141)...................:
+dapl_rc_setup_all_connections_20(1388): generic failure with errno = 872614415
+getConnInfoKVS(849)...................: PMI_KVS_Get failed
+Fatal error in MPI_Init: Other MPI error, error stack:
+MPIR_Init_thread(784).................:
+MPID_Init(1332).......................: channel initialization failed
+MPIDI_CH3_Init(141)...................:
+dapl_rc_setup_all_connections_20(1388): generic failure with errno = 872614415
+getConnInfoKVS(849)...................: PMI_KVS_Get failed
+[comet-20-15.sdsc.edu:mpispawn_0][readline] Unexpected End-Of-File on file descriptor 11. MPI process died?
+[comet-20-15.sdsc.edu:mpispawn_0][mtpmi_processops] Error while reading PMI socket. MPI process died?
+[comet-20-15.sdsc.edu:mpispawn_0][child_handler] MPI process (rank: 22, pid: 15066) exited with status 1
+[comet-20-15.sdsc.edu:mpispawn_0][child_handler] MPI process (rank: 0, pid: 15044) exited with status 1
+[comet-20-15.sdsc.edu:mpispawn_0][child_handler] MPI process (rank: 15, pid: 15059) exited with status 1
+[comet-20-15.sdsc.edu:mpispawn_0][child_handler] MPI process (rank: 4, pid: 15048) exited with status 1
+Connection to comet-20-15 closed by remote host.^M
+
+##############
+Script:
+
+#!/bin/bash
+#SBATCH --job-name="run1"
+#SBATCH --output="cw.%j.%N.out"
+#SBATCH --partition=compute
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=24
+#SBATCH --export=ALL
+#SBATCH -t 48:00:00
+module load lammps
+
+#This job runs with 2 nodes, 24 cores per node for a total of 48 cores.
+#ibrun in verbose mode will give binding detail
+
+ibrun -v lammps <  *inp > out1 

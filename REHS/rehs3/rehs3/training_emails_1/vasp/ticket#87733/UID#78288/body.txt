@@ -1,0 +1,32 @@
+
+Fri Apr 27 14:10:05 2018: Request 87733 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by carmanh
+       Queue: 0-SDSC
+     Subject: XUP: sbatch: error: Batch job submission failed: Job has invalid qos
+       Owner: Nobody
+  Requestors: kklyukin2@unl.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=87733 >
+
+
+[Ticket created from XUP by kklyukin]
+[From: Konstantin Klyukin]
+[System: Comet]
+[Category: Batch Queues/Jobs]
+A week ago it worked just fine, but now I am getting the following error "sbatch: error: Batch job submission failed: Job has invalid qos" using this sbatch script:
+Could you please look what is wrong? 
+
+#!/bin/bash
+#SBATCH --nodes=1
+#SBATCH --tasks-per-node=24
+#SBATCH -t 6:00:00
+#SBATCH -o vasp.out
+#SBATCH -e vasp.err
+#SBATCH -p compute
+#SBATCH --export=ALL
+
+module unload intel
+module load vasp
+exe=`which vasp_gam`
+processors=$(( $SLURM_NNODES * $SLURM_NTASKS_PER_NODE ))
+mpirun  -np $processors -genv I_MPI_FABRICS shm:ofa $exe >& vasp.log 

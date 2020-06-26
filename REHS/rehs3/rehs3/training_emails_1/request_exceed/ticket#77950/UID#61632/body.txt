@@ -1,0 +1,45 @@
+
+Thu Oct 26 12:39:04 2017: Request 77950 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by jhidleba
+       Queue: 0-SDSC
+     Subject: XUP: Trouble starting a job on Comet GPU node
+       Owner: Nobody
+  Requestors: cannonj@missouri.edu
+      Status: new
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=77950 >
+
+
+[Ticket created from XUP by jcannon]
+[From: John Cannon]
+[System: comet-gpu.sdsc.xsede]
+[Category: Allocations]
+I used 22 SU on a Comet startup account TG-ASC15024 to get benchmarks for my 10-10-17 XSEDE allocation request. Together with that request, I asked, and was granted 1000 SU in advance that expires 12-31-17. Thank you. That advance is reported in my MCB140208 account on the XSEDE user portal.
+
+I tried to start a job today and got this output
+sbatch: error: bank_limit plugin: The requested time can not exceed the available balance.
+Requested SUs: 145
+Allocation limit group SUs: 2500
+Allocation limit user SUs: 100
+Allocation used group SUs: 610
+Allocation used user SUs: 22
+Allocation available group SUs: 1890
+Allocation available user SUs: 78
+Allocation running/queued group SUs: 145
+Allocation running/queued user SUs: 145
+Allocation completed today group SUs: 0
+Allocation completed today user SUs: 0
+sbatch: error: Batch job submission failed: Requested time limit is invalid (missing or exceeds some limit)
+
+The top of my sbatch job file looks like this 
+#!/bin/bash
+# run_upx1.sh: Run equilibrations of four upx1 models on Comet using 4 GPU's
+#SBATCH -J upx1a                 # job name
+#SBATCH -o %j.out                # output and error file name (%j expands to jobID)
+#SBATCH --partition=gpu          # queue -- gpu or gpu-shared
+#SBATCH --nodes=1                # Total number of nodes requested (24 cores/node)
+#SBATCH --ntasks-per-node=24     # 6 x number of GPUs for K80 (7x for P100)
+#SBATCH --no-requeue             # do not restart upon node failure
+#SBATCH --gres=gpu:4             # use one GPU per model of any type
+#SBATCH -t 24:00:00              # run time (hh:mm:ss) - 24 hour (max)
+
+The benchmark jobs that I previously successfully ran now give a similar failure notice. 

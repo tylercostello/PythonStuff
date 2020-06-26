@@ -1,0 +1,58 @@
+
+Wed May 30 19:15:58 2018: Request 89299 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by buskuehl
+       Queue: 0-SDSC
+     Subject: XUP: Singularity error
+       Owner: buskuehl
+  Requestors: oroojlooy@gmail.com
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=89299 >
+
+
+[Ticket created from XUP by afshin67]
+[From: afshin oroojlooy]
+[System: Comet]
+[Category: Batch Queues/Jobs]
+Hi, 
+
+I had a submission file which was working two weeks ago, now when I run another job with same settings, I get the error below. Can you please let me know what is wrong with my submission file.
+
+Thanks,
+Afshin
+
+singularity(3):ERROR:105: Unable to locate a modulefile for 'singularity/2.3.2'
+No Modulefiles Currently Loaded.
+/var/spool/slurmd/job16574171/slurm_script: line 28: singularity: command not found
+real 0.00
+user 0.00
+sys 0.00
+
+and here is the submission file:
+
+#!/usr/bin/env bash
+#SBATCH --account=lhu117
+#SBATCH --job-name="seo-exponential-1-10-2-L1"
+#SBATCH -e /home/afshin67/nw/reports/errors-seo-exponential-1-10-2-L1.err
+#SBATCH --output=/home/afshin67/nw/reports/output-seo-exponential-1-10-2-L1.out
+#SBATCH --partition=shared
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=2
+#SBATCH --export=ALL
+#SBATCH --time 48:00:00
+#SBATCH --requeue
+#SBATCH --mem=10G
+
+declare -xr LOCAL_SCRATCH="/scratch/afshin67/"
+declare -xr LUSTRE_SCRATCH="/oasis/scratch/comet/mkandes/temp_project"
+declare -xr LUSTRE_STORAGE="/oasis/projects/nsf"
+
+declare -xr SINGULARITY_MODULE='singularity/2.3.2'
+
+module purge
+module load singularity/2.3.2
+module list 
+
+printenv
+
+cd /home/afshin67/nw
+time -p singularity exec tensorflow-cpu.img python2.7 runner-t-seo-exponential-1-10-2-L1.py 

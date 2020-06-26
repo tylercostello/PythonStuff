@@ -1,0 +1,85 @@
+
+Sun Jan 14 19:47:52 2018: Request 81842 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by sporluck
+       Queue: 0-SDSC
+     Subject: Unable to submit jobs
+       Owner: sporluck
+  Requestors: Lisa.Henn@arborresearch.org
+      Status: new
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=81842 >
+
+
+I tried submitting a job to the compute queue on Comet today, Sunday, 14 January. I believe I was denied because the product of (wall clock) x (cores requested) exceeded the number of service units I had left in my account. Even after I edited the batch file so that the product was less than my remaining balance, Comet would not authorize the job. It appears that it continues to have a hold on my account based on the requested SU's, despite those jobs being denied authorization. Please refer to the transcript at the end of this message. Note that I edited the wrong queuing file at first.
+
+
+I would like to get my account cleared so that I can submit new jobs. I am attempting some last benchmarking runs prior to the deadline for research allocation requests tomorrow, Monday 15 January. To that end, I am also hoping to confirm with you that I have sufficient overhead in my account to ensure the jobs will be authorized to start.
+
+
+I have 8 jobs planned for a total of 1248 SU's. I expect them to take between 0.25 and 4 hours. I would like to request more wall clock than that, though, in case I have underestimated the time required for the jobs. I would hate for them to time out because I was too penurious with the wall clock.
+
+
+If I ask for 8 hours of wall clock for each job, that implies a hold of 9984 SU's on my account. As my balance currently is 12915, I believe those jobs should start, once my account is freed up. Do I understand correctly? If not, I would appreciate clarification so that I can adjust my jobs or ask for a supplement as needed.
+
+
+Thank you for your assistance.
+
+
+Sincerely,
+
+Lisa Henn
+
+
+<begin transcript>
+
+[llhenn@comet-ln2 ~]$ sbatch Ord_bench_a.batch
+sbatch: error: bank_limit plugin: The requested time can not exceed the available balance.
+Requested SUs: 18433
+Allocation limit group SUs: 25000
+Allocation limit user SUs: 25000
+Allocation used group SUs: 12085
+Allocation used user SUs: 12085
+Allocation available group SUs: 12915
+Allocation available user SUs: 12915
+Allocation running/queued group SUs: 0
+Allocation running/queued user SUs: 0
+Allocation completed today group SUs: 36
+Allocation completed today user SUs: 36
+sbatch: error: Batch job submission failed: Requested time limit is invalid (missing or exceeds some limit)
+[llhenn@comet-ln2 ~]$ !v
+vi Ord_bench_c.batch
+[llhenn@comet-ln2 ~]$ vi Ord_bench_c.batch
+[llhenn@comet-ln2 ~]$ vi Ord_bench_a.batch
+[llhenn@comet-ln2 ~]$ !sb
+sbatch Ord_bench_a.batch
+sbatch: error: bank_limit plugin: The requested time can not exceed the available balance.
+Requested SUs: 11521
+Allocation limit group SUs: 25000
+Allocation limit user SUs: 25000
+Allocation used group SUs: 12085
+Allocation used user SUs: 12085
+Allocation available group SUs: 12915
+Allocation available user SUs: 12915
+Allocation running/queued group SUs: 18433
+Allocation running/queued user SUs: 18433
+Allocation completed today group SUs: 36
+Allocation completed today user SUs: 36
+sbatch: error: Batch job submission failed: Requested time limit is invalid (missing or exceeds some limit)
+[llhenn@comet-ln2 ~]$ !sbatch
+sbatch Ord_bench_a.batch
+sbatch: error: bank_limit plugin: The requested time can not exceed the available balance.
+Requested SUs: 11521
+Allocation limit group SUs: 25000
+Allocation limit user SUs: 25000
+Allocation used group SUs: 12085
+Allocation used user SUs: 12085
+Allocation available group SUs: 12915
+Allocation available user SUs: 12915
+Allocation running/queued group SUs: 29954
+Allocation running/queued user SUs: 29954
+Allocation completed today group SUs: 36
+Allocation completed today user SUs: 36
+sbatch: error: Batch job submission failed: Requested time limit is invalid (missing or exceeds some limit)
+
+
+<end trandscript>
+ 

@@ -1,0 +1,47 @@
+
+Wed Sep 06 16:05:07 2017: Request 74951 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by buskuehl
+       Queue: 0-SDSC
+     Subject: run on comet
+       Owner: buskuehl
+  Requestors: zahra.heidari@mso.umt.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=74951 >
+
+
+Dear Sir or Madam,
+
+I am trying submitting the following script on comet:
+
+#!/bin/sh
+#SBATCH -p shared
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH -t 1:00:00
+#SBATCH -J HPL.8
+#SBATCH -o HPL.8.%j.%N.out
+#SBATCH -o HPL.8.%j.%N.out
+#SBATCH --job-name="kmnmgwa"
+#SBATCH -e HPL.8.%j.%N.err
+#SBATCH --export=ALL
+
+module purge
+module load amber
+
+
+source /opt/amber/bin/amber.sh
+
+srun cpptraj -i cpp-dist.in
+
+Ir gives me the following error:
+
+sbatch: error: bank_limit plugin: user is disallowed to submit jobs
+sbatch: error: Batch job submission failed: Invalid account or account/partition combination specified
+
+I have an trial account on both comet and comet-gpu, I do not know why I got this error.
+Could you please help me with that.
+
+Thanks,
+Zahra
+
+ 

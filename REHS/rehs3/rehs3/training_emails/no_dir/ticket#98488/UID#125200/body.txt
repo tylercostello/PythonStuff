@@ -1,0 +1,69 @@
+
+Thu Nov 01 08:21:44 2018: Request 98488 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by jhidleba
+       Queue: 0-SDSC
+     Subject: permissions?
+       Owner: Nobody
+  Requestors: skimble@towson.edu
+      Status: new
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=98488 >
+
+
+Hi, we are trying to use program dDocent
+
+
+http://ddocent.com/
+
+
+which I run from here:
+
+
+/home/skimble5/installs/dreqs/dDocent
+
+It requires some interaction so I run with srun with the code:
+
+$srun --partition=compute --pty --nodes=1 --ntasks-per-node=24 -t 04:00:00 --wait=0 --export=ALL /bin/bash
+$export MODULEPATH=/home/skimble5/modulefiles:$MODULEPATH
+$module load dDocent/2.2.16
+$dDocent
+
+
+However, when user ckean1 tries to reproduce this with code:
+$export MODULEPATH=/home/skimble5/modulefiles:$MODULEPATH
+$module load dDocent/2.2.16
+$dDocent
+
+
+the program seems to hang, writing some but not all of the files we expect to see, and top shows no substantial CPU activity.
+
+
+1.) should he be using
+
+
+$export MODULEPATH=/home/ckean1/modulefiles:$MODULEPATH
+
+
+instead?
+
+
+2.) If so, does he need dDocent installed in his
+
+
+/home/ckean1/installs/dreqs/
+
+?
+
+
+Thanks,
+
+Steve
+
+
+Steve Kimble
+
+Clinical Assistant Professor, Towson University
+
+skimble@towson.edu
+
+https://www.towson.edu/fcsm/departments/biology/facultystaff/skimble.html
+ 

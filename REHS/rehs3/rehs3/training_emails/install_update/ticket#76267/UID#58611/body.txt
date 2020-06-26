@@ -1,0 +1,33 @@
+
+Thu Sep 28 15:29:50 2017: Request 76267 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by buskuehl
+       Queue: 0-SDSC
+     Subject: XUP: Gromacs install
+       Owner: buskuehl
+  Requestors: aksharma@wagner.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=76267 >
+
+
+[Ticket created from XUP by aksharma]
+[From: Arun Sharma]
+[System: Comet]
+[Category: Software]
+Hello,
+
+My goal is to install gromacs v. 5.0.7 for running MD simulations using gromacs with cuda libraries. I loaded the cuda/8.0 and cmake module to install gromacs. However, the build failed with some interesting messages:
+
+CMake Error at cmake/gmxTestSimd.cmake:244 (message):
+  Cannot find AVX2 compiler flag.  Use a newer compiler, or choose AVX SIMD
+  (slower).
+Call Stack (most recent call first):
+  CMakeLists.txt:729 (gmx_test_simd)
+
+And it could not locate the gpus
+-- Looking for NVIDIA GPUs present in the system
+-- Could not detect NVIDIA GPUs
+
+I logged into comet using gsissh comet from the xsede ssohub. I appreciate any guidance that you may be able to provide for the installation.
+
+Thanks,
+Arun 

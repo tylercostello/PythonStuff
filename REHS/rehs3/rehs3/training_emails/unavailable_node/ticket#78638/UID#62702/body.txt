@@ -1,0 +1,33 @@
+
+Tue Nov 07 13:21:14 2017: Request 78638 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by jhidleba
+       Queue: 0-SDSC
+     Subject: Fw: SLURM Job_id=12474291 Name=OrdDat Failed, Run time 1-03:05:42, NODE_FAIL
+       Owner: Nobody
+  Requestors: Lisa.Henn@arborresearch.org
+      Status: new
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=78638 >
+
+
+I received two emails like this for the two jobs I have running on Comet. The .err and .out files do not indicate anything amiss, nor does the .Rout file to which my R output is redirected. When I look in the queue, I get this:
+
+squeue -u llhenn
+             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+          12474286    shared   OrdDat   llhenn PD       0:00      1 (ReqNodeNotAvail, UnavailableNodes:comet-01-[01-72],comet-02-[01-24,71],comet-03-[01-24,42],comet-04-[01-24,56],comet-05-[01-24,63,68],comet-06-[01-04,09-24],comet-07-[01-02,04-24,38,69],comet-08-[01-24],comet-10-[01-24,55,69-72],comet-11-[01-24],comet-12-[01-24],comet-13-[01-12,17-24],comet-14-[01-04,09-24],comet-15-[01-24],comet-16-[01-24],comet-17-[01-17,19-24,45-48,71],comet-18-[05-24,70-72],comet-19-[05-24],comet-20-[01-24,28,42,53-56,59,65-67],comet-21-[01-24],comet-22-[01-24,57-60],comet-23-[01-08,13-24,29,58-59,71],comet-25-[01-05,07-24],comet-26-[01-22,34,71],comet-27-[01-24],comet-28-[01-24],comet-29-[01-24,69-72],comet-30-[03-04],comet-31-[03-04,10],comet-33-04,comet-34-[01-05,16])
+          12474291    shared   OrdDat   llhenn PD       0:00      1 (ReqNodeNotAvail, UnavailableNodes:comet-01-[01-72],comet-02-[01-24,71],comet-03-[01-24,42],comet-04-[01-24,56],comet-05-[01-24,63,68],comet-06-[01-04,09-24],comet-07-[01-02,04-24,38,69],comet-08-[01-24],comet-10-[01-24,55,69-72],comet-11-[01-24],comet-12-[01-24],comet-13-[01-12,17-24],comet-14-[01-04,09-24],comet-15-[01-24],comet-16-[01-24],comet-17-[01-17,19-24,45-48,71],comet-18-[05-24,70-72],comet-19-[05-24],comet-20-[01-24,28,42,53-56,59,65-67],comet-21-[01-24],comet-22-[01-24,57-60],comet-23-[01-08,13-24,29,58-59,71],comet-25-[01-05,07-24],comet-26-[01-22,34,71],comet-27-[01-24],comet-28-[01-24],comet-29-[01-24,69-72],comet-30-[03-04],comet-31-[03-04,10],comet-33-04,comet-34-[01-05,16])
+
+So it would seem the jobs are only mostly dead, not all dead.
+
+Is this connected to tomorrow's planned maintenance or an additional issue? Should I cancel the jobs, let them sit tight while you guys look at the matter, or let them get killed when Comet goes down or maintenance? 
+
+Or are they just on hold until the maintenance is complete?
+
+Thanks,
+Lisa
+________________________________________
+From: SDSC Admin <slurm@comet-fe4.sdsc.edu>
+Sent: Tuesday, November 7, 2017 1:24 PM
+To: Lisa Henn
+Subject: SLURM Job_id=12474291 Name=OrdDat Failed, Run time 1-03:05:42, NODE_FAIL
+
+ 

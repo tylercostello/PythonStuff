@@ -1,0 +1,43 @@
+
+Thu May 03 16:40:13 2018: Request 88036 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by carmanh
+       Queue: 0-SDSC
+     Subject: XUP: Unable to Submit Jobs
+       Owner: Nobody
+  Requestors: jrd101@pitt.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=88036 >
+
+
+[Ticket created from XUP by jrd101]
+[From: James Dean]
+[System: Comet]
+[Category: Batch Queues/Jobs]
+Hi,
+
+I am currently unable to submit jobs via sbatch to the compute node on Comet. Attempting to do so yields the following set of error messages:
+
+sbatch: error: bank_limit plugin: not found user association jrd101
+sbatch: error: Batch job submission failed: Invalid account or account/partition combination specified
+
+Below is the submission script I'm using (which has worked in the past on the cluster):
+
+#!/bin/env bash
+#SBATCH --job-name=zro2_slab_fix
+#SBATCH --output=sbatch.outp
+#SBATCH --nodes=2
+#SBATCH --ntasks-per-node=18
+#SBATCH --time=0-20:00:00
+#SBATCH --partition=compute
+
+module purge
+module load cp2k/4.1
+
+ulimit -s unlimited
+ulimit -l unlimited
+
+mpirun -np $SLURM_NTASKS cp2k.popt -i input.inp -o zro2.out
+
+
+Thanks!
+James Dean 

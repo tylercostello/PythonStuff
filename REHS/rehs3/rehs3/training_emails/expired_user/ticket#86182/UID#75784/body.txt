@@ -1,0 +1,56 @@
+
+Tue Apr 03 19:20:37 2018: Request 86182 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by buskuehl
+       Queue: 0-SDSC
+     Subject: XUP: Error in running the code with MPI processors and K80 GPU
+       Owner: buskuehl
+  Requestors: vkotteda@utep.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=86182 >
+
+
+[Ticket created from XUP by vkotteda]
+[From: V M Krushnarao Kotteda]
+[System: comet-gpu.sdsc.xsede]
+[Category: Batch Queues/Jobs]
+Hi, 
+
+I am able to compile a hybrid code on comet without error. And, I would like to run the code on a 
+compute node with 16 processors and 1 k80GPU processor. 
+The following job script results an error in running code 
+
+#!/bin/bash
+#SBATCH --job-name="mv2gdr"
+#SBATCH --output="output%j.%N.out"
+#SBATCH --partition=gpu-shared
+#SBATCH --nodes=1
+#SBATCH --gres=gpu:k80:1
+#SBATCH --ntasks-per-node 16
+#SBATCH --export=ALL
+#SBATCH -t 00:01:00
+
+#Environment
+module load gnutools
+module load intel
+module load cuda/8.0
+export MODULEPATH=/share/apps/compute/modulefiles/mpi:$MODULEPATH
+module load openmpi_ib/1.10.2_intel
+
+export CUDA_LAUNCH_BLOCKING=1
+export CUDA_MANAGED_FORCE_DEVICE_ALLOC=1
+
+srun  /oasis/scratch/comet/vkotteda/temp_project/Software/trilinos_3rd/cuda_mpi/mfix_mpi3d_v1p3_fill/mfixtpmu
+
+
+Run time error: 
+
+sbatch: error: bank_limit plugin: In a shared partition you can only request cores according to your GPUs request.
+sbatch: error: Batch job submission failed: Invalid generic resource (gres) specification
+ 
+
+Could you provide your suggestions to overcome that error?
+
+Thank you. 
+
+Sincerely, 
+VMK Kotteda 

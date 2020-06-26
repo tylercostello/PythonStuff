@@ -1,0 +1,44 @@
+
+Wed Oct 17 20:54:46 2018: Request 97226 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by buskuehl
+       Queue: 0-SDSC
+     Subject: Job submitted error
+       Owner: buskuehl
+  Requestors: cuto@ucsd.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=97226 >
+
+
+Hi,
+
+I have just submitted several jobs as below:
+
+#!/bin/bash
+#SBATCH --job-name=DEA_856_k5_3_5
+#SBATCH -p shared
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH -t 48:00:00
+#SBATCH -o DEA_856_k5_3_5.out
+#SBATCH -e DEA_856_k5_3_5.err
+#SBATCH --export=ALL
+
+cd /oasis/projects/nsf/csd414/cuongto/Fra/30_06_18/
+
+module load R
+
+Rscript DEA.R G1=3 G2=5
+
+and I obtained the error:
+
+There was an error running the SLURM sbatch command.
+The command was:
+'/usr/bin/sbatch Run_1_2_.pbs  2>&1'
+and the output was:
+'sbatch: error: bank_limit plugin: not found user association cuongto
+ sbatch: error: Batch job submission failed: Invalid account or account/partition combination specified
+
+Please advise me how to do.
+Thanks a lot.
+Cuong.
+ 

@@ -1,0 +1,57 @@
+
+Sat Jan 05 13:25:20 2019: Request 101329 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by jhidleba
+       Queue: 0-SDSC
+     Subject: XUP: Requested Time Cannot Exceed Available Balance Error
+       Owner: Nobody
+  Requestors: smressle@berkeley.edu
+      Status: new
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=101329 >
+
+
+[Ticket created from XUP by smressle]
+[From: Sean Ressler]
+[System: Comet]
+[Category: Batch Queues/Jobs]
+I get the following error when trying to submit a job but I have plenty of allocated time.  Do you know what could be the issue?  Thanks! 
+
+sbatch: error: bank_limit plugin: The requested time can not exceed the available balance.
+Requested SUs: 28417
+Allocation limit group SUs: 216748
+Allocation limit user SUs: 216748
+Allocation used group SUs: 208436
+Allocation used user SUs: 141506
+Allocation available group SUs: 8312
+Allocation available user SUs: 75242
+Allocation running/queued group SUs: 0
+Allocation running/queued user SUs: 0
+Allocation completed today group SUs: 3952
+Allocation completed today user SUs: 3952
+sbatch: error: Batch job submission failed: Requested time limit is invalid (missing or exceeds some limit)
+
+my submit batch script is copied below for reference
+
+#!/bin/bash
+# Job name
+#SBATCH --job-name=star_cluster
+#
+# Partition:
+#SBATCH --partition=compute
+#
+# Account:
+##SBATCH --account=co_astro
+#
+# QoS:
+##SBATCH --qos=savio_lowprio #condo_astro #br_astro #rc_astro?
+##SBATCH --requeue
+#
+# Processors:
+#SBATCH --ntasks=592
+#
+# Wall clock limit:
+#SBATCH --time=48:00:00
+# Terminate Signal:
+#SBATCH --signal=SIGTERM@3600
+
+## Run command
+mpirun -n 592 ./athena -r star_wind.00109.rst time/tlim=1.1  time/nlim=-1 problem/boundary_radius=8 problem/increase_resolution=false 

@@ -1,0 +1,41 @@
+
+Tue Jul 25 16:37:00 2017: Request 72627 was acted upon.
+ Transaction: Ticket created by chempel
+       Queue: 0-SDSC
+     Subject: How to run job on Comet
+       Owner: Nobody
+  Requestors: amir.jaberzadeh@usc.edu
+      Status: new
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=72627 >
+
+Ticket submitted on behalf of user, assigned to SDSC.  Chris Hempel
+
+
+
+I want to run multiple data with one program. Each program only uses 1 core and I tried to use sbatch —array=1-n for submitting the jobs. The cluster allocates 24 cores(I believe it is one Node) to each array job instead of one I have mentioned in the slurm file. The sample file with Slurm configs is:
+
+#!/bin/bash
+#SBATCH -J myprog # A single job name for the array
+#SBATCH -c 1 # Number of cores
+#SBATCH -N 1 # All tasks on one machine
+#SBATCH -t 0-00:01 # 1 min (D-HH:MM)
+#SBATCH -o myprog%A%a.out # Standard output
+# %A" is replaced by the job ID and "%a" with the array index
+#SBATCH -e myprog%A%a.err # Standard erroe
+echo  input$SLURM_ARRAY_TASK_ID
+
+and the submission command is:
+sbatch --array=1-2 test.slurm
+
+for monitoring:
+sacct —jobs=$JobID
+
+       JobID    JobName  Partition    Account  AllocCPUS      State ExitCode
+------------ ---------- ---------- ---------- ---------- ---------- --------
+10293869_2       myprog    compute     usc123         24  COMPLETED      0:0
+10293869_2.+      batch                        usc123         24  COMPLETED      0:0
+10293869_1       myprog    compute     usc123         24  COMPLETED      0:0
+10293869_1.+      batch                        usc123         24  COMPLETED      0:0
+  
+Thanks for your help,
+Amir

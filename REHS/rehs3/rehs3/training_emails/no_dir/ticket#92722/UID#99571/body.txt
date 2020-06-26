@@ -1,0 +1,31 @@
+
+Fri Aug 03 14:14:02 2018: Request 92722 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by jhidleba
+       Queue: 0-SDSC
+     Subject: boost mvapich error in comet
+       Owner: jhidleba
+  Requestors: pamidigs@iu.edu
+      Status: new
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=92722 >
+
+
+I am seeing this error from a c++ code compiled with boost loaded.
+
+can some body let me know if this could be corrected.
+
+Thanks,
+Sudhakar.
+
+[ux421154@comet-ln3 6ala-linear-bp]$ mpirun -np 4 ../../goniom-mpi.x <mpi.com<http://mpi.com>
+LiMIC: (limic_open) file open failLiMIC: (limic_open) file open fail
+LiMIC: (limic_open) file open fail
+
+[cli_2]: aborting job:
+Fatal error in MPI_Init:
+Other MPI error, error stack:
+MPIR_Init_thread(514)....:
+MPID_Init(359)...........: channel initialization failed
+MPIDI_CH3_Init(446)......:
+MPIDI_CH3I_SMP_Init(2313): LiMIC2 device does not exist: No such file or directory
+
+ 

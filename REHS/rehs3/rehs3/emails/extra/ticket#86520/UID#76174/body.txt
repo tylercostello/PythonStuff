@@ -1,0 +1,30 @@
+
+Sat Apr 07 08:48:09 2018: Request 86520 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by aredding
+       Queue: 0-SDSC
+     Subject: XUP: compare SU charges of one batch vs arrays?
+       Owner: Nobody
+  Requestors: ingber@alumni.caltech.edu
+      Status: new
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=86520 >
+
+
+[Ticket created from XUP by ingber]
+[From: Lester Ingber]
+[System: Comet]
+[Category: Batch Queues/Jobs]
+Hi.  I have a set of runs that could run up tp 216 case studies.  This can be submitted as one (trivial) MPI job, or as an array job.
+
+It seems that an array job would be more efficient?  That is, when any job in an array is complete, its SU count ends.  So I would use
+#SBATCH --array=1-256
+It would be more convenient if I could use something like:
+#SBATCH --array=1-24,101-124,201-224,301-324,401-424,501-524,601-624,701-724,801-824,901-924
+Is there a max array size?
+
+Is my assumption correct that a batch MPI keeps all its assigned SUs active?  E.g., I would submit
+#SBATCH --nodes=9
+#SBATCH --ntasks-per-node=24
+
+Thanks.
+
+Lester 

@@ -1,0 +1,31 @@
+
+Wed Dec 13 12:56:53 2017: Request 80335 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by jhawthor
+       Queue: 0-SDSC
+     Subject: XUP: high communication when using all cores per node
+       Owner: Nobody
+  Requestors: lihui870222@gmail.com
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=80335 >
+
+
+[Ticket created from XUP by hliastro]
+[From: Hui Li]
+[System: Comet]
+[Category: Batch Queues/Jobs]
+Dear Sir/Madam,
+
+I'm running my weak scaling test of a 256^3 resolution-element hydro simulation using my startup allocation on Comet.
+
+I submitted all my pure MPI jobs with 192 cores, but different configurations. The problem is that, when I tried to use all cores within nodes like 8 nodes each of which has 24 cores, I got slower performance than that uses 16 nodes each of which 12 cores. The difference of the performance continuous if I use an even smaller number of cores per node.
+
+Would you please let me know what exactly is going on here? Why does the communication within node is even worse than among nodes? Is there any I can do to improve it?
+
+For your reference, my runs are stored in the oasis scratch disk. One of the benchmark run is at /oasis/scratch/comet/hliastro/temp_project/AREPO/MHD_TURB/NFW/c14/scaling/256.
+
+The modules that I'm using are:
+  1) intel/2013_sp1.2.144   3) gnutools/2.69          5) gsl/2.1
+  2) mvapich2_ib/2.1        4) fftw/3.3.4             6) hdf5/1.8.14
+
+Thanks,
+Hui 

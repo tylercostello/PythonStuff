@@ -1,0 +1,29 @@
+
+Wed Feb 20 21:37:33 2019: Request 104125 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by carmanh
+       Queue: 0-SDSC
+     Subject: XUP: tensorflow library issue
+       Owner: Nobody
+  Requestors: mcianfro@umich.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=104125 >
+
+
+[Ticket created from XUP by micianfr]
+[From: Michael Cianfrocco]
+[System: Comet]
+[Category: Software]
+Hello,
+
+I'm trying to install the software package crYOLO for cryo-EM image analysis: 
+
+http://sphire.mpg.de/wiki/doku.php?id=downloads:cryolo_1&redirect=1
+
+After successful installation on a COMET compute node, I tried to execute the command and I got this error: 
+
+ImportError: /lib64/libc.so.6: version `GLIBC_2.17' not found (required by /home/cosmic2/.conda/envs/cryolo2/lib/python3.6/site-packages/tensorflow/python/_pywrap_tensorflow_internal.so)
+
+After looking online, this issue appears to be an OS incompatibility, where the error is likely due to the OS of Comet being slightly older than the code expects. What is the best way forward for this? A singularity container or is there a tensorflow package that I can use?
+
+Thank you,
+Mike 

@@ -1,0 +1,66 @@
+
+Wed Aug 29 18:53:26 2018: Request 94135 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by carmanh
+       Queue: 0-SDSC
+     Subject: HDFS fails to copy 256 GB data from Data Oasis
+       Owner: carmanh
+  Requestors: shw328@eng.ucsd.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=94135 >
+
+
+Hi XSEDE help,
+
+I am a current user on Comet cluster under username stingw. I was trying to
+use Spark to sort several-hundred GB data.
+
+I took the sbatch example script to run Scala based Spark 2.1.0, and
+modified myspark (/home/stingw/sparkscala_v210/myspark) script a bit, but
+this script has no direct relation with the error I ran into below. The
+script worked well when I moved smaller input data, e.g. 1.2 GB, to hdfs
+from data oasis.
+
+However, hdfs was having issues when I was trying to copy 256 GB data from
+data oasis.
+
+The error/warning message was as follow:
+
+WARN hdfs.DFSClient: DataStreamer Exception
+org.apache.hadoop.ipc.RemoteException(org.apache.hadoop.hdfs.server.namenode.SafeModeException):
+Cannot add block to /data/256gb5.input._COPYING_. Name node is in safe mode.
+Resources are low on NN. Please add or free up more resources then turn off
+safe mode manually.
+NOTE:  If you turn off safe mode before adding resources, the NN will
+immediately return to safe mode.
+Use "hdfs dfsadmin -safemode leave" to turn safe mode off.
+
+Then I tried to fix this as the error message suggested me. I added "hdfs
+dfsadmin -safemode leave" before I did any hdfs operations, but I still see
+the same error message as follow:
+
+mySpark: Starting worker on comet-21-13.sdsc.edu:
+  /share/apps/compute/spark/spark-2.1.0-bin-hadoop2.6/sbin/spark-daemon.sh
+--config /home/stingw/mycluster.conf/spark start
+org.apache.spark.deploy.worker.Worker 1 spark://comet-21-10.sdsc.edu:7077
+starting org.apache.spark.deploy.worker.Worker, logging to
+/scratch/stingw/18889739/logs/spark-stingw-org.apache.spark.deploy.worker.Worker-1-comet-21-13.sdsc.edu.out
+....
+Safe mode is OFF
+...
+18/08/29 15:34:01 WARN hdfs.DFSClient: DataStreamer Exception
+org.apache.hadoop.ipc.RemoteException(org.apache.hadoop.hdfs.server.namenode.SafeModeException):
+Cannot add block to /data/256gb5.input._COPYING_. Name node is in safe mode.
+Resources are low on NN. Please add or free up more resources then turn off
+safe mode manually.
+NOTE:  If you turn off safe mode before adding resources, the NN will
+immediately return to safe mode.
+Use "hdfs dfsadmin -safemode leave" to turn safe mode off.
+
+I am wondering why this happens because the namenode of hdfs isn't the node
+accommodating data,  why it cannot deal with 256 GB data?
+
+Also, I attach the log from the most recent Spark job.
+
+Thanks,
+Shu-Ting
+ 

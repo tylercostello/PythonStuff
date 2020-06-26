@@ -1,0 +1,60 @@
+
+Mon Apr 09 22:41:31 2018: Request 86668 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by buskuehl
+       Queue: 0-SDSC
+     Subject: C++ 11 Compilation problem with Intel TBB on Comet
+       Owner: buskuehl
+  Requestors: shw328@eng.ucsd.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=86668 >
+
+
+Hi XSEDE help
+
+I am a current user on Comet cluster under username stingw.
+
+I tried to compile an example of Intel TBB library on Comet cluster. (Link
+to the example https://github.com/01org/tbb/blob/tbb_2018/examples/
+graph/fgbzip2/fgbzip2.cpp)
+
+The example requires some C++ 11 features,  e.g. supporting lambda
+functions, as written in its preprocessor flags: #if
+__TBB_CPP11_LAMBDAS_PRESENT.
+
+It worked perfectly on my own machine with gcc 5.4.0 , glibc 2.23 , and
+glibcxx 3.4.21. These libraries are newer than its counterpart on Comet.
+On Comet, gcc is 4.9.0, glibc is 2.12, and glibcxx is 3.4.13.
+
+The compilation of the example on Comet didn't work out and gave the
+following errors:
+
+ /home/stingw/demo_tbb_cmake/tbb/examples/graph/fgbzip2/fgbzip2.cpp:142:20:
+error: 'async_node' in namespace 'tbb::flow' does not name a template type
+ typedef tbb::flow::async_node< tbb::flow::continue_msg, BufferMsg >
+async_file_reader_node;
+                    ^
+/home/stingw/demo_tbb_cmake/tbb/examples/graph/fgbzip2/fgbzip2.cpp:143:20:
+error: 'async_node' in namespace 'tbb::flow' does not name a template type
+ typedef tbb::flow::async_node< BufferMsg, tbb::flow::continue_msg >
+async_file_writer_node;
+
+First, it's an error unrelated to C++11 lambda feature. It may indicate
+that the environment doesn't have full C++11 support. Second, it's not a
+trivial header inclusion error. I did include the right header file: tbb
+/flow_graph.h. 'async node' appears in line 3768 of tbb/flow_graph.h
+<https://github.com/01org/tbb/blob/tbb_2018/include/tbb/flow_graph.h#L3768>.
+
+A possible explanation for the compilation error can be the environment
+setup related to C++11, and I'm guessing that the difference on gcc, glibc,
+and glibcxx is highly possible to contribute to the compilation error I had.
+
+Did someone report similar issues related to C++ 11 support on Comet
+before? Is it possible to update gcc, glibc, and glibcxx libraries to a
+later or the latest version?
+
+Also, I include my advisor Prof. George Porter (cc'd) in the loop so that
+we can keep him updated.
+
+Many Thanks,
+Shu-Ting
+ 

@@ -1,0 +1,30 @@
+
+Mon Mar 19 16:33:51 2018: Request 85229 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by fwells
+       Queue: 0-SDSC
+     Subject: XUP: Adding LAPACK library to singularity image
+       Owner: Nobody
+  Requestors: hjohlas@gmail.com
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=85229 >
+
+
+[Ticket created from XUP by hjohlas]
+[From: Hannah Johlas]
+[System: Comet]
+[Category: Software]
+Hello,
+
+I've added a function to my software which I run using the Singularity image /home/hjohlas/singularity/ubuntu_openmpi.img.
+
+This new function requires linking to the LAPACK library when I compile my UDF library, which I do from within a Singularity shell. However, I cannot find liblapack.so (or similar) in the existing image.
+
+Can you please let me know the path to the LAPACK library in the image, if it's already there?
+If not, can you please add the library to the image and then let me know the path?
+
+As discussed in previous tickets (#69228 in particular), just loading the LAPACK module doesn't work in this situation since I need to compile the UDF library from the Singularity shell which doesn't support modules. 
+
+As a side note, if I don't use the Singularity shell, I can successfully compile the UDF library once I've loaded the LAPACK module (but then cannot run the software with that UDF library of course).
+
+Thank you,
+Hannah 

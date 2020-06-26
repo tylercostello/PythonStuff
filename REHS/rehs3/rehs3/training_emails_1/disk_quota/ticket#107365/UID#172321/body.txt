@@ -1,0 +1,44 @@
+
+Thu Apr 25 14:42:21 2019: Request 107365 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by jhawthor
+       Queue: 0-SDSC
+     Subject: comet working directory choice
+       Owner: Nobody
+  Requestors: jmparker@berkeley.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=107365 >
+
+
+Hello,
+
+*Background*: I'm having trouble understanding the intended use of the
+directory structure on comet, in the context of my application. I'm running
+SPECFEM3D [1], which has a fairly strict location structure for source
+binaries, input, and output that I'd like to avoid messing with. I
+initially compiled the code under my home directory and was running small
+tests from there (on debug and compute nodes) until I think I hit a space
+quota. I re-read the comet welcome message and thought I should move
+everything over to my project space (/oasis/projects/nsf/ucb192/jmparker).
+I did that without archiving or compressing the files in any way, which I
+realize I should not do again, and discovered that all operations in that
+space are incredibly slow.
+
+*Questions*:
+1. How should I be using these directories? Work in $HOME and move any
+results that I want to keep over to oasis?
+2. How should I move my files back? Should either of the archiving or
+moving steps be done with a compute node to avoid using too much login node
+resource?
+3. What is the space quota on my home directory? The quota command throws
+connection refused errors.
+
+Thank you,
+Jes
+
+[1] https://specfem3d.readthedocs.io/en/latest/05_running_the_solver/
+
+-- 
+Jes Parker
+PhD Candidate - Glaser Lab <http://glaser.berkeley.edu/glaserdrupal/>
+UC Berkeley
+ 

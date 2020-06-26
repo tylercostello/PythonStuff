@@ -1,0 +1,26 @@
+
+Fri Jan 05 19:15:29 2018: Request 81352 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by buskuehl
+       Queue: 0-SDSC
+     Subject: XUP: Slow MPI_Alltoall
+       Owner: buskuehl
+  Requestors: rikhi@jhu.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=81352 >
+
+
+[Ticket created from XUP by rikhi]
+[From: Rikhi Bose]
+[System: Comet]
+[Category: Batch Queues/Jobs]
+Dear Sir/Madam,
+
+I had been successfully running my program on COMET over the last 4 months. Recently, I am having a problem at an MPI_AllToAll statement. While previously it was taking 0.3-0.5 seconds to execute, now it takes more than 100 seconds which severely slows down my calculation. 
+
+During smooth execution, the buffer size was 1105920 (X 8 byte real) for each process. Now I am trying to transfer a buffer of size 1253376 (X 8 byte real) for each process. In both runs, 720 processes are used. 
+
+I use intel 2015 compiler with mvapich2. I tried to recompile the code with the same number of grid points I used in successful runs in the present environmental setting and it ran smoothly. The problem reoccurs when I increase the number of grid points and run. 
+
+Can you suggest where I should look into?
+Sincerely,
+Rikhi Bose. 

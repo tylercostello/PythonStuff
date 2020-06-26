@@ -1,0 +1,28 @@
+
+Mon Nov 20 16:52:20 2017: Request 79289 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by buskuehl
+       Queue: 0-SDSC
+     Subject: XUP: Issue with P100
+       Owner: buskuehl
+  Requestors: rkonwar@ucsd.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=79289 >
+
+
+[Ticket created from XUP by rkonwar]
+[From: Rajdeep Konwar]
+[System: Comet]
+[Category: Batch Queues/Jobs]
+I am getting the following error when I try to run on P100 using sbatch:
+
+sbatch: error: bank_limit plugin: expired user, can't submit job
+sbatch: error: Batch job submission failed: Invalid account or account/partition combination specified
+
+I do have access to the P100 nodes. Here is a part of the slurm script I am using:
+#SBATCH --nodes=1
+#SBATCH -p gpu
+#SBATCH --gres=gpu:p100:4
+#SBATCH --ntasks-per-node=4
+#SBATCH --export=ALL
+#SBATCH -A TG-MCA03S012
+#SBATCH -t 00:05:00 

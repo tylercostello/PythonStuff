@@ -1,0 +1,44 @@
+
+Fri Oct 12 09:16:09 2018: Request 96861 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by jhidleba
+       Queue: 0-SDSC
+     Subject: XUP: restricted access to VASP?
+       Owner: jhidleba
+  Requestors: ebarnes@uwlax.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=96861 >
+
+
+[Ticket created from XUP by barnes73]
+[From: Eric Barnes]
+[System: Comet]
+[Category: Software]
+Hi,
+
+I've got a local license for VASP at my home institution, and I'm trying to scale up by using comet.  My test run job failed, but I'm not sure of what happened.
+
+One possibility seems to be that VASP is not available.  My output file starts with "which: no vasp in (... list of path directories ...)".  I've attached the output file.  With a little searching, I found a page that suggested that VASP is a restricted program.  Would there be any way for me to get access, if this is the issue?
+
+It is also possible that I have simply created a bad slurm file or misused ibrun.  Here's what I cobbled together from a colleague's sample file:
+
+#!/bin/bash
+
+#SBATCH --job-name="test run"
+#SBATCH --output="sing_zno_test.%j.%N.out"
+#SBATCH --nodes=2
+#SBATCH --ntasks-per-node=8
+#SBATCH --partition=debug
+#SBATCH --export=ALL
+#SBATCH --mail-user=ebarnes@uwlax.edu
+#SBATCH --mail-type=begin
+#SBATCH --mail-type=end
+#SBATCH -t 00:30:00
+
+# Campus Champion Allocation
+#SBATCH -A TG-CCR180031
+
+module load vasp/5.4.4
+
+ibrun -v -n 2 vasp
+
+Any help is appreciated.  Eric 

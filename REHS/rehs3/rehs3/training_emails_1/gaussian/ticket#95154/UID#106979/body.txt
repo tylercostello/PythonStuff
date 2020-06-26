@@ -1,0 +1,49 @@
+
+Fri Sep 14 16:42:45 2018: Request 95154 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by carmanh
+       Queue: 0-SDSC
+     Subject: XUP: Submitted jobs are not giving .log files
+       Owner: Nobody
+  Requestors: rdykstra@terpmail.umd.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=95154 >
+
+
+[Ticket created from XUP by rdykstra]
+[From: Ryan Dykstra]
+[System: Comet]
+[Category: Batch Queues/Jobs]
+Hello,
+
+I have been submitting Gaussian09 calculations using a script called comet.py. I usually will receive a .log file in either my completed calculations or my home directory. Recently some of my calculations have not returned a .log file in either my home directory or my completed calculations directory. I do receive a .out file with a list of errors that says the following:
+
+ Read checkpoint file Epoxy-tdb-complex-Ni-L-OA-1-4-b-2-rad-inner-top-abcd-MigInst-TS.chk
+ Write formatted file Epoxy-tdb-complex-Ni-L-OA-1-4-b-2-rad-inner-top-abcd-MigInst-TS.fchk
+ Missing data for FChkPn.
+ Error termination via Lnk1e at Thu Sep 13 21:00:53 2018.
+/var/spool/slurmd/job19082532/slurm_script: line 48: 18108 Segmentation fault      $FORMCHK Epoxy-tdb-complex-Ni-L-OA-1-4-b-2-rad-inner-top-abcd-MigInst-TS.chk
+ Read checkpoint file Epoxy-tdb-complex-Ni-L-OA-1-4-b-2-rad-inner-top-abcd-MigInst-TS.chk
+ Write formatted file Epoxy-tdb-complex-Ni-L-OA-1-4-b-2-rad-inner-top-abcd-MigInst-TS.fchk
+ Missing data for FChkPn.
+ Error termination via Lnk1e at Thu Sep 13 21:00:53 2018.
+/var/spool/slurmd/job19082532/slurm_script: line 49: 18109 Segmentation fault      $FORMCHK Epoxy-tdb-complex-Ni-L-OA-1-4-b-2-rad-inner-top-abcd-MigInst-TS.chk
+/var/spool/slurmd/job19082532/slurm_script: line 50: /home/rdykstra/CompletedCalcs/Epoxy-tdb-complex-Ni-L-OA-1-4-b-2-rad-inner-top-abcd-MigInst-TS.fchk: No such file or directory
+tar: Epoxy-tdb-complex-Ni-L-OA-1-4-b-2-rad-inner-top-abcd-MigInst-TS.fchk: Cannot stat: No such file or directory
+tar: Exiting with failure status due to previous errors
+
+One of the files I have been trying to submit using comet.py is called : 
+
+Epoxy-tdb-complex-Ni-L-OA-1-4-b-2-rad-inner-top-abcd-MigInst-TS.com 
+
+and it returns the file:
+
+Epoxy-tdb-complex-Ni-L-OA-1-4-b-2-rad-inner-top-abcd-MigInst-TS.out 
+
+which states the above error. I do not have a .log file from my calculation. 
+
+What could be the reason for my calculation to run but not return a .log file? Is it due to the way my comet.py file is written?
+
+I have attached my comet.py file 
+
+Account: mda125
+username: rdykstra 

@@ -1,0 +1,42 @@
+
+Mon Apr 02 12:33:06 2018: Request 86056 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by hthta
+       Queue: 0-SDSC
+     Subject: XUP: Question about job submission
+       Owner: hthta
+  Requestors: geng.liu@maine.edu
+      Status: new
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=86056 >
+
+
+[Ticket created from XUP by liugeng]
+[From: Geng Liu]
+[System: Comet]
+[Category: Batch Queues/Jobs]
+Hi, I am a new user of XSEDE cluster. And I am trying to submit a job now. After creating all the files needed for that case, I submitted the job by a script, which is attached below. However, an error comes out immediately after the submission. The error information is,
+
+" sbatch: error: bank_limit plugin: expired user, can't submit job
+sbatch: error: Batch job submission failed: Invalid account or account/partition combination specified "
+
+Does this mean my account is not working? Or anything wrong with the submission? 
+
+Thanks.
+
+Geng Liu
+
+-----------------
+
+The script is as follows,
+
+#!/bin/bash
+#SBATCH --job-name="re-01"
+#SBATCH --output="z2.out"
+#SBATCH --error="z2.err"
+#SBATCH --partition=compute
+#SBATCH --nodes=4
+#SBATCH --ntasks-per-node=16
+#SBATCH --export=ALL
+#SBATCH -t 48:00:00
+#SBATCH -A mai101
+
+ibrun -np 64 -v ./Xvicar3dPAT-2.5-v15 

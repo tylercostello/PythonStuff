@@ -1,0 +1,18 @@
+
+Tue Mar 20 19:57:19 2018: Request 85321 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by buskuehl
+       Queue: 0-SDSC
+     Subject: XUP: Missing "libcudnn.so.6" for Tensorflow
+       Owner: buskuehl
+  Requestors: zes017@eng.ucsd.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=85321 >
+
+
+[Ticket created from XUP by zes017]
+[From: Zeyang Shen]
+[System: comet-gpu.sdsc.xsede]
+[Category: System/Hardware Issues]
+I was trying to run Tensorflow and Keras on Comet GPU nodes. But I encountered two problems. 1) cuda in /usr/local is kind of outdated. I was hoping for cuda 9.0 for the latest version of tensorflow. But this is not the major issue here. 2) cuDNN is missing in /usr/loca/cuda/lib64. I was given error saying "libcudnn.so.6: cannot open shared object file: No such file or directory" when I tried to import tensorflow package. Some related information can be found here https://github.com/tensorflow/tensorflow/issues/12416. I am hoping for a solution to this problem so that I can run my python script on the cluster GPU.
+
+Is it possible to install cuDNN version 6.0 or 7.0 onto the system? Thank you! 

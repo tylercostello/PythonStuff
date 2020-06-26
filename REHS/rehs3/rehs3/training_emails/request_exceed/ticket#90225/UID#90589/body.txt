@@ -1,0 +1,73 @@
+
+Mon Jun 18 15:35:15 2018: Request 90225 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by aredding
+       Queue: 0-SDSC
+     Subject: XUP: sbatch: error: Batch job submission failed: Invalid account or account/partition combination specified
+       Owner: Nobody
+  Requestors: malwaraw@iwu.edu
+      Status: new
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=90225 >
+
+
+[Ticket created from XUP by malwaraw]
+[From: Mohammad Alwarawrah]
+[System: Comet]
+[Category: Batch Queues/Jobs]
+Hi,
+
+I am trying to submit a job on COMET using GROMACS script:
+#!/bin/bash
+#SBATCH -p compute
+#SBATCH -A "TG-MCB180043"
+#SBATCH --nodes=3
+#SBATCH --ntasks-per-node=24
+#SBATCH -t 48:00:00
+#SBATCH -o pure-popc-100-200ns.out
+#SBATCH -e pure-popc-100-200ns.out
+#SBATCH -J pure-popc-100-200ns
+#SBATCH --export=ALL
+module unload intel
+module load gromacs
+exe=`which gmx_mpi`
+processors=$(( $SLURM_NNODES * $SLURM_NTASKS_PER_NODE ))
+mpirun  -np $processors -genv I_MPI_FABRICS shm:ofa $exe mdrun -v -deffnm pure-popc-100-200ns
+
+Under the following directory: /oasis/scratch/comet/malwaraw/temp_project/pure-popc-512/100-200ns
+
+After using sbatch gromacs.cpu.sb, It gives me the following error:
+
+sbatch: error: bank_limit plugin: Can't find teragrid association for TG-MCB180043
+sbatch: error: Batch job submission failed: Invalid account or account/partition combination specified
+
+When I remove #SBATCH -A "TG-MCB180043", It gives me the following error:
+
+sbatch: error: bank_limit plugin: The requested time can not exceed the available balance.
+Requested SUs: 3457
+Allocation limit group SUs: 50000
+Allocation limit user SUs: 50000
+Allocation used group SUs: 47591
+Allocation used user SUs: 5126
+Allocation available group SUs: 2409
+Allocation available user SUs: 44874
+Allocation running/queued group SUs: 0
+Allocation running/queued user SUs: 0
+Allocation completed today group SUs: 0
+Allocation completed today user SUs: 0
+sbatch: error: Batch job submission failed: Requested time limit is invalid (missing or exceeds some limit)
+
+Does it mean that I still did not get the allocation of June 15th? Under my account on Xsede it show that I have the allocation and its active. 
+
+When I use:  show_accounts
+It give the following:
+ID name      project      used     available    used_by_proj
+------------------------------------------------------------
+malwaraw     iit105       5126     50000        47591
+
+To charge your job to one of these projects replace  << project >>
+with one from the list and put this Slurm directive in your job script:
+#SBATCH -A << project >>
+
+Which show that I do not have the TG-MCB180043 allocation. Am I right?
+
+Thanks
+Mohammad 

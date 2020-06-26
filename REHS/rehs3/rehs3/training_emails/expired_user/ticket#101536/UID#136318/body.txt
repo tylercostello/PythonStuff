@@ -1,0 +1,51 @@
+
+Wed Jan 09 09:08:59 2019: Request 101536 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by fwells
+       Queue: 0-SDSC
+     Subject: XUP: Batch job submission faild
+       Owner: Nobody
+  Requestors: shima.arasteh@temple.edu
+      Status: user_wait
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=101536 >
+
+
+[Ticket created from XUP by shima]
+[From: Shima Arasteh]
+[System: Comet]
+[Category: Batch Queues/Jobs]
+Hey Sir,
+I want to submit a job in Comet, but it looks like that I am not permitted to submit a job. The pbs I used and the error I am getting afterwards are as follow:
+
+PBS:
+"
+#!/bin/sh
+
+#PBS -N test
+#PBS -q compute
+#PBS -V
+#PBS -l nodes=1:ppn=24 -l walltime=00:20:00
+#
+# Batch-submission script for OpenPBS system
+#
+#SBATCH -A TG-MCB100145
+
+module load gromacs
+# cd $PBS_O_WORKDIR #change to the working directory
+export  OMP_NUM_THREADS=4
+
+cat $SLURM_NODEFILE
+
+mpirun -np 6 gmx_mpi mdrun -deffnm npt_heavyatoms -ntomp 4 -cpi npt_heavyatoms.cpt
+"
+And the error:
+"
+The command was:
+'/usr/bin/sbatch test.pbs  2>&1'
+and the output was:
+'sbatch: error: bank_limit plugin: expired user, can't submit job
+ sbatch: error: Batch job submission failed: Invalid account or account/partition combination specified
+"
+The pbs file works on another user account existing on comet.
+I would be very appreciated if you help me with this issue.
+Thank you,
+Shima Arasteh 

@@ -1,0 +1,33 @@
+
+Fri Oct 13 15:16:28 2017: Request 77240 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by buskuehl
+       Queue: 0-SDSC
+     Subject: run VASP in comet
+       Owner: buskuehl
+  Requestors: tianli.feng2011@gmail.com
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=77240 >
+
+
+Dear Comet Staff,
+
+I am trying to run VASP in Comet using MPI, but every result was outputted
+by 24 times in the output file, so I think my script should not be correct.
+I have tried all the MPI methods listed on the website, but none got run.
+Do you have any example script for running VASP in Comet?
+
+Here is my script:
+
+module load vasp/5.4.4
+VASP=$(which vasp)
+export SLURM_NODEFILE=`generate_pbs_nodefile`
+mpirun_rsh -hostfile $SLURM_NODEFILE -np 24 $VASP >out.txt
+
+
+Many thanks,
+Tianli
+------------
+Tianli Feng
+Vanderbilt University - Oak Ridge National Laboratory
+---*The truth is what it is, not what you see.*
+ 

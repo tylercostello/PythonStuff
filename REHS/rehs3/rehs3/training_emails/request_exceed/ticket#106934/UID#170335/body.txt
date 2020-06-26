@@ -1,0 +1,38 @@
+
+Tue Apr 16 10:13:24 2019: Request 106934 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by jhawthor
+       Queue: 0-SDSC
+     Subject: Allocation limit exceed message
+       Owner: Nobody
+  Requestors: kim1634@purdue.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=106934 >
+
+
+Dear admin,
+
+we have been using the comet cluster with this project (WaterHUB for Hydrologic Modeling and Education | TG-GEO150005), and we recently get this error message when we submitted a job.
+
+$sbatch -o /oasis/scratch/comet/waterhub/temp_project/swatjob/hhawrot/312/output/sim-312.out -e /oasis/scratch/comet/waterhub/temp_project/swatjob/hhawrot/312/output/sim-312.err -p compute -t 10080 -N 1 --qos=oneweek /home/waterhub/swat/run_v2/run_swatsim.sh hhawrot 3428 312 calibration calibration swat2012_627 false 0:
+Submitting a job to SLURM
+
+sbatch: error: bank_limit plugin: The requested time can not exceed the available balance.
+Requested SUs: 4033
+Allocation limit group SUs: 50000
+Allocation limit user SUs: 50000
+Allocation used group SUs: 29407
+Allocation used user SUs: 29407
+Allocation available group SUs: 20593
+Allocation available user SUs: 20593
+Allocation running/queued group SUs: 20165
+Allocation running/queued user SUs: 20165
+Allocation completed today group SUs: 3
+Allocation completed today user SUs: 3
+sbatch: error: Batch job submission failed: Requested time limit is invalid (missing or exceeds some limit)
+
+At the time, we already have 5 running jobs. It looks like those running jobs reserved the allocations. Is that correct?
+If that is the case, we can’t submit more than 5 jobs at the same time?
+
+Best,
+I Luk
+ 

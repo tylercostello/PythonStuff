@@ -1,0 +1,37 @@
+
+Mon Sep 10 15:41:31 2018: Request 94822 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by buskuehl
+       Queue: 0-SDSC
+     Subject: XUP: Unable to start parpool on Matlab 2018
+       Owner: buskuehl
+  Requestors: kanikanarang1991@gmail.com
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=94822 >
+
+
+[Ticket created from XUP by kanika]
+[From: Kanika Narang]
+[System: Comet]
+[Category: Software]
+Hi
+
+My scripts used to run perfectly for Matlab 2016, however after the update to new Matlab 2018, I'm unable to run my previous scripts. Specifically, it's not able to start a parallel pool. Interestingly, I'm not facing this error if I start an interactive session on the cluster.
+
+I'm getting this error
+
+"Error using parpool (line 113)
+Parallel pool failed to start with the following error. For more detailed
+information, validate the profile 'local' in the Cluster Profile Manager.
+
+Error in runPipeline_multipledata (line 19)
+parpool('local',15)
+
+Caused by:
+    Error using parallel.internal.pool.InteractiveClient>iThrowWithCause (line
+    676)
+    Failed to start pool.
+        Error using parallel.internal.customattr.checkConstraint (line 41)
+        Invalid value specified for property 'NumPathsToAppend'. Allowed values
+        are positive integer scalars."
+
+I have tried using this link to correct it but it doesn't work "https://www.mathworks.com/matlabcentral/answers/373221-problem-with-starting-parpool". Your help will be highly appreciated. 

@@ -1,0 +1,120 @@
+
+Tue Apr 03 16:04:17 2018: Request 86173 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by buskuehl
+       Queue: 0-SDSC
+     Subject: Help resolving runtime exception java.lang.UnsupportedClassVersionError: weka/core/Utils on Comet
+       Owner: buskuehl
+  Requestors: George.Rudolph@uvu.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=86173 >
+
+
+Dear XSEDE Help,
+When running Java on Comet, my job crashes due to  an
+exception with Weka libraries: java.lang.UnsupportedClassVersionError: weka/core/Utils.
+The job output is below.
+My CLASSPATH is defined and exported in my .bashrc to include, a PJ2 (Parallel Java 2)
+jar file, codsmp.jar file, and a weka.jar file (Weka 3.9.x). the latter two jar files
+are in the cod subdirectory under my home.
+This code is designed to be multicore, shared memory parallel, so I requested 1 node
+with 24 cores. As far as I can see, everything seems to startup and launch as expected,
+except perhaps the "unknown" launcher.
+There are 24 tasks started, one for each core---in this case, "d=0 a=4 p=3" is diagnostic output
+from the 24th task to be started up, and then the exception is encountered.
+
+My code is compiled using Oracle's JDK, rather than OpenJDK.  In my code, I am using dynamic
+class loading to create instances of the Weka classes I need. Apparently there is a class version
+mismatch between the class file formats for Weka 3.9 and whatever version of Java is running
+on Comet's nodes.
+Is there some way I can configure the runtime environment to control which JDK/JRE is used?
+My other solution would be to hard-code the Weka algorithms used in order to eliminate
+dynamic class loading as the culprit.
+
+I will upload a copy of the java source file SelfTrainerSmp.java to /home/grudolph/cod, so you have it
+for reference. The list of classifiers used is in /home/grudolph/cod/cod-refs.
+
+
+---------- output of Job PJ2.15371812.comet-23-36.out ----------------
+cat PJ2.15371812.comet-23-36.out
+sleep 10s before Launcher on tracker node
+Tue Apr 03 13:16:37 PDT 2018 Tracker started, tracker=comet-23-36:20618 web=localhost:8080 name=PJ2 Cluster version=Parallel Java 2 v20180222
+Tue Apr 03 13:16:47 PDT 2018 Launcher started, tracker=comet-23-36:20618 name=comet-23-36 cores=24 gpus=0 command="java"
+Tue Apr 03 13:16:47 PDT 2018 Node comet-23-36 launcher started, NodeProperties("comet-23-36",24,())
+Tue Apr 03 13:16:47 PDT 2018 Launcher started, tracker=comet-23-36:20618 name=comet-23-36 cores=24 gpus=0 command="java"
+Tue Apr 03 13:16:47 PDT 2018 Node comet-23-36 launcher started, NodeProperties("comet-23-36",24,())
+Tue Apr 03 13:16:50 PDT 2018 heartbeatFromLauncher(edu.rit.pj2.tracker.LauncherSender@4a6dfd4d): Unknown launcher
+Tue Apr 03 13:17:17 PDT 2018 Job 1 launched, user grudolph
+Tue Apr 03 13:17:17 PDT 2018 Job 1 task 1 launched, NodeProperties("",-1,0)
+Tue Apr 03 13:17:17 PDT 2018 Job 1 task 1 started on node comet-23-36
+Tue Apr 03 13:17:17 PDT 2018 Backend launched, jobID=1 taskID=1 jobHost=comet-23-36 jobPort=46567
+d=0 a=0 p=0
+d=0 a=4 p=2
+d=0 a=3 p=3
+d=0 a=4 p=0
+d=0 a=3 p=2
+d=0 a=3 p=1
+d=0 a=4 p=1
+d=0 a=2 p=1
+d=0 a=2 p=3
+d=0 a=2 p=2
+d=0 a=2 p=0
+d=0 a=1 p=3
+d=0 a=0 p=3
+d=0 a=0 p=2
+d=0 a=1 p=2
+d=0 a=3 p=0
+d=0 a=1 p=1
+d=0 a=1 p=0
+d=0 a=0 p=1
+d=1 a=0 p=3
+d=1 a=0 p=2
+d=1 a=0 p=1
+d=1 a=0 p=0
+d=0 a=4 p=3
+Tue Apr 03 13:17:17 PDT 2018 Job 1 task 1 backend: Unexpected exception
+java.lang.RuntimeException: Exception in parallel team thread
+        at edu.rit.pj2.Team.execute(Team.java:195)
+        at edu.rit.pj2.Team.execute(Team.java:178)
+        at edu.rit.pj2.LongParallelForLoop.exec(LongParallelForLoop.java:233)
+        at selftrain.SelfTrainerSmp.main(SelfTrainerSmp.java:123)
+        at edu.rit.pj2.Backend$BackendThread.run(Backend.java:366)
+Caused by: java.lang.UnsupportedClassVersionError: weka/core/Utils
+        at selftrain.SelfTrainerSmp$1.run(SelfTrainerSmp.java:137)
+        at edu.rit.pj2.LongParallelForLoop.iterateDynamic(LongParallelForLoop.java:343)
+        at edu.rit.pj2.Schedule$3.iterate(Schedule.java:159)
+        at edu.rit.pj2.Schedule.iterate(Schedule.java:452)
+        at edu.rit.pj2.LongParallelForLoop.run(LongParallelForLoop.java:263)
+        at edu.rit.pj2.Team$TeamThread.run(Team.java:239)
+Tue Apr 03 13:17:17 PDT 2018 Job 1 stopped due to exception: java.lang.RuntimeException: Exception in parallel team thread
+java.lang.RuntimeException: Exception in parallel team thread
+        at edu.rit.pj2.Team.execute(Team.java:195)
+        at edu.rit.pj2.Team.execute(Team.java:178)
+        at edu.rit.pj2.LongParallelForLoop.exec(LongParallelForLoop.java:233)
+        at selftrain.SelfTrainerSmp.main(SelfTrainerSmp.java:123)
+        at edu.rit.pj2.Backend$BackendThread.run(Backend.java:366)
+Caused by: java.lang.UnsupportedClassVersionError: weka/core/Utils
+        at selftrain.SelfTrainerSmp$1.run(SelfTrainerSmp.java:137)
+        at edu.rit.pj2.LongParallelForLoop.iterateDynamic(LongParallelForLoop.java:343)
+        at edu.rit.pj2.Schedule$3.iterate(Schedule.java:159)
+        at edu.rit.pj2.Schedule.iterate(Schedule.java:452)
+        at edu.rit.pj2.LongParallelForLoop.run(LongParallelForLoop.java:263)
+        at edu.rit.pj2.Team$TeamThread.run(Team.java:239)
+Killed by signal 15.
+Tue Apr 03 13:17:17 PDT 2018 HTTP server terminating
+Tue Apr 03 13:17:17 PDT 2018 launcherStopped(edu.rit.pj2.tracker.LauncherSender@4a6dfd4d): Unknown launcher
+Tue Apr 03 13:17:17 PDT 2018 Tracker stopped
+Tue Apr 03 13:17:17 PDT 2018 Launcher stopped, NodeProperties("comet-23-36",24,())Tue Apr 03 13:17:18 PDT 2018 Launcher stopped
+-------------------------------  end --------------------------------------------------------
+
+
+
+George Rudolph
+Associate Professor of Computer Science
+XSEDE Campus Champion for UVU
+CS 520h
+Department of Computer Science
+Utah Valley University
+Orem, Utah 84058
+801-863-8116
+
+ 

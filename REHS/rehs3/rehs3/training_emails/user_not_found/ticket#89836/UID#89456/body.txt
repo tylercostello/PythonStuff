@@ -1,0 +1,53 @@
+
+Mon Jun 11 09:37:28 2018: Request 89836 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by jhawthor
+       Queue: 0-SDSC
+     Subject: cannot run jobs on comet, TG-ASC170031,
+       Owner: Nobody
+  Requestors: kwong@utk.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=89836 >
+
+
+All my users in the project, TG-ASC170031, was removed on June 6.
+I have added them back. When they submit jobs on comet. They get the following errors.
+One of the user is chbrooks.
+
+Please check,
+
+Many thanks,
+
+
+===============
+[chbrooks@comet-ln3 colloid]$ more job.batch
+#!/bin/bash
+#SBATCH --job-name="OD-NWCHEM"
+#SBATCH --output="OD-NWCHEM.%j.%N.out"
+#SBATCH --partition=compute
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --export=ALL
+#SBATCH -t 00:10:00
+
+#This job runs with 1 nodes, each node has 24 cores .
+#ibrun in verbose mode will give binding detail
+
+module load lammps
+lammps < in.colloid
+
+============
+
+[chbrooks@comet-ln3 colloid]$ sbatch job.batch
+sbatch: error: bank_limit plugin: not found user association chbrooks
+sbatch: error: Batch job submission failed: Invalid account or account/partition combination specified
+=============
+
+
+
+Kwai Wong, Ph.D.
+Joint Institute for Computational Sciences, UTK/ORNL
+Director, CFD Laboratory, Research Assistant Professor
+Mechanical, Aerospace, Biomedical Engineering
+University of Tennessee, Knoxville, TN 37996-2030
+cfdlab.utk.edu, 865-974-8833
+ 

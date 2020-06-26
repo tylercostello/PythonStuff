@@ -1,0 +1,47 @@
+
+Thu Aug 03 22:19:18 2017: Request 73294 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by buskuehl
+       Queue: 0-SDSC
+     Subject: XUP: can not submit gpu jobs with 5 nodes
+       Owner: buskuehl
+  Requestors: utchunliyan@gmail.com
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=73294 >
+
+
+[Ticket created from XUP by cyan]
+[From: Chunli Yan]
+[System: Comet]
+[Category: Batch Queues/Jobs]
+Hello,
+
+I need to run replica exchange simulations and have to request 20 gpus (20 replicas). But I got the error below:
+
+[cyan@comet-ln3 dna]$ sbatch job-gpu 
+sbatch: error: Batch job submission failed: Node count specification invalid
+
+my job script is below:
+
+#!/bin/bash 
+#SBATCH --job-name="gpu_test"
+#SBATCH --output="gpu_test"
+#SBATCH --partition=gpu
+#SBATCH --nodes=6
+#SBATCH --gres=gpu:p100:4
+#SBATCH --ntasks-per-node=7
+#SBATCH --export=ALL
+#SBATCH -t 48:00:00
+
+module load cuda/8.0
+module load intel/2013_sp1.2.144
+module load mvapich2_ib/2.1
+
+cd /oasis/scratch/comet/cyan/temp_project/string/dna
+export AMBERHOME=/home/cyan/program/amber16/
+
+
+ibrun -n 20 $AMBERHOME/bin/pmemd.cuda.MPI -ng 20 -groupfile groupfile
+
+Are there something wrong?  I can request up to 8 nodes with gnu partition.
+
+Thanks, 

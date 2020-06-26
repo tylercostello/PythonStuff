@@ -1,0 +1,37 @@
+
+Mon Dec 18 14:01:30 2017: Request 80649 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by jhawthor
+       Queue: 0-SDSC
+     Subject: XUP: Invalid user
+       Owner: jhawthor
+  Requestors: owarek@oregonstate.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=80649 >
+
+
+[Ticket created from XUP by homeda7]
+[From: Kofi Oware Sarfo]
+[System: Comet]
+[Category: Batch Queues/Jobs]
+Hi,
+ I tried submitting a job to comet for the first time using  the job submission file listed below  and  received a prompt that I am an invalid user as indicated in the attached snapshot. . The vasp.sb  file I used in submitting the job contained the following: 
+
+#!/bin/bash
+#SBATCH --nodes=2
+#SBATCH --tasks-per-node=24
+#SBATCH -t 30:15:00
+#SBATCH -o vasp.out
+#SBATCH -e vasp.err
+#SBATCH -p compute
+#SBATCH --export=ALL
+
+module unload intel
+module load vasp
+exe=`which vasp_std`
+processors=$(( $SLURM_NNODES * $SLURM_NTASKS_PER_NODE ))
+mpirun  -np $processors -genv I_MPI_FABRICS shm:ofa $exe >& vasp.log
+
+
+my allocation  code is TG-ENG170002.
+
+Could you assist me to rectify this in this respect. 

@@ -1,0 +1,19 @@
+
+Sun Oct 15 06:40:16 2017: Request 77302 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by sporluck
+       Queue: 0-SDSC
+     Subject: XUP: MPI jobs exit immediately
+       Owner: sporluck
+  Requestors: finlator@nmsu.edu
+      Status: new
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=77302 >
+
+
+[Ticket created from XUP by finlator]
+[From: Kristian Finlator]
+[System: Comet]
+[Category: Batch Queues/Jobs]
+Since yesterday, I have been trying to submit a 336-core MPI job to comet.  More than five times in a row, I find that the jobs end immediately.  I put some simple debugging comments into main() that precede any actual work, and find that even they don't get printed to the log file.  Earlier this week (up through Oct 14) a similar series of runs did just fine, ending only when I had maxed out disk space; I've since freed some up.  The compiler I'm using is:
+
+[finlator@comet-ln2 gadget-3.26]$ which mpicc
+/opt/intel/2016.3.210/compilers_and_libraries/linux/mpi/intel64/bin/mpicc 

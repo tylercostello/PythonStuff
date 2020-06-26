@@ -1,0 +1,60 @@
+
+Wed Oct 18 17:33:12 2017: Request 77550 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by buskuehl
+       Queue: 0-SDSC
+     Subject: XUP: problem running cns in batch mode
+       Owner: buskuehl
+  Requestors: bnolen@uoregon.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=77550 >
+
+
+[Ticket created from XUP by bjnolen]
+[From: Brad Nolen]
+[System: Comet]
+[Category: Batch Queues/Jobs]
+Hi, I'm having a problem with running cns is batch mode. The cns script works fine on my home workstation, but when I try to run it on comet with the script below, the job starts fine but doesn't seem to finish. I can see some intermediate files generated during the run in the scratch file on the comet node, but the tarred results file is missing all of these intermediate files and also the final output files. 
+
+The slurm output file is as follows(/home/bjnolen/mass_spec/las17/splay/1ewe_fix/slurm-11948975.out):
+tar: Removing leading `/' from member names
+/scratch/bjnolen/11948975/docking_no_fix_rot_attched_2.inp
+slurmstepd: slurm_receive_msg: Socket timed out on send/recv operation
+slurmstepd: slurm_receive_msg: Socket timed out on send/recv operation
+slurmstepd: slurm_receive_msg: Socket timed out on send/recv operation
+slurmstepd: slurm_receive_msg: Socket timed out on send/recv operation
+slurmstepd: slurm_receive_msg: Socket timed out on send/recv operation
+slurmstepd: slurm_receive_msg: Socket timed out on send/recv operation
+slurmstepd: slurm_receive_msg: Socket timed out on send/recv operation
+slurmstepd: slurm_receive_msg: Socket timed out on send/recv operation
+slurmstepd: slurm_receive_msg: Socket timed out on send/recv operation
+slurmstepd: slurm_receive_msg: Socket timed out on send/recv operation
+slurmstepd: slurm_receive_msg: Socket timed out on send/recv operation
+slurmstepd: slurm_receive_msg: Socket timed out on send/recv operation
+slurmstepd: slurm_receive_msg: Socket timed out on send/recv operation
+slurmstepd: slurm_receive_msg: Socket timed out on send/recv operation
+slurmstepd: slurm_receive_msg: Socket timed out on send/recv operation
+slurmstepd: slurm_receive_msg: Socket timed out on send/recv operation
+slurmstepd: slurm_receive_msg: Socket timed out on send/recv operation
+slurmstepd: slurm_receive_msg: Socket timed out on send/recv operation
+
+The batch file is as follows (/home/bjnolen/mass_spec/las17/splay/1ewe_fix/arp.shared.sb):
+#!/bin/bash
+#SBATCH -p shared
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=22
+#SBATCH -t 24:00:00
+#SBATCH -J ARP.2
+#SBATCH --export=ALL
+. /home/bjnolen/installs/cns_solve_1.3/.cns_solve_env_sh
+cp docking_no_fix_rot_attched_2.inp /scratch/$USER/$SLURM_JOBID
+cp *.mtf /scratch/$USER/$SLURM_JOBID
+cp *.def /scratch/$USER/$SLURM_JOBID
+cp ATP* /scratch/$USER/$SLURM_JOBID
+cp splay_*.pdb /scratch/$USER/$SLURM_JOBID
+cd /scratch/$USER/$SLURM_JOBID
+module load python
+python3 $SLURM_SUBMIT_DIR/dock3.py docking_no_fix_rot_attched_2.inp 1
+tar -cvf $SLURM_SUBMIT_DIR/results.$SLURM_JOBID.tar /scratch/$USER/$SLURM_JOBID/dock*
+
+Thanks in advance for any advice, and let me know if you need more information.
+Thanks!! 

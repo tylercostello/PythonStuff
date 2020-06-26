@@ -1,0 +1,80 @@
+
+Wed Aug 23 10:44:57 2017: Request 74261 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by jhidleba
+       Queue: 0-SDSC
+     Subject: memory
+       Owner: jhidleba
+  Requestors: ksoh@its.jnj.com
+      Status: new
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=74261 >
+
+
+Hi Mahidhar
+
+
+
+I keep running into this memory problem with a program that I am sending to the nodes, am I requesting too much memory per node?
+
+
+
+Thank you.
+
+
+
+Best rgds
+
+keng
+
+____
+
+
+
+java -Djava.library.path=/projects/ps-janssen3/jhmi/ksoh/bbmap/jni/ -ea -Xmx140g -Xms140g -cp /projects/ps-janssen3/jhmi/ksoh/bbmap/current/ jgi.BBDukF in=trimmed/1001271B_mD2_PE1_mouse.fastq.gz.filtered.fq out=trimmed/1001271B_mD2_PE1_mouse.fastq.gz.filtered_mouse.fq k=31 threads=16 ref=/projects/ps-janssen3/jhmi/ksoh/hosts/mouse_masked.fa.gz -Xmx140g
+
+Executing jgi.BBDukF [in=trimmed/1001271B_mD2_PE1_mouse.fastq.gz.filtered.fq, out=trimmed/1001271B_mD2_PE1_mouse.fastq.gz.filtered_mouse.fq, k=31, threads=16, ref=/projects/ps-janssen3/jhmi/ksoh/hosts/mouse_masked.fa.gz, -Xmx140g]
+
+
+
+BBDuk version 37.48
+
+Set threads to 16
+
+Initial:
+
+Memory: max=144061m, free=141054m, used=3007m
+
+
+
+/projects/ps-janssen3/jhmi/ksoh/bbmap/bbduk.sh: line 321:  3697 Killed                  java -Djava.library.path=/projects/ps-janssen3/jhmi/ksoh/bbmap/jni/ -ea -Xmx140g -Xms140g -cp /projects/ps-janssen3/jhmi/ksoh/bbmap/current/ jgi.BBDukF in=trimmed/1001271B_mD2_PE1_mouse.fastq.gz.filtered.fq out=trimmed/1001271B_mD2_PE1_mouse.fastq.gz.filtered_mouse.fq k=31 threads=16 ref=/projects/ps-janssen3/jhmi/ksoh/hosts/mouse_masked.fa.gz -Xmx140g
+
+java -Djava.library.path=/projects/ps-janssen3/jhmi/ksoh/bbmap/jni/ -ea -Xmx140g -Xms140g -cp /projects/ps-janssen3/jhmi/ksoh/bbmap/current/ jgi.BBDukF in=trimmed/1001271B_mD2_PE1_mouse.fastq.gz.filtered_mouse.fq out=trimmed/1001271B_mD2_PE1_mouse.fastq.gz.filtered_mouse.filtered_human.fq k=31 threads=16 ref=/projects/ps-janssen3/jhmi/ksoh/hosts/hg19_main_mask_ribo_animal_allplant_allfungus.fa.gz -Xmx140g
+
+Executing jgi.BBDukF [in=trimmed/1001271B_mD2_PE1_mouse.fastq.gz.filtered_mouse.fq, out=trimmed/1001271B_mD2_PE1_mouse.fastq.gz.filtered_mouse.filtered_human.fq, k=31, threads=16, ref=/projects/ps-janssen3/jhmi/ksoh/hosts/hg19_main_mask_ribo_animal_allplant_allfungus.fa.gz, -Xmx140g]
+
+
+
+BBDuk version 37.48
+
+Set threads to 16
+
+Exception in thread "main" java.lang.RuntimeException: Can't read file 'trimmed/1001271B_mD2_PE1_mouse.fastq.gz.filtered_mouse.fq'
+
+                at shared.Tools.testInputFiles(Tools.java:612)
+
+                at jgi.BBDukF.<init>(BBDukF.java:785)
+
+                at jgi.BBDukF.main(BBDukF.java:69)
+
+slurmstepd: Exceeded step memory limit at some point.
+
+slurmstepd: Exceeded job memory limit at some point.
+
+
+
+
+
+
+
+
+
+ 

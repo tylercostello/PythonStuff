@@ -1,0 +1,42 @@
+
+Fri May 10 15:51:10 2019: Request 108043 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by buskuehl
+       Queue: 0-SDSC
+     Subject: XUP: Retrieval of QChem scratch file
+       Owner: buskuehl
+  Requestors: tuh16867@temple.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=108043 >
+
+
+[Ticket created from XUP by mushir]
+[From: Mushir Ul Hasan Kolathingal Thodika]
+[System: Comet]
+[Category: Batch Queues/Jobs]
+Hey,
+
+I am not able to save the scratch file for a QChem job for some reason. I am attaching the slurm file for the job. Any help is appreciated.
+
+Thank you.
+
+This is the directory where I am running the job
+
+Dir = /oasis/scratch/comet/mushir/temp_project/uracil/rx-12_ry-10_rz-4.5/dyson
+
+Slurm file input is as follows:
+
+#!/bin/bash
+#SBATCH --job-name="uracil_2000"
+#SBATCH --output=uracil_2000-slurm.out
+#SBATCH --partition=shared
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --exclude=comet-01-[01-54],comet-02-65
+#SBATCH --mem=78G
+#SBATCH --export=ALL
+#SBATCH -t 47:59:00
+export QCMACHINEFILE=`generate_pbs_nodefile`
+module load qchem
+export QCSCRATCH=/scratch/$USER/$SLURM_JOBID
+timeout 2860m qchem -save uracil_2000.inp uracil_2000.out uracil_2000
+cp -rf ${QCSRATCH}/uracil_2000 . 

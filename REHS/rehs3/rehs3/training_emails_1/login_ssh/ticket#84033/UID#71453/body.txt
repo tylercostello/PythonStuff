@@ -1,0 +1,41 @@
+
+Sun Feb 25 14:05:59 2018: Request 84033 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by jhawthor
+       Queue: 0-SDSC
+     Subject: XUP: Can not gsissh to comet, permission deny
+       Owner: Nobody
+  Requestors: h9qin@eng.ucsd.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=84033 >
+
+
+[Ticket created from XUP by guest]
+[From: He Qin]
+[System: Comet]
+[Category: Access/Login Issues]
+Hi,
+
+I am trying to login to comet from ssohub and I got permission deny. As shown below.
+
+    [qinacme@ssohub ~]$ gsissh comet
+    Permission denied (publickey,gssapi-keyex,gssapi-with-mic,password,keyboard-interactive,hostbased).
+
+The full logs are shown in attachment `ssh_log.txt` file. Basically, it's complaining the missing of the following files:
+
+debug1: identity file /home/qinacme/.ssh/id_rsa-cert type -1
+debug1: key_load_public: No such file or directory
+debug1: identity file /home/qinacme/.ssh/id_dsa type -1
+debug1: key_load_public: No such file or directory
+debug1: identity file /home/qinacme/.ssh/id_dsa-cert type -1
+debug1: key_load_public: No such file or directory
+debug1: identity file /home/qinacme/.ssh/id_ecdsa type -1
+debug1: key_load_public: No such file or directory
+debug1: identity file /home/qinacme/.ssh/id_ecdsa-cert type -1
+debug1: key_load_public: No such file or directory
+debug1: identity file /home/qinacme/.ssh/id_ed25519 type -1
+debug1: key_load_public: No such file or directory
+debug1: identity file /home/qinacme/.ssh/id_ed25519-cert type -1
+
+So would you please help me to look into it? You can just reset my account to default if necessary. Thank you so much!!!
+
+He Qin 

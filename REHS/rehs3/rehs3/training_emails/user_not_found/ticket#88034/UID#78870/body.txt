@@ -1,0 +1,42 @@
+
+Thu May 03 16:20:05 2018: Request 88034 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by buskuehl
+       Queue: 0-SDSC
+     Subject: Unable to request interactive resources on Comet at SDSC
+       Owner: buskuehl
+  Requestors: rmcwhirt@mail.sfsu.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=88034 >
+
+
+Hello,
+
+I'm attempting to run some code in an interactive session using srun on 
+the Comet cluster at SDSC but it seems I'm running into user account 
+problems. The command I type is:
+
+srun --partition=debug --pty --nodes=1 --ntasks-per-node=8 -t 00:10:00 
+--wait=0 --export=ALL /bin/bash
+
+The output is:
+
+srun: error: bank_limit plugin: not found user association qenupve
+srun: error: Unable to allocate resources: Invalid account or 
+account/partition combination specified
+
+I logged into the XSEDE user portal, went to "My XSEDE --> 
+Allocations/Usage" and I see active Comet allocation with spare SUs. My 
+advisor suggested I type "show_accounts" on Comet and says I should be 
+associated with project ucb274, but instead I get:
+
+ID name      project      used     available    used_by_proj
+------------------------------------------------------------
+
+No accounts found for user qenupve on platform sdsc_comet.
+
+Any help would be appreciated.
+
+Thanks,
+~Richard McWhirter (qenupve)
+
+ 

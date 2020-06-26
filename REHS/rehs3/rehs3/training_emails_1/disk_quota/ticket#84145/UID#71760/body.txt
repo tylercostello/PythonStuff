@@ -1,0 +1,28 @@
+
+Wed Feb 28 09:01:53 2018: Request 84145 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by jhidleba
+       Queue: 0-SDSC
+     Subject: XUP: wrf.exe: posixio.c:237: px_pgout: Assertion `*posp == ((off_t)(-1)) || *posp == lseek(nciop->fd, 0, 1)' failed
+       Owner: Nobody
+  Requestors: xhu@ou.edu
+      Status: new
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=84145 >
+
+
+[Ticket created from XUP by xhu]
+[From: Xiaoming Hu]
+[System: Comet]
+[Category: Batch Queues/Jobs]
+One of my wrf jobs aborted in the middle while the other job is still running. 
+See the error message: 
+ module_io_quilt_old.F        2931 F
+Quilting with   2 groups of   2 I/O tasks.
+wrf.exe: posixio.c:237: px_pgout: Assertion `*posp == ((off_t)(-1)) || *posp == lseek(nciop->fd, 0, 1)' failed.
+forrtl: error (76): Abort trap signal
+
+My run is beneath /oasis/scratch/comet/xhu2/temp_project/Run/CO2_and_otherGHG/WRFV3.9/wrfchem3.9_NCEP_DOE_CONUS_Snudge_tracer16CTbc_SSTu_10mb_convOnScavOff.2016010100
+
+My submission script: /oasis/scratch/comet/xhu2/temp_project/Run/CO2_and_otherGHG/WRFV3.9/wrfchem3.9_NCEP_DOE_CONUS_Snudge_tracer16CTbc_SSTu_10mb_convOnScavOff.2016010100/wrf_0100.sh
+
+Since the other wrf job is still running, this should not be the space issue. 
+anything I should worry about? 

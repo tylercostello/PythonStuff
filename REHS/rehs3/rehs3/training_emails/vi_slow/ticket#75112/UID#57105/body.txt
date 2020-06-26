@@ -1,0 +1,31 @@
+
+Fri Sep 08 15:48:20 2017: Request 75112 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by buskuehl
+       Queue: 0-SDSC
+     Subject: XUP: job quit again due to wrf.exe: posixio.c:237: px_pgout: Assertion `*posp == ((off_t)(-1)) || *posp == lseek(nciop->fd, 0, 1)' failed
+       Owner: buskuehl
+  Requestors: xhu@ou.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=75112 >
+
+
+[Ticket created from XUP by xhu]
+[From: Xiaoming Hu]
+[System: Comet]
+[Category: Batch Queues/Jobs]
+One of my jobs aborted again due to 
+wrf.exe: posixio.c:237: px_pgout: Assertion `*posp == ((off_t)(-1)) || *posp == lseek(nciop->fd, 0, 1)' failed
+
+See details in 
+/oasis/scratch/comet/xhu2/temp_project/Run/2016ACT-America/WRFV3.9.1/wrfchem3.9.1_NCEP_DOE1d_CONUS_NEI2011_MEGAN_Snudge_add_chemdiag.2016072400/rsl.error.0000
+
+Last time when I had this issue, I moved some stuff from scratch to /oasis/projects/nsf/uok114/xhu2  to solve the problem
+
+Do I have to do this again? 
+But according to 
+lfs quota -u $USER /oasis/scratch/comet
+I only used 19T of total 31T.
+
+The aborted job is beneath /oasis/scratch/comet/xhu2/temp_project/Run/2016ACT-America/WRFV3.9.1/wrfchem3.9.1_NCEP_DOE1d_CONUS_NEI2011_MEGAN_Snudge_add_chemdiag.2016072400
+The submission script is wrf_2400.sh under the directory
+Any idea? 

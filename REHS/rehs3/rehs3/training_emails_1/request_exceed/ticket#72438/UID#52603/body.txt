@@ -1,0 +1,34 @@
+
+Fri Jul 21 08:58:17 2017: Request 72438 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by fwells
+       Queue: 0-SDSC
+     Subject: XUP: Allocation used?
+       Owner: fwells
+  Requestors: skimble@towson.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=72438 >
+
+
+[Ticket created from XUP by skimble5]
+[From: steven kimble]
+[System: Comet]
+[Category: Allocations]
+My allocation page tells me I've used 453 SUs (of 50k) but I keep getting this error message when I try to sbatch:
+
+[skimble5@comet-ln2 all_samples_minus_related]$ sbatch submittercomet.sh
+sbatch: error: bank_limit plugin: The requested time can not exceed the available balance.
+Requested SUs: 481
+Allocation limit group SUs: 50000
+Allocation limit user SUs: 1000
+Allocation used group SUs: 44071
+Allocation used user SUs: 510
+Allocation available group SUs: 5929
+Allocation available user SUs: 490
+Allocation running/queued group SUs: 193
+Allocation running/queued user SUs: 0
+Allocation completed today group SUs: 160
+Allocation completed today user SUs: 144
+sbatch: error: Batch job submission failed: Requested time limit is invalid (missing or exceeds some limit)
+
+Thanks,
+Steve 

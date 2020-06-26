@@ -1,0 +1,28 @@
+
+Fri Dec 21 14:28:40 2018: Request 100847 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by jhidleba
+       Queue: 0-SDSC
+     Subject: XUP: Problem Installing Darshan on Comet
+       Owner: jhidleba
+  Requestors: mkhoshle@asu.edu
+      Status: new
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=100847 >
+
+
+[Ticket created from XUP by mkhoshle]
+[From: Mahzad Khoshlessan]
+[System: Comet]
+[Category: Software]
+Hello, 
+
+I am trying to install darshan and I have already compiled and installed both darshan_runtime and darshan_utils. When I run my code I get the following error:
+mpiexec: error while loading shared libraries: libmpich.so.3: cannot open shared object file: No such file or directory
+
+and I am not sure what is the problem. I checked my rpath and it is:
+(py3) [mkhoshle@comet-14-02 ~]$ objdump -x /home/mkhoshle/installs/darshan/lib/libdarshan.so |grep RPATH
+  RPATH                /home/mkhoshle/miniconda2/lib
+
+But I donot have a miniconda2 environment. I have a minconda3 environment. 
+Do you know what can be my mistake?
+
+Thank you, 

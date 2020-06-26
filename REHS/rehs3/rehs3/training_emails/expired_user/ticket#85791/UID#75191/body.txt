@@ -1,0 +1,35 @@
+
+Wed Mar 28 13:05:33 2018: Request 85791 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by jhidleba
+       Queue: 0-SDSC
+     Subject: XUP: sbatch error
+       Owner: Nobody
+  Requestors: kavindri9030@gmail.com
+      Status: new
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=85791 >
+
+
+[Ticket created from XUP by kavi9030]
+[From: Kavindri Ranasinghe]
+[System: Comet]
+[Category: Batch Queues/Jobs]
+sbatch: error: bank_limit plugin: expired user, can't submit job
+sbatch: error: Batch job submission failed: Invalid account or account/partition combination specified
+
+I'm getting the above error while I was trying to submit a gaussian job.
+
+This is the script I'm using.
+#!/bin/bash 
+#SBATCH -p shared 
+#SBATCH -N 1 # number of nodes  
+#SBATCH -n 8 # number of cores  
+#SBATCH --mem=2G                
+#SBATCH -t 1-12:00 # time (D-HH:MM)   
+ #SBATCH -A jsu101       
+ 
+cd $SLURM_SUBMIT_DIR   
+
+module load gnu/4.9.2  
+module load gaussian   
+
+g09 TS_E2-038.com 

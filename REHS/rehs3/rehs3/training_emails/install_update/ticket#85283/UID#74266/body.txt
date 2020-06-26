@@ -1,0 +1,27 @@
+
+Tue Mar 20 10:53:00 2018: Request 85283 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by fwells
+       Queue: 0-SDSC
+     Subject: XUP: Request: Singularity 2.4.2 or newer
+       Owner: fwells
+  Requestors: joaander@umich.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=85283 >
+
+
+[Ticket created from XUP by joaander]
+[From: Joshua Anderson]
+[System: Comet]
+[Category: Software]
+Please install singularity 2.4.2 or newer on Comet. Versions prior to that have a moderately annoying bug where certain characters in environment variables (set inside images) cause singularity to write files into the current working directory.
+
+Here is an example of this behavior:
+
+$ ls
+$ singularity pull docker://nvidia/cuda:8.0-runtime
+$ singularity exec cuda-8.0-runtime.img echo "test"
+test
+$ ls
+=8.0  cuda-8.0-runtime.img
+
+The =8.0 file was created because the cuda:8.0-runtime container contains the environment variable NVIDIA_REQUIRE_CUDA=cuda>=8.0. Singularity versions 2.4.2 and newer do not create the =8.0 file when running this image (or images based on this image). 

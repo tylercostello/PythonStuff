@@ -1,0 +1,48 @@
+
+Mon Aug 21 12:13:57 2017: Request 74148 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by hthta
+       Queue: 0-SDSC
+     Subject: XUP: Error in running batch script
+       Owner: hthta
+  Requestors: avenkatr@ucsd.edu
+      Status: new
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=74148 >
+
+
+[Ticket created from XUP by avenkatr]
+[From: AISHWARYA VENKATRAMANI]
+[System: Comet]
+[Category: Batch Queues/Jobs]
+I get an error when I run the script below,
+
+sbatch: error: bank_limit plugin: expired user, can't submit job
+sbatch: error: Batch job submission failed: Invalid account or account/partition combination specified
+
+
+This is the script:
+
+#!/bin/bash
+#SBATCH --job-name="leap"
+#SBATCH --partition=gpu-shared
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=4
+#SBATCH --gres=gpu:1
+#SBATCH -t 48:00:00
+#SBATCH -o test.out
+#SBATCH -e test.err
+#SBATCH --export=ALL
+
+%source /etc/profile.d/modules.sh
+
+module load amber/15
+
+export MODULEPATH=/share/apps/compute/modulefiles/mpi:$MODULEPATH
+module load openmpi_ib/1.8.8.g447
+module load cuda/6.5
+export AMBERHOME=/home/yin/amber
+export LD_LIBRARY_PATH=$AMBERHOME/lib:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/avenkatr/local/cuda/lib
+export PATH=$AMBERHOME/bin:$PATH
+
+
+tleap -I $AMBERHOME/dat/leap/cmd/oldff -I $AMBERHOME/dat/leap/lib/oldff -f leap.in 

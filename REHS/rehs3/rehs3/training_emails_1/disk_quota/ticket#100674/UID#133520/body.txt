@@ -1,0 +1,55 @@
+
+Wed Dec 19 01:53:51 2018: Request 100674 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by aredding
+       Queue: 0-SDSC
+     Subject: slurmstepd: Exceeded step memory limit at some point
+       Owner: Nobody
+  Requestors: robmoreyucsd@gmail.com
+      Status: new
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=100674 >
+
+
+Hello,
+
+I am trying to map some RNA-seq reads using STAR. For several years now I
+have been using the version of STAR here:
+/home/jpg/opt/biotools/rnastar/bin/STAR
+
+However, I needed to update my genome version which then made this old
+version of STAR no longer usable so I downloaded the newest version here:
+/oasis/projects/nsf/csd414/rmorey/Tools/STAR-2.6.0a
+
+However, now when I try to map I get the following "Exceeded step memory
+limit at some point" error. I am not sure why. In the past I never had set
+a memory option. Do I need to do that now? I did find this in the STAR
+manual:
+"Many standard Linux distributions do not allow large enough shared memory
+blocks. You can fix this issue if you have root privileges, or ask you
+system administrator to do it. To enable the shared memory modify or add
+the following lines to /etc/sysctl.conf:
+kernel.shmmax = Nmax
+kernel.shmall = Nall
+N max, N all numbers should be chosen as follows:
+N max > GenomeIndexSize = Genome + SA + SAindex ( 31000000000 for human
+genome)
+N all > GenomeIndexSize/P ageSize
+where PageSize is typically 4096 (this can be checked with getconf PAGE
+SIZE). Then run:
+/sbin/sysctl -p
+This will increase the allowed shared memory blocks to 31GB, enough for
+human or mouse genome."
+Any help would be appreciated. Below is the output from my attempt showing
+the memory error.
+
+Dec 18 23:35:36 ..... started STAR run
+Dec 18 23:35:36 ..... loading genome
+/var/spool/slurmd/job20623818/slurm_script: line 15: 29551 Killed
+        /oasis/projects/nsf/csd414/rmorey/Tools/STAR-2.6.0a/source/STAR
+--runMode alignReads --genomeDir
+/oasis/projects/nsf/csd414/rmorey/Reference_Genomes/Gencode26_GRCh38
+--readFilesIn
+/oasis/scratch/comet/rmorey/temp_project/Mana_RNA_seq/${SLURM_ARRAY_TASK_ID}.fastq
+--outFileNamePrefix ./${SLURM_ARRAY_TASK_ID} --outSAMmode Full
+--outSAMattributes Standard
+slurmstepd: Exceeded step memory limit at some point.
+ 

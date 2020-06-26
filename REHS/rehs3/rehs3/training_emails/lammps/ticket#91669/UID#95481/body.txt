@@ -1,0 +1,33 @@
+
+Fri Jul 13 14:41:21 2018: Request 91669 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by hthta
+       Queue: 0-SDSC
+     Subject: XUP: getting an MPD error when trying to run gromacs simulations on 1 node
+       Owner: hthta
+  Requestors: jermelgr@buffalo.edu
+      Status: new
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=91669 >
+
+
+[Ticket created from XUP by guest]
+[From: jermel griffin]
+[System: comet-gpu.sdsc.xsede]
+[Category: Batch Queues/Jobs]
+Hello,
+
+I am trying to benchmark gromacs simulations on comet p100 GPUs. I used the following file run_test_ibrun.sb to run simulation some six months ago. However, the simulation did not start and I received the following:
+
+Unloading compiler-dependent module mvapich2_ib/2.1
+IBRUN ERROR: No recognized MPI modules appear to be loaded.  Load an MPI module before using ibrun
+
+I then switched ibrun to srun and received a separate error in the output file test.out. which states that:
+
+
+mpiexec_comet-33-15.sdsc.edu: cannot connect to local mpd (/tmp/mpd2.console_jermelgr); possible causes:
+  1. no mpd is running on this host
+  2. an mpd is running but was started without a "console" (-n option)
+
+Currently I am at a loss on how to proceed
+
+Thank you and regards,
+Jermel 

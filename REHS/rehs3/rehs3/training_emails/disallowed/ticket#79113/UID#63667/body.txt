@@ -1,0 +1,68 @@
+
+Thu Nov 16 19:55:13 2017: Request 79113 was acted upon.
+ Transaction: Queue changed from 0-XOC to 0-SDSC by buskuehl
+       Queue: 0-SDSC
+     Subject: XUP: submitting job in scratch
+       Owner: buskuehl
+  Requestors: kravchen@pitt.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=79113 >
+
+
+[Ticket created from XUP by kravchen]
+[From: Olga Kravchenko]
+[System: Comet]
+[Category: Batch Queues/Jobs]
+Hi, 
+
+I am trying to submit a job in scratch directory and the following error comes up:
+
+[kravchen@comet-ln2 1]$ sbatch run.sh 
+sbatch: error: bank_limit plugin: user is disallowed to submit jobs
+sbatch: error: Batch job submission failed: Invalid account or account/partition combination specified
+
+I have already used the same script to run jobs in scratch and it worked. Please help me identify the error. 
+
+Here is my submission script:
+
+#!/usr/bin/env bash
+
+#SBATCH --account=uop134
+#SBATCH --job-name="minimize"
+#SBATCH --partition=compute
+#SBATCH --output="minimize.o%j.%N"
+#SBATCH --error="minimize.e%j.%N"
+#SBATCH --no-requeue
+#SBATCH --nodes=4
+#SBATCH --ntasks-per-node=24
+#SBATCH --time 1:00:00
+
+declare -r COMPILER_MODULE='gnu/4.9.2'
+declare -r OS='Linux'
+declare -r ARCH='x86_64'
+declare -r NAME='namd'
+declare -r VERSION='2.12'
+declare -r NAMD_PATH="${HOME}/namd/NAMD_${VERSION}_Source/${OS}-${ARCH}-g++"
+declare -r PBS_NODEFILE="$(generate_pbs_nodefile)"
+declare -r CHARMRUN_NODELIST="nodelist.o${SLURM_JOB_ID}"
+declare -r BENCHMARK='stmv'
+
+module purge
+module load "${COMPILER_MODULE}"
+export PATH="${NAMD_PATH}:${PATH}"
+export LD_LIBRARY_PATH="${NAMD_PATH}:${LD_LIBRARY_PATH}"
+
+echo "$(less ${PBS_NODEFILE} | sort | uniq)" > "${CHARMRUN_NODELIST}"
+sed -i 's/^/host /g' "${CHARMRUN_NODELIST}"
+
+printenv
+rm /usr/tmp/stmv-output.xsc
+time -p "${NAMD_PATH}/charmrun" ++nodelist "${CHARMRUN_NODELIST}" ++p 80 ++ppn 5 ++verbose "${NAMD_PATH}/namd2" +setcpuaff
+inity +commap 0,6,12,18 +pemap 1-5,7-11,13-17,19-23 "minimize.conf"
+
+
+It is located here: /oasis/scratch/comet/kravchen/temp_project/no_nacl/1
+
+I appreciate your help!
+
+Olga 

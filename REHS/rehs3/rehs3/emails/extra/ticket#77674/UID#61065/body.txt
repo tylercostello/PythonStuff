@@ -1,0 +1,48 @@
+
+Fri Oct 20 21:28:12 2017: Request 77674 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by buskuehl
+       Queue: 0-SDSC
+     Subject: XUP: Segmentation fault error
+       Owner: buskuehl
+  Requestors: kandoigaurav@gmail.com
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=77674 >
+
+
+[Ticket created from XUP by gkandoi]
+[From: Gaurav Kandoi]
+[System: Comet]
+[Category: Batch Queues/Jobs]
+Hi
+
+I'm trying to create a correlation matrix and then print out the upper triangle of the matrix. I've done this numerous times on my university servers by supplying only 256GB of memory. Now, I'm trying it on comet and it always gives me the following error:
+
+ *** caught segfault ***
+address 0x2b7d90f61538, cause 'memory not mapped'
+
+Traceback:
+ 1: cor(t(K3mer))
+An irrecoverable exception occurred. R is aborting now ...
+/var/spool/slurmd/job12024880/slurm_script: line 23: 22936 Segmentation fault      Rscript K3mer_pairs.R
+
+Yes, it is a big matrix, 70k * 70k, but I've been able to do this several times on university server's before. So, I believe this is not an R issue. I've used the same R script previously.
+
+I've tried using multiple compute nodes and the large-shared partition with 1450GB and all 64 cores. I always get the same error. I'm copying my files to the temporary job scratch and performing all computations there.
+
+I've attached my R as well as the shell script which I'm using. All files can be found in this directory:
+
+/oasis/scratch/comet/gkandoi/temp_project/Isopredict/Mouse/Edges
+
+This is how my R script is supposed to work:
+
+1) read protein_modified_header.fa and rna_modified_header.fa files
+2) perform some operations on the above 2 files
+3) calculate frequency of all possible 3mers for sequences in rna_modified_header.fa files (~70k gene sequences). Imagine this to be 70k row * 64 column matrix.
+4) calculate pairwise correlation of all ~70k sequences based on the above calculated 3mer frequecies
+5) Print out the correlation values along with the row and column names in 7 sub-parts (R can't allocate a vector to accommodate all 70k * 70k values)
+
+The script always breaks at the 4th step, i.e correlation calculation.
+
+Any comments to resolve this will be very helpful. Feel free to suggest an entirely different way if you feel what I'm doing right now is a huge waste of resources.
+
+Thanks 

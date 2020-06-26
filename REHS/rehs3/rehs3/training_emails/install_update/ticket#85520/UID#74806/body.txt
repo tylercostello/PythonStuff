@@ -1,0 +1,93 @@
+
+Fri Mar 23 14:16:33 2018: Request 85520 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by jhidleba
+       Queue: 0-SDSC
+     Subject: XUP: python and scipy not working properly
+       Owner: jhidleba
+  Requestors: drummondfielding@gmail.com
+      Status: new
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=85520 >
+
+
+[Ticket created from XUP by fielding]
+[From: Drummond Fielding]
+[System: Comet]
+[Category: Software]
+Hello
+
+I am trying to use scipy and I am unable to load the proper versions. I enter the following:
+module purge
+module load gnutools python/2.7.13 scipy/2.7 mpi4py/1.3.1
+
+which yields:
+Currently Loaded Modulefiles:
+  1) gnutools/2.69          2) intel/2013_sp1.2.144   3) python/2.7.13          4) scipy/2.7              5) openmpi_ib/1.8.4       6) mpi4py/1.3.1
+
+Then in ipython I get the following:
+
+In [1]: import scipy
+
+In [2]: scipy.__version__
+Out[2]: '0.19.1'
+
+In [3]: from scipy import interpolate
+---------------------------------------------------------------------------
+ImportError                               Traceback (most recent call last)
+<ipython-input-3-14dce4feefbb> in <module>()
+----> 1 from scipy import interpolate
+
+/share/apps/compute/scipy/2.7/lib/python2.7/site-packages/scipy-0.19.1-py2.7-linux-x86_64.egg/scipy/interpolate/__init__.py in <module>()
+    174 from __future__ import division, print_function, absolute_import
+    175
+--> 176 from .interpolate import *
+    177 from .fitpack import *
+    178
+
+/share/apps/compute/scipy/2.7/lib/python2.7/site-packages/scipy-0.19.1-py2.7-linux-x86_64.egg/scipy/interpolate/interpolate.py in <module>()
+     19
+     20 import scipy.linalg
+---> 21 import scipy.special as spec
+     22 from scipy.special import comb
+     23
+
+/share/apps/compute/scipy/2.7/lib/python2.7/site-packages/scipy-0.19.1-py2.7-linux-x86_64.egg/scipy/special/__init__.py in <module>()
+    646 from .orthogonal import *
+    647 from .spfun_stats import multigammaln
+--> 648 from ._ellip_harm import ellip_harm, ellip_harm_2, ellip_normal
+    649 from .lambertw import lambertw
+    650 from ._spherical_bessel import (spherical_jn, spherical_yn, spherical_in,
+
+/share/apps/compute/scipy/2.7/lib/python2.7/site-packages/scipy-0.19.1-py2.7-linux-x86_64.egg/scipy/special/_ellip_harm.py in <module>()
+      5
+      6 from ._ufuncs import _ellip_harm
+----> 7 from ._ellip_harm_2 import _ellipsoid, _ellipsoid_norm
+      8
+      9
+
+scipy/special/_ellip_harm_2.pyx in init scipy.special._ellip_harm_2 (scipy/special/_ellip_harm_2.c:8501)()
+
+/share/apps/compute/scipy/2.7/lib/python2.7/site-packages/scipy-0.19.1-py2.7-linux-x86_64.egg/scipy/integrate/__init__.py in <module>()
+     55 from .quadrature import *
+     56 from .odepack import *
+---> 57 from .quadpack import *
+     58 from ._ode import *
+     59 from ._bvp import solve_bvp
+
+/share/apps/compute/scipy/2.7/lib/python2.7/site-packages/scipy-0.19.1-py2.7-linux-x86_64.egg/scipy/integrate/quadpack.py in <module>()
+      7 from functools import partial
+      8
+----> 9 from . import _quadpack
+     10 import numpy
+     11 from numpy import Inf
+
+ImportError: /share/apps/compute/scipy/2.7/lib/python2.7/site-packages/scipy-0.19.1-py2.7-linux-x86_64.egg/scipy/integrate/_quadpack.so: undefined symbol: __intel_ssse3_rep_memcpy
+
+
+
+
+as you can see for some reason it is using scipy 0.19.1 instead of 2.7, and I am unable to import interpolate from scipy. 
+
+Any help would be greatly appreciated.
+
+Thanks
+Drummond 

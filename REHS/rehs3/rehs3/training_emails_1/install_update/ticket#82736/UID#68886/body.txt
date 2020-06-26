@@ -1,0 +1,30 @@
+
+Tue Jan 30 13:04:35 2018: Request 82736 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by fwells
+       Queue: 0-SDSC
+     Subject: XUP: Not able to use runstyle gnuparallel
+       Owner: fwells
+  Requestors: eamaccar@aggies.ncat.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=82736 >
+
+
+[Ticket created from XUP by eli123]
+[From: Elijah MacCarthy]
+[System: comet-gpu.sdsc.xsede]
+[Category: Batch Queues/Jobs]
+Hello,
+ I am having trouble using the gnu compiler. I am running a program in which I specify the runstyle as gnuparallel. I get n error message that says I cannot use gnuparallel unless I install gnu parallel. But I have module gnu loaded. 
+
+please find the error message below:
+
+which: no parallel in (/opt/pgi/linux86-64/17.5/bin:/opt/gnu/gcc/bin:/opt/gnu/bin:/opt/mvapich2/intel/ib/bin:/opt/intel/composer_xe_2013_sp1.2.144/bin/intel64:/opt/intel/composer_xe_2013_sp1.2.144/mpirt/bin/intel64:/opt/intel/composer_xe_2013_sp1.2.144/debugger/gdb/intel64_mic/bin:/usr/lib64/qt-3.3/bin:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin:/opt/ibutils/bin:/usr/java/latest/bin:/opt/pdsh/bin:/opt/rocks/bin:/opt/rocks/sbin:/opt/sdsc/bin:/opt/sdsc/sbin:/home/maccarth/bin)
+
+You can not set "-runstyle =gnuparallel" because your system dose not support the commands: parallel.
+To support parallel, you have to install the GNU parallel from https://www.gnu.org/software/parallel/
+
+The path to the batch script I am running is:
+/home/maccarth/I-TASSER5.1/I-TASSER5.1/I-TASSERmod 
+
+and the script is
+submit_itasser_comet.sh 

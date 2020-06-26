@@ -1,0 +1,60 @@
+
+Mon Oct 01 23:37:41 2018: Request 96125 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by aredding
+       Queue: 0-SDSC
+     Subject: XUP: Installing a custom keras version
+       Owner: Nobody
+  Requestors: saladi@caltech.edu
+      Status: user_wait
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=96125 >
+
+
+[Ticket created from XUP by saladi1]
+[From: Shyam Saladi]
+[System: comet-gpu.sdsc.xsede]
+[Category: Software]
+Hello!
+
+Thanks for all your help thus far. It turns out that I need a specific set of callbacks that have only recently been implemented in a PR for keras (https://github.com/keras-team/keras/pull/10513). The CI checks pass, but the branch is not yet merged. 
+
+I would like to install this into my tensorflow environment provided by the singularity container that Martin told me about. However, I seem to be having a ton of trouble actually going through the install process. Finally, I've been stumped by the following error. Could you give me a hand please/let me know what I'm doing wrong?
+
+Thanks,
+Shyam 
+
+1) download branch from github
+
+cd ~saladi/lustre/interpro_v70
+git clone git@github.com:hermansje/keras.git keras_cb
+
+2) move to folder
+
+cd keras_cb
+
+3) execute install with pip
+
+(master ✓) keras_cb SINGULARITY_ENV_TMPDIR=~/lustre/tmp singularity exec --nv /share/apps/gpu/singularity/images/tensorflow/tensorflow-gpu.simg python3 -m pip install --target=../pylib .
+WARNING: Non existent 'bind path' source: '/scratch'
+WARNING: Skipping user bind, non existent bind point (file) in container: '/usr/bin/nvidia-smi'
+Processing /oasis/scratch/comet/saladi1/temp_project/interpro_v70/keras_cb
+Exception:
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/pip/basecommand.py", line 209, in main
+    status = self.run(options, args)
+  File "/usr/lib/python3/dist-packages/pip/commands/install.py", line 328, in run
+    wb.build(autobuilding=True)
+  File "/usr/lib/python3/dist-packages/pip/wheel.py", line 748, in build
+    self.requirement_set.prepare_files(self.finder)
+  File "/usr/lib/python3/dist-packages/pip/req/req_set.py", line 360, in prepare_files
+    ignore_dependencies=self.ignore_dependencies))
+  File "/usr/lib/python3/dist-packages/pip/req/req_set.py", line 577, in _prepare_file
+    session=self.session, hashes=hashes)
+  File "/usr/lib/python3/dist-packages/pip/download.py", line 798, in unpack_url
+    unpack_file_url(link, location, download_dir, hashes=hashes)
+  File "/usr/lib/python3/dist-packages/pip/download.py", line 676, in unpack_file_url
+    shutil.copytree(link_path, location, symlinks=True)
+  File "/usr/lib/python3.5/shutil.py", line 353, in copytree
+    raise Error(errors)
+shutil.Error: [('/oasis/scratch/comet/saladi1/temp_project/interpro_v70/keras_cb/.git/objects/pack/pack-3d5a0cff6477edbbfcccd1e06871afda210c541e.idx', '/tmp/pip-k2m8tapd-build/.git/objects/pack/pack-3d5a0cff6477edbbfcccd1e06871afda210c541e.idx', "[Errno 13] Permission denied: '/tmp/pip-k2m8tapd-build/.git/objects/pack/pack-3d5a0cff6477edbbfcccd1e06871afda210c541e.idx'"), ('/oasis/scratch/comet/saladi1/temp_project/interpro_v70/keras_cb/.git/objects/pack/pack-3d5a0cff6477edbbfcccd1e06871afda210c541e.pack', '/tmp/pip-k2m8tapd-build/.git/objects/pack/pack-3d5a0cff6477edbbfcccd1e06871afda210c541e.pack', "[Errno 13] Permission denied: '/tmp/pip-k2m8tapd-build/.git/objects/pack/pack-3d5a0cff6477edbbfcccd1e06871afda210c541e.pack'")]
+You are using pip version 8.1.1, however version 18.0 is available.
+You should consider upgrading via the 'pip install --upgrade pip' command. 

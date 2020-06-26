@@ -1,0 +1,38 @@
+
+Mon Jul 23 18:13:33 2018: Request 92170 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by buskuehl
+       Queue: 0-SDSC
+     Subject: XUP: Allocation
+       Owner: buskuehl
+  Requestors: ml69@rice.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=92170 >
+
+
+[Ticket created from XUP by henry93]
+[From: Henry Leong]
+[System: Comet]
+[Category: Batch Queues/Jobs]
+Hi,
+
+I tried to submit my job on Comet, but I got the followings:
+
+henry93@comet-ln2:~/RI/code/sparse_matrix_method$ sbatch RI_CA_2000_comet.slurm
+sbatch: error: bank_limit plugin: The requested time can not exceed the available balance.
+Requested SUs: 3025
+Allocation limit group SUs: 50000
+Allocation limit user SUs: 22000
+Allocation used group SUs: 26326
+Allocation used user SUs: 21901
+Allocation available group SUs: 23674
+Allocation available user SUs: 99
+Allocation running/queued group SUs: 0
+Allocation running/queued user SUs: 0
+Allocation completed today group SUs: 0
+Allocation completed today user SUs: 0
+sbatch: error: Batch job submission failed: Requested time limit is invalid (missing or exceeds some limit)
+
+I see that there are still plenty of SUs, but somehow the availability for me is only 99 SUs?
+
+Thanks,
+Henry 

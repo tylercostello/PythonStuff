@@ -1,0 +1,24 @@
+
+Thu May 24 15:36:09 2018: Request 89018 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by buskuehl
+       Queue: 0-SDSC
+     Subject: XUP: spark rdma job failure
+       Owner: buskuehl
+  Requestors: cn.ramachandra@gmail.com
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=89018 >
+
+
+[Ticket created from XUP by rchakena]
+[From: Ramachandra Nanjegowda]
+[System: Comet]
+[Category: Batch Queues/Jobs]
+Hello,
+
+I am trying to submit a spark job using SBATCH to run a genome sequencing software called GPF. (https://github.com/fhyxz/GPF)
+
+After running for a while it fails with the below error. 
+
+org.apache.spark.SparkException: Job aborted due to stage failure: Serialized task 960:0 was 817631010 bytes, which exceeds max allowed: spark.akka.frameSize (134217728 bytes) - reserved (204800 bytes). Consider increasing spark.akka.frameSize or using broadcast variables for large values.
+
+I am attaching the SBATCH script I am using to run this job. Let me know if any additional options I need to use to fix the above issue. 

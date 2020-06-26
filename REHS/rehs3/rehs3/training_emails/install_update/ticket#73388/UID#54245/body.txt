@@ -1,0 +1,42 @@
+
+Sat Aug 05 09:26:33 2017: Request 73388 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by fwells
+       Queue: 0-SDSC
+     Subject: comet sdsc keras singularity  gpu
+       Owner: Nobody
+  Requestors: anand.chandrasekaran@uconn.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=73388 >
+
+
+Dear Sir/Madam
+
+
+I am interested in using the 'singularity' functionality in comet. For example, I would like to run the attached python code (with the keras module)  on a gpu. However, I have not managed to do this so far. If you could be give me a set of instructions/manual to do this it would be great.
+
+
+I have done the following steps so far.
+
+
+  1.  cd  /share/apps/gpu/singularity
+  2.  module load singularity
+  3.  singularity shell sdsc_ubuntu_tf1.1_keras.img         (I get "WARNING: Non existant 'bind path' source: '/scratch')
+  4.  python temp.py                    ( I get "OpenBLAS blas_thread_init: RLIMIT_NPROC 1024 current, 2048 max")
+  5.
+ulimit -u 2048
+  6.
+export OMP_NUM_THREADS=2
+  7.
+python temp.py
+  8.  I get the following error (
+    from keras.model import Sequential
+ImportError: No module named model
+)
+
+So I am guessing I need to update keras in the singularity but I am not able to do this with  pip install upgrade etc.
+
+Your help will be greatly appreciated.
+
+Kind regards,
+Anand
+ 

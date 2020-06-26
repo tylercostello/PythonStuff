@@ -1,0 +1,37 @@
+
+Wed May 23 11:47:44 2018: Request 88927 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by jhidleba
+       Queue: 0-SDSC
+     Subject: XUP: Insufficient SUs?
+       Owner: jhidleba
+  Requestors: jdw130330@utdallas.edu
+      Status: new
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=88927 >
+
+
+[Ticket created from XUP by jgravell]
+[From: Jamie Gravell]
+[System: Comet]
+[Category: Batch Queues/Jobs]
+Hello, today when I was attempting to start a new simulation the following message came up:
+
+[jgravell@comet-ln2 DM_MO_150_E]$ qsub comet_lammps_single.txt
+There was an error running the SLURM sbatch command.
+The command was:
+'/usr/bin/sbatch comet_lammps_single.txt  2>&1'
+and the output was:
+'sbatch: error: bank_limit plugin: The requested time can not exceed the available balance.
+ Requested SUs: 577
+ Allocation limit group SUs: 50000
+ Allocation limit user SUs: 50000
+ Allocation used group SUs: 40304
+ Allocation used user SUs: 13579
+ Allocation available group SUs: 9696
+ Allocation available user SUs: 36421
+ Allocation running/queued group SUs: 10377
+ Allocation running/queued user SUs: 0
+ Allocation completed today group SUs: 0
+ Allocation completed today user SUs: 0
+ sbatch: error: Batch job submission failed: Requested time limit is invalid (missing or exceeds some limit)
+
+It seems that my requested SUs is well below the available group and user SUs available. Why is it not being accepted then? Thank you for your assistance. 

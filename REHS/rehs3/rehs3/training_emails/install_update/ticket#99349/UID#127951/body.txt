@@ -1,0 +1,27 @@
+
+Mon Nov 19 15:48:41 2018: Request 99349 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by hthta
+       Queue: 0-SDSC
+     Subject: XUP: Trouble installing new software on Comet
+       Owner: hthta
+  Requestors: afraser3@wisc.edu
+      Status: new
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=99349 >
+
+
+[Ticket created from XUP by afraser]
+[From: Adrian Fraser]
+[System: Comet]
+[Category: Software]
+Dear Comet support staff,
+
+I am not sure if this falls in the realm of issues that are appropriate to ask you all for help with. If not, I'm very sorry, and will look for assistance elsewhere.
+
+I'm trying to run Dedalus (http://dedalus-project.org/) on Comet. Dedalus solves fluid dynamics equations in parallel using MPI. I've managed to install it on Stampede2 and find that it scales quite well there, but I also want to try using it on Comet to get a feel for how its performance there compares to Stampede2. Unfortunately, I'm having a hard time installing it. 
+
+Dedalus is typically installed via a bash script that includes builds for all of its dependencies, but the developers recently added the means to install it via PyPI (see https://dedalus-project.readthedocs.io/en/latest/installation.html , the bash script is towards the bottom under "Installation Script"). I've been trying to use the bash script to install Dedalus on Comet, as that's what worked for me with Stampede2. However, the installation fails during (or immediately after?) it installs Python, giving the error "RuntimeError: can't start new thread", which I haven't seen before on other systems and am having trouble diagnosing. This was attempted using first intel/mvapich2 and then intel/openmpi modules. When attempting the PyPI installation, the installation fails when it's unable to update the system's h5py installation from 2.5 to 2.6. I've tried installing h5py-2.6 locally, but have struggled to find much success there.
+
+Is this possibly something you would be willing to help me troubleshoot? Again, I'm very sorry if I'm looking in the wrong place.
+
+Thanks!
+Adrian 

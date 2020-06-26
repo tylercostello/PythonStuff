@@ -1,0 +1,76 @@
+
+Mon Oct 02 15:20:16 2017: Request 76464 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by clm
+       Queue: 0-SDSC
+     Subject: XUP: GROMACS error on comet
+       Owner: clm
+  Requestors: srinivas.mushnoori@rutgers.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=76464 >
+
+
+[Ticket created from XUP by srini216]
+[From: Srinivas Mushnoori]
+[System: Comet]
+[Category: Software]
+Hello, executing a GROMACS job on comet with the following submit script:
+
+#!/bin/bash
+#PBS -N GroTest_Vivek
+#PBS -o GroTest_Vivek.out
+#PBS -e GroTest_Vivek.err
+#PBS -A unc100
+#PBS -l walltime=00:20:00
+#PBS -l nodes=2
+#PBS -q compute
+#SBATCH --ntasks-per-node=24
+#PBS -M srinivas.mushnoori@rutgers.edu
+
+module unload intel
+module load gromacs
+/opt/gromacs/bin/gmx_mpi grompp -f run3.mdp -c bpti.gro -p topol.top -o md.tpr
+wait
+
+export OMP_NUM_THREADS=1
+export GMX_DISABLE_GPU_DETECTION=True
+ibrun -n 48 -N 24 /opt/gromacs/bin/gmx_mpi mdrun -s md.tpr -v -deffnm md -pin on -pinoffset 0
+
+wait
+
+
+
+
+
+I get the following error:
+
+Unloading compiler-dependent module mvapich2_ib/2.1
+Unloading compiler-dependent module openmpi_ib/1.8.4
+/opt/gromacs/bin/gmx_mpi: error while loading shared libraries: libcudart.so.8.0: cannot open shared object file: No such file or directory
+/opt/gromacs/bin/gmx_mpi: error while loading shared libraries: libcudart.so.8.0: cannot open shared object file: No such file or directory
+[comet-06-15.sdsc.edu:mpispawn_0][child_handler] MPI process (rank: 0, pid: 23694) exited with status 127
+/opt/gromacs/bin/gmx_mpi: error while loading shared libraries: libcudart.so.8.0: cannot open shared object file: No such file or directory
+[comet-06-15.sdsc.edu:mpispawn_0][child_handler] MPI process (rank: 1, pid: 23695) exited with status 127
+/opt/gromacs/bin/gmx_mpi: error while loading shared libraries: libcudart.so.8.0: cannot open shared object file: No such file or directory
+[comet-06-15.sdsc.edu:mpispawn_0][child_handler] MPI process (rank: 2, pid: 23696) exited with status 127
+/opt/gromacs/bin/gmx_mpi: error while loading shared libraries: libcudart.so.8.0: cannot open shared object file: No such file or directory
+[comet-06-15.sdsc.edu:mpispawn_0][child_handler] MPI process (rank: 3, pid: 23697) exited with status 127
+/opt/gromacs/bin/gmx_mpi: error while loading shared libraries: libcudart.so.8.0: cannot open shared object file: No such file or directory
+[comet-06-15.sdsc.edu:mpispawn_0][child_handler] MPI process (rank: 4, pid: 23698) exited with status 127
+/opt/gromacs/bin/gmx_mpi: error while loading shared libraries: libcudart.so.8.0: cannot open shared object file: No such file or directory
+[comet-06-15.sdsc.edu:mpispawn_0][child_handler] MPI process (rank: 5, pid: 23699) exited with status 127
+/opt/gromacs/bin/gmx_mpi: error while loading shared libraries: libcudart.so.8.0: cannot open shared object file: No such file or directory
+[comet-06-15.sdsc.edu:mpispawn_0][child_handler] MPI process (rank: 6, pid: 23700) exited with status 127
+/opt/gromacs/bin/gmx_mpi: error while loading shared libraries: libcudart.so.8.0: cannot open shared object file: No such file or directory
+[comet-06-15.sdsc.edu:mpispawn_0][child_handler] MPI process (rank: 7, pid: 23701) exited with status 127
+/opt/gromacs/bin/gmx_mpi: error while loading shared libraries: libcudart.so.8.0: cannot open shared object file: No such file or directory
+[comet-06-15.sdsc.edu:mpispawn_0][child_handler] MPI process (rank: 8, pid: 23702) exited with status 127
+
+
+
+
+
+Please advise? My submit script is based off the example in /share/apps/examples/GROMACS/
+
+Thanks,
+Srinivas Mushnoori
+Rutgers University 

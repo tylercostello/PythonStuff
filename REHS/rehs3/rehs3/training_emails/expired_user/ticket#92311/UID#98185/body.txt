@@ -1,0 +1,66 @@
+
+Thu Jul 26 10:18:04 2018: Request 92311 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by jhidleba
+       Queue: 0-SDSC
+     Subject: invalid account error message
+       Owner: Nobody
+  Requestors: skimble@towson.edu
+      Status: new
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=92311 >
+
+
+Hi:
+
+
+I just received word on Tuesday that I have been awarded a 10% advance on my applied-for Research Allocation. I believe it should be working since:
+
+
+[skimble5@comet-ln3 k1rep1]$ show_accounts
+ID name      project      used     available    used_by_proj
+------------------------------------------------------------
+skimble5     tow103       0        40000        0
+
+To charge your job to one of these projects replace  << project >>
+with one from the list and put this Slurm directive in your job script:
+#SBATCH -A << project >>
+
+
+but then I get:
+
+
+[skimble5@comet-ln3 k1rep1]$ sbatch structurejobsubmissionfile_one_run.sh
+sbatch: error: bank_limit plugin: expired user, can't submit job
+sbatch: error: Batch job submission failed: Invalid account or account/partition combination specified
+
+The structurejobsubmissionfile_one_run.sh is:
+
+
+#!/bin/bash
+#SBATCH -A tow103
+#SBATCH --job-name="STRUCTURE"
+#SBATCH --output="STRUCTURE.%j.%N.1node24cores.out"
+#SBATCH --partition=compute
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=24
+#SBATCH --export=ALL
+#SBATCH -t 06:00:00
+/share/apps/compute/structure/bin/structure
+
+
+Any suggestions?
+
+
+Thanks,
+
+Steve
+
+
+
+Steve Kimble
+
+Clinical Assistant Professor, Towson University
+
+skimble@towson.edu
+
+https://www.towson.edu/fcsm/departments/biology/facultystaff/skimble.html
+ 

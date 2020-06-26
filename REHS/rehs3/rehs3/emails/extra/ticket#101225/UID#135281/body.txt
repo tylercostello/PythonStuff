@@ -1,0 +1,41 @@
+
+Thu Jan 03 09:01:04 2019: Request 101225 was acted upon.
+ Transaction: Queue changed from 0-XOC to 0-SDSC by fwells
+       Queue: 0-SDSC
+     Subject: XUP: GPU/SU Conversion Clarification
+       Owner: fwells
+  Requestors: clorice.reinhardt@yale.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=101225 >
+
+
+[Ticket created from XUP by crr49]
+[From: Clorice Reinhardt]
+[System: Comet]
+[Category: Allocations]
+To whom it may concern,
+
+I was wondering if you could clarify the SU conversion for the GPU resources on Comet. Below is an excerpt from the comet user guide:
+
+Jobs run in the gpu-shared partition are charged differently from other shared partitions on Comet to reflect fractions of a resource used, based on number of GPUs requested and the relative performance of the different GPU types. P100 GPUs are generally substantially faster than K80 nodes, achieving more than twice the performance for some applications, so we charge a 1.5x premium on P100 GPUs.
+
+1 GPU is equivalent to 1/4th of the node, or 6 cores on K80 nodes and 7 cores on P100 nodes.
+
+The charging equation is:
+
+GPU SUs = (Number of K80 GPUs) + (Number of P100 GPUS)*1.5) x (wallclock time).
+
+I was then wondering, why the service unit converter tool found here uses a factor of 14. 
+https://portal.xsede.org/su-converter
+Comet GPU hours to Comet CPU hours.
+Enter 1for GPU hours, returned 14 CPU hours. 
+
+But following the above equation and the node specifications found on the comet user guide, is the following not correct?:
+1 GPU is equivalent to 1/4th of the node, or 6 cores on K80 nodes and 7 cores on P100 nodes.
+
+So for example, when benchmarking GPU code to obtain an estimate for an allocation request, what conversion factor should we use?
+
+Any clarification would be helpful!
+
+Thank you for your time,
+Clorice Reinhardt 

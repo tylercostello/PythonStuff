@@ -1,0 +1,36 @@
+
+Thu Jun 07 20:14:29 2018: Request 89714 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by buskuehl
+       Queue: 0-SDSC
+     Subject: XUP: ibrun for IMPI (intelmpi) on comet not working
+       Owner: buskuehl
+  Requestors: milfeld@tacc.utexas.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=89714 >
+
+
+[Ticket created from XUP by milfeld]
+[From: Kent Milfeld]
+[System: Comet]
+[Category: Batch Queues/Jobs]
+Hi,
+  I noticed that intelmpi/2016.3.210 is available on comet (and I needed to also use a newer compiler, intel16).  So I unload the old mpi and compiler; and loaded up the new compiler and mpi on a compute node.  So, I did this:
+
+[milfeld@comet-14-02 MPI_TEST]$   module unload  mvapich2_ib/2.1
+[milfeld@comet-14-02 MPI_TEST]$   module unload  intel/2013_sp1.2.144
+[milfeld@comet-14-02 MPI_TEST]$   module load      intel/2016.3.210
+[milfeld@comet-14-02 MPI_TEST]$   module load      intelmpi/2016.3.210
+[milfeld@comet-14-02 MPI_TEST]$
+[milfeld@comet-14-02 MPI_TEST]$ module list
+Currently Loaded Modulefiles:
+  1) gnutools/2.69         2) intel/2016.3.210      3) intelmpi/2016.3.210
+
+[milfeld@comet-14-02 MPI_TEST]$ ibrun date
+IBRUN ERROR: No recognized MPI modules appear to be loaded.  Load an MPI module before using ibrun.
+
+Contact help@xsede.org for additional assistance.
+
+When I look at ibrun it appears that this version of ibrun doesn't support IMPI.  Do you have an ibrun that can launch executables compiled for IMPI?
+
+Thanks for any help.
+Kent 

@@ -1,0 +1,22 @@
+
+Mon Oct 29 16:19:29 2018: Request 98336 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by hthta
+       Queue: 0-SDSC
+     Subject: XUP: Can't get job in GPU Queue
+       Owner: hthta
+  Requestors: forrestglines@gmail.com
+      Status: new
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=98336 >
+
+
+[Ticket created from XUP by fglines]
+[From: Forrest Glines]
+[System: Comet]
+[Category: Batch Queues/Jobs]
+I'm trying to an interactive job with a Pascal GPU (or any GPU) on Comet. However, the scheduler is rejecting my requests.
+`
+$ salloc -A lal106 --partition=gpu --nodes=1 --ntasks-per-node=1 --gres=gpu:p100:1  --time=1:00:00                                                                                          
+salloc: error: bank_limit plugin: expired user, can't submit job
+salloc: error: Job submit/allocate failed: Invalid account or account/partition combination specified
+`
+I'm able to get jobs in the compute and debug queues though, and the collaborator I'm working with is able to get time. Do I need to be in some group to be able to get GPU time? 

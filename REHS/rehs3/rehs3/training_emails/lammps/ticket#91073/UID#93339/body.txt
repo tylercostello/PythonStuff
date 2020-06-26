@@ -1,0 +1,67 @@
+
+Tue Jul 03 16:12:16 2018: Request 91073 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by buskuehl
+       Queue: 0-SDSC
+     Subject: XUP: Error submitting MPI jobs with multiple processors, (LAMMPS)
+       Owner: buskuehl
+  Requestors: sroot@gmwgroup.harvard.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=91073 >
+
+
+[Ticket created from XUP by seroot]
+[From: Samuel Root]
+[System: Comet]
+[Category: System/Hardware Issues]
+Hello,
+
+I am seeing a weird error when submitting typical LAMMPS simulations with multiple processors. This is happening using submission scripts that previously worked so I think it might be a problem with the system. The simulations run fine on 1 processor.
+Here is the error with multiple processors:
+
+Fatal error in MPI_Init: Other MPI error, error stack:
+MPIR_Init_thread(784).................:
+MPID_Init(1332).......................: channel initialization failed
+MPIDI_CH3_Init(141)...................:
+dapl_rc_setup_all_connections_20(1388): generic failure with errno = 872614415
+getConnInfoKVS(849)...................: PMI_KVS_Get failed
+Fatal error in MPI_Init: Other MPI error, error stack:
+MPIR_Init_thread(784).................:
+MPID_Init(1332).......................: channel initialization failed
+MPIDI_CH3_Init(141)...................:
+dapl_rc_setup_all_connections_20(1388): generic failure with errno = 872614415
+getConnInfoKVS(849)...................: PMI_KVS_Get failed
+Fatal error in MPI_Init: Other MPI error, error stack:
+MPIR_Init_thread(784).................:
+MPID_Init(1332).......................: channel initialization failed
+MPIDI_CH3_Init(141)...................:
+dapl_rc_setup_all_connections_20(1388): generic failure with errno = 872614415
+getConnInfoKVS(849)...................: PMI_KVS_Get failed
+Fatal error in MPI_Init: Other MPI error, error stack:
+MPIR_Init_thread(784).................:
+MPID_Init(1332).......................: channel initialization failed
+MPIDI_CH3_Init(141)...................:
+dapl_rc_setup_all_connections_20(1388): generic failure with errno = 872614415
+getConnInfoKVS(849)...................: PMI_KVS_Get failed
+[comet-06-27.sdsc.edu:mpispawn_0][readline] Unexpected End-Of-File on file descriptor 5. MPI process died?
+[comet-06-27.sdsc.edu:mpispawn_0][mtpmi_processops] Error while reading PMI socket. MPI process died?
+[comet-06-27.sdsc.edu:mpispawn_0][child_handler] MPI process (rank: 0, pid: 3038) exited with status 1
+[comet-06-27.sdsc.edu:mpispawn_0][child_handler] MPI process (rank: 3, pid: 3041) exited with status 1
+[comet-06-27.sdsc.edu:mpispawn_0][child_handler] MPI process (rank: 2, pid: 3040) exited with status 1
+[comet-06-27.sdsc.edu:mpispawn_0][child_handler] MPI process (rank: 1, pid: 3039) exited with status 1
+Connection to comet-06-27 closed by remote host.
+
+
+
+The jobs that I submitted are located in the following directory:
+
+/oasis/scratch/comet/seroot/temp_project/Aromodel/Solvate_SAM
+
+
+run with this:
+sbatch sub_Solvate_SAM
+
+Please let me know how I can resolve this!
+
+Thank you,
+
+Sam 

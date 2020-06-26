@@ -1,0 +1,29 @@
+
+Mon Jun 25 13:12:12 2018: Request 90552 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by jhawthor
+       Queue: 0-SDSC
+     Subject: XUP: Long Job
+       Owner: Nobody
+  Requestors: mphiferr@monmouth.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=90552 >
+
+
+[Ticket created from XUP by mrixey]
+[From: Megan Phifer-Rixey]
+[System: Comet]
+[Category: Batch Queues/Jobs]
+I have been running a program that needs relatively long times to run. I have been running test jobs but I can tell I will need more hours.   My current allocation is expiring on 6/30. I would like to run a job that exceeds the 48 hr wall time limit if at all possible. I would like to have it run ~90 hrs so that I can get it in under the limit for the expiration for my allocation. I have ~15000 sus so this should come in under my max.  Could this work?
+
+
+#!/bin/bash
+#SBATCH --job-name=test_IMa3_new
+#SBATCH --partition=compute
+#SBATCH --nodes=3
+#SBATCH --ntasks-per-node=24
+#SBATCH -t 90:05:00
+#SBATCH -A uoa104
+
+cd IMa3-master/
+
+ibrun -np 72 ./IMa3  -i /oasis/projects/nsf/uoa104/mrixey/IMA3/mus_200loci.u  -o /oasis/projects/nsf/uoa104/mrixey/IMA3/mus_200loci_test_long.out -q 5 -m 0.2  -t 2 -s123  -b 36.0 -l 54.0  -j 03  -hn144 -ha0.99 -hb 0.7 

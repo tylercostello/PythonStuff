@@ -1,0 +1,39 @@
+
+Fri Jul 28 13:39:57 2017: Request 72832 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by aredding
+       Queue: 0-SDSC
+     Subject: XUP: Expired User
+       Owner: Nobody
+  Requestors: rodrigogalindo@gmail.com
+      Status: new
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=72832 >
+
+
+[Ticket created from XUP by ros]
+[From: Rodrigo Galindo]
+[System: comet-gpu.sdsc.xsede]
+[Category: Accounts]
+Hello!
+I am trying to submit jobs to the GPUs  P100 and i get:
+
+sbatch: error: bank_limit plugin: expired user, can't submit job
+sbatch: error: Batch job submission failed: Invalid account or account/partition combination specified
+
+My slurm input:
+
+----------------------------------------------------------
+#!/bin/bash
+#SBATCH --job-name=cas-dionas-acac
+#SBATCH -t 48:00:00
+#SBATCH --output=log.%j.%N.out
+#SBATCH --partition=gpu
+#SBATCH --gres=gpu:p100:4
+#SBATCH --ntasks-per-node=28
+#SBATCH --no-requeue
+#SBATCH --mail-type=ALL
+#SBATCH --mail-user=rodrigogalindo@gmail.com
+----------------------------------------------------------
+Did I run out of time?   I can see that I still have time and days left in my allocation (Charge #:TG-MCA01S027)
+
+Thanks!
+Rodrigo 

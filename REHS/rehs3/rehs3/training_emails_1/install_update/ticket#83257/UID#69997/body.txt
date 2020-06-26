@@ -1,0 +1,27 @@
+
+Fri Feb 09 10:25:39 2018: Request 83257 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by jhidleba
+       Queue: 0-SDSC
+     Subject: XUP: MKL_ROOT
+       Owner: Nobody
+  Requestors: brook@nmsu.edu
+      Status: new
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=83257 >
+
+
+[Ticket created from XUP by guest]
+[From: Brook Milligan]
+[System: Comet]
+[Category: Software]
+I am configuring some code to compile on Comet that requires the Intel MKL library.  I see that I can use the documented MKL_ROOT environment variable to point into /opt/intel/... so that the compiler command line is correct.  I have several questions though, as I am trying to make this configuration portable.
+
+- I see also that there is a MKLROOT (no underscore) environment variable defined.  Indeed, the Intel Link Advisor (https://software.intel.com/en-us/articles/intel-mkl-link-line-advisor) mentions using MKLROOT but makes no mention of the other.  Is MKLROOT legacy and deprecated on your systems or an attempt to support differences between your and Intel's documentation?
+
+- From the perspective of portability, which of these will be a portable solution?  Are you using one or both across all of XSEDE?  Do you have any insight regarding non-XSEDE systems?  That is, is there prior art in the industry?  I realize exceptions are always possible.
+
+- The value of ${MKL_ROOT}/lib is a directory that contains two subdirectories, intel64 and mic.  Both have shared libraries.  Should I always use the intel64 subdirectory?  Under what conditions would I use the libraries in mic?
+
+Thanks for your help.
+
+Cheers,
+Brook 

@@ -1,0 +1,58 @@
+
+Fri Jun 08 17:07:41 2018: Request 89772 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by carmanh
+       Queue: 0-SDSC
+     Subject: SBATCH error: Invalid account or account/partition
+       Owner: Nobody
+  Requestors: rkramasamy@ucdavis.edu
+      Status: new
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=89772 >
+
+
+Hello,
+
+
+I tried to submit a test python job to sbatch, but it returned the following error:
+
+
+sbatch: error: bank_limit plugin: expired user, can't submit job
+sbatch: error: Batch job submission failed: Invalid account or account/partition
+
+
+My sbatch command:  sbatch test_job.sh
+
+
+test_job.sh looks like this:
+
+
+#!/bin/bash -l
+#SBATCH -A sds154
+#SBATCH -t 00:10:00
+#SBATCH -p gpu
+#SBATCH --job-name="test"
+#SBATCH --output="test.out"
+#SBATCH --error="test.error"
+#SBATCH --partition="compute"
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+
+ibrun ./test_python.py
+
+
+
+test_python looks like this:
+
+
+#!/usr/bin/env python3
+
+print('hello world')
+
+
+Could you please help me with this error?
+
+
+Thanks,
+
+Ramesh
+
+ 

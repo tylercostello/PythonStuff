@@ -1,0 +1,50 @@
+
+Wed Nov 14 09:30:42 2018: Request 99123 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by jhawthor
+       Queue: 0-SDSC
+     Subject: XUP: lammps package
+       Owner: Nobody
+  Requestors: chd415@lehigh.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=99123 >
+
+
+[Ticket created from XUP by chd415]
+[From: Chuqiao Dong]
+[System: comet-gpu.sdsc.xsede]
+[Category: Software]
+Hi, I was trying to run a benchmark program using lammps, and I tried the default version pre-installed on comet using the bash script (please see below). But I got this error message, it seems I request some packages not pre-installed in default version. Can you please help me with this?
+
+Thanks!
+Chuqiao
+
+
+#!/bin/bash
+
+#SBATCH --job-name=test
+#SBATCH --output="junk.out"
+#SBATCH --partition=compute
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --export=ALL
+#SBATCH --mail-user=chd415@lehigh.edu
+#SBATCH --mail-type=ALL
+#SBATCH -t 00:10:00
+
+#This job runs with 6 nodes, 24 cores per node for a total of 384 cores.
+
+#Load the CP2K module and find the executable
+module unload intel
+module load lammps
+export EXE=`which lammps`
+
+#Use mpirun to run the MPI job. 
+export OMP_NUM_THREADS=1
+processors=$(( $SLURM_NNODES * $SLURM_NTASKS_PER_NODE ))
+mpirun  -np $processors $EXE -in step7.1_1.inp
+
+
+ERROR MASSAGE:
+
+ERROR: Unknown dihedral style charmmfsw (../force.cpp:535)
+Last command: dihedral_style  charmmfsw 

@@ -1,0 +1,47 @@
+
+Tue Jul 25 12:33:47 2017: Request 72607 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by aredding
+       Queue: 0-SDSC
+     Subject: on Comet - program execution hangs
+       Owner: aredding
+  Requestors: ced3@columbia.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=72607 >
+
+
+My fortran trajectory code (compiled with /opt/mvapich2/intel/ib/bin/mpif90) 
+invokes Gaussian 16 in a “call system” statement, which executes a shell script, 
+run_g16, that invokes g16. It works well, except for my student Amrita (user 
+name aks2213). The problem in her case is that after the successful completion 
+of all statements in run_g16, the “call system” statement does not procede to 
+the next fortran statement. The job continues to be listed as running in squeue, 
+but no further output is produced. This happens only for Amrita, not for me or 
+my other students. Any ideas on what the problem could be, or how to debug it or 
+to avoid it? For example, is there a better way to execute run_g16 from within a 
+fortran program?
+
+Many thanks,
+Chuck Doubleday
+
+run_g16
+-----------
+#!/bin/csh
+set calcname = $1
+set chkname = $2
+setenv GAUSS_SCRDIR $3
+source /etc/profile.d/modules.csh
+module load gaussian/16.A.03
+set exeg16 = `which g16`
+set exeformchk = `which formchk`
+echo "running g16 now" >> debug
+$exeg16 < $calcname.inp > $calcname.out
+$exeformchk $chkname.chk $chkname.fchk
+echo "g16 finished" >> debug
+
+cat $calcname.inp >> allinput
+echo "     |||||" >> allinput
+cat $calcname.out >> alloutput
+echo "     |||||" >> alloutput
+
+
+ 

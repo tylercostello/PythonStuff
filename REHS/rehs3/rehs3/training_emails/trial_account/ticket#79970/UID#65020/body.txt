@@ -1,0 +1,41 @@
+
+Wed Dec 06 15:51:04 2017: Request 79970 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by buskuehl
+       Queue: 0-SDSC
+     Subject: XUP: Comet Trial Allocation Request
+       Owner: buskuehl
+  Requestors: dlebauer@illinois.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=79970 >
+
+
+[Ticket created from XUP by dlebauer]
+[From: David LeBauer]
+[System: Comet]
+[Category: Allocations]
+Title: Hyperspectral Workflow for the TERRA Reference Phenotyping Platform
+Primary Field of Science: Plant Phenomics, Computer Vision, Robotics
+Resources Request Information:
+What pecentage of the work you expect to do in this allocation will be the following types:
+Production: 75%
+Exploration / porting: 25%
+Education: 0%
+What percentage of the jobs you expect to run in this allocation will be the following types:
+Submitted thorugh command-line / script: 100%
+Submitted using Grid tools: 0%
+Submitted through a meta-scheduler: 0%
+Please estimate what percentage of the science runs you expect to perform in this allocation will be the following types:
+Independent: 100%
+Independent but related: 0%
+Tightly-coupled: 0%
+Dependent: 0%
+Resource Requested: Comet large memory 
+Resource Requested Amount: 1000 TB-h
+
+Abstract
+
+The Transportation Energy Resources from Renewable Agriculture Phenotyping Reference Platform (TERRA-REF) team has built a data pipeline responsible for collecting, transferring, processing and distributing large volumes of crop sensing data. The primary source of these data is a field scanner system built over an experimental field at the University of Arizona’s Maricopa Agricultural Center. The scanner uses several different sensors including RGB stereo cameras, hyperspectral imaging spectrometers, 3D laser scanners, and meteorological monitors to observe the field at a dense collection frequency with high resolution. 
+
+The visible and near infrared (VNIR) hyperspectral imaging camera captures data at mm spatial and ⅔ nm spectral resolution. Each 20m x 1m scan produces requires 256GB of RAM for 30 minutes to process. We estimate that it will take 500 TB-h of memory to process our existing 4000 datasets.
+
+We request a startup allocation of 1000 TB-h to use the large memory node on Comet in order to evaluate deploying our pipeline on Comet. The workflow that we plan to use is described in the README of https://github.com/terraref/extractors-hyperspectral. The dependencies are defined in our Dockerfile https://github.com/terraref/extractors-hyperspectral/blob/master/hyperspectral/Dockerfile, but we would prefer to port this to Singularity for use on Comet. 

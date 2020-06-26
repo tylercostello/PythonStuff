@@ -1,0 +1,37 @@
+
+Fri Dec 01 17:39:39 2017: Request 79754 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by buskuehl
+       Queue: 0-SDSC
+     Subject: XUP: Disk quota exceeded
+       Owner: buskuehl
+  Requestors: xhu@ou.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=79754 >
+
+
+[Ticket created from XUP by xhu]
+[From: Xiaoming Hu]
+[System: Comet]
+[Category: Accounts]
+I am compiling a small script, but got 
+"
+xhu2@comet-ln2.sdsc.edu:/oasis/projects/nsf/uok114/xhu2/Codes/mozbc_newCompile$  ./make_mozbc 
+=============================================================================
+Using ifort fortran compiler
+=============================================================================
+=============================================================================
+netcdf top level directory = /opt/netcdf/4.3.2/intel/mvapich2_ib
+=============================================================================
+ifort -g -fpe0 -ftrapuv -c -I/opt/netcdf/4.3.2/intel/mvapich2_ib/include mo_calendar.f90
+ifort -g -fpe0 -ftrapuv -c -I/opt/netcdf/4.3.2/intel/mvapich2_ib/include mo_utils.f90
+ifort -g -fpe0 -ftrapuv -c -I/opt/netcdf/4.3.2/intel/mvapich2_ib/include mo_mozart_lib.f90
+ifort -g -fpe0 -ftrapuv -c -I/opt/netcdf/4.3.2/intel/mvapich2_ib/include mo_wrfchem_lib.f90
+ifort -g -fpe0 -ftrapuv -c -I/opt/netcdf/4.3.2/intel/mvapich2_ib/include main_bc_wrfchem.f90
+ifort -o mozbc mo_calendar.o mo_utils.o mo_mozart_lib.o mo_wrfchem_lib.o main_bc_wrfchem.o -L/opt/netcdf/4.3.2/intel/mvapich2_ib/lib -lnetcdf -lnetcdff 
+ld: final link failed: Disk quota exceeded
+make: *** [mozbc] Error 1
+Failed to build fire_emis
+"
+I did not add anything recently, any idea what happened? 
+
+Thanks 

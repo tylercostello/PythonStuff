@@ -1,0 +1,38 @@
+
+Fri Mar 09 20:25:56 2018: Request 84720 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by buskuehl
+       Queue: 0-SDSC
+     Subject: XUP: data transfer
+       Owner: buskuehl
+  Requestors: hehe.chen@rutgers.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=84720 >
+
+
+[Ticket created from XUP by hechen]
+[From: He Chen]
+[System: XStream]
+[Category: Other]
+Hi there,
+
+Am I supposed to use the following command to transfer data (suppose I want to copy from comet to xstream):
+globus-url-copy -r -vb gsiftp://comet.sdsc.xsede.org:2811/home/chenhe/tmp gsiftp://xstream.stanford.xsede.org:2811/home/xsede/users/xs-hechen/
+
+Here are what it returns:
+error: globus_xio: Unable to connect to comet.sdsc.xsede.org:2811
+globus_xio: System error in connect: Connection refused
+globus_xio: A system call failed: Connection refused
+
+Any ideas??
+It seems I can not even transfer data from my local machine using "scp" to xstream. So I transferred my data to comet first and then transfer data from comet to xstream. But it didn't work.
+
+I also tried:
+gsiscp -oTcpRcvBufPoll=yes -oNoneEnabled=yes -oNoneSwitch=yes -P2222 f1 xs-hechen@xstream.stanford.xsede.org:/home/xsede/users/xs-hechen/f1
+
+It returns:
+Permission denied (gssapi-keyex,gssapi-with-mic).
+lost connection
+
+Please help..
+
+He Chen 

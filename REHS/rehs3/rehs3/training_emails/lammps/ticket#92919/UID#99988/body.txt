@@ -1,0 +1,106 @@
+
+Tue Aug 07 15:20:26 2018: Request 92919 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by buskuehl
+       Queue: 0-SDSC
+     Subject: EOF ERROR using mpi4py
+       Owner: buskuehl
+  Requestors: dmathias@uwlax.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=92919 >
+
+
+
+
+Hello.  We are running into an issue running our code on Comet.  Our code is in Python 2.7 using mpi4py for interprocess communication.  The error we see is EOFError.  When we run on a single node, we never get the error.  If we run on multiple nodes, the error usually occurs eventually, though not always.  When we run on multiple nodes on our small, local cluster, we have never seen the error (on that machine, mpi4py was built with gcc using OpenMPI).
+
+
+
+We found a reference to the same error here: https://bitbucket.org/mpi4py/mpi4py/issues/39/mpi-msgpicklepxi-eoferror
+
+
+
+The most relevant excerpt from the short thread linked above:
+
+
+
+Yes, indeed; I forgot to post the solution. The problem was related to IntelMPI and how it uses the Infiniband hardware. IntelMPI knows several different communication 'network fabrics' for inter- and intranode communication (https://software.intel.com/en-us/node/528821). The odd thing was that by switching to 'tcp' for internode communication everything seemed to work fine. I finally found that setting the I_MPI_OFA_TRANSLATION_CACHE to off using export I_MPI_OFA_TRANSLATION_CACHE=offsolved the issues (https://software.intel.com/en-us/node/528827). The documentation says "The cache substantially increases performance, but may lead to correctness issues in certain situations. See product Release Notes for further details." For me, no loss of performance was measurable and there is also no note in any of the release notes... :/
+
+
+
+
+
+Here are the relevant lines for including mpi4py from our slurm script:
+
+export MODULEPATH=$MODULEPATH:/share/apps/compute/modulefiles/applications
+
+module load mpi4py/2.0.0
+
+
+
+
+
+For reference, here is the error we get:
+
+
+
+Traceback (most recent call last):
+
+  File "pathfinder.py", line 1129, in <module>
+
+    is_valid, best = main(cmd_pop_size, cmd_gens)
+
+  File "pathfinder.py", line 1024, in main
+
+    valid, best_mem = run_ga(gens, pop_size)
+
+  File "pathfinder.py", line 635, in run_ga
+
+    pickled_pops = comm.gather(to_send, root=0)
+
+  File "MPI/Comm.pyx", line 1281, in mpi4py.MPI.Comm.gather (src/mpi4py.MPI.c:108949)
+
+  File "MPI/msgpickle.pxi", line 668, in mpi4py.MPI.PyMPI_gather (src/mpi4py.MPI.c:47706)
+
+  File "MPI/msgpickle.pxi", line 191, in mpi4py.MPI.Pickle.loadv (src/mpi4py.MPI.c:41957)
+
+  File "MPI/msgpickle.pxi", line 143, in mpi4py.MPI.Pickle.load (src/mpi4py.MPI.c:41248)
+
+EOFError
+
+
+
+One last detail - I’m not sure if it’s relevant: When running on multiple nodes we see this message on the output as our code begins to execute:
+
+
+
+WARNING: Error in initializing MVAPICH2 ptmalloc library.Continuing without InfiniBand registration cache support.
+
+
+
+We appreciate any help you can provide with this problem.
+
+
+
+David
+
+
+
+
+
+H. David Mathias, D.Sc.
+
+Assistant Professor of Computer Science
+
+University of Wisconsin - La Crosse
+
+dmathias@uwlax.edu<mailto:dmathias@uwlax.edu>
+
+http://hdmathias.github.io
+
+
+
+
+
+
+
+ 

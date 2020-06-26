@@ -1,0 +1,47 @@
+
+Thu Nov 09 15:14:21 2017: Request 78782 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by jhidleba
+       Queue: 0-SDSC
+     Subject: XUP: Gromacs installation
+       Owner: jhidleba
+  Requestors: var416@lehigh.edu
+      Status: new
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=78782 >
+
+
+[Ticket created from XUP by var416]
+[From: Vahid Rahmanian]
+[System: Comet]
+[Category: Software]
+Hi,
+
+I am trying to install plumed with gromacs on comet through the following instruction, but I got the error regarding to ICC! Can you please tell me how to solve this problem?
+
+Plumed Installation:
+
+cd plumed-2.2.1
+export CC=mpicc
+export CXX=mpicxx
+export FC=mpif90
+./configure --prefix=`pwd`/exec
+make -j4
+make install
+source sourceme.sh
+
+Gromacx installation:
+
+cd ../gromacs-08b2d50
+plumed-patch -r
+plumed-patch -p
+mkdir build_plumed
+cd build_plumed
+module load cmake
+export INSTALL_PATH=/home/var416/PROGRAMS/gromacs-08b2d50/exec
+cmake ../ -DCMAKE_INSTALL_PREFIX=$INSTALL_PATH -DGMX_FFT_LIBRARY=mkl -DCMAKE_EXE_LINKER_FLAGS="-mkl=sequential" -DGMX_X11=OFF -DBUILD_SHARED_LIBS=OFF -DGMX_PREFER_STATIC_LIBS=ON -DGMX_BUILD_MDRUN_ONLY=ON -DGMX_DOUBLE=OFF -DGMX_MPI=ON -DGMX_EXTERNAL_BOOST=ON
+
+Make -j4
+
+ERROR: unsupported ICC configuration! Only ICC 15.0 on Linux x86_64 is supported!
+
+Best,
+Vahid 

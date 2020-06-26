@@ -1,0 +1,30 @@
+
+Mon Feb 04 16:01:15 2019: Request 103366 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by buskuehl
+       Queue: 0-SDSC
+     Subject: XUP: mpi4run inside Singularity container
+       Owner: buskuehl
+  Requestors: damascus@umich.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=103366 >
+
+
+[Ticket created from XUP by damascus]
+[From: Pablo Souza]
+[System: Comet]
+[Category: Software]
+Hi, I'm having the following problem.
+
+1. I need to run a python3 code in parallel, it requires several libraries. 
+
+2. My current solution is to have a singularity container with the required libraries in it. This container runs fine on multi-processors on comet except the performance is 20x slower than single-core (on my personal machine, it is 4X faster).
+
+3. Suggested solution [1] to the problem is to import MPIPool from schwimmbad, but that requires mpi4py which a) is only available as a module for py27; b) cannot be installed in my container ("error: Cannot compile MPI programs." + "mpi.h: No such file or directory")
+
+Any suggestions?
+
+Thanks,
+P.
+
+
+[1] https://github.com/dfm/emcee/issues/199 

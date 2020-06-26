@@ -1,0 +1,51 @@
+
+Wed Nov 15 09:32:45 2017: Request 79027 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by jhawthor
+       Queue: 0-SDSC
+     Subject: XUP: Expired User
+       Owner: Nobody
+  Requestors: jrtusell@brophyprep.org
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=79027 >
+
+
+[Ticket created from XUP by tusell]
+[From: Jose Tusell]
+[System: Comet]
+[Category: Accounts]
+Hello,
+
+I was trying to submit a job to the queue in Comet.  I used the following script and submitted to the queue:
+
+#!/bin/bash
+#PBS -q normal
+#PBS -N test
+#PBS -l nodes=1:ppn=8
+#PBS -l walltime=48:00:00
+#PBS -A msu107
+#PBS -M jrta1981@gmail.com
+#PBS -m abe
+#PBS -j oe
+#PBS -V
+
+cd $PBS_O_WORKDIR
+export GAUSS_SCRDIR=/oasis/scratch/${USER}/${PBS_JOBID}
+. /etc/profile.d/modules.sh
+module load gaussian
+exe=`which g09`
+/usr/bin/time $exe < md_1ns-cent_69.gjf > md_1ns-cent_69.log
+
+I got the following error message:
+
+There was an error running the SLURM sbatch command.
+The command was:
+'/usr/bin/sbatch test9.scr  2>&1'
+and the output was:
+'sbatch: error: bank_limit plugin: expired user, can't submit job
+ sbatch: error: Batch job submission failed: Invalid account or account/partition combination specified
+'
+Any ideas why the error could be?
+
+Thank you in advance,
+
+Ramon Tusell 

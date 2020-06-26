@@ -1,0 +1,57 @@
+
+Fri May 11 20:29:45 2018: Request 88426 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by carmanh
+       Queue: 0-SDSC
+     Subject: XUP: MPI code suddenly not working
+       Owner: Nobody
+  Requestors: witzel@astro.ucla.edu
+      Status: new
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=88426 >
+
+
+[Ticket created from XUP by gwitzel]
+[From: Gunther Witzel]
+[System: Comet]
+[Category: Batch Queues/Jobs]
+Hi,
+
+I am currently trying to run our MPI code. Despite using the exact same settings as the last time when it worked (December 2017), I cannot get the code to run. The error is quoted below.
+
+We are using the modules:
+module load intel/2016.3.210
+module load intelmpi/2016.3.210
+The code is located in:  /home/gwitzel/sgra_ps/code/c_code
+and is called with ./red_n
+we have a makefile: /home/gwitzel/sgra_ps/code/c_code/Makefile
+we compile with 'make mpi'
+we use sbatch COMET_MPI.sh
+The code operates on data in: /home/gwitzel/sgra_ps/code/c_code
+and is supposed to write into: /oasis/projects/nsf/cla168/gwitzel/test
+
+Any help would be very much appreciated.
+
+Thank you!
+
+Gunther Witzel
+
+[gwitzel@comet-ln3 c_code]$ more testmpi.16191403.comet-02-30.out
+Fatal error in MPI_Init: Other MPI error, error stack:
+MPIR_Init_thread(784).................: 
+MPID_Init(1332).......................: channel initialization failed
+MPIDI_CH3_Init(141)...................: 
+dapl_rc_setup_all_connections_20(1388): generic failure with errno = 872614415
+getConnInfoKVS(849)...................: PMI_KVS_Get failed
+Fatal error in MPI_Init: Other MPI error, error stack:
+MPIR_Init_thread(784).................: 
+MPID_Init(1332).......................: channel initialization failed
+MPIDI_CH3_Init(141)...................: 
+dapl_rc_setup_all_connections_20(1388): generic failure with errno = 872614415
+getConnInfoKVS(849)...................: PMI_KVS_Get failed
+[comet-02-35.sdsc.edu:mpispawn_1][readline] Unexpected End-Of-File on file descriptor 5. MPI process died?
+[comet-02-35.sdsc.edu:mpispawn_1][mtpmi_processops] Error while reading PMI socket. MPI process died?
+[comet-02-30.sdsc.edu:mpispawn_0][readline] Unexpected End-Of-File on file descriptor 5. MPI process died?
+[comet-02-30.sdsc.edu:mpispawn_0][mtpmi_processops] Error while reading PMI socket. MPI process died?
+[comet-02-35.sdsc.edu:mpispawn_1][child_handler] MPI process (rank: 1, pid: 31833) exited with status 1
+[comet-02-30.sdsc.edu:mpispawn_0][child_handler] MPI process (rank: 0, pid: 25577) exited with status 1
+Connection to comet-02-35 closed by remote host.
+Connection to comet-02-30 closed by remote host. 

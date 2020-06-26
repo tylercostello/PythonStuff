@@ -1,0 +1,43 @@
+
+Tue May 15 15:27:30 2018: Request 88575 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by carmanh
+       Queue: 0-SDSC
+     Subject: XUP: git clone on comet
+       Owner: Nobody
+  Requestors: chp071@ucsd.edu
+      Status: new
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=88575 >
+
+
+[Ticket created from XUP by chp071]
+[From: Cong Huy Pham]
+[System: Comet]
+[Category: Software]
+Dear Sir/Madam,
+
+I tried to install one code (pySCF) on Comet. However I have a problem when compiling the code.
+Below is the error:
+
+[  1%] Performing download step (git clone) for 'libxcfun'
+Cloning into 'libxcfun'...
+fatal: unable to access 'https://github.com/dftlibs/xcfun.git/': SSL connect error
+Cloning into 'libxcfun'...
+fatal: unable to access 'https://github.com/dftlibs/xcfun.git/': SSL connect error
+Cloning into 'libxcfun'...
+fatal: unable to access 'https://github.com/dftlibs/xcfun.git/': SSL connect error
+-- Had to git clone more than once:
+          3 times.
+CMake Error at /home/chp071/Codes/pyscf/pyscf/lib/build/deps/tmp/libxcfun-gitclone.cmake:66 (message):
+  Failed to clone repository: 'https://github.com/dftlibs/xcfun.git'
+
+
+make[2]: *** [deps/src/libxcfun-stamp/libxcfun-download] Error 1
+make[1]: *** [CMakeFiles/libxcfun.dir/all] Error 2
+make: *** [all] Error 2
+
+
+Basically the code I compile need to download other package using "git clone" and it is not working.
+Could you please help me to solve this problem?
+
+Thank you,
+Huy 

@@ -1,0 +1,42 @@
+
+Mon Mar 19 13:06:44 2018: Request 85212 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by jhawthor
+       Queue: 0-SDSC
+     Subject: XUP: The result of RASPA2.0 software
+       Owner: Nobody
+  Requestors: dongc@nmsu.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=85212 >
+
+
+[Ticket created from XUP by life000]
+[From: chao dong]
+[System: Comet]
+[Category: Software]
+Hi Mahidhar:
+
+I run the RASPA2.0 software for a example test last week. It was shown that the energy is different from the example in manual.
+In the manual trouble shooting part it is said that:
+"The results are different on different machines We have come across one compiler-error: gcc 4.3.0 using
+optimizations ”-O3” and ”-O4” generated wrong code. Gcc 4.3.2 has resolved this bug."
+
+I checked that the current gcc verison is 4.9.2.
+
+I looked at the install procedure. It is  mentioned about the gcc alternatively as the following:
+
+Usually (when recent automake and autoconf versions are installed), it is enough to do
+1. make clean
+2. ./configure --prefix=${RASPA_DIR}
+3. make
+You can use the ’CFLAGS’ environment variable to set compiler options and ’CC’ to set the compiler.
+For example, for a gcc compiler one could use
+export CFLAGS="-Wall -O3 -ffast-math"
+export CC="gcc"
+
+The installation of RASPA2.0 is simple as following 2 and 3. It works for running and completion.
+
+Is it possible related to the gcc?
+
+Best
+
+Chao 

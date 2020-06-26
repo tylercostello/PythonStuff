@@ -1,0 +1,75 @@
+
+Wed Feb 20 14:21:13 2019: Request 104088 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by jhawthor
+       Queue: 0-SDSC
+     Subject: XUP: home directory inaccessible
+       Owner: Nobody
+  Requestors: saladi@caltech.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=104088 >
+
+
+[Ticket created from XUP by saladi1]
+[From: Shyam Saladi]
+[System: Comet,Comet GPU]
+[Category: System/Hardware Issues]
+Hi,
+
+Oddly today when logging in via ssh, I was prompted for a password and then am not able to get to my home directory. Could you help me please?
+
+Thanks,
+Shyam
+
+
+(base) ➜  ~ ssh comet.sdsc.edu
+Password:
+Last login: Wed Feb 20 12:16:53 2019 from pixel.caltech.edu
+Rocks 6.2 (SideWinder)
+Profile built 16:44 08-Feb-2016
+
+Kickstarted 17:18 08-Feb-2016
+
+                      WELCOME TO
+      __________________  __  _______________
+        -----/ ____/ __ \/  |/  / ____/_  __/
+          --/ /   / / / / /|_/ / __/   / /
+           / /___/ /_/ / /  / / /___  / /
+           \____/\____/_/  /_/_____/ /_/
+
+*******************************************************************************
+
+[1] Example Scripts: /share/apps/examples
+
+[2] Filesystems:
+
+     (a) Lustre scratch filesystem : /oasis/scratch/comet/$USER/temp_project
+         (Preferred: Scalable large block I/O)
+            *** Meant for storing data required for active simulations
+            *** Not backed up and should not be used for storing data long term
+            *** Periodically clear old data not required for active simulations
+
+     (b) Compute/GPU node local SSD storage: /scratch/$USER/$SLURM_JOBID
+         (Meta-data intensive jobs, high IOPs)
+
+     (c) Lustre projects filesystem: /oasis/projects/nsf
+
+     (d) /home/$USER : Only for source files, libraries, binaries.
+         *Do not* use for I/O intensive jobs.
+
+[3] Comet User Guide: http://www.sdsc.edu/support/user_guides/comet.html
+
+******************************************************************************
+SDSC COMET MAINTENANCE : 8AM-5PM (PT), Tuesday, 02/26/2019
+Details: https://portal.xsede.org/web/xup/user-news/-/news/item/10498
+******************************************************************************
+Could not chdir to home directory /home/saladi1: No such file or directory
+/usr/bin/xauth:  error in locking authority file /home/saladi1/.Xauthority
+-bash-4.1$ ls
+bin	    core.11539	core.15114  core.2227	core.31351  core.5749  etc     lib64	   mnt	  proc	    selinux   state  var
+boot	    core.12254	core.17202  core.22814	core.3284   core.6138  export  lost+found  net	  projects  share     sys
+cgroup	    core.13514	core.18286  core.24630	core.5054   cvmfs      home    media	   oasis  root	    software  tmp
+core.10778  core.14747	core.19874  core.26030	core.5593   dev        lib     misc	   opt	  sbin	    srv       usr
+-bash-4.1$ pwd
+/
+-bash-4.1$ cd $HOME
+-bash: cd: /home/saladi1: No such file or directory 

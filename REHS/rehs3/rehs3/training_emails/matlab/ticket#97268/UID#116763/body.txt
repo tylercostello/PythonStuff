@@ -1,0 +1,22 @@
+
+Thu Oct 18 13:52:19 2018: Request 97268 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by jhidleba
+       Queue: 0-SDSC
+     Subject: XUP: Matlab is run parallelly but then prompted "Killed" to be stopped
+       Owner: Nobody
+  Requestors: runren.zhang@duke.edu
+      Status: new
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=97268 >
+
+
+[Ticket created from XUP by renrenge]
+[From: Runren Zhang]
+[System: Comet]
+[Category: Software]
+Hi,
+I am new to the comet; when I required two cores in one node in non-GUI interactive mode to run my matlab code from my home directory, everything goes smooth; however, when it encounters the final linear solver phase, "Killed" is prompted with no other information for debug. 
+
+I tried it twice and both are killed at the same place (I am not very sure but since I have printed some information so it should be around the same place). It should be around a parfor(i, M=2) loop. This code used parfor a lot and this is not the first parfor it encounters. But this parfor will parallelly run a big function involving some large vector matrix multiplication (probably ~10 G for each core), so I wonder maybe this is the reason? Since there is no more information than a word "Killed", can you help me to figure out what can I do next?
+
+Best
+Runren 

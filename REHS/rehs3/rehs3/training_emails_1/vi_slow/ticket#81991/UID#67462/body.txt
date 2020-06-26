@@ -1,0 +1,60 @@
+
+Tue Jan 16 16:27:35 2018: Request 81991 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by buskuehl
+       Queue: 0-SDSC
+     Subject: XUP: unable to access filesystems
+       Owner: buskuehl
+  Requestors: candrewn@gmail.com
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=81991 >
+
+
+[Ticket created from XUP by cneale]
+[From: Chris Neale]
+[System: Comet]
+[Category: System/Hardware Issues]
+Dear Comet:
+
+I am able to log in today, but unable to access scratch or home filesystems. Any ls command simply hangs (see below). I didn't see any report of issues on the XSEDE portal systems monitor page.
+
+
+Password: 
+Last login: Tue Jan 16 14:07:23 2018 from 130.55.33.141
+Rocks 6.2 (SideWinder)
+Profile built 16:45 08-Feb-2016
+
+Kickstarted 17:27 08-Feb-2016
+                                                                       
+                      WELCOME TO 
+      __________________  __  _______________
+        -----/ ____/ __ \/  |/  / ____/_  __/
+          --/ /   / / / / /|_/ / __/   / /
+           / /___/ /_/ / /  / / /___  / /
+           \____/\____/_/  /_/_____/ /_/
+
+*******************************************************************************
+
+[1] Example Scripts: /share/apps/examples
+
+[2] Filesystems:
+
+     (a) Lustre scratch filesystem : /oasis/scratch/comet/$USER/temp_project
+         (Preferred: Scalable large block I/O)
+
+     (b) Compute/GPU node local SSD storage: /scratch/$USER/$SLURM_JOBID
+         (Meta-data intensive jobs, high IOPs)
+
+     (c) Lustre projects filesystem: /oasis/projects/nsf
+     
+     (d) /home/$USER : Only for source files, libraries, binaries.
+         *Do not* use for I/O intensive jobs.
+
+[3] Comet User Guide: http://www.sdsc.edu/support/user_guides/comet.html
+******************************************************************************
+[cneale@comet-ln3 ~]$ cat ~/.bashrc
+
+
+<<< it hangs here >>>
+
+Thank you,
+Chris. 

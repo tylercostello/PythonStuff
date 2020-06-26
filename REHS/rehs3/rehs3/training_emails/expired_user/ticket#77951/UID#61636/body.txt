@@ -1,0 +1,41 @@
+
+Thu Oct 26 12:47:53 2017: Request 77951 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by jhidleba
+       Queue: 0-SDSC
+     Subject: XUP: Unable to submit job
+       Owner: jhidleba
+  Requestors: giridharsekar@gmail.com
+      Status: new
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=77951 >
+
+
+[Ticket created from XUP by gsekar]
+[From: Giridhar Sekar]
+[System: comet-gpu.sdsc.xsede]
+[Category: Accounts]
+Unable to submit a job. Following error obtained.
+
+sbatch: error: bank_limit plugin: expired user, can't submit job
+sbatch: error: Batch job submission failed: Invalid account or account/partition combination specified
+
+
+Submission script used is below:
+
+#!/bin/bash
+#SBATCH --job-name="mdtest"  
+#SBATCH --output="mdtest.%j.%N.out"  
+#SBATCH -t 1:00:00       
+#SBATCH --mail-user=giridharsekar@gmail.com
+#SBATCH --mail-type=begin 
+#SBATCH --mail-type=end  
+#SBATCH --nodes=1
+#SBATCH --partition=gpu
+#SBATCH --ntasks-per-node=12
+#SBATCH --gres=gpu:2
+
+export SLURM_NODEFILE=`generate_pbs_nodefile`
+
+module purge
+module load gnutools amber cuda
+
+mpirun_rsh -export -hostfile $SLURM_NODEFILE -np 2 $AMBERHOME/bin/pmemd.cuda.MPI -O -i md.in -o md1.out -p prmtop -c equil.rst -r md1.rst -x md1.mdcrd -inf md1.mdinfo 

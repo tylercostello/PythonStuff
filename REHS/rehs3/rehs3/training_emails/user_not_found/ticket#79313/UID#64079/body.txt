@@ -1,0 +1,23 @@
+
+Tue Nov 21 10:37:52 2017: Request 79313 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by jhawthor
+       Queue: 0-SDSC
+     Subject: XUP: srun error on interactive debug session
+       Owner: Nobody
+  Requestors: mohtadin.hashemi@unmc.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=79313 >
+
+
+[Ticket created from XUP by mhashemi]
+[From: Mohtadin Hashemi]
+[System: Comet]
+[Category: Access/Login Issues]
+I am unable to run an interactive session on the debug partition using the following resource request:
+srun --partition=debug -t 00:30:00  --ntasks=1 --nodes=1  --pty /bin/bash
+
+I am met with the following error:
+srun: error: bank_limit plugin: not found user association mhashemi
+srun: error: Unable to allocate resources: Invalid account or account/partition combination specified
+
+We are currently in the process of transferring 100% of our Comet allocation to Comet-gpu, so that may be the issue - it is very strange since I have not experienced similar issues in the past during an allocation transfer. 

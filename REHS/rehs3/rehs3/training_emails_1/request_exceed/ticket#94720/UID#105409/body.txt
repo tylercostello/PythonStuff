@@ -1,0 +1,46 @@
+
+Sat Sep 08 10:10:06 2018: Request 94720 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by jhidleba
+       Queue: 0-SDSC
+     Subject: R job failed to run at all
+       Owner: Nobody
+  Requestors: Lisa.Henn@arborresearch.org
+      Status: new
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=94720 >
+
+
+Attn: Marty Kandes
+
+
+SLURM job 18956657 failed because the job exceeded its wall clock. When I look at the log file, I see only this:
+
+
+<begin>
+
+[llhenn@comet-ln2 OrdDat_clcc]$ cat OrdDat_clcc_settings_group2.Rout
+mpirun: Forwarding signal 18 to job
+[comet-22-04.sdsc.edu:14053] [[42221,0],0]->[[42221,0],1] mca_oob_tcp_msg_send_bytes: write failed: Broken pipe (32) [sd = 17]
+[comet-22-04.sdsc.edu:14053] [[42221,0],0]-[[42221,0],1] mca_oob_tcp_peer_send_handler: unable to send header
+mpirun: abort is already in progress...hit ctrl-c again to forcibly terminate
+
+<end>
+
+
+It looks like R didn't start at all. Checking the date stamps on the output files, they haven't been written to since Sept 4 or earlier. (If you want to check those, they are in /home/llhenn/Copula/OrdDat/OrdDat_clcc/rslts/rslts_OrdDat_clcc_phi_2.5_*.csv, where the number in the * position is 206 or less. A few jobs in that range were run when I was benchmarking Comet and will have much earlier date stamps.)
+
+
+So it looks like the job just sat and burned nearly 7000 SU's without running anything.
+
+
+Have I interpreted this correctly? Can anything be done to prevent it recurring? May I have a refund on those 6912 SU's?
+
+
+Group 3 ran without problem in the same time period.
+
+
+Thanks,
+
+Lisa
+
+PS I hope you had a good vacation!
+ 

@@ -1,0 +1,36 @@
+
+Wed Oct 18 14:30:05 2017: Request 77531 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by fwells
+       Queue: 0-SDSC
+     Subject: XUP: job submission issues
+       Owner: fwells
+  Requestors: rweihs@ucsd.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=77531 >
+
+
+[Ticket created from XUP by weihsr]
+[From: Rachel Weihs]
+[System: Comet]
+[Category: Batch Queues/Jobs]
+Hello,
+
+Throughout today and yesterday, I have been receiving timeout issues when submitting my jobs to the shared queue:
+
+sbatch: error: slurm_receive_msg: Socket timed out on send/recv operation
+sbatch: error: Batch job submission failed: Socket timed out on send/recv operation
+
+The submission script parameters for slurm are:
+#!/bin/bash
+#SBATCH -p shared
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --mem=32G
+#SBATCH -t 00:20:00
+#SBATCH -J compile_wps 
+#SBATCH -o compile_wps.%j.%N.out
+#SBATCH -e compile_wps.%j.%N.err
+#SBATCH --export=ALL
+
+Thanks,
+Rachel Weihs 

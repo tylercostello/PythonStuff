@@ -1,0 +1,46 @@
+
+Thu Aug 10 13:33:56 2017: Request 73651 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by jhawthor
+       Queue: 0-SDSC
+     Subject: XUP: expired user error
+       Owner: Nobody
+  Requestors: irem.altan@duke.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=73651 >
+
+
+[Ticket created from XUP by nano3]
+[From: Irem Altan]
+[System: Comet]
+[Category: Accounts]
+Hi,
+
+I'm trying to submit a GPU job, but I'm getting the following error:
+
+[nano3@comet-ln3 DBI_contact4_angle]$ sbatch submit.sh 
+sbatch: error: bank_limit plugin: expired user, can't submit job
+sbatch: error: Batch job submission failed: Invalid account or account/partition combination specified
+
+The submission script is as follows:
+
+#!/bin/bash
+#SBATCH --job-name="DBIc4ang"
+#SBATCH --output=out.dat
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=4
+#SBATCH --no-requeue
+#SBATCH -p gpu
+#SBATCH --gres=gpu:4
+#SBATCH -t 48:00:00
+#SBATCH -A TG-DMR150103
+
+export OMP_NUM_THREADS=6
+module unload intel
+module load gromacs
+
+ibrun gmx_mpi mdrun -v -deffnm npt
+
+Note that we have recently transferred most of our SUs to GPU SUs and this is the first time I'm trying to use the GPU SUs.
+
+Best,
+Irem 

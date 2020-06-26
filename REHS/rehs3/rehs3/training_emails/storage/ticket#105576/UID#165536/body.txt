@@ -1,0 +1,26 @@
+
+Thu Mar 21 10:05:30 2019: Request 105576 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by jhidleba
+       Queue: 0-SDSC
+     Subject: XUP: Weird segmentation faulty –– likely a RAM issue
+       Owner: Nobody
+  Requestors: nicolas.douguet@ucf.edu
+      Status: new
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=105576 >
+
+
+[Ticket created from XUP by ndouguet]
+[From: Nicolas Douguet]
+[System: Comet]
+[Category: System/Hardware Issues]
+Dear person in charge,
+I have been running my code on comet for about a month now and it worked fine. I had to transfer from SuperMIC that I could (unfortunately) not use anymore. Yesterday I tried to rerun older large calculations that I ran on SuperMIC in the past, however on comet it failed. Note that other smaller calculations work fine on comet. Now I remember I  already saw that a long time ago on comet and it is most likely the reason I had switched to SuperMIC. I do believe this could be a RAM issue as it fails when one array is allocated with a large number of elements (if I reduce the number of elements it works). On the other hand, I did not expect SuperMIC to absolutely outclass comet in terms of memory management so I am a bit surprise. Especially the memory is not that large in principle I believe. The error message is:
+
+/var/spool/slurmd/job22017166/slurm_script: line 14: 26328 Segmentation fault  
+
+Do you have any idea what it could be? I have changed -mcmodel from medium to large but it also failed. Now I am trying to get one of these large-memory nodes in the hope it will work but in principle I do not believe this calculation is that demanding in terms of memory, especially since it works fine on regular nodes on SuperMIC. Any help or advise would be appreciated.
+
+My account is ndouguet and the runs that fail is in /home/douguet/NeonElena..the code is in SourceCodes/H-42-INUSE-v2-NEON where you can also see the Makefile I used to compile the code.
+
+Thank you very much and best regards
+Nicolas Douguet 

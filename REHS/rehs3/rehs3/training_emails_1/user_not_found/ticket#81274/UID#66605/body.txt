@@ -1,0 +1,42 @@
+
+Fri Jan 05 10:25:15 2018: Request 81274 was acted upon.
+ Transaction: Queue changed from 0-XOC to 0-SDSC by jhidleba
+       Queue: 0-SDSC
+     Subject: XUP: sbatch: error
+       Owner: jhidleba
+  Requestors: malwaraw@iwu.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=81274 >
+
+
+[Ticket created from XUP by malwaraw]
+[From: Mohammad Alwarawrah]
+[System: Comet]
+[Category: Batch Queues/Jobs]
+Hi,
+
+I am trying to submit jobs on Comet using the following script (similar to the one under the directory: /share/apps/examples):
+_ _ _ _ _ _ _ 
+#!/bin/bash
+#SBATCH --job-name="cpu.N1.out"
+#SBATCH --output="cpu.N1.out"
+#SBATCH --partition=compute
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=24
+#SBATCH --export=ALL
+#SBATCH -t 1:00:00
+
+module unload intel
+module load gromacs
+gmx grompp -f 5ps.mdp -c NPT-1ns.gro -n index.ndx -t NPT-1ns.cpt -o cpu.N1.tpr
+ibrun gmx_mpi mdrun -v -deffnm cpu.N1
+_ _ _ _ _ _ _ _ 
+
+I received the following error message:
+sbatch: error: bank_limit plugin: not found user association malwaraw
+sbatch: error: Batch job submission failed: Invalid account or account/partition combination specified
+
+I am the PI of this project, do I need to add my self on the project allocation?
+
+Thanks
+Mohammad 

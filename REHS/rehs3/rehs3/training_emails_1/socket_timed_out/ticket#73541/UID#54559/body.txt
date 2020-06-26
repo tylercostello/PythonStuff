@@ -1,0 +1,66 @@
+
+Tue Aug 08 16:24:52 2017: Request 73541 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by clm
+       Queue: 0-SDSC
+     Subject: XUP: sbatch error?
+       Owner: clm
+  Requestors: khuang8@student.gsu.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=73541 >
+
+
+[Ticket created from XUP by khuang8]
+[From: Kenneth Huang]
+[System: comet-gpu.sdsc.xsede]
+[Category: Batch Queues/Jobs]
+Hi,
+
+I'm getting the following error on multiple job submission files as follows-
+
+[khuang8@comet-ln3 DNA]$ sbatch amber16_DNA-FI 
+sbatch: error: slurm_receive_msg: Socket timed out on send/recv operation
+sbatch: error: Batch job submission failed: Socket timed out on send/recv operation
+
+Where the sbatch files look like-
+
+#!/bin/bash
+#SBATCH --job-name="DNA-FI"
+#SBATCH --output="comet.%j.%N.out"
+#SBATCH --nodes=1
+#SBATCH --no-requeue
+#SBATCH -p gpu-shared
+#SBATCH --ntasks-per-node=7
+#SBATCH --gres=gpu:p100:1
+#SBATCH --export=ALL
+#SBATCH -t 48:00:00
+#SBATCH -A gsu110    
+#SBATCH --mail-user=khuang8@student.gsu.edu
+#SBATCH --mail-type=begin  
+#SBATCH --mail-type=end
+
+module unload mvapich2_ib
+module unload intel
+module purge
+module load python
+module load scipy
+module load gnu
+module load mvapich2_ib
+module load cuda/8.0
+export SLURM_NODEFILE=`generate_pbs_nodefile`
+export MV2_ENABLE_AFFINITY=0
+
+export AMBERHOME=/home/khuang8/amber16
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$AMBERHOME/lib
+source /home/khuang8/amber16/amber.sh
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib64/nvidia/
+export LD_LIBRARY_PATH=/opt/gnu/gcc/lib64:/opt/gnu/gmp/lib:/opt/gnu/mpfr/lib:/op
+t/gnu/mpc/lib:/usr/lib64:$LD_LIBRARY_PATH
+
+cd DNA_FI
+/home/khuang8/amber16/bin/pmemd.cuda -O -i 05_prod.in -o 05_prod5.out -p *.prmto
+p -c 05_prod4.rst -r 05_prod5.rst -x 05_prod5.nc -inf 05_prod5.mdinfo -l 05_prod
+5.log
+
+Best,
+
+Kenneth 

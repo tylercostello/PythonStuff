@@ -1,0 +1,32 @@
+
+Wed Mar 28 12:05:49 2018: Request 85777 was acted upon.
+ Transaction: Queue changed from 0-XOC to 0-SDSC by fwells
+       Queue: 0-SDSC
+     Subject: help with expired user
+       Owner: Nobody
+  Requestors: gpalermo@ucsd.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=85777 >
+
+
+Hi All,
+
+I am equilibrating a system using Gromacs on COMET.
+This equilibration can only be done using Gromacs version 4 on CPUs. This is because we are using specific distance restraints that are not supported by the newest versions of Gromacs on GPUs, because of a problem with the domain decomposition. We have already investigated this for long time with the help of the XSEDE people.
+
+However, this morning, I was trying to submit the job and it was not working with the following error:
+
+sbatch: error: bank_limit plugin: expired user, can't submit job
+sbatch: error: Batch job submission failed: Invalid account or account/partition combination specified
+
+I am using the account ddp245 (belonging to Prof. McCammon, who is my post-doctoral advisor), which has time on CPUs. As you see, there is still a lot on this account:
+
+ID name      project      used     available    used_by_proj
+------------------------------------------------------------
+gpalermo     ddp245       1372994  2005586      1372994
+
+Can we solve this issue?
+
+Thank you very much
+Giulia
+ 

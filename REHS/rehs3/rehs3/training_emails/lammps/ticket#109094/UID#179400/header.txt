@@ -1,0 +1,122 @@
+MIME-Version: 1.0
+Received: from BL0PR04MB4724.namprd04.prod.outlook.com (2603:10b6:a02:bc::32)
+ by BYAPR04MB3814.namprd04.prod.outlook.com with HTTPS via
+ BYAPR07CA0019.NAMPRD07.PROD.OUTLOOK.COM; Mon, 3 Jun 2019 16:11:00 +0000
+Received: from BN8PR04CA0045.namprd04.prod.outlook.com (2603:10b6:408:d4::19)
+ by BL0PR04MB4724.namprd04.prod.outlook.com (2603:10b6:208:4c::29) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.1943.22; Mon, 3 Jun
+ 2019 16:10:59 +0000
+Received: from DM3NAM03FT035.eop-NAM03.prod.protection.outlook.com
+ (2a01:111:f400:7e49::202) by BN8PR04CA0045.outlook.office365.com
+ (2603:10b6:408:d4::19) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.1943.22 via Frontend
+ Transport; Mon, 3 Jun 2019 16:10:59 +0000
+Authentication-Results: spf=none (sender IP is 132.239.0.82)
+ smtp.mailfrom=tickets.dyn.xsede.org; ucsdcloud.mail.onmicrosoft.com;
+ dkim=none (message not signed) header.d=none;ucsdcloud.mail.onmicrosoft.com;
+ dmarc=none action=none header.from=xsede.org;
+Received-SPF: None (protection.outlook.com: tickets.dyn.xsede.org does not
+ designate permitted sender hosts)
+Received: from XMAIL-B1.AD.UCSD.EDU (132.239.0.82) by
+ DM3NAM03FT035.mail.protection.outlook.com (10.152.82.188) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384) id
+ 15.20.1943.19 via Frontend Transport; Mon, 3 Jun 2019 16:10:58 +0000
+Received: from XMAIL-B1.AD.UCSD.EDU (132.239.0.82) by XMAIL-B1.AD.UCSD.EDU
+ (132.239.0.82) with Microsoft SMTP Server (TLS) id 15.1.396.30; Mon, 3 Jun
+ 2019 09:10:54 -0700
+Received: from XCORE-CUB1.AD.UCSD.EDU (132.239.0.117) by XMAIL-B1.AD.UCSD.EDU
+ (132.239.0.82) with Microsoft SMTP Server (TLS) id 15.1.396.30 via Frontend
+ Transport; Mon, 3 Jun 2019 09:10:54 -0700
+Received: from mx0a-0016e101.pphosted.com (148.163.145.30) by
+ XCORE-CUB1.AD.UCSD.EDU (132.239.0.117) with Microsoft SMTP Server (TLS) id
+ 14.3.408.0; Mon, 3 Jun 2019 09:10:53 -0700
+Received: from pps.filterd (m0151353.ppops.net [127.0.0.1])	by
+ mx0a-0016e101.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id x53G7jQj032509;
+	Mon, 3 Jun 2019 09:10:52 -0700
+Authentication-Results-Original: ppops.net;	spf=none
+ smtp.mailfrom=apache@tickets.dyn.xsede.org
+Received: from amantadine.ncsa.uiuc.edu (amantadine.ncsa.uiuc.edu
+ [141.142.192.229])	by mx0a-0016e101.pphosted.com with ESMTP id 2svtuhb34n-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Mon, 03 Jun 2019 09:10:52 -0700
+Received: from tickets.xsede.org (rt02.tacc.utexas.edu [129.114.60.41])	by
+ amantadine.ncsa.uiuc.edu (8.15.2/8.15.2) with ESMTP id x53GAS4w000596;	Mon, 3
+ Jun 2019 11:10:28 -0500
+Received: by tickets.xsede.org (Postfix, from userid 48)	id 3B76E400A4; Mon,
+  3 Jun 2019 11:10:51 -0500 (CDT)
+Subject: [tickets.xsede.org #109094] XUP: Compiling custom version of LAMMPS
+From: Jeremy Hawthorne via RT <help@xsede.org>
+Reply-To: <help@xsede.org>
+References: <RT-Ticket-109094@xsede.org>
+Message-ID: <rt-4.0.9-31902-1559578250-428.109094-12-0@xsede.org>
+Precedence: bulk
+X-RT-Loop-Prevention: tickets.xsede.org
+RT-Ticket: tickets.xsede.org #109094
+Managed-BY: RT 4.0.9 (http://www.bestpractical.com/rt/)
+RT-Originator: jhawthor@illinois.edu
+To: AdminCc of tickets.xsede.org Ticket #109094:;
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+X-RT-Original-Encoding: utf-8
+Date: Mon, 3 Jun 2019 11:10:51 -0500
+X-Null-Tag: f43f3e9559f91f1506f467011a8c5169
+X-CLX-Shades: MLX
+X-CLX-Response: 1TFkXGxIcEQpMehcaEQpZRBdtRUJCRGkefExEGBEKWFgXaUsTbBNhEn4aaH8 RCnhOF2RJSFhmBUUTQlNrEQp4SxdpSxNsE2ESfhpofxEKeUwXYW95BWViGWdeRH8RCnlDF2R9YB Nwa3pDb3JAEQpZTRdnZnIRCllJFxpxGhAadwYbHBxxHh8QGncGGBoGGhEKWV4XaG55EQpJRhdfS
+ VlOdUJFWV5PThEKQ04XH2NrQ1kHHUJdXXITE29FcmVbbVNlcmISQmMTenhJdUsRClhcFx8EGgQb HR8HGhkeHhJMEhIFGxoEGxoaBB4SBBsQGx4aHxoRCl5ZF39hX1lEEQpNXBcZHRIRCkxaF3htTUV dEQpFWRdNEQpMXxd6BQUFBQUFBQUFZREKTEYXY2tra0FraREKQk8XZ21PH0VHcBpaSWMRCkNaFx
+ seGwQbHhgEGxMYBBgYExEKQl4XGxEKRFgXGREKRF4XGhEKQkYXbRlMXkl+eFhmREARCkJcFxoRC kJFF29MclJYZR1rSGZdEQpCThdkSUhYZgVFE0JTaxEKQkwXaUsTbBNhEn4aaH8RCkJsF2NeHE5p Th0dU25oEQpCQBdtW3hDU0NOE3hfTREKcGcXaERYbxNMemFcZ10QGhEKcGgXYX1pXnoZfHJ/fBw
+ QGhEKcGgXemVOQ15ASUFrAVkQGhEKcGgXaWgfeUhlWXh8ZFkQGhEKcGgXZhNzEnpPGxlcGVIQGh EKcGgXZEceZnMSfkNIa3MQGhEKcH8XYF9lR11QR0UYRF4QGxgaEQpwXxdhX0VaaEl4eRh8YhAZG hEKcH0XYkdafmUbGXhuBUYQGhEKcGwXehIBRUlQXGVfGh8QGhEKcEMXaUESSUViYEtgH2EQHhIR Cm1+FxoRClhNF0sRIA==
+X-Proofpoint-SPF-Result: none
+X-Proofpoint-SPF-Record: N/A
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:,, definitions=2019-06-03_12:,,
+ signatures=0
+X-Proofpoint-Spam-Details: rule=inbound_notspam policy=inbound score=0 priorityscore=0 malwarescore=0
+ suspectscore=0 phishscore=0 bulkscore=0 spamscore=0 clxscore=186
+ lowpriorityscore=0 mlxscore=0 impostorscore=0 mlxlogscore=999 adultscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.0.1-1810050000
+ definitions=main-1906030112
+Return-Path: apache@tickets.dyn.xsede.org
+X-OrganizationHeadersPreserved: XMAIL-B1.AD.UCSD.EDU
+X-MS-Exchange-Organization-ExpirationStartTime: 03 Jun 2019 16:10:58.4497
+ (UTC)
+X-MS-Exchange-Organization-ExpirationStartTimeReason: OriginalSubmit
+X-MS-Exchange-Organization-ExpirationInterval: 2:00:00:00.0000000
+X-MS-Exchange-Organization-ExpirationIntervalReason: OriginalSubmit
+X-MS-Exchange-Organization-Network-Message-Id:
+ e3adc366-1611-4d1f-f5d2-08d6e83e10a6
+X-EOPAttributedMessage: 0
+X-MS-Exchange-Organization-MessageDirectionality: Originating
+X-CrossPremisesHeadersPromoted:
+ DM3NAM03FT035.eop-NAM03.prod.protection.outlook.com
+X-CrossPremisesHeadersFiltered:
+ DM3NAM03FT035.eop-NAM03.prod.protection.outlook.com
+X-Forefront-Antispam-Report:
+ CIP:132.239.0.82;IPV:NLI;CTRY:US;EFV:NLI;SFV:NSPM;SFS:(2980300002)(428003)(199004)(189003)(51234002)(14444005)(52956003)(8676002)(486006)(5660300002)(446003)(1096003)(8936002)(2616005)(476003)(126002)(7636002)(305945005)(336012)(246002)(966005)(426003)(50466002)(450100002)(43066004)(23676004)(2486003)(76176011)(6306002)(2870700001)(47776003)(109986005)(36756003)(3450700001)(6266002)(156004)(356004)(42186006)(103686004)(26005)(102196002);DIR:INB;SFP:;SCL:1;SRVR:BL0PR04MB4724;H:XMAIL-B1.AD.UCSD.EDU;FPR:;SPF:None;LANG:en;PTR:xmail-b1.ucsd.edu;A:1;MX:1;
+X-MS-Exchange-Organization-AuthSource: XCORE-CUB1.AD.UCSD.EDU
+X-MS-Exchange-Organization-AuthAs: Anonymous
+X-OriginatorOrg: newmail.ucsd.edu
+X-MS-PublicTrafficType: Email
+X-MS-Exchange-Organization-ExpirationInterval: 1:00:00:00.0000000
+X-MS-Exchange-Organization-ExpirationIntervalReason: FlexTransport
+X-MS-Office365-Filtering-Correlation-Id: e3adc366-1611-4d1f-f5d2-08d6e83e10a6
+X-Microsoft-Antispam:
+ BCL:0;PCL:0;RULEID:(2390118)(7020095)(4652040)(8989299)(4534185)(4627221)(201703031133081)(8559020)(8990200)(5600148)(711020)(4605104)(1401327)(2017052603328);SRVR:BL0PR04MB4724;
+X-MS-TrafficTypeDiagnostic: BL0PR04MB4724:
+X-MS-Exchange-PUrlCount: 1
+x-campus_o365: o365_983452
+X-MS-Oob-TLC-OOBClassifiers: OLM:9508;
+X-MS-Exchange-Organization-SCL: 1
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Jun 2019 16:10:58.1515
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: e3adc366-1611-4d1f-f5d2-08d6e83e10a6
+X-MS-Exchange-CrossTenant-Id: 8a198873-4fec-4e76-8182-ca479edbbd60
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=8a198873-4fec-4e76-8182-ca479edbbd60;Ip=[132.239.0.82];Helo=[XMAIL-B1.AD.UCSD.EDU]
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL0PR04MB4724
+X-MS-Exchange-Transport-EndToEndLatency: 00:00:02.5050511
+X-MS-Exchange-Processed-By-BccFoldering: 15.20.1943.000
+X-Microsoft-Antispam-Mailbox-Delivery:
+	ucf:0;jmr:0;ex:0;auth:0;dest:I;ENG:(20160514016)(750119)(520002050)(944506303)(944626516);
+X-Microsoft-Antispam-Message-Info:
+	GZ5keKg5ovYvlreU9WreTLoCPT0k06lWnBDbMHWnog46ouFjU+a5YfTJ+gi3XZIYTgcAgs6Bp2DZ91N+xq+Camn2KgFm79KLuPyhOOtjT0SHqjk5dLDLmeYEszYEl3jFFQnIPH+ir0ifL7zcu9teN9TNCVGtP2djaNtPfWUb1VY4MXFEoRLKw91tiJfVAMMm8eUVK2Ev6Li0W8/RYoOC0VPGOJOLf+/b4D8Ix6FF5Ue+Xk1O+iZLj0V1uHRHQpsjvSd8KFNjQluwv8gzX3p75lneNsBGsWw7JdLsGEXgVvAB7xgY+/Qe7xnia3YKYpbeLM9RgxFIMvtLEkLSuiPKa4UcQCVV5Cl8HQdLQJaYoeLb20Ct9vi3dsPC/9t0Hohdcfo3u8RiOczm2hL0SZhPsLlBNSvMQ4VnFiGIcNCC2Ec5HV0f+ZpxnLmUoMSwgURoKYU8qwiJCnhJdL6xjoYyM5gVImO0h4GDJRdUVVMtR0zpW99W7OJCJUMEcsIs3zYGezp9ActSMBpreCocbXUrSsDsqTbrz9o3Ip8Ey9q4eklIbotdj1DL0U79y+nUlxMUQqn28RAJkCIbkwBqM2+7HTJiQxDJubntulxqmiN1pdJ6CQRUe1uzOej7hQ3SHFXdsOlz4MyK+yB5RXzowf4h+KnSwaU/qGSjto+CvCMXDMd6nh1QlZNB5dAl4kyy93We+fs5VCA+tjZHGc1mhbroTyIwI10zdaOmm6VY4k3/MhP8y+eoMIq2H+w3NY0FcA4vPSAZ3aatmWyEN+45+0o41WRmr2klj1yCkJdbdwz685vNprX1grnixmNqIy1xNoTB1j/M6bscPtWZfC08EnwIxOteLC26lpGpC/z9cdSNM/CA3ouM370CIDFvGRnHnoYuakQiOysrTI99axPq8q6w4A==
+

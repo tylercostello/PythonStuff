@@ -1,0 +1,27 @@
+
+Wed May 29 15:14:08 2019: Request 108914 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by carmanh
+       Queue: 0-SDSC
+     Subject: XUP: ORCA 4.1
+       Owner: carmanh
+  Requestors: rnw8253@colostate.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=108914 >
+
+
+[Ticket created from XUP by rnw8253]
+[From: Ryan Weber]
+[System: Comet]
+[Category: Software]
+I need to use a feature of ORCA 4.1. Since an older version of ORCA is used on comet, I installed ORCA 4.1 in my scratch space. This orca runs fine. To run ORCA 4.1 mpi I need OpenMPI 3.1.3 installed. This is not the version currently on comet. I installed my own OpenMPI 3.1.3 in my scratch space. When I run a job using ORCA 4.1 on one core it runs fine. If I try to run ORCA mpi it does not run properly. There is no error message it just stops outputting anything to files. This is in my input scripts below the standard header.
+
+export MODULEPATH=/share/apps/compute/modulefiles/mpi:$MODULEPATH
+module unload intel
+module load gnu
+export orcahome="/oasis/scratch/comet/rnw8253/temp_project/orca-4.1.2"
+export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$orcahome"
+
+I was wondering if there is something else I need to load in to get this working. OpenMPI 3.1.3 is in my PATH and LD_LIBRARY_PATH. I also tried adding in these lines to my submit script, but it does not help.
+
+export PATH="/oasis/scratch/comet/rnw8253/temp_project/openmpi-3.1.3/build/bin:$PATH"
+export LD_LIBRARY_PATH="/oasis/scratch/comet/rnw8253/temp_project/openmpi-3.1.3/build/lib/:$LD_LIBRARY_PATH" 

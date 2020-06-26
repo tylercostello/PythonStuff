@@ -1,0 +1,33 @@
+
+Mon Feb 12 10:36:07 2018: Request 83360 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by jhawthor
+       Queue: 0-SDSC
+     Subject: XUP: Limit
+       Owner: jhawthor
+  Requestors: jmz5364@psu.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=83360 >
+
+
+[Ticket created from XUP by mantun]
+[From: Jia Zhu]
+[System: Comet]
+[Category: Batch Queues/Jobs]
+Hi,
+
+I am a user of Comet. My batch file is
+
+#!/bin/bash
+#SBATCH --job-name="3D-d3"
+#SBATCH --output="3D-d3"
+#SBATCH --partition=compute
+#SBATCH --nodes=1
+#SBATCH --export=ALL
+#SBATCH --ntasks-per-node=24
+#SBATCH -L abaqus:24
+#SBATCH -t 48:00:00
+module load abaqus/6.14-1
+export EXE=`which abq6141`
+$EXE job=3D-d3 input=3D-d3.inp scratch=/scratch/$USER/$SLURM_JOBID cpus=24 mp_mode=threads memory=360000mb interactive
+
+When submitting it, I got a message saying "Requested time limit is invalid (missing or exceeds some limit)". Could you help check it? 

@@ -1,0 +1,50 @@
+
+Tue Feb 05 11:22:31 2019: Request 103402 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by jhawthor
+       Queue: 0-SDSC
+     Subject: Can't ssh to wrangler IU from SDSC Comet login node
+       Owner: Nobody
+  Requestors: hayashis@iu.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=103402 >
+
+
+Hello. I am trying to transfer some files from comet to Wrangler.
+
+I can scp to karst/carbonate just fine, but not wrangler.
+
+hayashis@comet-ln2:~ $ ssh karst.uits.iu.edu
+Warning: Permanently added 'karst.uits.iu.edu,149.165.234.31' (RSA) to the
+list of known hosts.
+Warning: untrusted X11 forwarding setup failed: xauth key data not generated
+Warning: No xauth data; using fake authentication data for X11 forwarding.
+Last login: Mon Feb  4 12:20:32 2019 from 129.79.196.215
+
+
+****************************************************************************
+                 Welcome to Indiana University's Karst Cluster
+               Email questions and comments to hps-admin@iu.edu.
+
+        For information about this cluster see https://kb.iu.edu/d/bezu.
+
+
+****************************************************************************
+..
+
+hayashis@comet-ln2:~ $ ssh wrangler.iu.xsede.org
+ssh: connect to host wrangler.iu.xsede.org port 22: No route to host
+
+Is this by design? Or maybe the IP address is blocked?
+
+I can go the other direction just fine btw.
+
+hayashis@karst(h1):~(git?) 255 ssh hayashis@comet.sdsc.edu
+Last login: Tue Feb  5 09:14:34 2019 from
+45-16-200-251.lightspeed.iplsin.sbcglobal.net
+Rocks 6.2 (SideWinder)
+
+So this is not a show-stopper, but I think I should be able to ssh from
+both directions.
+
+Soichi
+ 

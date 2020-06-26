@@ -1,0 +1,32 @@
+
+Fri Jun 01 16:05:13 2018: Request 89421 was acted upon.
+ Transaction: Queue changed from 0-XOC to 0-SDSC by hthta
+       Queue: 0-SDSC
+     Subject: submit Matlab job with control operator &
+       Owner: hthta
+  Requestors: zej011@ucsd.edu
+      Status: new
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=89421 >
+
+
+Hello all:
+
+Today I found a very strange problem I can not explain myself. When I only
+apply one CPU in my batch script to run MATLAB just like this:
+
+*matlab -nodisplay -r XXX > logfile &*
+
+The job is cancelled as long as it runs. However, it could be properly
+executed if I comment out the & sign.
+
+Later, I wrote a script applying several CPUs within one node and assign
+them to each MATLAB task submitted in the same way as above: *matlab
+-nodisplay -r XXX > logfile & *, it could be successfully run on comet. As
+a comparison, I am confused that why several tasks could be run at the
+background while it fails in only one CPU? Could you please help me explain
+that?
+
+Thanks,
+-- 
+Zeyu Jin
+ 

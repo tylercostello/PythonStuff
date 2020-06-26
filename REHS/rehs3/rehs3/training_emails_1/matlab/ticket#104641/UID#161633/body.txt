@@ -1,0 +1,37 @@
+
+Mon Mar 04 10:55:22 2019: Request 104641 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by hthta
+       Queue: 0-SDSC
+     Subject: XUP: can I sbatch matlab jobs on Comet?
+       Owner: hthta
+  Requestors: xhu@ou.edu
+      Status: new
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=104641 >
+
+
+[Ticket created from XUP by xhu]
+[From: Xiaoming Hu]
+[System: Comet]
+[Category: Software]
+I was told before that to run matlab jobs on Comet, I need to do
+" srun --partition=debug --pty --nodes=1 --ntasks-per-node=1 -t 00:30:00 --wait=0 --export=ALL /bin/bash 
+module load matlab
+matlab -nodisplay      
+"
+to run matlab
+
+Can I sbatch matlab jobs?  in a script like:
+"
+#SBATCH --job-name="plot_s"
+#SBATCH --output="/oasis/scratch/comet/xhu2/temp_project/Run/log/plot.%j.o"
+#SBATCH --partition=shared
+#SBATCH --nodes=1  
+#SBATCH -A uok114 
+#SBATCH --ntasks-per-node=1  
+#SBATCH --export=ALL  
+#SBATCH -t 8:30:00 
+
+module load matlab
+matlab < xxx.m
+
+" 

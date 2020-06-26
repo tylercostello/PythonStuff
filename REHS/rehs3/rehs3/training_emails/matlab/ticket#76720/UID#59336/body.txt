@@ -1,0 +1,51 @@
+
+Thu Oct 05 10:51:39 2017: Request 76720 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by jhidleba
+       Queue: 0-SDSC
+     Subject: XUP: Workflow optimization
+       Owner: jhidleba
+  Requestors: kandoigaurav@gmail.com
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=76720 >
+
+
+[Ticket created from XUP by gkandoi]
+[From: Gaurav Kandoi]
+[System: Comet]
+[Category: Batch Queues/Jobs]
+Hi
+
+I'm working on a project to predict whether or not a given mRNA transcript isoform pair will have be connected (edge) in a network. To this end, I'm employing a machine learning approach and using several genomic and transcriptomic  properties as the learning features.
+
+I've a set of ~76K mRNA transcript isoform, this leads to a total of 76K * 76K or ~2.9 billion possible edges. I've calculated 10 features for each of these ~2.9 billion edges and each feature is in a separate file. Each file is ~100 GB. Each file consists of 3 columns:
+
+Transcript ID1, Transcript ID2, Numeric Feature Value
+
+Now, I would like to combine all these 10 files into a single file which will have 12 columns based on the combination of Transcript ID1 and Transcript ID2:
+
+Transcript ID1, Transcript ID2, Numeric Feature Value 1, Numeric Feature Value 2, .... , Numeric Feature Value 10
+
+Later, I would like to label these Transcript ID1 and Transcript ID2 pairs as positive or negative and build training/testing datasets for my machine learning algorithm and ultimately predict the edge probability for each of ~2.9 billion possible edges.
+
+My current approach is as following:
+
+1) Copy 2 feature files to temporary scratch
+2) Combine these files using AWK and write a new file with 4 columns (ID1, ID2, Feature1, Feature2)
+3) Move next feature file to temporary scratch
+4) Combine this new feature file with the output file of previous step and write a new file with 5 columns (ID1, ID2, Feature1, Feature2, Feature3)
+5) Repeat 3 and 4 to finally combine all 10 files. (At each iteration, the number of columns in the output of step 4 will increase by 1)
+
+Because my local scratch has a lot of data already (~2TB), I had to do several compression/uncompression operations which required a lot of overhead time to avoid "no space left on disk" error. I try and delete the intermediate combined files to save disk space. (I'm working on reducing the total data, but would like to keep working on this till then)
+
+I've attached a sample script that I've been using to do this.
+
+The individual files are ~100 GB and the combined files increase by ~18 GB/ iteration. After combining six files, the combined file with 8 columns (ID1, ID2, Feature 1 - 6) is 188 GB. It took more than 24 hours on the large-shared partition with all 64 cores and 1500 GB memory to do this. I realize that this is a very memory as well as disk space intensive process. I know that the large-shared partition is little slower than the compute nodes, but the job fails on compute node due to insufficient memory.
+
+I'm sure this is not the most efficient method and I don't want to waste resources for myself as well as others. Maybe AWK isn't the best way to do this? Or my choice of resources is poor? There are many shortcomings of the current workflow.
+
+If you could please suggest/recommend anything that might help optimize the current workflow code or maybe even suggest something more efficient in some other programming languages like R, Python, MATLAB (I'm comfortable using these 3, but if required, can try and decipher others) that would be really helpful.
+
+PS: At present, I only have 10 such files to combine, but as I move along, I'll have few more files.
+
+Thanks
+Gaurav 

@@ -1,0 +1,39 @@
+
+Thu Apr 04 09:59:07 2019: Request 106352 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by jhawthor
+       Queue: 0-SDSC
+     Subject: Jobs Appear Frozen
+       Owner: jhawthor
+  Requestors: ckottke@andrew.cmu.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=106352 >
+
+
+To whom it concerns,
+
+I submitted some computations yesterday on a gpu-share allocation on SDSC
+Comet, and checking this morning it looks like the jobs are frozen. When I
+run
+
+squeue -u kottkech
+
+my output is always
+
+JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+22323313 gpu-share slurm4.s kottkech CG       0:04      1 comet-34-18
+22323311 gpu-share slurm2.s kottkech CG       0:06      1 comet-34-18
+22323312 gpu-share slurm3.s kottkech CG       0:06      1 comet-34-18
+
+In general these jobs take 4.5 hours to complete, but they appear stuck at
+4 to 6 seconds. I tried to kill or suspend these jobs, but I was unable to
+kill them as they had already started running, and I wasn't able to suspend
+them as I got a permission denied error.
+
+Do you have any insight into what might have happened and how I can remove
+these jobs from the queue if they are not behaving normally. Additionally,
+will my SUs be charged for the frozen time? I've run hundreds of these jobs
+before with no issue, so this is new to me.
+
+Thank you,
+~Chris
+ 

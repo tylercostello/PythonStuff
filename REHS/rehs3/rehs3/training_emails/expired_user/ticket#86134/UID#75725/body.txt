@@ -1,0 +1,36 @@
+
+Tue Apr 03 11:25:47 2018: Request 86134 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by jhawthor
+       Queue: 0-SDSC
+     Subject: XUP: Expired User Account
+       Owner: Nobody
+  Requestors: dnoci001@ucr.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=86134 >
+
+
+[Ticket created from XUP by dnocito]
+[From: Dominique Nocito]
+[System: Comet]
+[Category: Accounts]
+Hello,
+
+I'm having issues with my account. When I submit a job I get this message.
+
+[dnocito@comet-ln2 240]$ qsub submit.sh 
+There was an error running the SLURM sbatch command.
+The command was:
+'/usr/bin/sbatch submit.sh  2>&1'
+and the output was:
+'sbatch: error: bank_limit plugin: expired user, can't submit job
+ sbatch: error: Batch job submission failed: Invalid account or account/partition combination specified
+
+So I went to check which account I'm on 
+
+[dnocito@comet-ln2 240]$ show_accounts
+ID name      project      used     available    used_by_proj
+------------------------------------------------------------
+
+No accounts found for user dnocito on platform sdsc_comet.
+
+My PI has shown me a screen shot which I have attached and says I should be on his account, but that doesn't seem to be the case on Comet. 

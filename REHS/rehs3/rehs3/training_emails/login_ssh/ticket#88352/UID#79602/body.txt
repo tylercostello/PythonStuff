@@ -1,0 +1,52 @@
+
+Thu May 10 13:18:22 2018: Request 88352 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by fwells
+       Queue: 0-SDSC
+     Subject: reverse ssh tunnel on comet
+       Owner: fwells
+  Requestors: tluchko@csun.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=88352 >
+
+
+Hello,
+
+I am trying to access a git repository that is behind my university’s firewall. Moving the repository outside of the firewall is not an option.
+
+I used to be able to set up a reverse tunnel from my local machine using
+
+$ ssh -N -R2222:localhost:22 comet.sdsc.edu
+
+but this no longer works.  Trying to connect through the tunnel I get 
+
+$ ssh -p 2222 localhost
+ssh: connect to host localhost port 2222: Connection refused
+
+which used to work.  Note that I can do this from oasis-dm but I’m a little concerned because the git version on oasis is rather old.
+
+FWIW, I was following 
+
+https://unix.stackexchange.com/questions/46235/how-does-reverse-ssh-tunneling-work
+
+to set this up.
+
+Please let me know if something can be changed or if there is an alternate solution.
+
+Thank you,
+
+Tyler
+
+
+-----------------------------------
+Tyler Luchko
+Assistant Professor
+Dept. of Physics & Astronomy
+Cal State Northridge
+Northridge, CA
+tluchko@csun.edu
+818-677-6442
+
+
+
+
+ 

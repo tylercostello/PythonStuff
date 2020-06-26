@@ -1,0 +1,44 @@
+
+Tue Oct 30 08:02:37 2018: Request 98360 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by jhidleba
+       Queue: 0-SDSC
+     Subject: monitor memory use during srun?
+       Owner: Nobody
+  Requestors: skimble@towson.edu
+      Status: new
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=98360 >
+
+
+Dear Help:
+
+
+We are using srun to run some jobs because there is an interactive portion at the beginnings, but we are having trouble assessing the progress of the job. scontrol and squeue show us information about the srun job, but not about the program being run through srun (we are running dDocent/2.2.16). dDocent seems to successfully complete at least part of its task, but then either hangs or is running longer than expected. Is there a way we can monitor real-time CPU usage of the srun job?
+
+
+Thanks,
+
+Steve
+
+
+we use:
+$srun --partition=compute --pty --nodes=1 --ntasks-per-node=24 -t 18:00:00 --wait=0 --export=ALL /bin/bash
+it then reports:
+srun: job 19879167 queued and waiting for resources
+once it says:
+srun: job 19879167 has been allocated resources
+$export MODULEPATH=/home/ckean1/modulefiles:$MODULEPATH
+$module load dDocent/2.2.16
+$dDocent
+
+
+after a few minutes, we are done with the interaction portion and dDocent prompts us that the interactive portion is done.
+
+
+Steve Kimble
+
+Clinical Assistant Professor, Towson University
+
+skimble@towson.edu
+
+https://www.towson.edu/fcsm/departments/biology/facultystaff/skimble.html
+ 

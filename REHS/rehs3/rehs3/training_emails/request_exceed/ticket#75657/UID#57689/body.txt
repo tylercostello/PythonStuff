@@ -1,0 +1,58 @@
+
+Mon Sep 18 14:40:05 2017: Request 75657 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by jhawthor
+       Queue: 0-SDSC
+     Subject: XUP: sbatch submit failed
+       Owner: Nobody
+  Requestors: mahongjing2009@gmail.com
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=75657 >
+
+
+[Ticket created from XUP by hongjing]
+[From: hongjing ma]
+[System: Comet]
+[Category: Batch Queues/Jobs]
+Dear Sir/Madam, 
+
+I was trying to submit a job using sbatch on Comet. I get the following error, saying that 
+Requested time limit is invalid (missing or exceeds some limit). Would you please take a look at this? Thanks in advance. 
+
+```
+[hongjing@comet-ln2 namd]$ sbatch -J glpc_1 --export nsys=1,cnt=2,cntmax=7 step6.csh
+sbatch: error: bank_limit plugin: The requested time can not exceed the available balance.
+Requested SUs: 17281
+Allocation limit group SUs: 68545
+Allocation limit user SUs: 68545
+Allocation used group SUs: 53974
+Allocation used user SUs: 39080
+Allocation available group SUs: 14571
+Allocation available user SUs: 29465
+Allocation running/queued group SUs: 0
+Allocation running/queued user SUs: 0
+Allocation completed today group SUs: 0
+Allocation completed today user SUs: 0
+sbatch: error: Batch job submission failed: Requested time limit is invalid (missing or exceeds some limit)
+```
+
+The following script is listed for your reference. I think 48 hours should be okay as indicated in the website. 
+
+```
+[hongjing@comet-ln2 namd]$ cat step6.csh 
+#!/bin/csh
+#SBATCH --job-name="namd"
+#SBATCH --partition=compute
+#SBATCH --nodes=15
+#SBATCH --ntasks-per-node=24
+#SBATCH --export=ALL
+#SBATCH -t 48:00:00
+
+#This job runs with 15 nodes, 24 cores/node, total of 360 cores
+#Load NAMD module
+module load namd
+```
+
+Looking forward to hearing from you. 
+
+Best,
+hongjing 

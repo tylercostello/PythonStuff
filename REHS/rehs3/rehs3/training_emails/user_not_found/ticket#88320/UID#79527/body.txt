@@ -1,0 +1,29 @@
+
+Wed May 09 21:15:37 2018: Request 88320 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by carmanh
+       Queue: 0-SDSC
+     Subject: XUP: Memory issues
+       Owner: Nobody
+  Requestors: drummondfielding@gmail.com
+      Status: new
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=88320 >
+
+
+[Ticket created from XUP by fielding]
+[From: Drummond Fielding]
+[System: Comet]
+[Category: System/Hardware Issues]
+Hello, 
+
+I am trying to analyze my large simulation outputs and have been running into lots of memory issues this week with scripts that worked perfectly on the exact same outputs last week. Before telling you about the issues I wanted to ask if there is a better way to go about analyzing my simulations than what I am currently doing. All of my analysis scripts are written in python and because I am trying to figure out and tweak things much of it is done interactively with ipython. For the most part I have been running either interactive jobs or several node jobs on the debug queue because my jobs on the large-shared or compute queues take days to start. Are there any dedicated data visualization nodes or something like that? Any advice you have on best practices would be appreciated. 
+
+Now for the technical difficulties.  I tried to run some of my analysis scripts that were working just fine the past few days and I keep getting "Exceeded job memory limit at some point." The weird thing is that I am using the exact same modules, scripts, and data as last week when they worked just fine. I think something is up with the memory not clearing fully after a job finishes on the debug queue, but that is a total guess. This morning I started two interactive jobs and got assigned to comet-14-04 and comet-14-05, here is the command i used to request the nodes 
+srun --partition=debug --pty --exclusive --nodes=1 --ntasks-per-node=1 -t 00:30:00 --wait=0 --export=ALL --account TG-AST160020 /bin/bash
+note the --exclusive, which I believe should give me the entire 24 nodes and all the memory to myself. I then proceeded to load the exact same data in an ipython session from an hdf5 file to a numpy array. On comet-14-05 I was able to load all the data just fine, but on comet-14-04 I was only able to load about 1/4 of the data before I got the exceeded memory error. That is weird, right??
+
+If you have any thoughts, advice, or want any more information please let me know! I am looking into ways to possibly load the data in parallel using the package DASK, but I am not familiar with it so the learning curve may be a bit prohibitively steep because I am trying to finish my PhD thesis!
+
+Any help would be much appreciated. Thank you in advance for you help, you guys have been awesome and I love using comet! 
+
+best
+Drummond 

@@ -1,0 +1,49 @@
+
+Sun Jun 10 10:14:35 2018: Request 89805 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by jhawthor
+       Queue: 0-SDSC
+     Subject: memory limits Gaussian G4
+       Owner: Nobody
+  Requestors: bklynsci@aol.com
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=89805 >
+
+
+
+
+Dear Marty,
+I am presently tying to calculate the Gaussian G4 enthalpy and structure for ethylhexylcyclopentane and I seem to be running out of memory.
+What can I do to fix this? the output tail is
+
+[dwrogers@comet-ln2 June]$ tail ethexcy52.out
+ T4(AAB)= -0.29263703D-01
+ T5(AAA)=  0.65739078D-04
+ T5(AAB)=  0.97925520D-03
+ Time for triples=    93705.16 seconds.
+ T4(CCSD)= -0.61827906D-01
+ T5(CCSD)=  0.20899885D-02
+ CCSD(T)= -0.50935466350D+03
+ Discarding MO integrals.
+galloc:  could not allocate memory.: Cannot allocate memory
+galloc:  could not allocate memory.
+[dwrogers@comet-ln2 June]$ grep minutes ethexcy52.out
+
+The input head was ethexcy52.out
+
+rwf=ssd,240gb,Don, -1
+%Nosave
+%mem=98gb
+%nproc=24
+
+# g4
+Tran=semidirect
+
+ethylhexylcyclopentane
+
+[dwrogers@comet-ln2 June]$
+
+
+
+
+
+  

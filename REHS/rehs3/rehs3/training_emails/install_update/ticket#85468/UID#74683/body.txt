@@ -1,0 +1,30 @@
+
+Thu Mar 22 18:11:46 2018: Request 85468 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by buskuehl
+       Queue: 0-SDSC
+     Subject: XUP: Unable to import mpi4py in virtual environment
+       Owner: buskuehl
+  Requestors: yraghu@umd.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=85468 >
+
+
+[Ticket created from XUP by guest]
+[From: Raghu Yaramasu]
+[System: Comet]
+[Category: Software]
+Hi, I am trying to run a mpi job on comet using a python script. I created a virtual environment with python 3.5. I loaded the mpi4py software but when trying to do "from mpi4py import MPI", it gives the "ImportError: dynamic module does not define module export function (PyInit_MPI)" error. 
+
+I tried installing mpi4py using pip in my venv but it throws the following error:
+
+ In file included from src/MPI.c(4):
+    src/mpi4py.MPI.c(175068): error: struct "_Py_atomic_address" has no field "_value"
+              PyThreadState *tstate = __Pyx_PyThreadState_Current;
+                                      ^
+
+    compilation aborted for src/MPI.c (code 4)
+    error: command '/opt/mvapich2/intel/ib/bin/mpicc' failed with exit status 4
+
+Could you find a way to work around this problem
+Thanks
+Raghu 

@@ -1,0 +1,23 @@
+
+Wed Aug 09 18:28:10 2017: Request 73610 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by buskuehl
+       Queue: 0-SDSC
+     Subject: XUP: Credentials Not Available In Script
+       Owner: buskuehl
+  Requestors: keanfree@umich.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=73610 >
+
+
+[Ticket created from XUP by guest]
+[From: Kean Freeman]
+[System: Comet]
+[Category: Software]
+Hello,
+
+I am having issues using the pyLauncher application in /share/apps/examples/PYLAUNCHER . The issue has to do with authorization. After submitting the sbatch jobscript file, eventually a module (paramiko) within pylauncher.py tries to establish an SSH connection to the nodes that it has time reserved on. This is on line 2071 of "/share/apps/compute/pylauncher/pylauncher/pylauncher.py". It fails, because it doesn't have any authorization methods. 
+
+I tried running a copy of this program in which I manually supplied my credentials to the Paramiko module as it tried to establish an SSH connection. This was successful. However, this shouldn't be necessary. I am able to SSH into nodes that I have time on using "srun" without manually supplying credentials. It's unsafe to supply credentials in plaintext like that anyway. My second thought was to generate a public/private key pair, but I have no idea where I would put the public key since I could be connecting to any number of arbitrary compute nodes. Also, if I'm able to SSH into the nodes without a password from the login node anyway, that should already be done, right?
+
+Thanks,
+Kean Freeman 

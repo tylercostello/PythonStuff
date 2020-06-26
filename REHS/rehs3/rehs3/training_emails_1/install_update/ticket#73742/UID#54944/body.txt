@@ -1,0 +1,41 @@
+
+Sat Aug 12 10:59:03 2017: Request 73742 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-OSG by jhawthor
+       Queue: 0-OSG
+     Subject: XUP: software required for experiments
+       Owner: Nobody
+  Requestors: fmetze@cs.cmu.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=73742 >
+
+
+[Ticket created from XUP by fmetze]
+[From: Florian Metze]
+[System: bridges-gpu.psc.xsede]
+[Category: Software]
+Hi,
+
+for a set of experiments, we'll require the following software. Please advise if it can be installed on Bridges, or if it should be run in a VM. If the latter, how would we proceed?
+
+Thanks & best,
+
+Florian
+
+List:
+
+Please find below the software I require on bridges to be able to run my experiments with OpenNMT:
+
+1) Latest version of torch installed with Lua5.2 and not with LuaJIT. Steps below are taken from http://torch.ch/docs/getting-started.html:
+
+  - git clone https://github.com/torch/distro.git ~/torch --recursive
+  - cd ~/torch; bash install-deps;
+  - TORCH_LUA_VERSION=LUA52 ./install.sh
+
+2) The package 'Luarocks'
+
+3) Finally, using luarocks, the following modules:
+Steps:
+  - luarocks install image
+  - luarocks install tds
+
+The current version of torch on bridges is an old one, and it does not run with my toolkit. Also, the luarocks and tds packages are not available on bridges. 

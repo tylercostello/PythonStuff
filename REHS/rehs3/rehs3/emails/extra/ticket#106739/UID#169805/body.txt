@@ -1,0 +1,39 @@
+
+Thu Apr 11 21:56:30 2019: Request 106739 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by carmanh
+       Queue: 0-SDSC
+     Subject: XUP: ramdisk size
+       Owner: carmanh
+  Requestors: saladi@caltech.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=106739 >
+
+
+[Ticket created from XUP by saladi1]
+[From: Shyam Saladi]
+[System: Comet]
+[Category: Software]
+Hello --
+
+Is it possible to have more than 64gb of ramdisk space (looking at /dev/shm) for a job on a non-shared node?
+
+I am running hh-blits which benefits quite a bit by having the ~80 gbs of database on the ramdisk as opposed to on an SSD. This is both in my experience as well as noted by the package's developers: 
+
+https://github.com/soedinglab/hh-suite/wiki#supported-platforms-and-hardware-requirements
+
+Thanks for your help as always,
+Shyam
+
+[saladi1@comet-ln3 trc_get_lower_euk]$ srun --partition=debug --pty --nodes=1 --ntasks-per-node=24  --mem=120G -t 5:00 --wait=0 --export=ALL --pty /bin/bash
+[saladi1@comet-14-02 trc_get_lower_euk]$ df
+Filesystem            Size  Used Avail Use% Mounted on
+/dev/md1               79G   65G  9.9G  87% /
+tmpfs                  63G     0   63G   0% /dev/shm
+/dev/md0              239M  165M   62M  73% /boot
+scratch               210G  5.2M  210G   1% /scratch
+192.168.16.6@tcp:192.168.24.6@tcp:/panda
+                      2.6P  2.1P  538T  80% /oasis/projects/nsf
+10.22.11.3@o2ib:10.22.11.4@o2ib:/wombat
+                      2.5P  2.0P  599T  77% /oasis/scratch/comet
+10.22.10.12:/export/nfs-32-2/home/saladi1
+                       17T   32G   17T   1% /home/saladi1 

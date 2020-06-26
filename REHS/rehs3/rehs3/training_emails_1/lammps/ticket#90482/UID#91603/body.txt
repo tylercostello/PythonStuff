@@ -1,0 +1,63 @@
+
+Sat Jun 23 11:30:30 2018: Request 90482 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by jhidleba
+       Queue: 0-SDSC
+     Subject: XUP: Error Opening gdrcopy module from "/opt/gdrcopy/lib64/libgdrapi.so"
+       Owner: Nobody
+  Requestors: laichenggang@gmail.com
+      Status: new
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=90482 >
+
+
+[Ticket created from XUP by cl004]
+[From: Chenggang Lai]
+[System: comet-gpu.sdsc.xsede]
+[Category: Batch Queues/Jobs]
+Hello,
+
+I try running my program on Comet K80s and today I got errors 
+
+"Error opening gdrcopy module from "/opt/gdrcopy/lib64/libgdrapi.so"
+Error opening gdrcopy module from "/opt/gdrcopy/lib64/libgdrapi.so"
+Error opening gdrcopy module from "/opt/gdrcopy/lib64/libgdrapi.so"
+Error opening gdrcopy module from "/opt/gdrcopy/lib64/libgdrapi.so"
+[cli_15]: [cli_8]: [cli_22]: aborting job:
+Fatal error in MPI_Init:
+Other MPI error, error stack:
+MPIR_Init_thread(514): 
+MPID_Init(366).......: channel initialization failed
+MPIDI_CH3_Init(270)..: Error enabling MV2 GDRCOPY support
+"
+
+It is working yesterday but it does not work day. Thanks for your  help.
+
+Here is my script:
+
+#! /bin/bash
+#SBATCH -A TG-ASC180033
+#SBATCH --job-name="mcs"
+#SBATCH --output="mcs.%j.%N.out"
+#SBATCH -p gpu
+#SBATCH --partition=gpu
+#SBATCH --nodes=7
+#SBATCH --ntasks-per-node=4
+#SBATCH --no-requeue
+#SBATCH --gres=gpu:4
+#SBATCH --export=ALL
+#SBATCH -t 00:05:00
+
+
+#module unload intel/2013_sp1.2.144
+#module unload intel/2015.2.164
+module load intel/2016.3.210
+module load mvapich2_gdr
+#module load intelmpi/2016.3.210
+module load cuda/8.0
+
+export HFILE=`generate_pbs_nodefile`
+cat $HFILE | sort -u > hosts.txt
+
+
+date
+time mpirun_rsh -export -hostfile hosts.txt -np 28  MV2_CPU_MAPPING=0 MV2_USE_CUDA=1 ./FDTD
+date 

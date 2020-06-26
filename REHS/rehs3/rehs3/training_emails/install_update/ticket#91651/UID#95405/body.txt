@@ -1,0 +1,41 @@
+
+Fri Jul 13 11:48:06 2018: Request 91651 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by hthta
+       Queue: 0-SDSC
+     Subject: SLURM Job_id=17834516 Failed with ExitCode 56 on Comet
+       Owner: hthta
+  Requestors: Lisa.Henn@arborresearch.org
+      Status: new
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=91651 >
+
+
+My code is in R. The end of of the log file contains the following:
+
+
+[comet-02-65.sdsc.edu:28500] tcp_peer_recv_connect_ack: invalid header type: 100000
+[comet-02-65.sdsc.edu:28500] tcp_peer_recv_connect_ack: invalid header type: 1701999465
+[comet-02-65.sdsc.edu:28500] tcp_peer_recv_connect_ack: invalid header type: 753855154
+[comet-02-65.sdsc.edu:28500] tcp_peer_recv_connect_ack: invalid header type: 1634624623
+[comet-02-65.sdsc.edu:28500] tcp_peer_recv_connect_ack: invalid header type: 50462986
+[comet-02-65.sdsc.edu:28500] [[65439,2],71] tcp_peer_recv_connect_ack: received different version from [[0,164],4283649346]:  instead of 1.8.4
+
+
+This error occurred after 25 hours of running. It had gotten most of the way through the job, but not completely.
+
+
+What little I can find on the web suggests that applications are compiled expecting specific versions of OpenMPI. If more than one MPI application is available on the resource, errors of this sort can arise. This doesn't completely make sense to me, since the job ran so long without error. Also, from what I can guess from the messages, this is on a specific core (or perhaps node).
+
+
+This is the same analysis for which ticket #87826 is open, assigned to Marty Kandes. Note that in ticket #
+
+87826, I was using the snow and Rmpi libraries of R, whereas this run uses the Rhpc library.
+
+
+Thank you for your assistance.
+
+
+Sincerely,
+
+Lisa Henn
+
+ 

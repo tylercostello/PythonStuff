@@ -1,0 +1,33 @@
+
+Wed Jun 20 15:41:40 2018: Request 90347 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by carmanh
+       Queue: 0-SDSC
+     Subject: parallel compression on Comet?
+       Owner: Nobody
+  Requestors: eph2001@columbia.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=90347 >
+
+
+Hi,
+
+I'm looking a way to make .tar.gz files suitable for storage on Ranch 
+more quickly.   Generally, I have folders with several hundred files 
+ranging from 0.5-15 GB each.  The total size of each .tar.gz archive is 
+roughly in the 10GB - 300GB size range that the Ranch user guide page 
+specifies as being a good size.  Right now I'm just doing this the 
+simplest way:
+
+$ tar -czvf run4000.tar.gz  run4000
+
+I'm running this command in Comet scratch and I have two problems. 1) It 
+is very slow  2) about 1/3 of the time the command fails, leaving me 
+with an incomplete archive file.   I'd really like to speed up the 
+compression step by running it in parallel.   What is the best way to do 
+this?   Could I use pigz on a single Comet node?   Is there some other 
+solution that would be better?
+
+Thank you,
+Elizabeth
+
+ 

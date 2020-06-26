@@ -1,0 +1,33 @@
+
+Wed Aug 30 11:56:39 2017: Request 74604 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by jhawthor
+       Queue: 0-SDSC
+     Subject: XUP: Slow Queue Communication
+       Owner: jhawthor
+  Requestors: jrd101@pitt.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=74604 >
+
+
+[Ticket created from XUP by jrd101]
+[From: James Dean]
+[System: Comet]
+[Category: Batch Queues/Jobs]
+Hello,
+
+It currently takes a long time to interact with the queue system on Comet (login node 3 if that makes a difference). The "qstat" command takes around a minute (wall time) to run. Here's the output of "time qstat -u jrd101":
+real    0m58.086s
+user    0m0.214s
+sys     0m0.015s
+
+And here's the timing of the "qdel" command:
+real    0m56.690s
+user    0m0.024s
+sys     0m0.009s
+
+
+And submitting jobs via "sbatch" takes at least that amount of time if not longer, to the point where I actually got several timeout messages for some of the jobs I submitted today (after 1 minute 30 seconds had passed in those cases):
+"sbatch: error: slurm_receive_msg: Socket timed out on send/recv operation
+sbatch: error: Batch job submission failed: Socket timed out on send/recv operation"
+
+Performing other tasks (using Vim, running Python scripts, etc) is very responsive and has no appreciable delay. It's only interacting with the queue system where this occurs. 

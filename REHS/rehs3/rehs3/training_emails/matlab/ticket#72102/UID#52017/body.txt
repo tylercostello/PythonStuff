@@ -1,0 +1,37 @@
+
+Sat Jul 15 13:20:56 2017: Request 72102 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by jhawthor
+       Queue: 0-SDSC
+     Subject: XUP: Comet Matlab
+       Owner: Nobody
+  Requestors: aditk2@illinois.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=72102 >
+
+
+[Ticket created from XUP by guest]
+[From: Adit Krishnan]
+[System: Comet]
+[Category: Software]
+Cant execute matlab script on comet shared queue. Jobscript is as follows:
+
+#!/bin/bash
+#SBATCH --job-name="matlab_1"
+#SBATCH --output="matlab_1.%j.out"
+#SBATCH --partition=shared
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --export=ALL
+#SBATCH --time=13:00:00
+
+#SBATCH -A uic333        # Specify allocation to charge against
+
+# Load any necessary modules (these are examples)
+# Loading modules in the script ensures a consistent environment.
+# Launch the executable named "a.out"
+module load matlab
+matlab -nodisplay -nosplash < 1.m
+
+
+Submitting this returns an error in the output file:
+/var/spool/slurmd/job10241887/slurm_script: line 16: matlab: command not found 

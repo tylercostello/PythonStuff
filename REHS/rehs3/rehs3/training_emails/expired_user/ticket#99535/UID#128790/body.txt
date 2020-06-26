@@ -1,0 +1,41 @@
+
+Mon Nov 26 11:03:47 2018: Request 99535 was acted upon.
+ Transaction: Queue changed from 0-XOC to 0-SDSC by fwells
+       Queue: 0-SDSC
+     Subject: XUP: Problem with submitting job
+       Owner: fwells
+  Requestors: dariush.bodaghi@maine.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=99535 >
+
+
+[Ticket created from XUP by dbodaghi]
+[From: Dariush Bodaghi]
+[System: Comet]
+[Category: Allocations]
+Hi,
+
+I wanted to submit job at COMET but I got this error:
+
+sbatch: error: bank_limit plugin: expired user, can't submit job
+sbatch: error: Batch job submission failed: Invalid account or account/partition combination specified
+
+Maybe that is because I am new user. this is my job:
+
+#!/bin/bash  
+#SBATCH --job-name="m9"
+#SBATCH --output="z1.out"
+#SBATCH --error="z1.err"    
+#SBATCH --partition=compute
+#SBATCH --nodes=11
+#SBATCH --ntasks-per-node=24
+#SBATCH --export=ALL
+#SBATCH -t 47:10:00
+#SBATCH -A mai103
+
+ibrun -np 256 -v ./Xvicar3dPAT-2.3.2
+
+Thank you for your time. I look forward to your reply.
+
+Regards,
+Dariush 

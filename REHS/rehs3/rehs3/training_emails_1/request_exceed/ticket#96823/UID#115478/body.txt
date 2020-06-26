@@ -1,0 +1,60 @@
+
+Thu Oct 11 15:20:16 2018: Request 96823 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by carmanh
+       Queue: 0-SDSC
+     Subject: XUP: sbatch thinks I am out of SUs
+       Owner: carmanh
+  Requestors: l_f96@txstate.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=96823 >
+
+
+[Ticket created from XUP by lfried10]
+[From: Lee Friedman]
+[System: Comet]
+[Category: Trial Account]
+It seems like sbatch does not like my request, even though I should have more than 500 SUs
+left on my Trial account.  Is there a command that will tell me how many SUs I have left in my
+account?
+
+Here is the batch file, followed by the error message.
+
+----------------------------------------------------------------------------------------------
+#!/bin/bash
+#SBATCH --job-name="FastMyROC"
+#SBATCH --output="FastMyROC.%j.%N.out"
+#SBATCH --partition=share
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=12
+#SBATCH --export=ALL
+#SBATCH -t 04:45:00
+
+#This job runs with 2 nodes, 24 cores per node for a total of 48 cores.
+#ibrun in verbose mode will give binding detail
+
+export TMP=/scratch/$USER/$SLURM_JOBID
+export TMPDIR=/scratch/$USER/$SLURM_JOBID
+
+ulimit -u 2048
+
+module load matlab
+matlab -nodisplay -nosplash < /home/lfried10/FastMyROC.m
+--------------------------------------------------------------------------------------------------------------
+
+Error message:
+--------------------------------------------------------------------------------------------------------------
+sbatch FastMyROC.sb; source GetQueue.sh
+sbatch: error: bank_limit plugin: The requested time can not exceed the available balance.
+Requested SUs: 115
+Allocation limit group SUs: 50000
+Allocation limit user SUs: 1000
+Allocation used group SUs: 22886
+Allocation used user SUs: 318
+Allocation available group SUs: 27114
+Allocation available user SUs: 682
+Allocation running/queued group SUs: 0
+Allocation running/queued user SUs: 0
+Allocation completed today group SUs: 609
+Allocation completed today user SUs: 608
+sbatch: error: Batch job submission failed: Requested time limit is invalid (missing or exceeds some limit)
+------------------------------------------------------------------------------------------------------------------------ 

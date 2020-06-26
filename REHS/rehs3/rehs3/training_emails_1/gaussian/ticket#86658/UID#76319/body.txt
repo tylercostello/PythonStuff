@@ -1,0 +1,37 @@
+
+Mon Apr 09 18:51:45 2018: Request 86658 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by buskuehl
+       Queue: 0-SDSC
+     Subject: XUP: Gaussian Revision D?
+       Owner: buskuehl
+  Requestors: share@ucdavis.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=86658 >
+
+
+[Ticket created from XUP by guest]
+[From: Stephanie Hare]
+[System: Comet]
+[Category: Software]
+Hi there,
+
+I'm trying to run some Gaussian calculations that require Revision D. Weirdly, it looks like my calculations used to run with this revision, but now they're being run using Revision C. I'm not sure where to change this. Here's an example job file that I would use:
+
+#!/bin/bash
+#SBATCH --partition=shared 
+#SBATCH --nodes=1  
+#SBATCH --ntasks-per-node=16  
+#SBATCH --mail-type=END,FAIL
+#SBATCH --mail-user=share@ucdavis.edu
+#SBATCH --export=ALL  
+#SBATCH -t 48:00:00  
+export my_file=file.com
+      . /etc/profile.d/modules.sh
+      module load gaussian
+      export GAUSS_SCRDIR=/scratch/${USER}/${SLURM_JOB_ID}
+      g09 < file.com > file.log
+
+... but I don't see where in the job file I could change the Gaussian revision used. Any help would be much appreciated, thank you!
+
+Best,
+Stephanie 

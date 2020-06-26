@@ -1,0 +1,40 @@
+
+Wed Apr 03 12:29:46 2019: Request 106311 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by jhawthor
+       Queue: 0-SDSC
+     Subject: XUP: Gaussian jobs not running g16 not found
+       Owner: jhawthor
+  Requestors: vinh.phuong@wagner.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=106311 >
+
+
+[Ticket created from XUP by vinh]
+[From: Vinh Phuong]
+[System: Comet,Comet GPU]
+[Category: Software]
+Hello,
+I am trying to run Gaussian from my account. I copied the input script from examples directory. However, when I run the script, I get the following error message. 
+
+which: no g16 in (/share/apps/gpu/gaussian/16.B.01/g16:/opt/gnu/gcc/bin:/opt/gnu/bin:/opt/mvapich2/intel/ib/bin:/opt/intel/composer_xe_2013_sp1.2.144/bin/intel64:/opt/intel/composer_xe_2013_sp1.2.144/mpirt/bin/intel64:/opt/intel/composer_xe_2013_sp1.2.144/debugger/gdb/intel64_mic/bin:/usr/lib64/qt-3.3/bin:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin:/opt/sdsc/bin:/opt/sdsc/sbin:/opt/ibutils/bin:/usr/java/latest/bin:/opt/pdsh/bin:/opt/rocks/bin:/opt/rocks/sbin:/home/vinh/bin)
+
+My input script looks like this:
+#!/bin/bash
+#SBATCH --job-name="pyrW2"
+#SBATCH --output="gauss.%j.%N.out"
+#SBATCH --partition=compute
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=24
+#SBATCH --export=ALL
+#SBATCH -t 1:00:00
+filename=pyr-2-water.dat
+export MODULEPATH=/share/apps/compute/modulefiles/applications:$MODULEPATH
+export GAUSS_SCRDIR=/scratch/$USER/$SLURM_JOBID
+module load gaussian/16.B.01
+exe=`which g16`
+bash /share/apps/examples/GAUSSIAN/16_revB_cpu/getcpusets $$
+cat $$.out $filename >file.tmp.$$
+/usr/bin/time $exe < file.tmp.$$ > $filename.out
+rm -f $$.out file.tmp.$$
+
+Thank you for any assistance that you may be able to provide. 

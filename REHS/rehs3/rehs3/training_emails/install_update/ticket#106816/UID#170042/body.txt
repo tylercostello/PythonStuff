@@ -1,0 +1,59 @@
+
+Sun Apr 14 15:38:18 2019: Request 106816 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by carmanh
+       Queue: 0-SDSC
+     Subject: XUP: using mmseqs2 on comet
+       Owner: Nobody
+  Requestors: saladi@caltech.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=106816 >
+
+
+[Ticket created from XUP by saladi1]
+[From: Shyam Saladi]
+[System: Comet]
+[Category: Software]
+Hi --
+
+I'm trying to run mmseqs2 on comet, but having a bit of trouble getting it installed/compiled.
+
+https://github.com/soedinglab/MMseqs2
+
+The static builds provided by the developers run into an error message "FATAL: kernel too old". I haven't run into this error message before, so I'm not sure if this information about the binary will help:
+
+[saladi1@comet-14-01 static_sse41]$ file bin/mmseqs
+bin/mmseqs: ELF 64-bit LSB executable, x86-64, version 1 (GNU/Linux), statically linked, for GNU/Linux 3.2.0, not stripped
+
+I can install it through conda, but if I understand correctly then the binary won't be built with avx2, which the developers say provides a pretty big advantage in terms of speed and it looks like the processors on comet support them.
+
+
+Compiling with the following modules loaded:
+Currently Loaded Modulefiles:
+  1) use.own             3) parallel/20160422   5) gnu/4.9.2           7) cmake/3.9.1
+  2) tmux/2.2            4) singularity/2.6.1   6) fastqc/v0.11.8      8) openmpi_ib/1.8.4
+
+and following the authors sort of simple instructions runs into errors during `make`. I saved the output of cmake and in case it would help figure out what's going on here.
+
+directory: /home/saladi1/apps/mmseqs2/git/build
+cmake -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_INSTALL_PREFIX=. ..  > output.cmake.txt 2>&1
+
+make > output.make.txt  2>&1
+
+The errors include:
+
+/tmp/ccw6bSPq.s:684: Error: no such instruction: `shlx %r11,%r9,%r9'
+/tmp/ccw6bSPq.s:693: Error: no such instruction: `shlx %r10,%rcx,%rcx'
+/tmp/ccw6bSPq.s:705: Error: no such instruction: `shrx %rcx,%r9,%r9'
+/tmp/ccw6bSPq.s:727: Error: no such instruction: `shlx %rsi,%rcx,%rcx'
+/tmp/ccw6bSPq.s:730: Error: no such instruction: `shlx %rax,%rsi,%rax'
+/tmp/ccw6bSPq.s:734: Error: no such instruction: `shlx %r13,%rsi,%rsi'
+/tmp/ccw6bSPq.s:738: Error: no such instruction: `shlx %r10,%rsi,%rsi'
+/tmp/ccw6bSPq.s:752: Error: no such instruction: `shrx %rsi,%rcx,%r9'
+/tmp/ccw6bSPq.s:758: Error: no such instruction: `shlx %rsi,%rcx,%rcx'
+
+When I search this online, I'm pointed towards binutils versions as being the issue, but this is where I sort of am not sure where to go next.
+
+Do you think you might be able to help?
+
+Thanks a ton,
+Shyam 

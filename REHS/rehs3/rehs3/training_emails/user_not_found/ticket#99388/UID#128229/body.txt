@@ -1,0 +1,27 @@
+
+Tue Nov 20 11:28:08 2018: Request 99388 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by jhidleba
+       Queue: 0-SDSC
+     Subject: XUP: Problem with interactive resource
+       Owner: Nobody
+  Requestors: mer317@lehigh.edu
+      Status: new
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=99388 >
+
+
+[Ticket created from XUP by mer317]
+[From: Meghdad Razizadeh]
+[System: Comet]
+[Category: Batch Queues/Jobs]
+Hi!
+
+I get this error when I want to use interactive resources
+
+-bash-4.1$ show_accounts
+ID name      project      used     available    used_by_proj
+------------------------------------------------------------
+mer317       uot156       3384     50000        3384    
+
+-bash-4.1$ srun --partition=debug --pty --nodes=1 --ntasks-per-node=24 -t 00:30:00 --wait=0 --export=ALL /bin/bash -A uot156
+srun: error: bank_limit plugin: expired user, can't submit job
+srun: error: Unable to allocate resources: Invalid account or account/partition combination specified 

@@ -1,0 +1,40 @@
+
+Tue Oct 24 12:34:05 2017: Request 77824 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by fwells
+       Queue: 0-SDSC
+     Subject: XUP: globus-url-copy
+       Owner: fwells
+  Requestors: fm@phys.ethz.ch
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=77824 >
+
+
+[Ticket created from XUP by fminiati]
+[From: Francesco Miniati]
+[System: Comet]
+[Category: External Relations]
+hi there,
+
+i am trying to copy some data from my system in switzerland (ETH) to oasis on comet.
+i tried to use the GUI of globus but, while i can connect to the two systems, i cannot access
+the disk location hosting the files at ETH.
+
+I have previously copied/trasferred these data (sitting on the same disk) using the 
+command line of globus, so i wanted to give it a try. however, i get an error message. 
+here is what i do:
+
+i log into comet and run this command line to transfer the file check000450.3d.hdf5 from 
+ETH to oasis:
+
+globus-url-copy -rst -cd -r -p 4 -cc 4 sshftp://fm@shakra.ethz.ch/net/astrogate/export/astrodata/fminiati/matryoshka/check000450.3d.hdf5 file://oasis/projects/nsf/fdl101/fminiati/
+
+here is the error message i get:
+
+error: globus_xio: Unable to open file /projects/nsf/fdl101/fminiati/check000450.3d.hdf5
+globus_xio: System error in open: No such file or directory
+globus_xio: A system call failed: No such file or directory
+
+any help would be valuable.
+
+many thanks in advance!
+fm 

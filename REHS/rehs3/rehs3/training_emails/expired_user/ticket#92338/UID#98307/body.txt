@@ -1,0 +1,38 @@
+
+Thu Jul 26 16:24:13 2018: Request 92338 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by buskuehl
+       Queue: 0-SDSC
+     Subject: XUP: Invalid account or account/partition combination specified
+       Owner: buskuehl
+  Requestors: adamhogan@mail.usf.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=92338 >
+
+
+[Ticket created from XUP by ahogan2]
+[From: Adam Hogan]
+[System: Comet]
+[Category: Batch Queues/Jobs]
+Hi,
+
+When I try to submit a batch job on comet I get the following error on both the debug and normal partition:
+
+sbatch: error: bank_limit plugin: not found user association ahogan2
+sbatch: error: Batch job submission failed: Invalid account or account/partition combination specified
+
+This is the submission script:
+
+#!/bin/bash
+#SBATCH --job-name="df sapt"
+#SBATCH --output="job.%j.%N.out"
+#SBATCH --partition=compute
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=24
+#SBATCH --export=ALL
+#SBATCH -t 00:30:00
+[...]
+
+Can you tell me what's wrong?
+
+Thanks,
+Adam 

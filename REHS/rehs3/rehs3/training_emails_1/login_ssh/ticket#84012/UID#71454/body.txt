@@ -1,0 +1,89 @@
+
+Sun Feb 25 14:25:41 2018: Request 84012 was acted upon.
+ Transaction: Queue changed from 0-XOC to 0-SDSC by jhawthor
+       Queue: 0-SDSC
+     Subject: XUP: Unable to login comet
+       Owner: jhawthor
+  Requestors: yuy130@ucsd.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=84012 >
+
+
+[Ticket created from XUP by guest]
+[From: Yunfan Yang]
+[System: Comet]
+[Category: Access/Login Issues]
+I typed in gsissh comet, but I got permission denied. My username is andrew95. Why is this?
+
+Error output is this: 
+OpenSSH_7.5p1b-GSI NMOD_3.19-hpn14v13 GSI, OpenSSL 1.0.1e-fips 11 Feb 2013
+debug1: Reading configuration data /etc/gsissh/ssh_config
+debug1: /etc/gsissh/ssh_config line 52: Applying options for *
+debug1: /etc/gsissh/ssh_config line 68: Applying options for comet
+debug1: Connecting to comet.sdsc.xsede.org [198.202.113.252] port 22.
+debug1: Connection established.
+debug1: key_load_public: No such file or directory
+debug1: identity file /home/andrew95/.ssh/id_rsa type -1
+debug1: key_load_public: No such file or directory
+debug1: identity file /home/andrew95/.ssh/id_rsa-cert type -1
+debug1: key_load_public: No such file or directory
+debug1: identity file /home/andrew95/.ssh/id_dsa type -1
+debug1: key_load_public: No such file or directory
+debug1: identity file /home/andrew95/.ssh/id_dsa-cert type -1
+debug1: key_load_public: No such file or directory
+debug1: identity file /home/andrew95/.ssh/id_ecdsa type -1
+debug1: key_load_public: No such file or directory
+debug1: identity file /home/andrew95/.ssh/id_ecdsa-cert type -1
+debug1: key_load_public: No such file or directory
+debug1: identity file /home/andrew95/.ssh/id_ed25519 type -1
+debug1: key_load_public: No such file or directory
+debug1: identity file /home/andrew95/.ssh/id_ed25519-cert type -1
+debug1: Enabling compatibility mode for protocol 2.0
+debug1: Local version string SSH-2.0-OpenSSH_7.5p1b-GSI NMOD_3.19-hpn14v13 GSI
+debug1: Remote protocol version 2.0, remote software version OpenSSH_5.9p1-hpn13v11 GSI_GSSAPI_20110906 GSI KRB5 MECHGLUE
+debug1: match: OpenSSH_5.9p1-hpn13v11 GSI_GSSAPI_20110906 GSI KRB5 MECHGLUE pat OpenSSH_5* compat 0x0c000000
+debug1: Authenticating to comet.sdsc.xsede.org:22 as 'andrew95'
+debug1: Offering GSSAPI proposal: gss-group16-sha512-dZuIebMjgUqaxvbF7hDbAw==,gss-group18-sha512-dZuIebMjgUqaxvbF7hDbAw==,gss-gex-sha1-dZuIebMjgUqaxvbF7hDbAw==,gss-group14-sha256-dZuIebMjgUqaxvbF7hDbAw==,gss-group14-sha1-dZuIebMjgUqaxvbF7hDbAw==,gss-group1-sha1-dZuIebMjgUqaxvbF7hDbAw==,gss-group16-sha512-vz8J1E9PzLr8b1K+0remTg==,gss-group18-sha512-vz8J1E9PzLr8b1K+0remTg==,gss-gex-sha1-vz8J1E9PzLr8b1K+0remTg==,gss-group14-sha256-vz8J1E9PzLr8b1K+0remTg==,gss-group14-sha1-vz8J1E9PzLr8b1K+0remTg==,gss-group1-sha1-vz8J1E9PzLr8b1K+0remTg==
+debug1: SSH2_MSG_KEXINIT sent
+debug1: SSH2_MSG_KEXINIT received
+debug1: AUTH STATE IS 0
+debug1: kex: algorithm: gss-gex-sha1-dZuIebMjgUqaxvbF7hDbAw==
+debug1: kex: host key algorithm: ssh-rsa
+debug1: REQUESTED ENC.NAME is 'aes128-ctr'
+debug1: kex: server->client cipher: aes128-ctr MAC: umac-64@openssh.com compression: none
+debug1: REQUESTED ENC.NAME is 'aes128-ctr'
+debug1: kex: client->server cipher: aes128-ctr MAC: umac-64@openssh.com compression: none
+debug1: Doing group exchange
+
+debug1: Calling gss_init_sec_context
+debug1: Delegating credentials
+debug1: Received GSSAPI_CONTINUE
+debug1: Calling gss_init_sec_context
+debug1: Delegating credentials
+debug1: Received GSSAPI_CONTINUE
+debug1: Calling gss_init_sec_context
+debug1: Delegating credentials
+debug1: Received GSSAPI_CONTINUE
+debug1: Calling gss_init_sec_context
+debug1: Delegating credentials
+debug1: Received GSSAPI_COMPLETE
+debug1: Rekey has happened - updating saved versions
+debug1: rekey after 4294967296 blocks
+debug1: SSH2_MSG_NEWKEYS sent
+debug1: expecting SSH2_MSG_NEWKEYS
+debug1: SSH2_MSG_NEWKEYS received
+debug1: rekey after 4294967296 blocks
+debug1: SSH2_MSG_SERVICE_ACCEPT received
+debug1: Authentications that can continue: publickey,gssapi-keyex,gssapi-with-mic,password,keyboard-interactive,hostbased
+debug1: Next authentication method: gssapi-keyex
+debug1: Remote: failed to set username from gssapi context
+debug1: Authentications that can continue: publickey,gssapi-keyex,gssapi-with-mic,password,keyboard-interactive,hostbased
+debug1: Next authentication method: gssapi-with-mic
+debug1: Delegating credentials
+debug1: Delegating credentials
+debug1: Delegating credentials
+debug1: Delegating credentials
+debug1: Authentications that can continue: publickey,gssapi-keyex,gssapi-with-mic,password,keyboard-interactive,hostbased
+debug1: Authentications that can continue: publickey,gssapi-keyex,gssapi-with-mic,password,keyboard-interactive,hostbased
+debug1: No more authentication methods to try.
+Permission denied (publickey,gssapi-keyex,gssapi-with-mic,password,keyboard-interactive,hostbased). 

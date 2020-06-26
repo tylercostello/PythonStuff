@@ -1,0 +1,307 @@
+
+Wed Oct 10 15:58:33 2018: Request 96741 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by carmanh
+       Queue: 0-SDSC
+     Subject: XUP: size available for internal matlab /tmp files is too small for my project
+       Owner: carmanh
+  Requestors: l_f96@txstate.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=96741 >
+
+
+[Ticket created from XUP by lfried10]
+[From: Lee Friedman]
+[System: Comet]
+[Category: Software]
+In my MATLAB code, I am using new Big Data options.
+Specifically, I am using tall arrays.
+When using tall arrays, matlab internally writes data to temporary .mat files.
+Here is the error that my code throws:
+--------------------------------------------------------------------------------------------------------------
+Error using matlab.mapreduce.internal.Serializer/writeToMatfile (line 46)
+Internal problem while evaluating tall expression. The problem was:
+
+Can not write file
+/tmp/tp778fd703_02f4_4a10_b3e6_10f633d6a7e2/array_t00001_r30_00002_snapshot_0x4C.mat.
+--------------------------------------------------------------------------------------------------------------------------------------
+
+I will post all of the code and all of the matlab code below for your evaluation.
+
+But I am certain that this problem stems from the fact that matlab internally wants to write to this /tmp/
+folder, and the file size is huge and much larger than whatever is allocated currently for this.
+
+If more space on tmp cannot be made available then I simply won't be able to do my project on
+comet.
+
+Any help you can provide would be greatly appreciated:
+
+Here is the matlab cod, followed by the entire matlab output:
+
+Code:
+InputArray=csvread('in.csv')
+
+Band            =InputArray(1)
+NumberOfFeatures=InputArray(2)
+WhichIteration  =InputArray(3)
+
+fprintf('Band = %d, NumberOfFeatures = %d, Iteration = %d\n',Band,NumberOfFeatures,WhichIteration)
+
+NumberOfSubjects=100000;
+
+
+        tic
+
+
+        S_Band=num2str(Band);
+        S_NumSubs=num2str(NumberOfSubjects,'%8.8d');
+        S_NumFeat=num2str(NumberOfFeatures,'%2.2d');
+        S_Iter=num2str(WhichIteration);
+        EER_File_Name=['EER_' S_Band '_' S_NumSubs '_' S_NumFeat '_' S_Iter '.csv'] ;
+
+        PathToWorkInput=['/home/lfried10/MAT_FILES/' num2str(Band) '_' num2str(NumberOfSubjects,'%8.8d') '_' num2str(NumberOfFeatures) '_' num2str(WhichIteration) '/']
+        mkdir(PathToWorkInput)
+        PathToScratchInput=['/oasis/scratch/comet/lfried10/temp_project/' num2str(Band) '_' num2str(NumberOfSubjects,'%8.8d') '_' num2str(NumberOfFeatures) '_' num2str(WhichIteration) '/']
+        PathToHome='/home/lfried10/MatFileEERs/';
+        PathToMinMax=[PathToScratchInput 'MinMaxScores.mat'];
+        load(PathToMinMax);
+        DirName=     [PathToScratchInput 'NFeatures_*.mat'];
+        Path1ToEER=   [PathToWorkInput EER_File_Name]
+        Path2ToEER=   [PathToHome  EER_File_Name]
+
+        load(PathToMinMax);
+
+        % replace this with location for data...
+        featureData = DirName;
+
+        fds = fileDatastore(featureData,...
+            'ReadFcn', @(f) getfield(load(f), 'L_S_Array'), ...
+            'UniformRead', true)
+
+        L_S_Array = tall(fds)
+        L_S_Array(:,1)= (L_S_Array(:,1) - out(1))/(out(2) - out(1));
+
+        fprintf('Sorting L_S_Array\n');
+        L_S_Array=sortrows(L_S_Array,1,'descend');
+
+        fprintf('Create labels_tall\n');
+        labels_tall=L_S_Array(:,2);
+
+        fprintf('Create tp_tall\n');
+        tp_tall = cumsum(labels_tall==1,1);
+
+        fprintf('Get size of L_S_Array\n');
+        [n_tall,m_tall] = size(L_S_Array(:,2));
+
+        % colon operator : is not support for tall
+        % fprintf('Create fp_tall using repmat\n');fp_tall = repmat((1:n_tall)',[1 1]);
+        % here is a trick to accomplish the same
+        fp_tall = cumsum(double(L_S_Array(:,2) <=inf));
+        fp_tall=fp_tall-tp_tall;
+
+        fprintf('Create num_pos_tall\n');
+        num_pos_tall = sum(L_S_Array(:,2));
+
+        fprintf('Create num_neg_tall\n');
+        num_neg_tall = n_tall-num_pos_tall;
+
+        fprintf('Create fpr_tall\n');
+        fpr_tall=fp_tall./num_neg_tall;
+
+        fprintf('Create tpr_tall\n');
+        tpr_tall=tp_tall./num_pos_tall;
+
+        fprintf('Create diff\n');
+        diff=abs(fpr_tall-(1-tpr_tall));
+
+        fprintf('Create mindiff\n');
+        mindiff=min(diff);
+
+        fprintf('Create eer\n');
+        eer=fpr_tall(diff == mindiff);
+        eer=eer(1)*100
+
+        fprintf('Gather eer\n');
+        eer=gather(eer);
+        fprintf('EER = %0.2f\n',eer)
+        fid=fopen(Path1ToEER,'w')
+        fprintf(fid,'Band,%d,Nsubjects,%8.8d,Nfeatures,%d,Iteration,%d,EER,%0.4f,TimeMin,%f,TimeHours,%f\n',Band,NumberOfSubjects,NumberOfFeatures,WhichIteration,eer,toc/60,toc/60/60);
+        fclose('all');
+        fid=fopen(Path2ToEER,'w')
+        fprintf(fid,'Band,%d,Nsubjects,%8.8d,Nfeatures,%d,Iteration,%d,EER,%0.4f,TimeMin,%f,TimeHours,%f\n',Band,NumberOfSubjects,NumberOfFeatures,WhichIteration,eer,toc/60,toc/60/60);
+        fclose('all');
+        fprintf('Elapsed time: min = %f, hours = %f\n',toc/60,toc/60/60)
+        fprintf('******************************** F I N I S H E D **********************************')
+        mydate=datestr(datetime)
+        message=['EER = ' num2str(eer,'%0.4f') ', Number Of Subjects = ' num2str(NumberOfSubjects) ', Elapsed Time (hrs) = ' num2str(toc/60/60) ', Date = ' mydate]
+
+Output F
+                            < M A T L A B (R) >
+                  Copyright 1984-2018 The MathWorks, Inc.
+                   R2018a (9.4.0.813654) 64-bit (glnxa64)
+                             February 23, 2018
+
+ 
+To get started, type one of these: helpwin, helpdesk, or demo.
+For product information, visit www.mathworks.com.
+ 
+>> 
+InputArray =
+
+     3    10     5
+
+>> >> 
+Band =
+
+     3
+
+>> 
+NumberOfFeatures =
+
+    10
+
+>> 
+WhichIteration =
+
+     5
+
+>> >> Band = 3, NumberOfFeatures = 10, Iteration = 5
+>> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> 
+PathToWorkInput =
+
+    '/home/lfried10/MAT_FILES/3_00100000_10_5/'
+
+>> Warning: Directory already exists. 
+>> 
+PathToScratchInput =
+
+    '/oasis/scratch/comet/lfried10/temp_project/3_00100000_10_5/'
+
+>> >> >> >> >> 
+Path1ToEER =
+
+    '/home/lfried10/MAT_FILES/3_00100000_10_5/EER_3_00100000_10_5.csv'
+
+>> 
+Path2ToEER =
+
+    '/home/lfried10/MatFileEERs/EER_3_00100000_10_5.csv'
+
+>> >> >> >> >> >> >> 
+fds = 
+
+  FileDatastore with properties:
+
+                       Files: {
+                              ' .../comet/lfried10/temp_project/3_00100000_10_5/NFeatures_10_0000001.mat';
+                              ' .../comet/lfried10/temp_project/3_00100000_10_5/NFeatures_10_0000002.mat';
+                              ' .../comet/lfried10/temp_project/3_00100000_10_5/NFeatures_10_0000003.mat'
+                               ... and 9997 more
+                              }
+                 UniformRead: 1
+                     ReadFcn: @(f)getfield(load(f),'L_S_Array')
+    AlternateFileSystemRoots: {}
+
+>> >> Starting parallel pool (parpool) using the 'local' profile ...
+connected to 12 workers.
+
+L_S_Array =
+
+  Mx2 tall double matrix
+
+    0.4019    1.0000
+   -0.0667         0
+    0.5694         0
+   -0.0277         0
+   -0.2460         0
+   -0.7074         0
+    0.0643         0
+   -0.1514         0
+      :            :
+      :            :
+
+>> >> >> Sorting L_S_Array
+>> >> >> Create labels_tall
+>> >> >> Create tp_tall
+>> >> >> Get size of L_S_Array
+>> >> >> >> >> >> >> >> >> Create num_pos_tall
+>> >> >> Create num_neg_tall
+>> >> >> Create fpr_tall
+>> >> >> Create tpr_tall
+>> >> >> Create diff
+>> >> >> Create mindiff
+>> >> >> Create eer
+>> >> 
+eer =
+
+  MxNx... tall double array
+
+    ?    ?    ?    ...
+    ?    ?    ?    ...
+    ?    ?    ?    ...
+    :    :    :
+    :    :    :
+
+>> >> Gather eer
+>> Evaluating tall expression using the Parallel Pool 'local':
+- Pass 1 of 2: Completed in 5.05 min
+
+Evaluation 37% complete
+
+Evaluation 37% complete
+
+Evaluation 41% complete
+
+Evaluation 41% complete
+
+- Pass 2 of 2: 0% complete
+Evaluation 41% complete
+Error using matlab.mapreduce.internal.Serializer/writeToMatfile (line 46)
+Internal problem while evaluating tall expression. The problem was:
+
+Can not write file
+/tmp/tp778fd703_02f4_4a10_b3e6_10f633d6a7e2/array_t00001_r30_00002_snapshot_0x4C.mat.
+
+Error in matlab.mapreduce.internal.MatValueSerializer/serialize (line 64)
+                obj.writeToMatfile(s);
+
+Error in matlab.bigdata.internal.io.MatArrayWriter/add (line 37)
+            if serialize(obj.Serializer,...
+
+Error in ...
+
+Error in tall/gather (line 50)
+[varargout{:}] = iGather(varargin{:});
+
+Caused by:
+    Error using matlab.mapreduce.internal.Serializer/writeToMatfile (line 46)
+    Can not write file
+    /tmp/tp778fd703_02f4_4a10_b3e6_10f633d6a7e2/array_t00001_r30_00002_snapshot_0x4C.mat. 
+>> Error using fprintf
+Expect>> 
+fid =
+
+     3
+
+>> Error using fprintf
+Expected size on tall to return a double vector with at least two elements.
+ 
+>> >> 
+fid =
+
+     3
+
+>> Error using fprintf
+Expected size on tall to return a double vector with at least two elements.
+ 
+>> >> Elapsed time: min = 8.236420, hours = 0.137274
+>> ******************************** F I N I S H E D **********************************>> 
+mydate =
+
+    '10-Oct-2018 13:12:22'
+
+>> Conversion to logical from tall is not possible.
+
+Error in num2str (line 48)
+    if isempty(x)
+ 
+ed size on tall to return a double vector with at least two elements. 

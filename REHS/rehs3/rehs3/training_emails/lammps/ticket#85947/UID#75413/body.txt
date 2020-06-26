@@ -1,0 +1,51 @@
+
+Fri Mar 30 14:15:05 2018: Request 85947 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by jhidleba
+       Queue: 0-SDSC
+     Subject: XUP: Running LAMMPS with GPUs
+       Owner: jhidleba
+  Requestors: dinpajooh@gmail.com
+      Status: new
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=85947 >
+
+
+[Ticket created from XUP by din1984]
+[From: Hadi Dinpajooh]
+[System: Comet]
+[Category: Software]
+Hi,
+
+We are writing a proposal about Xsede allocations and I am working on a report about the scalability of our simulations with LAMMPS software, when we use GPUs.
+
+I followed the script, lammp-slurm-gpu.sb, available on /share/apps/examples/LAMMPS/; however, 
+I am not sure if I understand the script and the generated output file:
+
+For instance, in the log.lammps file I am not sure how to interpret the following lines, where "mpirun  -np $processors $EXE -sf gpu -pk gpu 1 -in in.lj.txt" has been used in the script: 
+
+#################################
+OUTPUT Line: "  1 by 2 by 3 MPI processor grid "
+
+Qeustion: 
+My guess is that when we use "--partition=gpu-shared" and "--ntasks-per-node=6" in the batch script, the GPUs have been used.
+1) Have GPUs or CPUs been used?  
+
+2) What does "-sf gpu -pk gpu 1" exactly mean?
+
+###################################
+
+###################################
+OUTput lines: 
+"Loop time of 0.144435 on 6 procs for 100 steps with 32000 atoms
+
+Performance: 299096.133 tau/day, 692.352 timesteps/s
+72.2% CPU use with 6 MPI tasks x 1 OpenMP threads"
+
+Question: 
+1) Shouldn't I expect to see lines such as "GPU Time Stamps:" in the output file?
+
+2) What does "72.2% CPU use" mean given the fact GPUs have been requested?
+
+####################################
+
+Thanks for your help,
+Hadi 

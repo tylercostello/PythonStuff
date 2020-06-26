@@ -1,0 +1,17 @@
+
+Wed Oct 11 18:37:45 2017: Request 77104 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by buskuehl
+       Queue: 0-SDSC
+     Subject: XUP: cp2k/4.1 can't run for large systems
+       Owner: buskuehl
+  Requestors: laiwei@msu.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=77104 >
+
+
+[Ticket created from XUP by laiwei]
+[From: Wei Lai]
+[System: Comet]
+[Category: Software]
+I loaded cp2k/4.1 module and requested 4 nodes and 24 cores/node.  It was fine with running an input file with ~64 atoms.  When I increased the number of atoms to ~200, the program would run but hang before it started the first iteration.  I waited for 10 minutes (two different times) and it still hung.  I noticed that the default module was with mvapich_ib which I never used before.
+I used the same input file to run at a local hpcc (intel/15.0, intel mpi/5.0.1, fftw/3.3.4) it only took 2 seconds to see the first iteration. 

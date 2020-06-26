@@ -1,0 +1,27 @@
+
+Wed Jul 19 21:58:59 2017: Request 72353 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by clm
+       Queue: 0-SDSC
+     Subject: XUP: Error trying to start interactive job
+       Owner: clm
+  Requestors: mona@sdsc.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=72353 >
+
+
+[Ticket created from XUP by mona]
+[From: Mona Wong]
+[System: Comet]
+[Category: System/Hardware Issues]
+I'm getting errors when I tried to start interactive job (these command worked previously):
+
+[mona@comet-ln3 step3]$ /share/apps/compute/interactive/qsubi.bash -J "si" -p shared --nodes=1 --ntasks-per-node=1 -t 03:00:00 --mem=20G --export=ALL  -A csd516
+Waiting for JOBID  to start
+Job is not Running or Pending. Aborting
+scancel: error: No job identification provided
+/usr/bin/scancel: option requires an argument -- 'q'
+Try "scancel --help" for more information
+
+[mona@comet-ln3 step3]$ srun --pty -J "si" -p shared --nodes=1 --ntasks-per-node=1 -t 03:00:00 --mem=20G -A csd516 --export=ALL --wait 0 /bin/bash
+srun: error: bank_limit plugin: error talking to slurm, please try again
+srun: error: Unable to allocate resources: Error configuring interconnect 

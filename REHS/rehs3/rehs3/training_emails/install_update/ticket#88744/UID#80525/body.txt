@@ -1,0 +1,44 @@
+
+Fri May 18 16:51:22 2018: Request 88744 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by carmanh
+       Queue: 0-SDSC
+     Subject: Comet software request (Pandas)
+       Owner: Nobody
+  Requestors: chholtz@eng.ucsd.edu
+      Status: new
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=88744 >
+
+
+Hello,
+
+I am writing to ask about using a particular python library on comet. I
+want to use pandas on python2/python3, but the module is not natively
+available and I cannot seem to complete a local installation.
+
+After running "pip install --user pandas", the installation completes
+successfully, but when I attempt to import pandas, I get the following
+error:
+
+[chholtz@comet-ln3 profiling]$ module load python
+[chholtz@comet-ln3 profiling]$ python
+Python 2.7.10 (default, Feb  1 2016, 14:30:50)
+[GCC 4.9.2] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import pandas
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/home/chholtz/.local/lib/python2.7/site-packages/pandas/__init__.py",
+line 23, in <module>
+    from pandas.compat.numpy import *
+  File "/home/chholtz/.local/lib/python2.7/site-packages/pandas/compat/__init__.py",
+line 421, in <module>
+    raise ImportError('dateutil 2.5.0 is the minimum required version')
+ImportError: dateutil 2.5.0 is the minimum required version
+
+I am having difficulty installing this version of dateutil. Please let me
+know if there are additional steps that I should take to fix this issue, or
+if you need any additional information.
+
+Best,
+Chester Holtz
+ 

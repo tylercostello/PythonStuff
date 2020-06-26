@@ -1,0 +1,58 @@
+
+Sun Jan 27 01:25:01 2019: Request 102627 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by sporluck
+       Queue: 0-SDSC
+     Subject: need help in running running NAMD on Comet
+       Owner: sporluck
+  Requestors: indrani2611@gmail.com
+      Status: new
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=102627 >
+
+
+Hi,
+I want to run NAMD on Comet. I am submitting the following
+*#!/bin/bash*
+*#SBATCH --job-name="run1"*
+*#SBATCH --partition=compute*
+*#SBATCH --nodes=4*
+*#SBATCH --ntasks-per-node=1*
+*#SBATCH --cpus-per-task=24*
+*#SBATCH --export=ALL*
+*#SBATCH -t 48:00:00*
+*### Load the NAMD module*
+*module load namd/2.12*
+*EXE=`which namd2`*
+*charmrun  $EXE +p96 dyn9.inp >& dyn9.out*
+*wait*
+*charmrun  $EXE +p96 dyn10.inp >& dyn10.out*
+*wait*
+*charmrun  $EXE +p96 dyn11.inp >& dyn11.out*
+
+But I am getting the error
+*Permission denied
+(publickey,gssapi-keyex,gssapi-with-mic,password,keyboard-interactive,hostbased).*
+*Charmrun> Error 255 returned from remote shell (localhost:0)*
+*Charmrun> Reconnection attempt 1 of 3*
+*Permission denied
+(publickey,gssapi-keyex,gssapi-with-mic,password,keyboard-interactive,hostbased).*
+*Charmrun> Error 255 returned from remote shell (localhost:39)*
+*Charmrun> Reconnection attempt 1 of 3*
+*Permission denied
+(publickey,gssapi-keyex,gssapi-with-mic,password,keyboard-interactive,hostbased).*
+*Charmrun> Error 255 returned from remote shell (localhost:39)*
+*Charmrun> Reconnection attempt 2 of 3*
+*Permission denied
+(publickey,gssapi-keyex,gssapi-with-mic,password,keyboard-interactive,hostbased).*
+*Charmrun> Error 255 returned from remote shell (localhost:39)*
+*Charmrun> Reconnection attempt 3 of 3*
+*Permission denied
+(publickey,gssapi-keyex,gssapi-with-mic,password,keyboard-interactive,hostbased).*
+*Charmrun> Error 255 returned from remote shell (localhost:39)*
+*Charmrun> Too many reconnection attempts; bailing out*
+*Charmrun> scalable start enabled. *
+*Charmrun> IBVERBS version of charmrun*
+
+Please help.
+Thanks,
+Indrani
+ 

@@ -1,0 +1,35 @@
+
+Mon Mar 04 10:54:04 2019: Request 104640 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by hthta
+       Queue: 0-SDSC
+     Subject: Error with pandas dateutil package on Comet
+       Owner: hthta
+  Requestors: jsale@sdsc.edu
+      Status: new
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=104640 >
+
+
+I am getting the following error when I try to run pandas on Comet:
+
+[jsale@comet-14-02 climatechange]$ python3
+Python 3.5.0 (default, Feb  1 2016, 14:14:54)
+[GCC 4.9.2] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import dateutil
+>>> import pandas
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/home/jsale/.local/lib/python3.5/site-packages/pandas/__init__.py", line 23, in <module>
+    from pandas.compat.numpy import *
+  File "/home/jsale/.local/lib/python3.5/site-packages/pandas/compat/__init__.py", line 438, in <module>
+    raise ImportError('dateutil 2.5.0 is the minimum required version')
+ImportError: dateutil 2.5.0 is the minimum required version
+
+
+I have tried to explicitly upgrade dateutil with:
+
+pip3 install --upgrade --user python-dateutil==2.8.0
+
+However, it still installs 2.4.2. 
+
+ 

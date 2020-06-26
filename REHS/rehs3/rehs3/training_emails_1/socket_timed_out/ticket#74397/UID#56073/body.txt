@@ -1,0 +1,52 @@
+
+Fri Aug 25 16:21:44 2017: Request 74397 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by hthta
+       Queue: 0-SDSC
+     Subject: XUP: sbatch error
+       Owner: hthta
+  Requestors: ojaghloun@vcu.edu
+      Status: new
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=74397 >
+
+
+[Ticket created from XUP by nedaoj]
+[From: neda ojaghlou]
+[System: Comet]
+[Category: Other]
+Hi ,
+I was trying to submit my job but I recieved this error:
+sbatch: error: slurm_receive_msg: Socket timed out on send/recv operation
+sbatch: error: Batch job submission failed: Socket timed out on send/recv operation
+
+Could you please help me to solve this problem?'
+
+Thanks, Neda
+
+Here is my script:
+
+#!/usr/bin/env bash
+
+#SBATCH --partition=compute
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=24
+#SBATCH --time 24:00:00
+#SBATCH --export=ALL
+#SBATCH --no-requeue
+#SBATCH --job-name="lammps-intelmpi"
+#SBATCH --output="lammps-intelmpi.o%j.%N"
+#SBATCH --error="lammps-intelmpi.e%j.%N"
+
+declare -r LAMMPS_MODULE='lammps/20170331-intelmpi'
+declare -r GNUTOOLS_MODULE='gnutools/2.69'
+
+declare -r LOCAL_SCRATCH="/scratch/${USER}/${SLURM_JOB_ID}"
+declare -r LUSTRE_SCRATCH="/oasis/scratch/comet/${USER}/temp_project"
+declare -r LUSTRE_STORAGE='/oasis/projects/nsf'
+
+module purge
+module load "${GNUTOOLS_MODULE}"
+export MODULEPATH="/share/apps/compute/modulefiles/applications:${MODULEPATH}"
+module load "${LAMMPS_MODULE}"
+
+export OMP_NUM_THREADS=1
+time -p mpirun lammps -in in_rep_fiber.inp 

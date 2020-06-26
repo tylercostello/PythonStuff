@@ -1,0 +1,62 @@
+
+Thu Aug 03 14:37:49 2017: Request 73276 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by jhawthor
+       Queue: 0-SDSC
+     Subject: XUP: Cannot compile my code
+       Owner: Nobody
+  Requestors: pakserep@onid.oregonstate.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=73276 >
+
+
+[Ticket created from XUP by pakserep]
+[From: Pedram Pakseresht]
+[System: Comet]
+[Category: Operations]
+Hello there, 
+
+It has been a while that I cannot compile my code on COMET which was getting compiled on other clusters such as STAMPEDE 1 and 2. I am receiving an error regarding the HYPRE as follows. The code package is cgs_dem in my home directory. It is highly appreciated if you could help me out on this matter. Thanks in advance. 
+
+Best,
+Pedram
+
+cp libcgs.a ../../lib
+cp *.mod ../../mod
+make[2]: Leaving directory `/home/pakserep/cgs_dem/pcgs/src/cgs'
+(cd solver ; make)
+make[2]: Entering directory `/home/pakserep/cgs_dem/pcgs/src/solver'
+(cd cgshypre; make)
+make[3]: Entering directory `/home/pakserep/cgs_dem/pcgs/src/solver/cgshypre'
+if [ "TRUE" = "TRUE" ]; \
+	then \
+		echo "building HYPRE"; \
+		cd /home/pakserep/cgs_dem/hypre-2.9.0b  /src;\
+		export CC="mpicc";\
+		export CXX="mpicxx";\
+		export F77="mpif77";\
+		export FFLAGS="-w -c -O3 ";\
+		export CFLAGS="-w -O3";\
+		export CXXFLAGS="-w -O3";\
+		make clean; \
+		make distclean; \
+		./configure --enable-fortran --with-MPI --with-timing ;\
+		make install;\
+	fi;
+building HYPRE
+make[4]: Entering directory `/home/pakserep/cgs_dem/hypre-2.9.0b'
+make[4]: *** No rule to make target `clean'.  Stop.
+make[4]: Leaving directory `/home/pakserep/cgs_dem/hypre-2.9.0b'
+make[4]: Entering directory `/home/pakserep/cgs_dem/hypre-2.9.0b'
+make[4]: *** No rule to make target `distclean'.  Stop.
+make[4]: Leaving directory `/home/pakserep/cgs_dem/hypre-2.9.0b'
+/bin/sh: line 12: ./configure: No such file or directory
+make[4]: Entering directory `/home/pakserep/cgs_dem/hypre-2.9.0b'
+make[4]: *** No rule to make target `install'.  Stop.
+make[4]: Leaving directory `/home/pakserep/cgs_dem/hypre-2.9.0b'
+make[3]: *** [cgshypre.o] Error 2
+make[3]: Leaving directory `/home/pakserep/cgs_dem/pcgs/src/solver/cgshypre'
+make[2]: *** [libcgshypre.a] Error 2
+make[2]: Leaving directory `/home/pakserep/cgs_dem/pcgs/src/solver'
+make[1]: *** [../lib/libcgssolver.a] Error 2
+make[1]: Leaving directory `/home/pakserep/cgs_dem/pcgs/src'
+make: *** [default] Error 2 

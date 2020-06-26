@@ -1,0 +1,67 @@
+
+Tue Oct 10 11:56:28 2017: Request 76991 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by jhawthor
+       Queue: 0-SDSC
+     Subject: XUP: MPI Fatal Error
+       Owner: Nobody
+  Requestors: yang.zhang@stonybrook.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=76991 >
+
+
+[Ticket created from XUP by yzhang89]
+[From: yang zhang]
+[System: Comet]
+[Category: Batch Queues/Jobs]
+Hi there,
+
+I met a problem which is unusual to me while using LAMMPS on Comet.
+I think it is related to mpi configuration.
+
+When I submit my pbs file with 2 nodes  (48 threads), it stops immediately and returns (log.out): 
+
+Fatal error in MPI_Init: Other MPI error, error stack:
+MPIR_Init_thread(784).................: 
+MPID_Init(1332).......................: channel initialization failed
+MPIDI_CH3_Init(141)...................: 
+dapl_rc_setup_all_connections_20(1388): generic failure with errno = 872614415
+getConnInfoKVS(849)...................: PMI_KVS_Get failed
+
+And when I try to use more nodes (for example 12), it keeps running without any output. 
+
+
+Here is my job description file (run.pbs):
+
+#!/bin/bash 
+#SBATCH --job-name="sig3_112_H3_1kev"
+#SBATCH --output="log.out"
+#SBATCH --partition=compute
+#SBATCH --nodes=12
+#SBATCH --ntasks-per-node=24
+#SBATCH --export=all
+#SBATCH -t 00:30:00
+
+#---- general setup    ---------------
+
+   export SLURM_NODEFILE=`generate_pbs_nodefile`
+  
+   module load intel/2013_sp1.2.144   
+   module load mvapich2_ib/2.1
+   module load gnutools/2.69
+   module load intel/2016.3.210
+   module load intelmpi/2016.3.210
+   module load mkl/11.1.2.144
+   module load lammps
+
+
+
+#--------  end of general setup -------
+
+   ibrun lammps -in blimp-3.10.trz > sig3_H3_r1.log
+
+I am not sure what I can do to fix this issue.
+Could you please help me out?
+
+Thank you,
+
+Yang 

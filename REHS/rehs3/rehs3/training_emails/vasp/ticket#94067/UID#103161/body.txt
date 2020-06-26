@@ -1,0 +1,66 @@
+
+Tue Aug 28 23:20:51 2018: Request 94067 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by aredding
+       Queue: 0-SDSC
+     Subject: VASP calculation on Comet
+       Owner: Nobody
+  Requestors: hanghui.chen@nyu.edu
+      Status: new
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=94067 >
+
+
+To whom it may concern,
+      I have encountered a weird problem of VASP on Comet.
+      A typical DFT (VASP) calculation involves two steps: one is atomic 
+relaxation and the other is a final self-consistent calculation. The two 
+calculations have the same size (in terms of memory usage). However, 
+what I have found is that I successfully finished the first step (atomic 
+relaxation). But the final self-consistent calculation crashes. The 
+error is "SIGSEGV, segmentation fault occurred". VASP forum says that it 
+is likely due to memory and/or compilation. But I use exactly the same 
+executable to finish the relaxation calculation.
+      The running directory is: 
+/oasis/scratch/comet/hchen/temp_project/pressure-ferro/Pb2CoOsO6/P21n-80atom/Yuewen/P-0GPa/SOC
+      The job id is: 18868927, 18852228, 18852153
+      The job script is shown below.
+      Thank you very much for your help.
+
+
+---------------------------------------------------------------------------
+
+#!/bin/bash
+
+
+#SBATCH --job-name="CoOs-0GPaSOC"
+#SBATCH --qos=oneweek
+#SBATCH --output="%j.%N.out"
+#SBATCH --partition=compute
+#SBATCH --nodes=2
+#SBATCH --ntasks-per-node=12
+#SBATCH --export=ALL
+#SBATCH -t 168:00:00
+
+#This job runs with 2 nodes, 24 cores per node for a total of 48 cores.
+#ibrun in verbose mode will give binding detail
+
+touch RUNNING
+
+#ibrun -v /home/hchen/codes-Comet/vasp/vasp.5.2/vasp
+
+ibrun -v /home/hchen/codes-Comet/vasp/vasp.5.4.1/bin/vasp_ncl
+
+touch done
+
+\rm RUNNING
+
+
+-- 
+Dr. Hanghui Chen
+Assistant Professor of Physics
+NYU-ECNU Institute of Physics
+New York University Shanghai
+1555 Century Avenue, Pudong Shanghai, China, 200122
+Phone: 86-21-20595152
+Group page: www.hanghuichen.org
+
+ 

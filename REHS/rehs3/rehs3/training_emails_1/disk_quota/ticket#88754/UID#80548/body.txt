@@ -1,0 +1,31 @@
+
+Fri May 18 23:16:23 2018: Request 88754 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by sporluck
+       Queue: 0-SDSC
+     Subject: XUP: speed up NetCDF IO in Fortran code
+       Owner: sporluck
+  Requestors: xhu@ou.edu
+      Status: new
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=88754 >
+
+
+[Ticket created from XUP by xhu]
+[From: Xiaoming Hu]
+[System: Comet]
+[Category: Software]
+I am using a Fortran code to extract profiles, and column average value from 8761 WRF NetCDF outputs, and put the extracted values into a single NetCDF file. 
+My code is: 
+/oasis/scratch/comet/xhu2/temp_project/Run/CO2_and_otherGHG/WRFV3.9.1.1/wrfchem3.9.1.1_R2_CONUS_Snudge_tracer16CTbc_SSTu_10mb_convOnScavOff_Hilton3ReShrubRES.2016010100/extract_netCDF_Fortran_xhu/extract_netCDF_xhu_atLamontetc_4sites_writeNC.f90
+Makefile: 
+/oasis/scratch/comet/xhu2/temp_project/Run/CO2_and_otherGHG/WRFV3.9.1.1/wrfchem3.9.1.1_R2_CONUS_Snudge_tracer16CTbc_SSTu_10mb_convOnScavOff_Hilton3ReShrubRES.2016010100/extract_netCDF_Fortran_xhu/Makefile
+
+I really did not do much calculation in the Fortran code. I thought this job would be quick. 
+But it actually took several hours to finish. 
+See my submission script: 
+/oasis/scratch/comet/xhu2/temp_project/Run/CO2_and_otherGHG/WRFV3.9.1.1/wrfchem3.9.1.1_R2_CONUS_Snudge_tracer16CTbc_SSTu_10mb_convOnScavOff_Hilton3ReShrubRES.2016010100/extract_netCDF_Fortran_xhu/sge_wps.sh
+
+Anyway I can speed up this job? 
+My friend mentioned to me the bottleneck of this job is NetCDF I/O
+Any idea? 
+Thanks
+Xiaoming 

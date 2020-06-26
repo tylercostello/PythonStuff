@@ -1,0 +1,32 @@
+
+Sat Jul 21 22:18:47 2018: Request 92098 was acted upon.
+ Transaction: Queue changed from 0-Help to 0-SDSC by sporluck
+       Queue: 0-SDSC
+     Subject: XUP: Openfoam Simulation Crashing. mkdir Not Working
+       Owner: sporluck
+  Requestors: harissheikh@berkeley.edu
+      Status: open
+ Ticket <URL: https://tickets.xsede.org/Ticket/Display.html?id=92098 >
+
+
+[Ticket created from XUP by guest]
+[From: Haris Moazam Sheikh]
+[System: Comet]
+[Category: Batch Queues/Jobs]
+Hi,
+
+I am running a simulation on Comet using OpenFOAM. During this simulation, the error outputs:
+
+FOAM FATAL ERROR: 
+[65] Couldn't create directory "/oasis/scratch/comet/h7ris/temp_project/ValidationCases/StabilityRotations/11TotalRotations/processor65/1.3"
+[65] 
+[65]     From function bool Foam::mkDir(const Foam::fileName&, mode_t)
+[65]     in file POSIX.C at line 434.
+[65] 
+FOAM parallel run exiting
+
+for all the processors. (I have attached a log file). I am using 4 nodes and all the cores on these nodes. I ran a similar simulation before using the same number of nodes saving data in the same scratch directory. I don't think its OpenFOAMs error.
+
+The only reason I can think of is that somehow, I managed to fill out my allocated disk space in oasis/scratch.
+
+Kindly let me know if there is any suggestion 

@@ -1,3 +1,5 @@
+#algorithm credit to https://www.youtube.com/watch?v=biY7F-tLwE8
+
 import numpy as np
 import matplotlib.pyplot as plt
 

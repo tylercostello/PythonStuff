@@ -3,46 +3,48 @@ import numpy as np
 import pandas as pd
 from numpy.linalg import inv
 
+
 #*************Declare Variables**************************
 #Read Input File
+measurements = pd.read_csv('obj_pose-laser-radar-synthetic-input.txt', header=None, delim_whitespace = True, skiprows=1)
 
 # Manualy copy initial readings from first row of input file.
-prv_time = 0
+prv_time = 1477010443000000/1000000.0
 x = np.array([
+        [0.312242],
+        [0.5803398],
         [0],
-        [0],
-        [0],
-        [0],
-        [0],
-        [0],
-        [0],
-        [0],
+        [0]
         ])
 
-
+#Initialize variables to store ground truth and RMSE values
+ground_truth = np.zeros([4, 1])
+rmse = np.zeros([4, 1])
 
 #Initialize matrices P and A
-P  = np.zeros((8, 8), int)
-np.fill_diagonal(P, 1)
-P[6][6]=1000
-P[7][7]=1000
-dt=1.0
-A = np.array([
-        [1, 0, dt, 0, 0.5*dt*dt, 0, dt*dt*dt/6, 0],
-        [0, 1, 0, dt, 0, 0.5*dt*dt, 0, dt*dt*dt/6],
-        [0, 0, 1, 0, dt, 0, 0.5*dt*dt, 0],
-        [0, 0, 0, 1, 0, dt, 0, 0.5*dt*dt],
-        [0, 0, 0, 0, 1, 0, dt, 0],
-        [0, 0, 0, 0, 0, 1, 0, dt],
-        [0, 0, 0, 0, 0, 0, 1, 0],
-        [0, 0, 0, 0, 0, 0, 0, 1]
+
+#equation variances
+P = np.array([
+        [1, 0, 0, 0],
+        [0, 1, 0, 0],
+        [0, 0, 1000, 0],
+        [0, 0, 0, 1000]
         ])
+#equation creator
+A = np.array([
+        [1.0, 0, 1.0, 0],
+        [0, 1.0, 0, 1.0],
+        [0, 0, 1.0, 0],
+        [0, 0, 0, 1.0]
+        ])
+#shaper
 H = np.array([
         [1.0, 0, 0, 0],
         [0, 1.0, 0, 0]
         ])
 I = np.identity(4)
 z_lidar = np.zeros([2, 1])
+#sensor variances
 R = np.array([
         [0.0225, 0],
         [0, 0.0225]
@@ -56,7 +58,9 @@ def predict():
     # Predict Step
     global x, P, Q
     x = np.matmul(A, x)
+    #predicted sensor values
     At = np.transpose(A)
+    #predicted value variances
     P = np.add(np.matmul(A, np.matmul(P, At)), Q)
 
 def update(z):
@@ -70,7 +74,9 @@ def update(z):
     K = np.matmul(K, Si)
 
     # New state
+    #final predicted values
     x = np.add(x, np.matmul(K, Y))
+    #final variances
     P = np.matmul(np.subtract(I ,np.matmul(K, H)), P)
 
 def CalculateRMSE(estimations, ground_truth):

@@ -2,11 +2,11 @@
 import numpy as np
 import pandas as pd
 from numpy.linalg import inv
-
+import matplotlib.pyplot as plt
 #*************Declare Variables**************************
 #Read Input File
 measurements = pd.read_csv('obj_pose-laser-radar-synthetic-input.txt', header=None, delim_whitespace = True, skiprows=1)
-
+print(measurements)
 # Manualy copy initial readings from first row of input file.
 prv_time = 1477010443000000/1000000.0
 x = np.array([
@@ -94,11 +94,16 @@ def CalculateRMSE(estimations, ground_truth):
 
 #**********************Iterate through main loop********************
 #Begin iterating through sensor data
+xList=[]
+sensorList=[]
+groundList=[]
+tList=[]
 for i in range (len(measurements)):
     new_measurement = measurements.iloc[i, :].values
     if new_measurement[0] == 'L':
         #Calculate Timestamp and its power variables
         cur_time = new_measurement[3]/1000000.0
+        tList.append(cur_time)
         dt = cur_time - prv_time
         prv_time = cur_time
         dt_2 = dt * dt
@@ -127,7 +132,14 @@ for i in range (len(measurements)):
         #Call Kalman Filter Predict and Update functions.
         predict()
         update(z_lidar)
+        sensorList.append(z_lidar[0][0])
+        xList.append(x[0])
+        groundList.append(ground_truth[1])
 
 
     rmse = CalculateRMSE(x, ground_truth)
+
     print('iteration', i, 'x: ', x)
+plt.plot(tList, xList)
+plt.plot(tList, groundList)
+plt.show()

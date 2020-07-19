@@ -12,6 +12,7 @@ def lowerCaseList(upperList):
 spell.word_frequency.load_words([])
 email=getList("sampleemail.txt")
 email=lowerCaseList(email)
+print(len(email))
 misspelled = spell.unknown(email)
 for word in misspelled:
     print(word)

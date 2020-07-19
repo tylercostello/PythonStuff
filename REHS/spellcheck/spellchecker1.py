@@ -68,15 +68,15 @@ if __name__ == "__main__":
         return spell1.correction(word)
     def text_blob(word):
         return Word(word).correct()
-    spell = Speller(fast=True)
+    spell = Speller(fast=true)
     def autocorrecter(word):
         return spell(word)
     #print(symspell2("memebers",2))
     print(spellcheck(partial(symspell, pregennederrors), test))
     print(spellcheck(partial(symspell2), test))
     print(spellcheck(partial(autocorrecter), test))
-    print(spellcheck(partial(pyspellchecker), test))
-    print(spellcheck(partial(text_blob), test))
+    #print(spellcheck(partial(pyspellchecker), test))
+    #print(spellcheck(partial(text_blob), test))
 
 
 """
@@ -86,9 +86,12 @@ Ashwin's Symspell
 Symspellpy
 --- 1.3413007259368896 seconds ---
 (3491, 4269, 0.8177559147341298)
-Autocorrect
+Autocorrect Fast
 --- 1.1464083194732666 seconds ---
 (2978, 4269, 0.6975872569688452)
+Autocorrect Regular
+--- 91.3641529083252 seconds ---
+(3217, 4269, 0.7535722651674865)
 Spellchecker
 --- 718.3646824359894 seconds ---
 (3385, 4269, 0.7929257437338956)

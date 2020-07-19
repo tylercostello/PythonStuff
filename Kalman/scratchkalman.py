@@ -42,7 +42,7 @@ for counter in range(200):
 
 #plotting
 fig, ax = plt.subplots()
-#ax.plot(t, s)
+ax.plot(t, s)
 ax.plot(t, v)
 
 ax.plot(t,pointsList,color='red')

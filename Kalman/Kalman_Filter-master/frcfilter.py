@@ -18,11 +18,12 @@ vy=np.cos(t)
 
 vf=np.sqrt((vx*vx+vy*vy))
 
-theta=np.arctan(0.5*np.cos(0.5*t))
+theta=np.arctan(0.5*np.cos(0.5*xt))
 
-vfnoisy=vx+np.random.normal(0, 0, vx.shape)
-
-thetanoisy=theta+np.random.normal(0, 0, theta.shape)
+vfnoisy=vf+np.random.normal(0, 0.1, vf.shape)
+#vfnoisy=vf
+#thetanoisy=theta
+thetanoisy=theta+np.random.normal(0, 0.1, theta.shape)
 
 
 
@@ -59,7 +60,6 @@ def hFunction(x):
     returnArray=np.zeros((2,1))
     returnArray[0][0]=np.sqrt(x[2]*x[2]+x[3]*x[3])
     returnArray[1][0]= np.arctan(x[3]/x[2])
-    #return np.sqrt(x[2]*x[2]+x[3]*x[3]), np.arctan(vy/vx)
     return returnArray
 H = np.array([
         [0, 0, -x[3]/(x[3]*x[3]+x[2]*x[2]), x[2]/(x[3]*x[3]+x[2]*x[2])],
@@ -72,8 +72,8 @@ R = np.array([
         [0.01, 0],
         [0, 0.01]
         ])
-noise_ax = 0.05
-noise_ay = 0.05
+noise_ax = 1
+noise_ay = 1
 Q = np.zeros([4, 4])
 
 def predict():
@@ -84,6 +84,7 @@ def predict():
     At = np.transpose(A)
     #predicted value variances
     P = np.add(np.matmul(A, np.matmul(P, At)), Q)
+    #P = np.matmul(A, np.matmul(P, At))
 
 def update(z):
     global x, P
@@ -170,4 +171,8 @@ for i in range (1,1400):
 #plt.plot(t,vx)
 plt.plot(t,vyList)
 plt.plot(t,vy)
+
+#plt.plot(t,theta)
+
+#plt.plot(t,vf)
 plt.show()

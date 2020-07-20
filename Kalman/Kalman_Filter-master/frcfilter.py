@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 
 
 
-t = np.arange(0.0, 14.0, 0.01)
+t = np.arange(0.0, 14.00, 0.01)
 
 xt=2*t
 yt=np.sin(t)
@@ -20,9 +20,9 @@ vf=np.sqrt((vx*vx+vy*vy))
 
 theta=np.arctan(0.5*np.cos(0.5*t))
 
-vfnoisy=vx+np.random.normal(0, 0.1, vx.shape)
+vfnoisy=vx+np.random.normal(0, 0, vx.shape)
 
-thetanoisy=theta+np.random.normal(0, 0.1, theta.shape)
+thetanoisy=theta+np.random.normal(0, 0, theta.shape)
 
 
 
@@ -44,8 +44,8 @@ x = np.array([
 P = np.array([
         [1, 0, 0, 0],
         [0, 1, 0, 0],
-        [0, 0, 1000, 0],
-        [0, 0, 0, 1000]
+        [0, 0, 1, 0],
+        [0, 0, 0, 1]
         ])
 #equation creator
 A = np.array([
@@ -55,19 +55,25 @@ A = np.array([
         [0, 0, 0, 1.0]
         ])
 #shaper
+def hFunction(x):
+    returnArray=np.zeros((2,1))
+    returnArray[0][0]=np.sqrt(x[2]*x[2]+x[3]*x[3])
+    returnArray[1][0]= np.arctan(x[3]/x[2])
+    #return np.sqrt(x[2]*x[2]+x[3]*x[3]), np.arctan(vy/vx)
+    return returnArray
 H = np.array([
-        [1.0, 0, 0, 0],
-        [0, 1.0, 0, 0]
+        [0, 0, -x[3]/(x[3]*x[3]+x[2]*x[2]), x[2]/(x[3]*x[3]+x[2]*x[2])],
+        [0, 0, x[2]/np.sqrt((x[3]*x[3]+x[2]*x[2])), x[3]/np.sqrt((x[3]*x[3]+x[2]*x[2]))]
         ])
 I = np.identity(4)
-z_lidar = np.zeros([2, 1])
+z_gyro = np.zeros([2, 1])
 #sensor variances
 R = np.array([
-        [0.0225, 0],
-        [0, 0.0225]
+        [0.01, 0],
+        [0, 0.01]
         ])
-noise_ax = 5
-noise_ay = 5
+noise_ax = 0.05
+noise_ay = 0.05
 Q = np.zeros([4, 4])
 
 def predict():
@@ -82,7 +88,11 @@ def predict():
 def update(z):
     global x, P
     # Measurement update step
-    Y = np.subtract(z_lidar, np.matmul(H, x))
+    Y = np.subtract(z_gyro, hFunction(x))
+    H = np.array([
+            [0, 0, -x[3]/(x[3]*x[3]+x[2]*x[2]), x[2]/(x[3]*x[3]+x[2]*x[2])],
+            [0, 0, x[2]/np.sqrt((x[3]*x[3]+x[2]*x[2])), x[3]/np.sqrt((x[3]*x[3]+x[2]*x[2]))]
+            ], dtype='float')
     Ht = np.transpose(H)
     S = np.add(np.matmul(H, np.matmul(P, Ht)), R)
     K = np.matmul(P, Ht)
@@ -95,65 +105,69 @@ def update(z):
     #final variances
     P = np.matmul(np.subtract(I ,np.matmul(K, H)), P)
 
-def CalculateRMSE(estimations, ground_truth):
-    rmse = np.zeros([4, 1])
-    """
-    if (sys.getsizeof(estimations) != sys.getsizeof(ground_truth) or sys.getsizeof(estimations) == 0):
-        print ('Invalid estimation or ground_truth data')
-        return rmse
-    """
-    rmse[0][0] =  np.sqrt(((estimations[0][0] - ground_truth[0][0]) ** 2).mean())
-    rmse[1][0] =  np.sqrt(((estimations[1][0] - ground_truth[1][0]) ** 2).mean())
-    rmse[2][0] =  np.sqrt(((estimations[2][0] - ground_truth[2][0]) ** 2).mean())
-    rmse[3][0] =  np.sqrt(((estimations[3][0] - ground_truth[3][0]) ** 2).mean())
-    print('rmse',rmse)
-    return rmse
+
 
 #**********************Iterate through main loop********************
 #Begin iterating through sensor data
 xList=[]
+xList.append(xt[0])
+yList=[]
+yList.append(yt[0])
+vxList=[]
+vxList.append(vx[0])
+vyList=[]
+vyList.append(vy[0])
+
 sensorList=[]
 groundList=[]
 tList=[]
-for i in range (len(measurements)):
-    new_measurement = measurements.iloc[i, :].values
-    if new_measurement[0] == 'L':
-        #Calculate Timestamp and its power variables
-        cur_time = new_measurement[3]/1000000.0
-        tList.append(cur_time)
-        dt = cur_time - prv_time
-        prv_time = cur_time
-        dt_2 = dt * dt
-        dt_3 = dt_2 * dt
-        dt_4 = dt_3 * dt
-        #Updating matrix A with dt value
-        A[0][2] = dt
-        A[1][3] = dt
-        #Updating Q matrix
-        Q[0][0] = dt_4/4*noise_ax
-        Q[0][2] = dt_3/2*noise_ax
-        Q[1][1] = dt_4/4*noise_ay
-        Q[1][3] = dt_3/2*noise_ay
-        Q[2][0] = dt_3/2*noise_ax
-        Q[2][2] = dt_2*noise_ax
-        Q[3][1] = dt_3/2*noise_ay
-        Q[3][3] = dt_2*noise_ay
-        #Updating sensor readings
-        z_lidar[0][0] = new_measurement[1]
-        z_lidar[1][0] = new_measurement[2]
-        #Collecting ground truths
-        ground_truth[0] = new_measurement[4]
-        ground_truth[1] = new_measurement[5]
-        ground_truth[2] = new_measurement[6]
-        ground_truth[3] = new_measurement[7]
-        #Call Kalman Filter Predict and Update functions.
-        predict()
-        update(z_lidar)
-        sensorList.append(z_lidar[0][0])
-        xList.append(x[0])
-        groundList.append(ground_truth[1])
+for i in range (1,1400):
+    new_measurement = np.zeros((2,1))
+    #print(new_measurement)
+    new_measurement[0][0]=vfnoisy[i]
+    new_measurement[1][0]=thetanoisy[i]
+    #Calculate Timestamp and its power variables
+    cur_time = i/100
+    tList.append(cur_time)
+    dt = cur_time - prv_time
+    prv_time = cur_time
+    dt_2 = dt * dt
+    dt_3 = dt_2 * dt
+    dt_4 = dt_3 * dt
+    #Updating matrix A with dt value
+    A[0][2] = dt
+    A[1][3] = dt
+    #Updating Q matrix
+    Q[0][0] = dt_4/4*noise_ax
+    Q[0][2] = dt_3/2*noise_ax
+    Q[1][1] = dt_4/4*noise_ay
+    Q[1][3] = dt_3/2*noise_ay
+    Q[2][0] = dt_3/2*noise_ax
+    Q[2][2] = dt_2*noise_ax
+    Q[3][1] = dt_3/2*noise_ay
+    Q[3][3] = dt_2*noise_ay
+    #Updating sensor readings
+    z_gyro[0][0] = new_measurement[0][0]
+    z_gyro[1][0] = new_measurement[1][0]
+    #Collecting ground truths
+    #Call Kalman Filter Predict and Update functions.
+    predict()
+    update(z_gyro)
+    sensorList.append(z_gyro[0][0])
+    xList.append(x[0])
+    yList.append(x[1])
+    vxList.append(x[2])
+    vyList.append(x[3])
 
 
-    rmse = CalculateRMSE(x, ground_truth)
 
-    print('iteration', i, 'x: ', x)
+    #print('iteration', i, 'x: ', x)
+#plt.plot(t,xList)
+#plt.plot(t,xt)
+#plt.plot(t,yList)
+#plt.plot(t,yt)
+#plt.plot(t,vxList)
+#plt.plot(t,vx)
+plt.plot(t,vyList)
+plt.plot(t,vy)
+plt.show()

@@ -68,7 +68,7 @@ if __name__ == "__main__":
         return spell1.correction(word)
     def text_blob(word):
         return Word(word).correct()
-    spell = Speller(fast=true)
+    spell = Speller(fast=True)
     def autocorrecter(word):
         return spell(word)
     #print(symspell2("memebers",2))

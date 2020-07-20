@@ -140,6 +140,3 @@ for i in range (len(measurements)):
     rmse = CalculateRMSE(x, ground_truth)
 
     print('iteration', i, 'x: ', x)
-plt.plot(tList, xList)
-plt.plot(tList, groundList)
-plt.show()

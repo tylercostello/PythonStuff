@@ -1,25 +1,42 @@
-#**************Importing Required Libraries*************
+
 import numpy as np
 import pandas as pd
 from numpy.linalg import inv
+import matplotlib.pyplot as plt
 
 
-#*************Declare Variables**************************
-#Read Input File
-measurements = pd.read_csv('obj_pose-laser-radar-synthetic-input.txt', header=None, delim_whitespace = True, skiprows=1)
 
-# Manualy copy initial readings from first row of input file.
-prv_time = 1477010443000000/1000000.0
+
+t = np.arange(0.0, 14.0, 0.01)
+
+xt=2*t
+yt=np.sin(t)
+
+vx=[2]*1400
+vx=np.asarray(vx)
+vy=np.cos(t)
+
+vf=np.sqrt((vx*vx+vy*vy))
+
+theta=np.arctan(0.5*np.cos(0.5*t))
+
+vfnoisy=vx+np.random.normal(0, 0.1, vx.shape)
+
+thetanoisy=theta+np.random.normal(0, 0.1, theta.shape)
+
+
+
+
+
+prv_time = 0
 x = np.array([
-        [0.312242],
-        [0.5803398],
-        [0],
-        [0]
+        [xt[0]],
+        [yt[0]],
+        [vx[0]],
+        [vy[0]]
         ])
 
-#Initialize variables to store ground truth and RMSE values
-ground_truth = np.zeros([4, 1])
-rmse = np.zeros([4, 1])
+
 
 #Initialize matrices P and A
 
@@ -53,7 +70,6 @@ noise_ax = 5
 noise_ay = 5
 Q = np.zeros([4, 4])
 
-#**********************Define Functions*****************************
 def predict():
     # Predict Step
     global x, P, Q
@@ -95,11 +111,16 @@ def CalculateRMSE(estimations, ground_truth):
 
 #**********************Iterate through main loop********************
 #Begin iterating through sensor data
+xList=[]
+sensorList=[]
+groundList=[]
+tList=[]
 for i in range (len(measurements)):
     new_measurement = measurements.iloc[i, :].values
     if new_measurement[0] == 'L':
         #Calculate Timestamp and its power variables
         cur_time = new_measurement[3]/1000000.0
+        tList.append(cur_time)
         dt = cur_time - prv_time
         prv_time = cur_time
         dt_2 = dt * dt
@@ -128,7 +149,11 @@ for i in range (len(measurements)):
         #Call Kalman Filter Predict and Update functions.
         predict()
         update(z_lidar)
+        sensorList.append(z_lidar[0][0])
+        xList.append(x[0])
+        groundList.append(ground_truth[1])
 
 
     rmse = CalculateRMSE(x, ground_truth)
+
     print('iteration', i, 'x: ', x)

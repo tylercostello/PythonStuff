@@ -33,7 +33,7 @@ z=0
 h=1
 k=0
 i=1
-r=0.35
+r=0.01
 for counter in range(1400):
 
     x=a*x

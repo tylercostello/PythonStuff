@@ -10,15 +10,19 @@ import matplotlib.pyplot as plt
 t = np.arange(0.0, 14.00, 0.01)
 
 xt=2*t
-yt=np.sin(t)
+#yt=np.sin(t)
+yt=3*t
 
 vx=[2]*1400
 vx=np.asarray(vx)
-vy=np.cos(t)
+vy=[3]*1400
+vy=np.asarray(vy)
+#vy=np.cos(t)
 
 vf=np.sqrt((vx*vx+vy*vy))
-
-theta=np.arctan(0.5*np.cos(0.5*xt))
+theta=[np.arctan(3/2)]*1400
+theta=np.asarray(theta)
+#theta=np.arctan(0.5*np.cos(0.5*xt))
 
 vfnoisy=vf+np.random.normal(0, 0.1, vf.shape)
 #vfnoisy=vf

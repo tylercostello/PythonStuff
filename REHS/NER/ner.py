@@ -23,15 +23,23 @@ def lowerCaseList(upperList):
 
 namesList=set(getList("FullNamesList.txt"))
 
-email=getList("sample2.txt")
+email=getList("26000.txt")
 email=lowerCaseList(email)
 
 
 removed = [x for x in email if x in namesList]
 newEmail = [x for x in email if x not in namesList]
+"""
 print("Original: ")
 print(' '.join(email))
 print("With NER: ")
 print(' '.join(newEmail))
 print("--- %s seconds ---" % (time.time() - start_time))
+"""
+timeDif=(time.time() - start_time)
+
 print(removed)
+print("Time: ",timeDif)
+
+
+#run in about 0.5 seconds but misses many foreign names

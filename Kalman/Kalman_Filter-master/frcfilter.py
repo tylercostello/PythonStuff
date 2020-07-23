@@ -10,19 +10,19 @@ import matplotlib.pyplot as plt
 t = np.arange(0.0, 14.00, 0.01)
 
 xt=2*t
-#yt=np.sin(t)
-yt=3*t
+yt=np.sin(t)
+#yt=3*t
 
 vx=[2]*1400
 vx=np.asarray(vx)
-vy=[3]*1400
-vy=np.asarray(vy)
-#vy=np.cos(t)
+#vy=[3]*1400
+#vy=np.asarray(vy)
+vy=np.cos(t)
 
 vf=np.sqrt((vx*vx+vy*vy))
-theta=[np.arctan(3/2)]*1400
-theta=np.asarray(theta)
-#theta=np.arctan(0.5*np.cos(0.5*xt))
+#theta=[np.arctan(3/2)]*1400
+#theta=np.asarray(theta)
+theta=np.arctan(0.5*np.cos(0.5*xt))
 
 vfnoisy=vf+np.random.normal(0, 0.1, vf.shape)
 #vfnoisy=vf
@@ -62,8 +62,8 @@ A = np.array([
 #shaper
 def hFunction(x):
     returnArray=np.zeros((2,1))
-    returnArray[0][0]=np.sqrt(x[2]*x[2]+x[3]*x[3])
-    returnArray[1][0]= np.arctan(x[3]/x[2])
+    returnArray[1][0]=np.sqrt(x[2]*x[2]+x[3]*x[3])
+    returnArray[0][0]= np.arctan(x[3]/x[2])
     return returnArray
 H = np.array([
         [0, 0, -x[3]/(x[3]*x[3]+x[2]*x[2]), x[2]/(x[3]*x[3]+x[2]*x[2])],
@@ -129,8 +129,8 @@ tList=[]
 for i in range (1,1400):
     new_measurement = np.zeros((2,1))
     #print(new_measurement)
-    new_measurement[0][0]=vfnoisy[i]
-    new_measurement[1][0]=thetanoisy[i]
+    new_measurement[1][0]=vfnoisy[i]
+    new_measurement[0][0]=thetanoisy[i]
     #Calculate Timestamp and its power variables
     cur_time = i/100
     tList.append(cur_time)
@@ -169,12 +169,12 @@ for i in range (1,1400):
     #print('iteration', i, 'x: ', x)
 #plt.plot(t,xList)
 #plt.plot(t,xt)
-#plt.plot(t,yList)
-#plt.plot(t,yt)
+plt.plot(t,yList)
+plt.plot(t,yt)
 #plt.plot(t,vxList)
 #plt.plot(t,vx)
-plt.plot(t,vyList)
-plt.plot(t,vy)
+#plt.plot(t,vyList)
+#plt.plot(t,vy)
 
 #plt.plot(t,theta)
 

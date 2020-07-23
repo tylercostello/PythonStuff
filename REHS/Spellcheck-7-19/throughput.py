@@ -6,7 +6,10 @@ from functools import partial
 from textblob import Word
 from autocorrect import Speller
 
-
+def getText(file):
+    with open(file, encoding="utf8") as f:
+        list = f.read()
+    return list
 
 def getList(file):
     with open(file, encoding="utf8") as f:
@@ -53,6 +56,7 @@ start_time = time.time()
 for word in text:
     symspell2(word)
 runningTime=(time.time() - start_time)
+print("Symspell")
 print("Seconds",runningTime)
 print("Words per second:", len(text)/runningTime )
 
@@ -61,25 +65,14 @@ start_time = time.time()
 for word in text:
     autocorrecter(word)
 runningTime=(time.time() - start_time)
+print("Autocorrect")
 print("Seconds",runningTime)
 print("Words per second:", len(text)/runningTime )
 
 #The other 2 libraries run too slow, about 10 words per second, to include in this test
+#Here is the code to run them if you ever want to run the other libraries but you should probably use a different text file
 
 """
-Words 517025
-Symspell
-Seconds 42.576579570770264
-Words per second: 12143.413238271229
-Autocorrect
-Seconds 6.239381313323975
-Words per second: 82864.78643257653
-"""
-
-#Here is the code to run them if you ever want to run the other libraries
-
-"""
-
 start_time = time.time()
 for word in text:
     pyspellchecker(word)
@@ -93,4 +86,24 @@ for word in text:
 runningTime=(time.time() - start_time)
 print("Seconds",runningTime)
 print("Words per second:", len(text)/runningTime )
+"""
+
+
+
+"""
+RESULTS
+
+Words 517025
+
+Symspell
+Seconds 42.576579570770264
+Words per second: 12143.413238271229
+
+Autocorrect
+Seconds 6.239381313323975
+Words per second: 82864.78643257653
+
+the other 2 run about 10 words per second so they would take too long to run
+their comparative speed can be seen in AccuracyTester.py
+
 """

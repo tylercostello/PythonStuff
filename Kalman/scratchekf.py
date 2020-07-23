@@ -9,7 +9,7 @@ t = np.arange(0.0, 14.0, 0.01)
 original=np.sin(t)
 #sensor input
 
-np.random.seed(1)
+
 noisy=original+np.random.normal(0, 0.1, original.shape)
 #print(np.var(s))
 

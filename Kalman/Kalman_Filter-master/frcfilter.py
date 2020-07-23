@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 
 
 
-
+np.random.seed(1)
 t = np.arange(0.0, 14.00, 0.01)
 
 xt=2*t
@@ -24,10 +24,10 @@ vf=np.sqrt((vx*vx+vy*vy))
 #theta=np.asarray(theta)
 theta=np.arctan(0.5*np.cos(0.5*xt))
 
-vfnoisy=vf+np.random.normal(0, 0.1, vf.shape)
+vfnoisy=vf+np.random.normal(0, 0.5, vf.shape)
 #vfnoisy=vf
 #thetanoisy=theta
-thetanoisy=theta+np.random.normal(0, 0.1, theta.shape)
+thetanoisy=theta+np.random.normal(0, 0.5, theta.shape)
 
 
 
@@ -73,8 +73,8 @@ I = np.identity(4)
 z_gyro = np.zeros([2, 1])
 #sensor variances
 R = np.array([
-        [0.01, 0],
-        [0, 0.01]
+        [0.25, 0],
+        [0, 0.25]
         ])
 noise_ax = 1
 noise_ay = 1

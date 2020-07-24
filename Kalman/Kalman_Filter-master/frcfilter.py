@@ -62,8 +62,9 @@ A = np.array([
 #shaper
 def hFunction(x):
     returnArray=np.zeros((2,1))
-    returnArray[1][0]=np.sqrt(x[2]*x[2]+x[3]*x[3])
     returnArray[0][0]= np.arctan(x[3]/x[2])
+    returnArray[1][0]=np.sqrt(x[2]*x[2]+x[3]*x[3])
+
     return returnArray
 H = np.array([
         [0, 0, -x[3]/(x[3]*x[3]+x[2]*x[2]), x[2]/(x[3]*x[3]+x[2]*x[2])],
@@ -73,8 +74,8 @@ I = np.identity(4)
 z_gyro = np.zeros([2, 1])
 #sensor variances
 R = np.array([
-        [0.25, 0],
-        [0, 0.25]
+        [0.001, 0],
+        [0, 0.001]
         ])
 noise_ax = 1
 noise_ay = 1
@@ -129,8 +130,9 @@ tList=[]
 for i in range (1,1400):
     new_measurement = np.zeros((2,1))
     #print(new_measurement)
-    new_measurement[1][0]=vfnoisy[i]
     new_measurement[0][0]=thetanoisy[i]
+    new_measurement[1][0]=vfnoisy[i]
+
     #Calculate Timestamp and its power variables
     cur_time = i/100
     tList.append(cur_time)
@@ -169,12 +171,15 @@ for i in range (1,1400):
     #print('iteration', i, 'x: ', x)
 #plt.plot(t,xList)
 #plt.plot(t,xt)
-plt.plot(t,yList)
-plt.plot(t,yt)
+#plt.plot(t,yList)
+#plt.plot(t,yt)
 #plt.plot(t,vxList)
 #plt.plot(t,vx)
+#plt.plot(t,vfnoisy*np.sin(thetanoisy))
 #plt.plot(t,vyList)
 #plt.plot(t,vy)
+plt.plot(xt,yt)
+plt.plot(xList,yList)
 
 #plt.plot(t,theta)
 

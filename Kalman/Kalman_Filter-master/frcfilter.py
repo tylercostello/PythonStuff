@@ -6,14 +6,14 @@ import matplotlib.pyplot as plt
 
 
 
-np.random.seed(1)
-t = np.arange(0.0, 14.00, 0.01)
+#np.random.seed(1)
+t = np.arange(0.0, 140.00, 0.01)
 
 xt=2*t
 yt=np.sin(t)
 #yt=3*t
 
-vx=[2]*1400
+vx=[2]*14000
 vx=np.asarray(vx)
 #vy=[3]*1400
 #vy=np.asarray(vy)
@@ -34,13 +34,13 @@ thetanoisy=theta+np.random.normal(0, 0.5, theta.shape)
 
 
 prv_time = 0
+
 x = np.array([
         [xt[0]],
         [yt[0]],
         [vx[0]],
         [vy[0]]
         ])
-
 
 
 #Initialize matrices P and A
@@ -74,8 +74,8 @@ I = np.identity(4)
 z_gyro = np.zeros([2, 1])
 #sensor variances
 R = np.array([
-        [0.001, 0],
-        [0, 0.001]
+        [0.01, 0],
+        [0, 0.01]
         ])
 noise_ax = 1
 noise_ay = 1
@@ -127,7 +127,7 @@ vyList.append(vy[0])
 sensorList=[]
 groundList=[]
 tList=[]
-for i in range (1,1400):
+for i in range (1,14000):
     new_measurement = np.zeros((2,1))
     #print(new_measurement)
     new_measurement[0][0]=thetanoisy[i]
@@ -171,8 +171,9 @@ for i in range (1,1400):
     #print('iteration', i, 'x: ', x)
 #plt.plot(t,xList)
 #plt.plot(t,xt)
-#plt.plot(t,yList)
+
 #plt.plot(t,yt)
+#plt.plot(t,yList)
 #plt.plot(t,vxList)
 #plt.plot(t,vx)
 #plt.plot(t,vfnoisy*np.sin(thetanoisy))

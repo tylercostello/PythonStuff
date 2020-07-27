@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 #*************Declare Variables**************************
 #Read Input File
 measurements = pd.read_csv('obj_pose-laser-radar-synthetic-input.txt', header=None, delim_whitespace = True, skiprows=1)
-print(measurements)
+#print(measurements)
 # Manualy copy initial readings from first row of input file.
 prv_time = 1477010443000000/1000000.0
 x = np.array([
@@ -44,10 +44,12 @@ H = np.array([
 I = np.identity(4)
 z_lidar = np.zeros([2, 1])
 #sensor variances
+
 R = np.array([
         [0.0225, 0],
         [0, 0.0225]
         ])
+
 noise_ax = 5
 noise_ay = 5
 Q = np.zeros([4, 4])
@@ -89,7 +91,7 @@ def CalculateRMSE(estimations, ground_truth):
     rmse[1][0] =  np.sqrt(((estimations[1][0] - ground_truth[1][0]) ** 2).mean())
     rmse[2][0] =  np.sqrt(((estimations[2][0] - ground_truth[2][0]) ** 2).mean())
     rmse[3][0] =  np.sqrt(((estimations[3][0] - ground_truth[3][0]) ** 2).mean())
-    print('rmse',rmse)
+    #print('rmse',rmse)
     return rmse
 
 #**********************Iterate through main loop********************
@@ -132,11 +134,15 @@ for i in range (len(measurements)):
         #Call Kalman Filter Predict and Update functions.
         predict()
         update(z_lidar)
-        sensorList.append(z_lidar[0][0])
-        xList.append(x[0])
+        sensorList.append(z_lidar[1][0])
+        xList.append(x[1])
         groundList.append(ground_truth[1])
 
 
     rmse = CalculateRMSE(x, ground_truth)
 
-    print('iteration', i, 'x: ', x)
+    #print('iteration', i, 'x: ', x)
+plt.plot(tList,xList)
+plt.plot(tList,sensorList)
+plt.plot(tList,groundList)
+plt.show()

@@ -71,7 +71,7 @@ H = np.array([
 #Identity
 I = np.identity(4)
 #Where sensor readings will be stored
-z_lidar = np.zeros([2, 1])
+z_encoder = np.zeros([2, 1])
 #sensor variances
 R = np.array([
         [0.25, 0],
@@ -110,7 +110,7 @@ def update(z):
     global x, P
     #Difference between predicted and measured sensor readings
     #Y = Z — H * X
-    Y = np.subtract(z_lidar, np.matmul(H, x))
+    Y = np.subtract(z_encoder, np.matmul(H, x))
 
     Ht = np.transpose(H)
 
@@ -170,13 +170,13 @@ for i in range (1,14000):
     Q[3][1] = dt_3/2*noise_ay
     Q[3][3] = dt_2*noise_ay
     #Updating sensor readings
-    z_lidar[0][0] = new_measurement[0][0]
-    z_lidar[1][0] = new_measurement[1][0]
+    z_encoder[0][0] = new_measurement[0][0]
+    z_encoder[1][0] = new_measurement[1][0]
     #Collecting ground truths
     #Call Kalman Filter Predict and Update functions.
     predict()
-    update(z_lidar)
-    sensorList.append(z_lidar[0][0])
+    update(z_encoder)
+    sensorList.append(z_encoder[0][0])
     xList.append(x[0])
     yList.append(x[1])
     vxList.append(x[2])

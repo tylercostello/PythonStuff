@@ -28,10 +28,10 @@ prv_time = 0
 
 #Initialzing x with first sensor readings
 x = np.array([
-        [xt[0]],
-        [yt[0]],
-        [vx[0]],
-        [vy[0]]
+        [xtnoisy[0]],
+        [ytnoisy[0]],
+        [0],
+        [0]
         ])
 
 """
@@ -53,10 +53,16 @@ d. P = ( I — K * H ) * P
 P = np.array([
         [1, 0, 0, 0],
         [0, 1, 0, 0],
-        [0, 0, 1, 0],
-        [0, 0, 0, 1]
+        [0, 0, 1000, 0],
+        [0, 0, 0, 1000]
         ])
 #equation creator
+"""
+Px(t+1) = Px + delta_t * vx
+Py(t+1) = Py + delta_t * vy
+Vx(t+1) = Vx
+Vy(t+1) = Vy
+"""
 A = np.array([
         [1.0, 0, 1.0, 0],
         [0, 1.0, 0, 1.0],
@@ -144,10 +150,8 @@ sensorList=[]
 groundList=[]
 tList=[]
 for i in range (1,14000):
-    new_measurement = np.zeros((2,1))
-    #print(new_measurement)
-    new_measurement[0][0]=xtnoisy[i]
-    new_measurement[1][0]=ytnoisy[i]
+    z_encoder[0][0]=xtnoisy[i]
+    z_encoder[1][0]=ytnoisy[i]
 
     #Calculate Timestamp and its power variables
     cur_time = i/100
@@ -170,8 +174,7 @@ for i in range (1,14000):
     Q[3][1] = dt_3/2*noise_ay
     Q[3][3] = dt_2*noise_ay
     #Updating sensor readings
-    z_encoder[0][0] = new_measurement[0][0]
-    z_encoder[1][0] = new_measurement[1][0]
+
     #Collecting ground truths
     #Call Kalman Filter Predict and Update functions.
     predict()

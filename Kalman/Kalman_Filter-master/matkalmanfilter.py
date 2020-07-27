@@ -4,36 +4,22 @@ import pandas as pd
 from numpy.linalg import inv
 import matplotlib.pyplot as plt
 
-
-
-#np.random.seed(1)
+np.random.seed(1)
 t = np.arange(0.0, 140.00, 0.01)
 
 xt=2*t
 yt=3*t
-#yt=3*t
+#yt=np.sin(t)
 
 vx=[2]*14000
 vx=np.asarray(vx)
 vy=[3]*14000
-#vy=np.asarray(vy)
+vy=np.asarray(vy)
 #vy=np.cos(t)
 
-#vf=np.sqrt((vx*vx+vy*vy))
-#theta=[np.arctan(3/2)]*1400
-#theta=np.asarray(theta)
-#theta=np.arctan(0.5*np.cos(0.5*xt))
 
 xtnoisy=xt+np.random.normal(0, 0.5, xt.shape)
-
 ytnoisy=yt+np.random.normal(0, 0.5, yt.shape)
-#vfnoisy=vf+np.random.normal(0, 0.5, vf.shape)
-#vfnoisy=vf
-#thetanoisy=theta
-#thetanoisy=theta+np.random.normal(0, 0.5, theta.shape)
-
-
-
 
 
 prv_time = 0
@@ -67,13 +53,16 @@ H = np.array([
         [1.0, 0, 0, 0],
         [0, 1.0, 0, 0]
         ])
+#Identity
 I = np.identity(4)
+#Where sensor readings will be stored
 z_lidar = np.zeros([2, 1])
 #sensor variances
 R = np.array([
         [0.25, 0],
         [0, 0.25]
         ])
+#A guess on how random our acceleration will be
 noise_ax = 1
 noise_ay = 1
 Q = np.zeros([4, 4])
@@ -81,24 +70,25 @@ Q = np.zeros([4, 4])
 def predict():
     # Predict Step
     global x, P, Q
-    x = np.matmul(A, x)
     #predicted sensor values
+    x = np.matmul(A, x)
+
     At = np.transpose(A)
     #predicted value variances
     P = np.add(np.matmul(A, np.matmul(P, At)), Q)
-    #P = np.matmul(A, np.matmul(P, At))
 
 def update(z):
     global x, P
     # Measurement update step
+    #Difference between predicted and measured sensor readings
     Y = np.subtract(z_lidar, np.matmul(H, x))
     Ht = np.transpose(H)
     S = np.add(np.matmul(H, np.matmul(P, Ht)), R)
     K = np.matmul(P, Ht)
     Si = inv(S)
+    #Kalman gain
     K = np.matmul(K, Si)
 
-    # New state
     #final predicted values
     x = np.add(x, np.matmul(K, Y))
     #final variances
@@ -160,25 +150,25 @@ for i in range (1,14000):
     vyList.append(x[3])
 
 
+plt.plot(t,xtnoisy)
+plt.plot(t,xList)
+plt.plot(t,xt)
 
-    #print('iteration', i, 'x: ', x)
-#plt.plot(t,xList)
-#plt.plot(t,xt)
 
-#plt.plot(t,ytnoisy)
-#plt.plot(t,yt)
-#plt.plot(t,yList)
+"""
+plt.plot(t,ytnoisy)
+plt.plot(t,yt)
+plt.plot(t,yList)
+"""
 
-plt.plot(t,vxList)
+"""
 plt.plot(t,vx)
+plt.plot(t,vxList)
+"""
 
-#plt.plot(t,vfnoisy*np.sin(thetanoisy))
-#plt.plot(t,vyList)
-#plt.plot(t,vy)
-#plt.plot(xt,yt)
-#plt.plot(xList,yList)
+"""
+plt.plot(t,vy)
+plt.plot(t,vyList)
+"""
 
-#plt.plot(t,theta)
-
-#plt.plot(t,vf)
 plt.show()

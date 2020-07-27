@@ -67,6 +67,17 @@ noise_ax = 1
 noise_ay = 1
 Q = np.zeros([4, 4])
 
+"""
+A. Predict:
+a. X = A * X
+b. P = A * P * AT + Q
+B. Update
+a. Y = Z — H * X
+b. K = ( P * HT ) / ( ( H * P * HT ) + R )
+c. X = X + K * Y
+d. P = ( I — K * H ) * P
+"""
+
 def predict():
     # Predict Step
     global x, P, Q
@@ -94,10 +105,8 @@ def update(z):
     #final variances
     P = np.matmul(np.subtract(I ,np.matmul(K, H)), P)
 
+#Main loop
 
-
-#**********************Iterate through main loop********************
-#Begin iterating through sensor data
 xList=[]
 xList.append(xt[0])
 yList=[]

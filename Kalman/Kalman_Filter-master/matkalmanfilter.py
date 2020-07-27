@@ -111,6 +111,7 @@ def predict():
     #predicted value variances
     #P = A * P * AT + Q
     P = np.add(np.matmul(A, np.matmul(P, At)), Q)
+    #P = np.matmul(A, np.matmul(P, At))
 
 def update(z):
     global x, P

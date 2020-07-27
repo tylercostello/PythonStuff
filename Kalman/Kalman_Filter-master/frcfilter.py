@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 
 
 
-#np.random.seed(1)
+np.random.seed(1)
 t = np.arange(0.0, 140.00, 0.01)
 
 xt=2*t
@@ -15,7 +15,7 @@ yt=np.sin(t)
 
 vx=[2]*14000
 vx=np.asarray(vx)
-#vy=[3]*1400
+#vy=[3]*14000
 #vy=np.asarray(vy)
 vy=np.cos(t)
 
@@ -74,8 +74,8 @@ I = np.identity(4)
 z_gyro = np.zeros([2, 1])
 #sensor variances
 R = np.array([
-        [0.01, 0],
-        [0, 0.01]
+        [0.25, 0],
+        [0, 0.25]
         ])
 noise_ax = 1
 noise_ay = 1

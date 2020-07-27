@@ -4,6 +4,8 @@ import pandas as pd
 from numpy.linalg import inv
 import matplotlib.pyplot as plt
 
+
+#Ground Truth
 np.random.seed(1)
 t = np.arange(0.0, 140.00, 0.01)
 
@@ -17,13 +19,14 @@ vy=[3]*14000
 vy=np.asarray(vy)
 #vy=np.cos(t)
 
-
+#What the sensor readings will be from encoders
 xtnoisy=xt+np.random.normal(0, 0.5, xt.shape)
 ytnoisy=yt+np.random.normal(0, 0.5, yt.shape)
 
 
 prv_time = 0
 
+#Initialzing x with first sensor readings
 x = np.array([
         [xt[0]],
         [yt[0]],
@@ -31,10 +34,22 @@ x = np.array([
         [vy[0]]
         ])
 
+"""
+A. Predict:
+a. X = A * X
+b. P = A * P * AT + Q
+B. Update
+a. Y = Z — H * X
+b. K = ( P * HT ) / ( ( H * P * HT ) + R )
+c. X = X + K * Y
+d. P = ( I — K * H ) * P
+"""
+
 
 #Initialize matrices P and A
 
 #equation variances
+#Doesn't really matter the kalman filter will figure it out
 P = np.array([
         [1, 0, 0, 0],
         [0, 1, 0, 0],
@@ -63,8 +78,8 @@ R = np.array([
         [0, 0.25]
         ])
 #A guess on how random our acceleration will be
-noise_ax = 1
-noise_ay = 1
+noise_ax = 5
+noise_ay = 5
 Q = np.zeros([4, 4])
 
 """
@@ -82,27 +97,36 @@ def predict():
     # Predict Step
     global x, P, Q
     #predicted sensor values
+    #X = A * X
     x = np.matmul(A, x)
 
     At = np.transpose(A)
+
     #predicted value variances
+    #P = A * P * AT + Q
     P = np.add(np.matmul(A, np.matmul(P, At)), Q)
 
 def update(z):
     global x, P
-    # Measurement update step
     #Difference between predicted and measured sensor readings
+    #Y = Z — H * X
     Y = np.subtract(z_lidar, np.matmul(H, x))
+
     Ht = np.transpose(H)
+
+    #Kalman gain
+    #( P * HT ) / ( ( H * P * HT ) + R )
     S = np.add(np.matmul(H, np.matmul(P, Ht)), R)
     K = np.matmul(P, Ht)
     Si = inv(S)
-    #Kalman gain
     K = np.matmul(K, Si)
 
     #final predicted values
+    #X = X + K * Y
     x = np.add(x, np.matmul(K, Y))
+
     #final variances
+    #P = ( I — K * H ) * P
     P = np.matmul(np.subtract(I ,np.matmul(K, H)), P)
 
 #Main loop
@@ -158,17 +182,17 @@ for i in range (1,14000):
     vxList.append(x[2])
     vyList.append(x[3])
 
-
+"""
 plt.plot(t,xtnoisy)
 plt.plot(t,xList)
 plt.plot(t,xt)
-
-
 """
+
+
 plt.plot(t,ytnoisy)
 plt.plot(t,yt)
 plt.plot(t,yList)
-"""
+
 
 """
 plt.plot(t,vx)

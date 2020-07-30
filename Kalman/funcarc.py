@@ -9,7 +9,7 @@ t = np.arange(0.0, 14.0, 0.01)
 #Left Wheel Speed
 sl=50
 #Right Wheel Speed
-sr=50
+sr=25
 #Starting X
 x=0
 #Starting Y
@@ -53,7 +53,7 @@ for counter in range(1399):
 
 plt.xlim(-10,10)
 plt.ylim(-10,10)
-#plt.plot(xList,yList)
+plt.plot(xList,yList)
 #plt.plot(t,yList)
-plt.plot(t,thetaList)
+#plt.plot(t,thetaList)
 plt.show()

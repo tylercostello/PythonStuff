@@ -1,15 +1,16 @@
+#implements algorithm from http://www.cs.columbia.edu/~allen/F15/NOTES/icckinematics.pdf
 import numpy as np
 from numpy.linalg import inv
 import matplotlib.pyplot as plt
 
 t = np.arange(0.0, 14.0, 0.01)
 
-sl=50
-sr=0
+sl=2
+sr=1
 x=0
 y=0
 theta=np.pi/2
-b=10
+b=1
 dt=0.01
 xList=[x]
 yList=[y]
@@ -87,6 +88,6 @@ for counter in range(1399):
     yList.append(m1[1])
 #plt.xlim(-500,500)
 #plt.ylim(-500,500)
-plt.plot(xList,yList)
-#plt.plot(t,yList)
+#plt.plot(xList,yList)
+plt.plot(t,yList)
 plt.show()

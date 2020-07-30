@@ -7,7 +7,7 @@ t = np.arange(0.0, 14.0, 0.01)
 
 #from what I understand this is the wheel's forward velocity, so it is radius * angular velocity
 sl=2
-sr=1
+sr=2.00001
 x=0
 y=0
 theta=np.pi/2
@@ -87,8 +87,8 @@ for counter in range(1399):
 
     xList.append(m1[0])
     yList.append(m1[1])
-#plt.xlim(-500,500)
-#plt.ylim(-500,500)
+plt.xlim(-10,10)
+plt.ylim(-10,10)
 plt.plot(xList,yList)
 #plt.plot(t,yList)
 plt.show()

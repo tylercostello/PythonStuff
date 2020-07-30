@@ -6,11 +6,17 @@ import matplotlib.pyplot as plt
 t = np.arange(0.0, 14.0, 0.01)
 
 #from what I understand this is the wheel's forward velocity, so it is radius * angular velocity
+#Left Wheel Speed
 sl=50
+#Right Wheel Speed
 sr=25
+#Starting X
 x=0
+#Starting Y
 y=0
+#Starting Theta
 theta=np.pi/2
+#Robot Width
 b=1
 dt=0.01
 xList=[x]

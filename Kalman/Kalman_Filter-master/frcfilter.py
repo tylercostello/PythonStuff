@@ -172,15 +172,16 @@ for i in range (1,14000):
     #print('iteration', i, 'x: ', x)
 #plt.plot(t,xList)
 #plt.plot(t,xt)
-print(errorCalc(yt,yList))
+print(errorCalc(vy,vyList))
 
-plt.plot(t,yt)
-plt.plot(t,yList)
+#plt.plot(t,yt)
+#plt.plot(t,yList)
 #plt.plot(t,vxList)
 #plt.plot(t,vx)
 #plt.plot(t,vfnoisy*np.sin(thetanoisy))
-#plt.plot(t,vyList)
-#plt.plot(t,vy)
+plt.plot(t,vy)
+plt.plot(t,vyList)
+
 #plt.plot(xt,yt)
 #plt.plot(xList,yList)
 

@@ -26,15 +26,8 @@ thetaList=[theta]
 
 for counter in range(1399):
 
-    if sl==-sr:
-        w=(sr-sl)/b
-        x=x
-        y=y
-        theta=theta+w*dt
-        xList.append(x)
-        yList.append(y)
-        thetaList.append(theta)
-    elif sl==sr:
+
+    if sl==sr:
         x=x+sl*np.cos(theta)
         y=y+sl*np.sin(theta)
         theta=theta

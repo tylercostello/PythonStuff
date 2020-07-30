@@ -4,8 +4,8 @@ import pandas as pd
 from numpy.linalg import inv
 import matplotlib.pyplot as plt
 
-
-
+def errorCalc(truth, guess):
+    return sum(abs(guess-truth))/14000
 np.random.seed(1)
 t = np.arange(0.0, 140.00, 0.01)
 
@@ -35,6 +35,7 @@ thetanoisy=theta+np.random.normal(0, 0.5, theta.shape)
 
 prv_time = 0
 
+#EKF depends largely on starting position being right so we have to give it ground truths
 x = np.array([
         [xt[0]],
         [yt[0]],
@@ -47,10 +48,10 @@ x = np.array([
 
 #equation variances
 P = np.array([
-        [1, 0, 0, 0],
-        [0, 1, 0, 0],
-        [0, 0, 1, 0],
-        [0, 0, 0, 1]
+        [0.01, 0, 0, 0],
+        [0, 0.01, 0, 0],
+        [0, 0, 0.01, 0],
+        [0, 0, 0, 0.01]
         ])
 #equation creator
 A = np.array([
@@ -77,8 +78,8 @@ R = np.array([
         [0.25, 0],
         [0, 0.25]
         ])
-noise_ax = 1
-noise_ay = 1
+noise_ax = 10
+noise_ay = 10
 Q = np.zeros([4, 4])
 
 def predict():
@@ -171,16 +172,17 @@ for i in range (1,14000):
     #print('iteration', i, 'x: ', x)
 #plt.plot(t,xList)
 #plt.plot(t,xt)
+print(errorCalc(yt,yList))
 
-#plt.plot(t,yt)
-#plt.plot(t,yList)
+plt.plot(t,yt)
+plt.plot(t,yList)
 #plt.plot(t,vxList)
 #plt.plot(t,vx)
 #plt.plot(t,vfnoisy*np.sin(thetanoisy))
 #plt.plot(t,vyList)
 #plt.plot(t,vy)
-plt.plot(xt,yt)
-plt.plot(xList,yList)
+#plt.plot(xt,yt)
+#plt.plot(xList,yList)
 
 #plt.plot(t,theta)
 

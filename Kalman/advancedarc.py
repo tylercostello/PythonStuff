@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 
 t = np.arange(0.0, 14.0, 0.01)
 
+#from what I understand this is the wheel's forward velocity, so it is radius * angular velocity
 sl=2
 sr=1
 x=0
@@ -88,6 +89,6 @@ for counter in range(1399):
     yList.append(m1[1])
 #plt.xlim(-500,500)
 #plt.ylim(-500,500)
-#plt.plot(xList,yList)
-plt.plot(t,yList)
+plt.plot(xList,yList)
+#plt.plot(t,yList)
 plt.show()

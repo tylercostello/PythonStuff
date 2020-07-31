@@ -7,9 +7,9 @@ t = np.arange(0.0, 14.0, 0.01)
 
 #from what I understand this is the wheel's forward velocity, so it is radius * angular velocity
 #Left Wheel Speed
-sl=50
+vl=50
 #Right Wheel Speed
-sr=25
+vr=25
 #Starting X
 x=0
 #Starting Y
@@ -27,16 +27,17 @@ thetaList=[theta]
 for counter in range(1399):
 
 
-    if sl==sr:
-        x=x+sl*np.cos(theta)
-        y=y+sl*np.sin(theta)
+    if vl==vr:
+        x=x+vl*np.cos(theta)
+        y=y+vl*np.sin(theta)
         theta=theta
         xList.append(x)
         yList.append(y)
         thetaList.append(theta)
     else:
-        w=(sr-sl)/b
-        r=(b/2)*(sl+sr)/(sr-sl)
+        w=(vr-vl)/b
+        r=(b/2)*(vl+vr)/(vr-vl)
+        #print(r)
         x=r*np.sin(theta)*np.cos(w*dt)+r*np.cos(theta)*np.sin(w*dt)+x-r*np.sin(theta)
         y=r*np.sin(theta)*np.sin(w*dt)-r*np.cos(theta)*np.cos(w*dt)+y+r*np.cos(theta)
         theta=theta+w*dt

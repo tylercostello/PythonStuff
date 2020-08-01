@@ -40,6 +40,7 @@ print("--- %s seconds ---" % (time.time() - start_time))
 timeDif=(time.time() - start_time)
 
 print(removed)
+#print(len(removed))
 print("Time: ",timeDif)
 #0.161 sec
 

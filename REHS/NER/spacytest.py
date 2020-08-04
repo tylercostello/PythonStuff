@@ -32,13 +32,15 @@ for sentence in sentences:
         if (ent.label_=='PERSON'):
             #print(ent.text)
             personcounter+=1
+            for a in range(ent.text.count(" ")):
+                personcounter+=1
     	#print(ent.text, ent.label_, end =" ")
     #print()
 
 print(personcounter)
 
 
-
+#2628
 
 
 #print("Time: ",timeDif)

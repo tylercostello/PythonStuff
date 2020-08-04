@@ -31,7 +31,7 @@ for sentence in sentences:
         if 'NNP' in x:
             personcounter+=1
 print(personcounter)
-
+#8724
 #print(tagged)
 #print(timeDif)
 

@@ -18,3 +18,5 @@ for group in tags:
 print(personcounter)
 #print(tuple(process_data('texta.txt','tagsa.txt')))
 #print(tuple(process_data('texta.txt','tagsa.txt')))
+
+#3016

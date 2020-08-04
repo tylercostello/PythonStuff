@@ -24,9 +24,10 @@ def lowerCaseList(upperList):
 namesList=set(getList("FullNamesList.txt"))
 #email=getList("sampletextnews.txt")
 #email=getList("26000.txt")
-email=getList("wpexcerpt.txt")
+#email=getList("wpexcerpt.txt")
+#email=lowerCaseList(email)
+email=getList("texta.txt")
 email=lowerCaseList(email)
-
 
 removed = [x for x in email if x in namesList]
 newEmail = [x for x in email if x not in namesList]
@@ -40,8 +41,8 @@ print("--- %s seconds ---" % (time.time() - start_time))
 timeDif=(time.time() - start_time)
 
 print(removed)
-#print(len(removed))
+print(len(removed))
 print("Time: ",timeDif)
 #0.161 sec
-
+#5209
 #Misses foreign names and has problems the name list not being properly cleaned, like users picking english words as their username

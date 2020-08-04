@@ -37,7 +37,7 @@ for sentence in sentences:
             personcounter+=1
             #print(group)
 print(personcounter)
-#3028 99.6%
+#3119 3.4% error
 """
 start_time = time.time()
 output=p.predict(text)

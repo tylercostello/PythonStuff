@@ -31,7 +31,7 @@ for sentence in sentences:
         if 'NNP' in x:
             personcounter+=1
 print(personcounter)
-#8724 counts places and people
+#8724 189% error counts places and people
 #print(tagged)
 #print(timeDif)
 

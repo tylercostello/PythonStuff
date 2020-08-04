@@ -40,7 +40,7 @@ for sentence in sentences:
 print(personcounter)
 
 
-#2628
+#2628 12% error
 
 
 #print("Time: ",timeDif)

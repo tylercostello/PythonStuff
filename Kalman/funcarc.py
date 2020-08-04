@@ -41,13 +41,14 @@ for counter in range(1399):
         x=r*np.sin(theta)*np.cos(w*dt)+r*np.cos(theta)*np.sin(w*dt)+x-r*np.sin(theta)
         y=r*np.sin(theta)*np.sin(w*dt)-r*np.cos(theta)*np.cos(w*dt)+y+r*np.cos(theta)
         theta=theta+w*dt
+        theta=theta%(2*np.pi)
         xList.append(x)
         yList.append(y)
         thetaList.append(theta)
 
 plt.xlim(-10,10)
 plt.ylim(-10,10)
-plt.plot(xList,yList)
+#plt.plot(xList,yList)
 #plt.plot(t,yList)
-#plt.plot(t,thetaList)
+plt.plot(t,thetaList)
 plt.show()

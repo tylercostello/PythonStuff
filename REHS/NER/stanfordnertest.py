@@ -33,7 +33,7 @@ for sentence in sentences:
 		if 'PERSON' in x:
 			personcounter+=1
 	print(personcounter)
-
+#2403
 
 
 #timeDif=(time.time() - start_time)

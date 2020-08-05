@@ -24,7 +24,7 @@ yList=[y]
 thetaList=[theta]
 
 
-for counter in range(1399):
+for counter in range(1,1400):
 
 
     if vl==vr:
@@ -48,7 +48,7 @@ for counter in range(1399):
 
 plt.xlim(-10,10)
 plt.ylim(-10,10)
-#plt.plot(xList,yList)
+plt.plot(xList,yList)
 #plt.plot(t,yList)
-plt.plot(t,thetaList)
+#plt.plot(t,thetaList)
 plt.show()

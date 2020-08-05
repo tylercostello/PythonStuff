@@ -43,6 +43,10 @@ timeDif=(time.time() - start_time)
 print(removed)
 print(len(removed))
 print("Time: ",timeDif)
-#0.161 sec 72% error
+#0.178 sec 72% error
 #5209
+
+
+
+#0.161
 #Misses foreign names and has problems the name list not being properly cleaned, like users picking english words as their username

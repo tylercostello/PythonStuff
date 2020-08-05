@@ -7,8 +7,8 @@ def getText(file):
         list = f.read()
     return list
 #sentence=getText("wpexcerpt.txt")
-#start_time = time.time()
-#timeDif=(time.time() - start_time)
+start_time = time.time()
+
 def process_data(text_file, tag_file):
     with open(text_file, 'r') as f1, open(tag_file, 'r') as f2:
         sentences = f1.read().strip().split("\n")
@@ -36,14 +36,14 @@ for sentence in sentences:
                 personcounter+=1
     	#print(ent.text, ent.label_, end =" ")
     #print()
-
+timeDif=(time.time() - start_time)
 print(personcounter)
-
-
+print("Time: ",timeDif)
 #2628 12% error
+#29.13 sec
 
 
-#print("Time: ",timeDif)
+
 #0.446 sec
 
 

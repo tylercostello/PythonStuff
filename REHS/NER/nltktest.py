@@ -7,9 +7,9 @@ def getText(file):
 #sentence=getText("sampleemail.txt")
 #sentence=getText("sampletextnews.txt")
 #sentence=getText("wpexcerpt.txt")
-#start_time = time.time()
+start_time = time.time()
 
-#timeDif=(time.time() - start_time)
+
 def process_data(text_file, tag_file):
     with open(text_file, 'r') as f1, open(tag_file, 'r') as f2:
         sentences = f1.read().strip().split("\n")
@@ -30,9 +30,14 @@ for sentence in sentences:
     for x in tagged:
         if 'NNP' in x:
             personcounter+=1
+timeDif=(time.time() - start_time)
 print(personcounter)
 #8724 189% error counts places and people
+#4.11 sec
 #print(tagged)
-#print(timeDif)
+print(timeDif)
+
+
+
 
 #0.218 sec

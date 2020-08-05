@@ -21,7 +21,7 @@ def process_data(text_file, tag_file):
         tags = [x.split() for x in tags]
     return sentences,tags
 sentences,tags=process_data('texta.txt','tagsa.txt')
-
+start_time = time.time()
 personcounter=0
 for sentence in sentences:
     #sentence=', '.join(sentence)
@@ -37,7 +37,13 @@ for sentence in sentences:
             personcounter+=1
             #print(group)
 print(personcounter)
+timeDif=(time.time() - start_time)
+print(timeDif)
 #3119 3.4% error
+#133.5 sec
+
+
+
 """
 start_time = time.time()
 output=p.predict(text)

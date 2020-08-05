@@ -12,7 +12,7 @@ def getText(file):
 #text=getText("wpexcerpt.txt")
 #text=getText("sampleemail.txt")
 #text = 'While in France, Christine Lagarde discussed short-term stimulus efforts in a recent interview with the Wall Street Journal.'
-#start_time = time.time()
+start_time = time.time()
 def process_data(text_file, tag_file):
     with open(text_file, 'r') as f1, open(tag_file, 'r') as f2:
         sentences = f1.read().strip().split("\n")
@@ -36,9 +36,9 @@ for sentence in sentences:
 #2403 20% error
 
 
-#timeDif=(time.time() - start_time)
+timeDif=(time.time() - start_time)
 #print(classified_text)
-#print(timeDif)
+print(timeDif)
 
 
 #2.710 sec

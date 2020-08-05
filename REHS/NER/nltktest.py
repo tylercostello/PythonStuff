@@ -1,5 +1,7 @@
 import time
 import nltk
+from nltk import word_tokenize, pos_tag, ne_chunk
+from nltk.chunk import tree2conlltags
 def getText(file):
     with open(file, encoding="utf8") as f:
         list = f.read()
@@ -23,13 +25,17 @@ sentences,tags=process_data('texta.txt','tagsa.txt')
 personcounter=0
 for sentence in sentences:
     tokens = nltk.word_tokenize(sentence)
-    tagged = nltk.pos_tag(tokens)
+    tagged = tree2conlltags(ne_chunk(pos_tag(tokens)))
+    #print(tagged)
+    #tagged = nltk.pos_tag(tokens)
     #print(tagged)
 	#print(classified_text)
 
     for x in tagged:
-        if 'NNP' in x:
+        #if 'NNP' in x:
+        if 'B-PERSON' in x or 'I-PERSON' in x:
             personcounter+=1
+            #print(x)
 timeDif=(time.time() - start_time)
 print(personcounter)
 #8724 189% error counts places and people

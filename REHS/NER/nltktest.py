@@ -38,8 +38,8 @@ for sentence in sentences:
             #print(x)
 timeDif=(time.time() - start_time)
 print(personcounter)
-#8724 189% error counts places and people
-#4.11 sec
+#3293 9.18% error counts places and people
+#17.88 sec
 #print(tagged)
 print(timeDif)
 

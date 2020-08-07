@@ -4,19 +4,19 @@ import matplotlib.pyplot as plt
 
 #setup
 t = np.arange(0.0, 14.0, 0.01)
-vl=50
-vr=25
+vl=10
+vr=9
 x=0
 y=0
 theta=np.pi/2
-b=1
+b=10
 dt=0.01
 xTruth=[x]
 yTruth=[y]
 thetaTruth=[theta]
 
 vlTruth=[vl]*1400
-
+#print(vlTruth[0])
 vrTruth=[vr]*1400
 
 for counter in range(1,1400):
@@ -27,6 +27,7 @@ for counter in range(1,1400):
         xTruth.append(x)
         yTruth.append(y)
         thetaTruth.append(theta)
+        print("here")
     else:
         w=(vr-vl)/b
         r=(b/2)*(vl+vr)/(vr-vl)
@@ -40,13 +41,13 @@ for counter in range(1,1400):
         thetaTruth.append(theta)
 
 vlTruth=np.asarray(vlTruth)
-vlNoisy=vlTruth+np.random.normal(0, 0.001, vlTruth.shape)
+vlNoisy=vlTruth+np.random.normal(0, 0.5, vlTruth.shape)
 vrTruth=np.asarray(vrTruth)
-vrNoisy=vrTruth+np.random.normal(0, 0.001, vrTruth.shape)
+vrNoisy=vrTruth+np.random.normal(0, 0.5, vrTruth.shape)
 thetaTruth=np.asarray(thetaTruth)
-thetaNoisy=thetaTruth+np.random.normal(0, 0.001, thetaTruth.shape)
-#plt.plot(xTruth,yTruth)
-#plt.show()
+thetaNoisy=thetaTruth+np.random.normal(0, 0.5, thetaTruth.shape)
+plt.plot(xTruth,yTruth)
+plt.show()
 
 
 prv_time = 0
@@ -58,7 +59,7 @@ x=np.array([
             [vlTruth[0]],
             [vrTruth[0]]
             ], dtype='float')
-
+#print(x)
 
 P = np.array([
         [0.01, 0, 0, 0, 0],
@@ -76,12 +77,12 @@ I = np.identity(5)
 z_sensors = np.zeros([3, 1])
 Q = np.zeros([5, 5])
 R = np.array([
-        [5, 0, 0],
-        [0, 5, 0],
-        [0, 0, 5]
+        [0.25, 0, 0],
+        [0, 0.25, 0],
+        [0, 0, 0.25]
         ])
 
-A = np.ones((5,5))
+A = np.zeros((5,5))
 
 def aFunction(xInput,b,dt):
     xOutput=np.array([
@@ -155,7 +156,8 @@ def predict():
         A[4][4]=1
 
 
-    x = aFunction(x, 1, 0.01)
+    x = aFunction(x, b, dt)
+
     At = np.transpose(A)
     P = np.add(np.matmul(A, np.matmul(P, At)), Q)
 def update(z):
@@ -171,24 +173,31 @@ def update(z):
 xList=[]
 xList.append(xTruth[0])
 yList=[]
-yList.append(xTruth[1])
+yList.append(yTruth[0])
 thetaList=[]
-thetaList.append(xTruth[2])
+thetaList.append(thetaTruth[0])
 vlList=[]
-vlList.append(xTruth[3])
+vlList.append(vlTruth[0])
+#print(vlList)
 vrList=[]
-vrList.append(xTruth[4])
+vrList.append(vrTruth[0])
 for counter in range(1,1400):
-    z_sensors[0][0]=thetaNoisy[counter]
-    z_sensors[1][0]=vlNoisy[counter]
-    z_sensors[2][0]=vrNoisy[counter]
-    predict()
-    update(z_sensors)
+    #print(x[3])
     xList.append(x[0])
     yList.append(x[1])
     thetaList.append(x[2])
     vlList.append(x[3])
     vrList.append(x[4])
-plt.plot(t,vrNoisy)
+    z_sensors[0][0]=thetaNoisy[counter]
+    z_sensors[1][0]=vlNoisy[counter]
+    z_sensors[2][0]=vrNoisy[counter]
+    predict()
+    update(z_sensors)
+#plt.plot(xList,yList)
+#plt.plot(t,vlNoisy)
+plt.plot(t,vlTruth)
+plt.plot(t,vlList)
+#plt.plot(t,vrNoisy)
+plt.plot(t,vrTruth)
 plt.plot(t,vrList)
 plt.show()

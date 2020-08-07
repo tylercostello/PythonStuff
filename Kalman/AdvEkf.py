@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 
 #setup
 t = np.arange(0.0, 14.0, 0.01)
-vl=10
+vl=90
 vr=90
 x=0
 y=0
@@ -16,18 +16,19 @@ yTruth=[y]
 thetaTruth=[theta]
 
 vlTruth=[vl]*1400
+#vlTruth=20*(np.sin(t)+1)
 #print(vlTruth[0])
 vrTruth=[vr]*1400
 
 for counter in range(1,1400):
     if vl==vr:
-        x=x+vl*np.cos(theta)
-        y=y+vl*np.sin(theta)
+        x=x+vl*np.cos(theta)*dt
+        y=y+vl*np.sin(theta)*dt
         theta=theta
         xTruth.append(x)
         yTruth.append(y)
         thetaTruth.append(theta)
-        print("here")
+        #print("here")
     else:
         w=(vr-vl)/b
         r=(b/2)*(vl+vr)/(vr-vl)
@@ -99,10 +100,10 @@ def aFunction(xInput,b,dt):
     vl=xInput[3]
     vr=xInput[4]
     if vr==vl:
-        x=x+vl*np.cos(theta)
-        y=y+vl*np.sin(theta)
+        x=x+vl*np.cos(theta)*dt
+        y=y+vl*np.sin(theta)*dt
         theta=theta
-        print("here")
+        #print("here")
     else:
         w=(vr-vl)/b
         r=(b/2)*(vl+vr)/(vr-vl)
@@ -125,8 +126,31 @@ def predict():
     A = np.ones((5,5))
 
     if x[3]==x[4]:
-        #do otherjacobian
-        print("here")
+        A[0][0]=1
+        A[0][1]=0
+        A[0][2]=-vl*dt*np.sin(x[2])
+        A[0][3]=dt*np.cos(x[2])
+        A[0][4]=0
+        A[1][0]=0
+        A[1][1]=1
+        A[1][2]=dt*vl*np.cos(x[2])
+        A[1][3]=dt*np.sin(x[2])
+        A[1][4]=0
+        A[2][0]=0
+        A[2][1]=0
+        A[2][2]=1
+        A[2][3]=0
+        A[2][4]=0
+        A[3][0]=0
+        A[3][1]=0
+        A[3][2]=0
+        A[3][3]=1
+        A[3][4]=0
+        A[4][0]=0
+        A[4][1]=0
+        A[4][2]=0
+        A[4][3]=0
+        A[4][4]=1
     else:
         #jacobian
         A[0][0]=1
@@ -189,20 +213,28 @@ for counter in range(1,1400):
     vlList.append(x[3])
     vrList.append(x[4])
     z_sensors[0][0]=thetaNoisy[counter]
-    z_sensors[1][0]=vlNoisy[counter]
-    z_sensors[2][0]=vrNoisy[counter]
+    #z_sensors[1][0]=vlNoisy[counter]
+    #z_sensors[2][0]=vrNoisy[counter]
+    z_sensors[1][0]=vlTruth[counter]
+    z_sensors[2][0]=vrTruth[counter]
     predict()
     #print(x)
     update(z_sensors)
-    print(x)
-plt.plot(xTruth,yTruth)
+    #print(x)
+
 plt.plot(xList,yList)
+plt.plot(xTruth,yTruth)
+
+"""
 #plt.plot(t,vlNoisy)
-#plt.plot(t,vlTruth)
-#plt.plot(t,vlList)
+plt.plot(t,vlTruth)
+plt.plot(t,vlList)
 #plt.plot(t,vrNoisy)
-#plt.plot(t,vrTruth)
-#plt.plot(t,vrList)
-#plt.plot(t,thetaTruth)
-#plt.plot(t,thetaList)
+plt.plot(t,vrTruth)
+plt.plot(t,vrList)
+"""
+"""
+plt.plot(t,thetaTruth)
+plt.plot(t,thetaList)
+"""
 plt.show()

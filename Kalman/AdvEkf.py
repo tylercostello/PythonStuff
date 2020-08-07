@@ -40,11 +40,11 @@ for counter in range(1,1400):
         thetaTruth.append(theta)
 
 vlTruth=np.asarray(vlTruth)
-vlNoisy=vlTruth+np.random.normal(0, 0.5, vlTruth.shape)
+vlNoisy=vlTruth+np.random.normal(0, 0.001, vlTruth.shape)
 vrTruth=np.asarray(vrTruth)
-vrNoisy=vrTruth+np.random.normal(0, 0.5, vrTruth.shape)
+vrNoisy=vrTruth+np.random.normal(0, 0.001, vrTruth.shape)
 thetaTruth=np.asarray(thetaTruth)
-thetaNoisy=thetaTruth+np.random.normal(0, 0.5, thetaTruth.shape)
+thetaNoisy=thetaTruth+np.random.normal(0, 0.001, thetaTruth.shape)
 #plt.plot(xTruth,yTruth)
 #plt.show()
 
@@ -74,11 +74,11 @@ H = np.array([
         ])
 I = np.identity(5)
 z_sensors = np.zeros([3, 1])
-Q = np.ones([5, 5])
+Q = np.zeros([5, 5])
 R = np.array([
-        [0.25, 0, 0],
-        [0, 0.25, 0],
-        [0, 0, 0.25]
+        [5, 0, 0],
+        [0, 5, 0],
+        [0, 0, 5]
         ])
 
 A = np.ones((5,5))
@@ -122,9 +122,10 @@ def predict():
 
     """needs to be jacobian"""
     A = np.ones((5,5))
+
     if x[3]==x[4]:
         #do otherjacobian
-        variablethatneedstoberemoved=0
+        print("here")
     else:
         #jacobian
         A[0][0]=1
@@ -153,8 +154,8 @@ def predict():
         A[4][3]=0
         A[4][4]=1
 
-    x = aFunction(x, 1, 0.01)
 
+    x = aFunction(x, 1, 0.01)
     At = np.transpose(A)
     P = np.add(np.matmul(A, np.matmul(P, At)), Q)
 def update(z):
@@ -188,5 +189,6 @@ for counter in range(1,1400):
     thetaList.append(x[2])
     vlList.append(x[3])
     vrList.append(x[4])
-plt.plot(xList,yList)
+plt.plot(t,vrNoisy)
+plt.plot(t,vrList)
 plt.show()

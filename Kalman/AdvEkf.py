@@ -3,9 +3,9 @@ from numpy.linalg import inv
 import matplotlib.pyplot as plt
 
 #setup
-t = np.arange(0.0, 14.0, 0.01)
+t = np.arange(0.0, 140.0, 0.01)
 vl=10
-vr=9
+vr=90
 x=0
 y=0
 theta=np.pi/2
@@ -15,11 +15,11 @@ xTruth=[x]
 yTruth=[y]
 thetaTruth=[theta]
 
-vlTruth=[vl]*1400
+vlTruth=[vl]*14000
 #print(vlTruth[0])
-vrTruth=[vr]*1400
+vrTruth=[vr]*14000
 
-for counter in range(1,1400):
+for counter in range(1,14000):
     if vl==vr:
         x=x+vl*np.cos(theta)
         y=y+vl*np.sin(theta)
@@ -181,7 +181,7 @@ vlList.append(vlTruth[0])
 #print(vlList)
 vrList=[]
 vrList.append(vrTruth[0])
-for counter in range(1,1400):
+for counter in range(1,14000):
     #print(x[3])
     xList.append(x[0])
     yList.append(x[1])

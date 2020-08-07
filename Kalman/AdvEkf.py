@@ -74,7 +74,7 @@ H = np.array([
         ])
 I = np.identity(5)
 z_sensors = np.zeros([3, 1])
-Q = np.zeros([5, 5])
+Q = np.ones([5, 5])
 R = np.array([
         [0.25, 0, 0],
         [0, 0.25, 0],
@@ -101,6 +101,7 @@ def aFunction(xInput,b,dt):
         x=x+vl*np.cos(theta)
         y=y+vl*np.sin(theta)
         theta=theta
+        print("here")
     else:
         w=(vr-vl)/b
         r=(b/2)*(vl+vr)/(vr-vl)
@@ -118,10 +119,41 @@ def aFunction(xInput,b,dt):
 
 def predict():
     global x, P, Q
-    x = aFunction(x, 1, 0.01)
 
     """needs to be jacobian"""
     A = np.ones((5,5))
+    if x[3]==x[4]:
+        #do otherjacobian
+        variablethatneedstoberemoved=0
+    else:
+        #jacobian
+        A[0][0]=1
+        A[0][1]=0
+        A[0][2]=(b*(x[4]+x[3])*(np.cos(x[2]+dt*(x[4]-x[3])/b)-np.cos(x[2])))/(2*(x[4]-x[3]))
+        A[0][3]=(-x[4]*x[4]*dt*np.cos(x[2]+dt*(x[4]-x[3])/b)+2*b*x[4]*np.sin(x[2]+dt*(x[4]-x[3])/b)-2*b*x[4]*np.sin(x[2])+x[3]*x[3]*dt*np.cos(x[2]+dt*(x[4]-x[3])/b))/(2*(x[4]-x[3])*(x[4]-x[3]))
+        A[0][4]=(2*x[3]*b*np.sin(x[2])-2*x[3]*b*np.sin(x[2]+dt*(x[4]-x[3])/b)+x[4]*x[4]*dt*np.cos(x[2]+dt*(x[4]-x[3])/b)-x[3]*x[3]*dt*np.cos(x[2]+dt*(x[4]-x[3])/b))/(2*(x[4]-x[3])*(x[4]-x[3]))
+        A[1][0]=0
+        A[1][1]=1
+        A[1][2]=(b*(x[4]+x[3])*(np.sin(x[2]+dt*(x[4]-x[3])/b)-np.sin(x[2])))/(2*(x[4]-x[3]))
+        A[1][3]=(x[3]*x[3]*dt*np.cos(dt*(x[4]-x[3])/b)*np.sin(x[2])+x[3]*x[3]*dt*np.sin(dt*(x[4]-x[3])/b)*np.cos(x[2])+2*b*x[4]*np.sin(dt*(x[4]-x[3])/b)*np.sin(x[2])+2*b*x[4]*np.cos(x[2])-x[4]*x[4]*dt*np.cos(dt*(x[4]-x[3])/b)*np.sin(x[2])-x[4]*x[4]*dt*np.sin(dt*(x[4]-x[3])/b)*np.cos(x[2])-2*b*x[4]*np.cos(dt*(x[4]-x[3])/b)*np.cos(x[2]))/(2*(x[4]-x[3])*(x[4]-x[3]))
+        A[1][4]=(x[4]*x[4]*dt*np.cos(dt*(x[4]-x[3])/b)*np.sin(x[2])+x[4]*x[4]*dt*np.sin(dt*(x[4]-x[3])/b)*np.cos(x[2])+2*b*x[3]*np.cos(dt*(x[4]-x[3])/b)*np.cos(x[2])-x[3]*x[3]*dt*np.cos(dt*(x[4]-x[3])/b)*np.sin(x[2])-2*b*x[3]*np.sin(dt*(x[4]-x[3])/b)*np.sin(x[2])-x[3]*x[3]*dt*np.sin(dt*(x[4]-x[3])/b)*np.cos(x[2])-2*b*x[3]*np.cos(x[2]))/(2*(x[4]-x[3])*(x[4]-x[3]))
+        A[2][0]=0
+        A[2][1]=0
+        A[2][2]=1
+        A[2][3]=-dt/b
+        A[2][4]=dt/b
+        A[3][0]=0
+        A[3][1]=0
+        A[3][2]=0
+        A[3][3]=1
+        A[3][4]=0
+        A[4][0]=0
+        A[4][1]=0
+        A[4][2]=0
+        A[4][3]=0
+        A[4][4]=1
+
+    x = aFunction(x, 1, 0.01)
 
     At = np.transpose(A)
     P = np.add(np.matmul(A, np.matmul(P, At)), Q)

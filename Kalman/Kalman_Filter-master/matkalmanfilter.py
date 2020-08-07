@@ -1,6 +1,5 @@
 
 import numpy as np
-import pandas as pd
 from numpy.linalg import inv
 import matplotlib.pyplot as plt
 
@@ -10,14 +9,14 @@ np.random.seed(1)
 t = np.arange(0.0, 140.00, 0.01)
 
 xt=2*t
-yt=3*t
-#yt=np.sin(t)
+#yt=3*t
+yt=np.sin(t)
 
 vx=[2]*14000
 vx=np.asarray(vx)
-vy=[3]*14000
-vy=np.asarray(vy)
-#vy=np.cos(t)
+#vy=[3]*14000
+#vy=np.asarray(vy)
+vy=np.cos(t)
 
 #What the sensor readings will be from encoders
 xtnoisy=xt+np.random.normal(0, 0.5, xt.shape)

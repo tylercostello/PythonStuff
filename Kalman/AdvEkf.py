@@ -3,7 +3,7 @@ from numpy.linalg import inv
 import matplotlib.pyplot as plt
 
 #setup
-t = np.arange(0.0, 140.0, 0.01)
+t = np.arange(0.0, 14.0, 0.01)
 vl=10
 vr=90
 x=0
@@ -15,11 +15,11 @@ xTruth=[x]
 yTruth=[y]
 thetaTruth=[theta]
 
-vlTruth=[vl]*14000
+vlTruth=[vl]*1400
 #print(vlTruth[0])
-vrTruth=[vr]*14000
+vrTruth=[vr]*1400
 
-for counter in range(1,14000):
+for counter in range(1,1400):
     if vl==vr:
         x=x+vl*np.cos(theta)
         y=y+vl*np.sin(theta)
@@ -35,7 +35,7 @@ for counter in range(1,14000):
         x=r*np.sin(theta)*np.cos(w*dt)+r*np.cos(theta)*np.sin(w*dt)+x-r*np.sin(theta)
         y=r*np.sin(theta)*np.sin(w*dt)-r*np.cos(theta)*np.cos(w*dt)+y+r*np.cos(theta)
         theta=theta+w*dt
-        theta=theta%(2*np.pi)
+        #theta=theta%(2*np.pi)
         xTruth.append(x)
         yTruth.append(y)
         thetaTruth.append(theta)
@@ -46,8 +46,8 @@ vrTruth=np.asarray(vrTruth)
 vrNoisy=vrTruth+np.random.normal(0, 0.5, vrTruth.shape)
 thetaTruth=np.asarray(thetaTruth)
 thetaNoisy=thetaTruth+np.random.normal(0, 0.5, thetaTruth.shape)
-plt.plot(xTruth,yTruth)
-plt.show()
+#plt.plot(xTruth,yTruth)
+#plt.show()
 
 
 prv_time = 0
@@ -181,7 +181,7 @@ vlList.append(vlTruth[0])
 #print(vlList)
 vrList=[]
 vrList.append(vrTruth[0])
-for counter in range(1,14000):
+for counter in range(1,1400):
     #print(x[3])
     xList.append(x[0])
     yList.append(x[1])
@@ -192,12 +192,17 @@ for counter in range(1,14000):
     z_sensors[1][0]=vlNoisy[counter]
     z_sensors[2][0]=vrNoisy[counter]
     predict()
+    #print(x)
     update(z_sensors)
-#plt.plot(xList,yList)
+    print(x)
+plt.plot(xTruth,yTruth)
+plt.plot(xList,yList)
 #plt.plot(t,vlNoisy)
-plt.plot(t,vlTruth)
-plt.plot(t,vlList)
+#plt.plot(t,vlTruth)
+#plt.plot(t,vlList)
 #plt.plot(t,vrNoisy)
-plt.plot(t,vrTruth)
-plt.plot(t,vrList)
+#plt.plot(t,vrTruth)
+#plt.plot(t,vrList)
+#plt.plot(t,thetaTruth)
+#plt.plot(t,thetaList)
 plt.show()

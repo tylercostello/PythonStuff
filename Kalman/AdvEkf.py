@@ -28,7 +28,6 @@ for counter in range(1,1400):
         xTruth.append(x)
         yTruth.append(y)
         thetaTruth.append(theta)
-        #print("here")
     else:
         w=(vr-vl)/b
         r=(b/2)*(vl+vr)/(vr-vl)
@@ -60,7 +59,7 @@ x=np.array([
             [vlTruth[0]],
             [vrTruth[0]]
             ], dtype='float')
-#print(x)
+
 
 P = np.array([
         [0.01, 0, 0, 0, 0],
@@ -103,7 +102,6 @@ def aFunction(xInput,b,dt):
         x=x+vl*np.cos(theta)*dt
         y=y+vl*np.sin(theta)*dt
         theta=theta
-        #print("here")
     else:
         w=(vr-vl)/b
         r=(b/2)*(vl+vr)/(vr-vl)
@@ -122,8 +120,7 @@ def aFunction(xInput,b,dt):
 def predict():
     global x, P, Q
 
-    """needs to be jacobian"""
-    A = np.ones((5,5))
+    A = np.zeros((5,5))
 
     if x[3]==x[4]:
         A[0][0]=1
@@ -152,7 +149,6 @@ def predict():
         A[4][3]=0
         A[4][4]=1
     else:
-        #jacobian
         A[0][0]=1
         A[0][1]=0
         A[0][2]=(b*(x[4]+x[3])*(np.cos(x[2]+dt*(x[4]-x[3])/b)-np.cos(x[2])))/(2*(x[4]-x[3]))
@@ -202,25 +198,19 @@ thetaList=[]
 thetaList.append(thetaTruth[0])
 vlList=[]
 vlList.append(vlTruth[0])
-#print(vlList)
 vrList=[]
 vrList.append(vrTruth[0])
 for counter in range(1,1400):
-    #print(x[3])
     xList.append(x[0])
     yList.append(x[1])
     thetaList.append(x[2])
     vlList.append(x[3])
     vrList.append(x[4])
     z_sensors[0][0]=thetaNoisy[counter]
-    #z_sensors[1][0]=vlNoisy[counter]
-    #z_sensors[2][0]=vrNoisy[counter]
-    z_sensors[1][0]=vlTruth[counter]
-    z_sensors[2][0]=vrTruth[counter]
+    z_sensors[1][0]=vlNoisy[counter]
+    z_sensors[2][0]=vrNoisy[counter]
     predict()
-    #print(x)
     update(z_sensors)
-    #print(x)
 
 plt.plot(xList,yList)
 plt.plot(xTruth,yTruth)

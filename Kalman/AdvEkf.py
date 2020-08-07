@@ -4,8 +4,8 @@ import matplotlib.pyplot as plt
 
 #setup
 t = np.arange(0.0, 14.0, 0.01)
-vl=90
-vr=90
+vl=75
+vr=25
 x=0
 y=0
 theta=np.pi/2

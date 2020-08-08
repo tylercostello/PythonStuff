@@ -1,7 +1,7 @@
 import numpy as np
 from numpy.linalg import inv
 import matplotlib.pyplot as plt
-
+np.random.seed(1)
 #setup
 t = np.arange(0.0, 14.0, 0.01)
 
@@ -14,12 +14,12 @@ xTruth=[x]
 yTruth=[y]
 thetaTruth=[theta]
 
-#vlTruth=20*(np.sin(t)+10)-100
-#vrTruth=20*(np.sin(t)+10)
+vlTruth=20*(np.sin(t)+10)-100
+vrTruth=20*(np.sin(t)+10)
 #vlTruth=100*t
 #vrTruth=200*t
-vlTruth=[110]*1400
-vrTruth=[50]*1400
+#vlTruth=[110]*1400
+#vrTruth=[50]*1400
 vl=vlTruth[0]
 vr=vrTruth[0]
 
@@ -92,7 +92,8 @@ R = np.array([
         ])
 
 A = np.zeros((5,5))
-
+alvariance=10
+arvariance=10
 def aFunction(xInput,b,dt):
     xOutput=np.array([
                 [0],
@@ -125,9 +126,42 @@ def aFunction(xInput,b,dt):
     xOutput[3]=vl
     xOutput[4]=vr
     return xOutput
-
+dt_2=dt*dt
+dt_3=dt*dt_2
+dt_4=dt*dt_3
 def predict():
     global x, P, Q
+
+    Q = np.zeros([5, 5])
+    Q[0][0]=0
+    Q[0][1]=0
+    Q[0][2]=0
+    Q[0][3]=0
+    Q[0][4]=0
+
+    Q[1][0]=0
+    Q[1][1]=0
+    Q[1][2]=0
+    Q[1][3]=0
+    Q[1][4]=0
+
+    Q[2][0]=0
+    Q[2][1]=0
+    Q[2][2]=(dt_4*alvariance+dt_4*arvariance)/(4*b*b)
+    Q[2][3]=(-dt_3*alvariance)/(2*b)
+    Q[2][4]=(dt_3*arvariance)/(2*b)
+
+    Q[3][0]=0
+    Q[3][1]=0
+    Q[3][2]=(-dt_3*alvariance)/(2*b)
+    Q[3][3]=dt_2*alvariance
+    Q[3][4]=0
+
+    Q[4][0]=0
+    Q[4][1]=0
+    Q[4][2]=(dt_3*arvariance)/(2*b)
+    Q[4][3]=0
+    Q[4][4]=dt_2*arvariance
 
     A = np.zeros((5,5))
 

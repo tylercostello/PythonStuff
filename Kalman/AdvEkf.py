@@ -4,8 +4,7 @@ import matplotlib.pyplot as plt
 
 #setup
 t = np.arange(0.0, 14.0, 0.01)
-vl=75
-vr=25
+
 x=0
 y=0
 theta=np.pi/2
@@ -15,10 +14,14 @@ xTruth=[x]
 yTruth=[y]
 thetaTruth=[theta]
 
-vlTruth=[vl]*1400
-#vlTruth=20*(np.sin(t)+1)
-#print(vlTruth[0])
-vrTruth=[vr]*1400
+#vlTruth=20*(np.sin(t)+10)-100
+#vrTruth=20*(np.sin(t)+10)
+#vlTruth=100*t
+#vrTruth=200*t
+vlTruth=[110]*1400
+vrTruth=[50]*1400
+vl=vlTruth[0]
+vr=vrTruth[0]
 
 for counter in range(1,1400):
     if vl==vr:
@@ -28,6 +31,10 @@ for counter in range(1,1400):
         xTruth.append(x)
         yTruth.append(y)
         thetaTruth.append(theta)
+        vl=vlTruth[counter]
+        vr=vrTruth[counter]
+
+
     else:
         w=(vr-vl)/b
         r=(b/2)*(vl+vr)/(vr-vl)
@@ -39,6 +46,8 @@ for counter in range(1,1400):
         xTruth.append(x)
         yTruth.append(y)
         thetaTruth.append(theta)
+        vl=vlTruth[counter]
+        vr=vrTruth[counter]
 
 vlTruth=np.asarray(vlTruth)
 vlNoisy=vlTruth+np.random.normal(0, 0.5, vlTruth.shape)
@@ -212,8 +221,12 @@ for counter in range(1,1400):
     predict()
     update(z_sensors)
 
+
+
 plt.plot(xList,yList)
 plt.plot(xTruth,yTruth)
+
+
 
 """
 #plt.plot(t,vlNoisy)

@@ -28,8 +28,8 @@ for counter in range(1,1400):
 
 
     if vl==vr:
-        x=x+vl*np.cos(theta)
-        y=y+vl*np.sin(theta)
+        x=x+vl*np.cos(theta)*dt
+        y=y+vl*np.sin(theta)*dt
         theta=theta
         xList.append(x)
         yList.append(y)

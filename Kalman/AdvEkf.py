@@ -93,8 +93,8 @@ R = np.array([
         ])
 
 A = np.zeros((5,5))
-alvariance=10
-arvariance=10
+alvariance=100
+arvariance=100
 def aFunction(xInput,b,dt):
     xOutput=np.array([
                 [0],

@@ -14,11 +14,12 @@ xTruth=[x]
 yTruth=[y]
 thetaTruth=[theta]
 
-vlTruth=20*(np.sin(t)+10)-100
-vrTruth=20*(np.sin(t)+10)
+#vlTruth=20*(np.sin(t)+10)-100
+vrTruth=20*(np.sin(t)+10)-100
 #vlTruth=100*t
+#vrTruth=100*t
 #vrTruth=200*t
-#vlTruth=[110]*1400
+vlTruth=[110]*1400
 #vrTruth=[50]*1400
 vl=vlTruth[0]
 vr=vrTruth[0]
@@ -257,9 +258,9 @@ for counter in range(1,1400):
 
 
 
-plt.plot(xList,yList)
-plt.plot(xTruth,yTruth)
-
+plt.plot(xList,yList,label='truth')
+plt.plot(xTruth,yTruth, label='estimated')
+plt.legend()
 
 
 """

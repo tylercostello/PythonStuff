@@ -21,7 +21,7 @@ vrTruth = 20 * (np.sin(t) + 10) - 100
 # vrTruth=100*t
 # vrTruth=200*t
 vlTruth = [110] * 1400
-# vrTruth=[50]*1400
+#vrTruth=[110]*1400
 vl = vlTruth[0]
 vr = vrTruth[0]
 
@@ -175,12 +175,12 @@ def predict():
     if x[3] == x[4]:
         A[0][0] = 1
         A[0][1] = 0
-        A[0][2] = -vl * dt * np.sin(x[2])
+        A[0][2] = -x[3] * dt * np.sin(x[2])
         A[0][3] = dt * np.cos(x[2])
         A[0][4] = 0
         A[1][0] = 0
         A[1][1] = 1
-        A[1][2] = dt * vl * np.cos(x[2])
+        A[1][2] = dt * x[3] * np.cos(x[2])
         A[1][3] = dt * np.sin(x[2])
         A[1][4] = 0
         A[2][0] = 0

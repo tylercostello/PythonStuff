@@ -178,21 +178,25 @@ def predict():
         A[0][2] = -x[3] * dt * np.sin(x[2])
         A[0][3] = dt * np.cos(x[2])
         A[0][4] = 0
+
         A[1][0] = 0
         A[1][1] = 1
         A[1][2] = dt * x[3] * np.cos(x[2])
         A[1][3] = dt * np.sin(x[2])
         A[1][4] = 0
+
         A[2][0] = 0
         A[2][1] = 0
         A[2][2] = 1
         A[2][3] = 0
         A[2][4] = 0
+
         A[3][0] = 0
         A[3][1] = 0
         A[3][2] = 0
         A[3][3] = 1
         A[3][4] = 0
+
         A[4][0] = 0
         A[4][1] = 0
         A[4][2] = 0
@@ -204,21 +208,25 @@ def predict():
         A[0][2] = (b * (x[4] + x[3]) * (np.cos(x[2] + dt * (x[4] - x[3]) / b) - np.cos(x[2]))) / (2 * (x[4] - x[3]))
         A[0][3] = (-x[4] * x[4] * dt * np.cos(x[2] + dt * (x[4] - x[3]) / b) + 2 * b * x[4] * np.sin(x[2] + dt * (x[4] - x[3]) / b) - 2 * b * x[4] * np.sin(x[2]) + x[3] * x[3] * dt * np.cos(x[2] + dt * (x[4] - x[3]) / b)) / (2 * (x[4] - x[3]) * (x[4] - x[3]))
         A[0][4] = (2 * x[3] * b * np.sin(x[2]) - 2 * x[3] * b * np.sin(x[2] + dt * (x[4] - x[3]) / b) + x[4] * x[4] * dt * np.cos(x[2] + dt * (x[4] - x[3]) / b) - x[3] * x[3] * dt * np.cos(x[2] + dt * (x[4] - x[3]) / b)) / (2 * (x[4] - x[3]) * (x[4] - x[3]))
+
         A[1][0] = 0
         A[1][1] = 1
         A[1][2] = (b * (x[4] + x[3]) * (np.sin(x[2] + dt * (x[4] - x[3]) / b) - np.sin(x[2]))) / (2 * (x[4] - x[3]))
         A[1][3] = (x[3] * x[3] * dt * np.cos(dt * (x[4] - x[3]) / b) * np.sin(x[2]) + x[3] * x[3] * dt * np.sin(dt * (x[4] - x[3]) / b) * np.cos(x[2]) + 2 * b * x[4] * np.sin(dt * (x[4] - x[3]) / b) * np.sin(x[2]) + 2 * b * x[4] * np.cos(x[2]) - x[4] * x[4] * dt * np.cos(dt * (x[4] - x[3]) / b) * np.sin(x[2]) - x[4] * x[4] * dt * np.sin(dt * (x[4] - x[3]) / b) * np.cos(x[2]) - 2 * b * x[4] * np.cos(dt * (x[4] - x[3]) / b) * np.cos(x[2])) / (2 * (x[4] - x[3]) * (x[4] - x[3]))
         A[1][4] = (x[4] * x[4] * dt * np.cos(dt * (x[4] - x[3]) / b) * np.sin(x[2]) + x[4] * x[4] * dt * np.sin(dt * (x[4] - x[3]) / b) * np.cos(x[2]) + 2 * b * x[3] * np.cos(dt * (x[4] - x[3]) / b) * np.cos(x[2]) - x[3] * x[3] * dt * np.cos(dt * (x[4] - x[3]) / b) * np.sin(x[2]) - 2 * b * x[3] * np.sin(dt * (x[4] - x[3]) / b) * np.sin(x[2]) - x[3] * x[3] * dt * np.sin(dt * (x[4] - x[3]) / b) * np.cos(x[2]) - 2 * b * x[3] * np.cos(x[2])) / (2 * (x[4] - x[3]) * (x[4] - x[3]))
+
         A[2][0] = 0
         A[2][1] = 0
         A[2][2] = 1
         A[2][3] = -dt / b
         A[2][4] = dt / b
+
         A[3][0] = 0
         A[3][1] = 0
         A[3][2] = 0
         A[3][3] = 1
         A[3][4] = 0
+
         A[4][0] = 0
         A[4][1] = 0
         A[4][2] = 0
@@ -233,7 +241,7 @@ def predict():
 
 def update(z):
     global x, P
-    Y = np.subtract(z_sensors, np.matmul(H, x))
+    Y = np.subtract(z, np.matmul(H, x))
     Ht = np.transpose(H)
     S = np.add(np.matmul(H, np.matmul(P, Ht)), R)
     K = np.matmul(P, Ht)

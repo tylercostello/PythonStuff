@@ -43,11 +43,9 @@ def autocorrecter(word):
 
 
 
-#text=getList("62668-0.txt")
-#text=getList("moby10b.txt")
-#text=getList("largetext.txt")
+
 text=getList("0100011.txt")
-#text=getList("26000.txt")
+
 text=lowerCaseList(text)
 print("Words",len(text))
 
